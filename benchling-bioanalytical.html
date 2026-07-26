@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    .nav-desktop, .contact-desktop { display: flex; }
+    .nav-mobile-toggle { display: none; }
+    @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
+    .header-spacer-default { height: 76px; }
+  </style>
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Semibold.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Semibold.otf" crossorigin="anonymous">
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Extralight.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Black.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    strong, b { font-weight: 600; }
+    @keyframes bioFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .bio-intro-1 { animation: bioFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .bio-intro-2 { animation: bioFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+    .bio-intro-3 { animation: bioFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .bio-intro-4 { animation: bioFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+    @media (prefers-reduced-motion: reduce) { .bio-intro-1, .bio-intro-2, .bio-intro-3, .bio-intro-4 { animation: none !important; } }
+    @media (max-width: 820px) { .bio-col { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; } }
+    @media (max-width: 1100px) {
+      .bio-title-grid, .bio-shell { display: block !important; }      .bio-title-block { padding-top: 2.5rem !important; }
+      .bio-dl { margin-bottom: 2.5rem !important; padding-bottom: 0 !important; grid-template-columns: 1fr !important; }
+      .bio-divider { display: none !important; }
+      .bio-overview-wrap { padding-bottom: 1.5rem !important; }
+      .reflow-2col { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .reflow-2col-flip > *:first-child { order: 2 !important; }
+      .reflow-2col-flip > *:last-child { order: 1 !important; }
+      .reflow-force-full { width: 100% !important; }
+      .reflow-force-full > div { width: 100% !important; margin-left: 0 !important; }
+      .lab-tour-img { height: 260px !important; max-height: 260px !important; }
+      .solution-first-row { padding-top: 0.5rem !important; }
+      .solution-header { margin-bottom: 0.25rem !important; }
+      .solution-header + div h3 { margin: 0 0 0.4rem !important; }
+      .solution-row { padding-top: 2.5rem !important; }
+      .solution-row h3 { margin: 0 0 0.3rem !important; }
+    }
+  </style>
+  <script src="./image-slot.js"></script>
+</helmet>
+
+<div style="position: relative;">
+<header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
+  <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+      <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
+      Jia Liu
+    </a>
+    <div style="display: flex; align-items: center; gap: 1.75rem;">
+      <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
+        <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
+        <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
+        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+      </nav>
+      <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
+        <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </sc-if>
+        <sc-if value="{{ mobileNavClosed }}" hint-placeholder-val="{{ true }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </sc-if>
+      </button>
+      <div ref="{{ contactWrapRef }}" class="contact-desktop-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
+        <div style="position: absolute; top: 0; right: 0; background: #14130f; overflow: hidden; width: {{ contactShapeWidth }}; height: {{ contactShapeHeight }}; border-radius: {{ contactShapeRadius }}; box-shadow: {{ contactShapeShadow }}; transition: width 0.45s cubic-bezier(0.16,1,0.3,1), height 0.45s cubic-bezier(0.16,1,0.3,1), border-radius 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; z-index: 20;">
+          <button class="contact-desktop" onClick="{{ toggleContact }}" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border: none; color: #ffffff; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: {{ contactButtonContentOpacity }}; pointer-events: {{ contactButtonPointerEvents }}; transition: opacity 0.2s ease {{ contactButtonContentDelay }};">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+            Contact
+          </button>
+          <div style="position: absolute; inset: 0; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: {{ contactCardContentOpacity }}; pointer-events: {{ contactCardPointerEvents }}; transition: opacity 0.25s ease {{ contactCardContentDelay }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
+              <span style="font-size: 0.95rem; color: #9a968f;">Get in touch</span>
+              <button onClick="{{ closeContact }}" aria-label="Close" style="background: none; border: none; color: #9a968f; cursor: pointer; padding: 0; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">Email</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">jia.eq.liu@gmail.com</div>
+              </div>
+              <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: rgba(255,255,255,0.1); border: none; border-radius: 8px; width: 34px; height: 34px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                </sc-if>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">LinkedIn</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">@jia-eq-liu</div>
+              </div>
+              <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255,255,255,0.1); border-radius: 8px; width: 34px; height: 34px; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: {{ mobileNavMaxHeight }}; border-top: 1px solid #e4e0d8; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+   <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
+    <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
+      <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
+      <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
+      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+        Contact
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+      <div style="overflow: hidden; max-height: {{ mobileContactMaxHeight }}; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div style="padding: 0.25rem 0 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">Email</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">jia.eq.liu@gmail.com</div>
+            </div>
+            <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: #f2f1ec; border: none; border-radius: 8px; width: 34px; height: 34px; color: #14130f; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+              </sc-if>
+              <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+              </sc-if>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">LinkedIn</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">@jia-eq-liu</div>
+            </div>
+            <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: #f2f1ec; border-radius: 8px; width: 34px; height: 34px; color: #14130f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   </div>
+  </div>
+</header>
+<div class="header-spacer-default" style="height: {{ headerSpacerHeight }}; flex-shrink: 0;"></div>
+
+<div style="position: relative; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+
+  <div style="position: absolute; inset: 0; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: {{ gridOverlayDisplay }}; grid-template-columns: repeat(12, 1fr); gap: 32px; z-index: 9999; pointer-events: none;">
+    <sc-for list="{{ gridOverlayCols }}" as="col" hint-placeholder-count="12">
+      <div style="background: rgba(6,136,240,0.08); border-left: 1px dashed rgba(6,136,240,0.4); border-right: 1px dashed rgba(6,136,240,0.4); height: 100%;"></div>
+    </sc-for>
+  </div>
+
+  <div class="bio-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+    <div class="bio-title-block bio-intro-1" style="grid-column: 3 / 11; padding: 4rem 0 1.5rem;">
+      <div class="bio-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+      <h1 id="overview-title" style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; line-height: 1.25; margin: 0 0 0.5rem;">{{ overviewTitle }}</h1>
+      <h2 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 400; line-height: 1.3; color: #6b6863; margin: 0;">{{ overviewSubtitle }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="bio-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start;">
+
+    <div class="bio-overview-wrap" style="grid-column: 3 / 11; grid-row: 1; padding-bottom: 3rem;">
+
+    <section id="overview" class="bio-col bio-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+      <p style="margin: 0 0 1rem;">Benchling creates software for life science teams, ranging from academic labs to some of the largest pharmaceutical companies in the world. What started as a simple set of tools had evolved into a full platform, with over 200K scientists and 1,300 companies relying on it. In 2025, we launched <span style="font-weight: 600;"><span style="font-weight: normal;">Benchling Bioanalytical</span></span>, a product to help large enterprise customers develop and execute tests during drug development.</p>
+      
+
+      <dl ref="{{ dlRef }}" class="bio-dl bio-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0 0;">
+        <div>
+          <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Role</dt>
+          <dd style="margin: 0;">Design lead, 2024–2025. Co-led discovery with a senior PM, then coordinated design work across 4 designers and 5 engineering teams.</dd>
+        </div>
+        <div>
+          <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Outcome</dt>
+          <dd style="margin: 0;">Launched with our charter customer, onboarding 400+ users, reduced throughput time by 90%, and replaced 6 systems with 1.</dd>
+        </div>
+        <div>
+          <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Skills</dt>
+          <dd style="margin: 0; display: flex; flex-wrap: wrap; gap: 0.5em;">
+            <sc-for list="{{ skillsChips }}" as="chip" hint-placeholder-count="4">
+              <dc-import name="Chip" label="{{ chip }}" hint-size="auto,32px"></dc-import>
+            </sc-for>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    </div>
+
+    <div class="bio-divider" style="grid-column: 3 / 11; grid-row: 1; align-self: end;">
+      <div class="bio-col" style="max-width: 760px; margin: 0 auto; height: 0; border-bottom: 1px solid #e4e0d8;"></div>
+    </div>
+
+    <div ref="{{ wideBreakoutLeftRef }}" style="grid-column: 2 / 3; grid-row: 2; width: 0; height: 0;"></div>
+    <div ref="{{ wideBreakoutRightRef }}" style="grid-column: 11 / 12; grid-row: 2; width: 0; height: 0;"></div>
+    <div ref="{{ fullBreakoutLeftRef }}" style="grid-column: 1 / 2; grid-row: 2; width: 0; height: 0;"></div>
+    <div ref="{{ fullBreakoutRightRef }}" style="grid-column: 12 / 13; grid-row: 2; width: 0; height: 0;"></div>
+
+    <dc-import name="SectionNav" hint-size="1px,1px"></dc-import>
+
+    <div ref="{{ mainColRef }}" style="grid-column: 3 / 11; grid-row: 2;">
+  <section id="background" class="bio-col bio-intro-4" style="max-width: 760px; margin-left: auto; margin-right: auto; margin-top: 1rem; margin-bottom: 4rem;">
+    <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ backgroundLabel }}</div>
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">{{ backgroundHeading }}</h3>
+    <p style="margin: 0 0 1rem;">During drug development, companies run countless analytical tests to ensure the quality and efficacy of their products and processes. Developing them is a massive investment, where each test must be experimentally designed and validated. Novel biologics make this even harder, since cells are super sensitive and easily contaminated.</p>
+    <div style="margin: 0 0 1rem;"><div>For companies like Merck, this process can be excruciating. It's like running a high-end test kitchen. Processes need to be meticulously orchestrated, with each step eventually documented and reported to internal auditors and government regulators. Scientists often complain about how hard it is to keep up with the sheer number of systems, physical materials, and data that needs to flow from start to finish.<br></div></div>
+
+    <video loop="" muted="" playsinline="" preload="auto" poster="assets/img/benchling-tour-sm.jpg" style="width: 100%; height: auto; display: block; border-radius: 10px; margin-top: 2.5rem; margin-bottom: 2.5rem"><source src="assets/video/automated-workcell.webm" type="video/webm"><source src="assets/video/automated-workcell.mp4" type="video/mp4"></video>
+
+    <dc-import name="Blockquote" quote="“The thing that was taking the longest wasn't doing the experiments in lab — it was getting data from all the systems collected and analyzed.”" author="Roy Helmy, Associate VP, Merck" style="margin: 0;" hint-size="100%,140px"></dc-import>
+
+    <div style="margin-top: 4rem; max-width: {{ teamSportFullPx }}px;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Every handoff is a chance for something to slip</h3>
+      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">Analytical test development requires work that passes from person to person, system to system. Every one of those handoffs is a place where something can slip. A sample ID gets typed into a different system and comes out in a slightly different format. A spreadsheet gets exported, edited by hand, then reimported somewhere else. Context that made sense to the scientist who ran the test doesn't always make it into the report someone reads three weeks later.</p>
+
+</div>
+      
+    </div>
+
+    <div ref="{{ tabsWrapRef }}" style="display: flex; gap: 1.75rem; margin-top: 2rem; border-bottom: 1px solid #e4e0d8; overflow-x: auto; scrollbar-width: none;">
+      <sc-for list="{{ personaTabs }}" as="tab" hint-placeholder-count="3">
+        <button ref="{{ tab.ref }}" onClick="{{ tab.select }}" style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: {{ tab.fontWeight }}; padding: 0 0 0.7em; border: none; border-bottom: 2px solid {{ tab.borderColor }}; background: none; color: {{ tab.color }}; cursor: pointer; margin-bottom: -1px; flex-shrink: 0; white-space: nowrap;">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+    <div style="margin-top: 1.25rem;" onTouchStart="{{ handlePersonaTouchStart }}" onTouchEnd="{{ handlePersonaTouchEnd }}">
+      <dc-import name="ExpandableImage" src="{{ currentPersonaSrc }}" alt="{{ currentPersonaAlt }}" hint-size="100%,400px"></dc-import>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Plate design is central to any bioanalytical software</h3>
+      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">A plate is a physical grid of tiny wells that slots into an automated lab instrument. Load it correctly and a robot can run hundreds of samples in a single pass. Designing a plate can be highly complex, with each well carefully mapped out to test a specific condition while accounting for evaporative effects or cross-contamination risks. Any system that handles plate design must be flexible, error-proof and efficient to use.</p>
+
+</div>
+
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8; margin-top: 1.5rem;">
+        <img src="assets/img/plate-loading.jpg" alt="Loading a 96-well plate into a QuantStudio instrument" class="lab-tour-img" style="width: 100%; height: 400px; max-height: 400px; object-fit: cover; display: block;">
+      </div>
+      
+    </div>
+  </section>
+
+  <section id="problem" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ problemLabel }}</div>
+    
+    <div style="margin: 0 0 1rem;"></div>
+
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Where the handoffs break down</h3>
+
+    
+    <div style="margin-bottom: 2rem">We led a design sprint on-site and remotely with their team for 2 months, mapping out their user journeys, digging into their systems, and understanding their pain points. We were impressed by the level of rigor that went into planning experiments, but also struck by how parts of their workflow really felt duct-taped together.</div><div style="margin-bottom: 1.5rem;">
+      <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/plugs.svg" alt="" style="width: 20px; height: 20px;">Disconnected tools, manual work</h4>
+      <p style="margin: 0;">Different tools capture and document data, but they don't talk to each other. Scientists end up manually chasing down samples, checking expiration dates, and recording work they'd done hours earlier. On average, a scientist needed to work across nine systems to access the information they need.</p>
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+      <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/copy-simple.svg" alt="" style="width: 20px; height: 20px;">Duplicative data structures</h4>
+      <p style="margin: 0;">Different materials and instruments live in different systems, each with their own data structure. No one could agree on what a "sample ID" was, so they existed in four different formats, relying on know-how and Python scripts to get everything consistent. Multiply this across different systems and it led to a lot of frustration and confusion.</p>
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+      <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/chart-scatter.svg" alt="" style="width: 20px; height: 20px;">Processing data and reviewing findings</h4>
+      <p style="margin: 0;">Robotics made execution faster, but also more data than teams could handle. Given all the manual steps in handling and processing data, the tedious work rapidly piled up. Lead scientists talked about manually reviewing reports, even on nights and weekends.</p>
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+      <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/eye.svg" alt="" style="width: 20px; height: 20px;">Seeing the end-to-end process</h4>
+      <p style="margin: 0;">Teams didn't have visibility into each other's work, which led to confusion around timelines and requests. Every team wished the other teams understood their work better. When are my samples arriving? Where did the test results go?</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 0 0; margin-top: 2rem; margin-bottom: 2rem">
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">35–50%</p>
+        <p style="color: #6b6863; margin: 0;">of scientists' time spent on non-scientific tasks</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">9</p>
+        <p style="color: #6b6863; margin: 0;">different systems to complete workflow</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">3 months</p>
+        <p style="color: #6b6863; margin: 0;">for IT to implement process changes</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">100%</p>
+        <p style="color: #6b6863; margin: 0;">of interviewees felt it was hard to find data</p>
+      </div>
+    </div>
+
+    <dc-import name="ExpandableImage" src="assets/img/clinical-assay-workflow.png" alt="Clinical assay execution workflow" hint-size="100%,500px"></dc-import>
+
+    
+    
+    <div style="margin: 0 0 1rem;"></div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Nobody could fully trust the data</h3>
+      <p style="margin: 0;">The bottom line is that their scientists couldn't always trust their data, relying instead on manual reviews to make sure everything looked correct. When things did go wrong, it required days or weeks to figure out why. In the worst scenario, they might have to re-do an entire set of experiments.&nbsp;It's why it was so important for them to have reliable end-to-end data flow, and they were looking to us at Benchling&nbsp;to help them.&nbsp;</p>
+    </div>
+
+    <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8; margin: 2.5rem 0 0;">
+      <img src="assets/img/benchling-tour-sm.jpg" alt="On-site lab tour at Merck" class="lab-tour-img" style="width: 100%; height: 400px; max-height: 400px; object-fit: cover; display: block;">
+    </div>
+    
+  </section>
+
+  <section id="approach" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto">
+    <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ approachLabel }}</div>
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">The basic workflow</h3>
+    <p style="margin: 0 0 1rem;">Underneath all the complexity, Bioanalytical had to support one basic path. A scientist defines a testing procedure: the rules for what's being measured and how. From that procedure, they design an experiment, setting the specific parameters for this run. Next comes designing the plates, mapping samples to the physical wells that go into the instrument. The plates run, generating data. That data gets analyzed, often through a template built for the test type. Finally, a lead scientist or quality team reviews the results and signs off.</p>
+    <p style="margin: 0 0 1rem;">Every decision in this case study traces back to one of those six steps. Some steps got the experience we originally wanted while others got a more pragmatic version, shaped by constraints we hit along the way.</p>
+    <p style="margin: 0;">Plates and structured data configuration are the two I'll walk through here, since they carry the throughline of the whole project, but they were part of a much larger set of decisions across all six steps.</p>
+
+    <div style="margin-top: 2.5rem;">
+      <dc-import name="ExpandableImage" src="assets/img/approach-flow-diagram.png" alt="Six-step flow: define procedure, design experiment, design plates, run plates and generate data, analyze data, review and sign off" hint-size="100%,220px"></dc-import>
+    </div>
+
+    <div style="margin-top: 3.5rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Building two products on a single foundation</h3>
+      <div style="margin: 0 0 1rem;"><div>We made a major technical bet early on that we could build Bioanalytical on the same foundation as Bioprocess, another product under development. Both use cases required step-by-step procedures through systematic experimentation, and both needed those procedures to eventually be locked down and executed reliably.</div></div>
+      <div style="margin: 1.5rem 0;">
+        <image-slot id="building-two-products" shape="rounded" radius="10" placeholder="Drop an image for Building two products on a single foundation"></image-slot>
+      </div>
+      <p style="margin: 0 0 1rem;">Throughout discovery we incrementally validated this approach, but also identified gaps and risks. Bioanalytical required first-class support for designing plates that were highly integrated with lab robotics. We also hadn't yet built out a "locked down" version of Benchling, which was critical for automated sampling testing later in the project.<br></p>
+    </div>
+
+    <div style="margin-top: 3.5rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Exploring configuration under technical constraints</h3>
+      <p style="margin: 0 0 1rem;">Configuration got the most of my attention, since it's the part scientists interact with every day. But building on Bioprocess's foundation limited what we could do about it in this timeline.</p>
+      <p style="margin: 0 0 1rem;">Structured data wasn't optional. Freeform notes and spreadsheets don't hold up when you need to trace a result back to a sample months later, and search, traceability, and analysis all depend on data living somewhere a database can reach.</p>
+      <p style="margin: 0 0 1rem;">So we explored structured entry that worked more like building a document in Notion than filling out the rigid tables already in the product, with scientists choosing what to capture and how to lay it out. Early concepts tested well on-site.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <image-slot id="configuration-exploration" shape="rounded" radius="10" placeholder="Drop an image of the configuration exploration"></image-slot>
+      </div>
+
+      <p style="margin: 0 0 1rem; font-weight: 500">However, we eventually realized that we couldn't build this in time. The UI components, registration behavior and validation rules all made this basically impossible. It also required more of a platform-wide approach, as any improvements here should ultimately extend to our document framework. During our on-site design sprint, Bioprocess had already reached the same conclusion, leaning on Benchling's existing document table framework, making both our UIs stick closer to the existing components than we had envisioned.</p>
+      <p style="margin: 1rem 0 0;">We traded a better configuration experience for clean data flow that could ship in time, staying consistent with what Bioprocess was planning to build.</p>
+    </div>
+
+    <div style="margin-top: 3.5rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Rethinking plate design, still bounded by the platform</h3>
+      <p style="margin: 0 0 1rem;">My first instinct was to treat plates the way I'd treat any other step in the experiment planning flow. A scientist works through experiment planning linearly, so why not add plate design as another step, maybe even auto-populate a layout based on what they'd already entered earlier? From a pure UX standpoint it made a lot of sense. Fill in the details up top, get a recommended plate design, assign it to a run, done.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <p style="margin: 0 0 0.5rem; font-size: 0.95rem; color: #6b6863;">Concept: Plate design during experimental planning</p>
+        <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+          <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/plate-design-in-exp-planning-v2.webm" type="video/webm"><source src="assets/video/plate-design-in-exp-planning-v2.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+
+      <p style="margin: 0 0 1rem;">My version wouldn't work. Another team had already scoped plate design as a generic component elsewhere in the product, not built around Bioanalytical's flow, and wiring it into the middle of experiment planning would have taken integration work we didn't have time for.</p>
+      <p style="margin: 0 0 1rem;">I led a short internal design sprint on this, exploring options. The only viable path would be for scientists to just create the plate designs, one-by-one, in the documents after experiment planning.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <dc-import name="ExpandableImage" src="assets/img/plates-proposed-workaround.png" alt="Initial exploration vs. proposed workaround: passing plate design or param values between Design experiment, Study, and Worksheet screens" hint-size="100%,400px"></dc-import>
+      </div>
+
+      <p style="margin: 0 0 1rem;">We traced the impact through every layer, data flow to UI, catching rough edges like unclear parameter hand-off to plates, and how to make it easier to design a large number of plates across different documents once they were created.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <image-slot id="plates-usability-polish" shape="rounded" radius="10" placeholder="Drop an image showing the usability polish for plate hand-off and multi-document design"></image-slot>
+      </div>
+
+      <p style="margin: 0 0 1rem;">The silver lining in banking this decision was that we also focused on improvements to the plate design UI itself. Because of the complexity of bioanalytical experiments, there was a real problem around visualizing the layers of experimental parameters and metadata within the plate. I did multiple rounds of hands-on exploration with the team, in particular pushing for a browser in the left panel, which I felt could be reused elsewhere in the product to tackle similar challenges.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <image-slot id="plate-design-ui-browser" shape="rounded" radius="10" placeholder="Drop an image of the plate design UI with left-panel browser"></image-slot>
+      </div>
+    </div>
+
+    <div style="margin-top: 3.5rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Reorganizing around the work instead of our app teams</h3>
+      <p style="margin: 0 0 1rem;">Looking back, hitting these constraints was never really a technical problem. We had pulled people from other teams into the on-site discovery, but their attention was split across their own workstreams, so our ideas didn't get scoped deeply until we'd already spent significant time fleshing them out ourselves.</p>
+      <p style="margin: 0 0 1rem;">Teams at Benchling were organized around app-level areas, but Bioanalytical needed work to move across several at once: plates, documents, data pipelines, the core experiment flow. We brought the resulting friction to product and engineering leadership as a structural issue, and re-organized into squads around a slice of the user journey instead, each with a lead from design, engineering and product.</p>
+      <p style="margin: 0 0 1rem;">In that new structure, I became a kind of connective tissue across squads. I set up weekly design reviews across all the teams, assembling designs and specs at increasing levels of fidelity into end-to-end flows.&nbsp;&nbsp;These reviews also became a forum where all of us, including product and engineer, could stress-test how the pieces fit together, especially around handoffs.</p>
+      
+
+      <div style="margin-top: 1.5rem;">
+        <dc-import name="ExpandableImage" src="assets/img/bioa-design-review.png" alt="BioA design review session" hint-size="100%,400px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="solution" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div class="solution-header" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ solutionLabel }}</div>
+
+    <div class="bio-col" style="max-width: 760px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">The same six steps, now connected</h3>
+      <p style="margin: 0;">Here's the flow as it actually shipped. Each step below carries the decisions we made along the way, some ambitious, some scoped down out of necessity, but all aimed at the same goal: getting a scientist from defining a test to trusting the results, without losing confidence at every hand-off in between.</p>
+    </div>
+
+    <div class="bio-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+      
+      
+    </div>
+
+    <div class="solution-first-row solution-row" style="padding-top: 1rem">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Define testing procedures</h3>
+      <p style="margin: 0 0 1.5rem;">Before, there wasn't one standard definition of a sample. It could exist in different formats across different systems, with no single source of truth, so scientists spent time reconciling versions instead of trusting the data. Now a testing procedure includes a standardized sample definition. It takes some setup, but once it exists, it means the same thing everywhere, and scientists can build experiments on it without re-establishing what a sample is each time.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/flowchart-extended.webm" type="video/webm"><source src="assets/video/flowchart-extended.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <div class="solution-row" style="padding-top: 4rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Design experiments</h3>
+      <p style="margin: 0 0 1.5rem;">This one was a pragmatic call. Scientists set parameters in a dense table, including a column for whether a piece of data belongs at the document level or the plate level. It gets the job done, but we knew going in that a table wasn't the ideal interface for a decision this significant. Better options were on our minds, like describing an experiment in plain language and letting the system populate the table, but they were future work, not something we could build in v1.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/create-plate-map-extended.webm" type="video/webm"><source src="assets/video/create-plate-map-extended.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <div class="solution-row" style="padding-top: 4rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Design plates</h3>
+      <p style="margin: 0 0 1.5rem;">Plate design didn't have a real home in the product before. Scientists now create plates individually within documents, with copy-paste between documents to cut down repetition. We managed to ship improvements to the plate design experience itself: metadata shows in a navigator panel instead of a dropdown, which makes it clear you're paging through layers of data. The same plate view works in multiple places, and data flows cleanly in and out of analysis.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/create-plate-map-extended.webm" type="video/webm"><source src="assets/video/create-plate-map-extended.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <div class="solution-row" style="padding-top: 4rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Execute runs</h3>
+      <p style="margin: 0 0 1.5rem;">Finally, scientists could see all of their work in one place, everything linked together correctly, and easily track progress, down to the step-by-step level within each document. We leaned on Bioprocess here, adapting their status tracking and step-by-step completion patterns for Bioanalytical rather than designing something new from scratch.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/lab-auto-run-clean.webm" type="video/webm"><source src="assets/video/lab-auto-run-clean.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <div class="solution-row" style="padding-top: 4rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Analyze data</h3>
+      <p style="margin: 0 0 1.5rem;">Datasets used to end up scattered in folders or embedded as CSVs in documents. Scientists exported to third-party tools or wrote custom scripts, both fragile and hard to trace when a result looked off. Now, data from a run is automatically linked to it. Scientists pull it into analysis with one click, run it through a template, and never leave the system. Nothing gets exported or reimported, so there are fewer errors and a clear line back to the source.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/lab-auto-run-clean.webm" type="video/webm"><source src="assets/video/lab-auto-run-clean.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <div class="solution-row" style="padding-top: 4rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Review and approve</h3>
+      <p style="margin: 0 0 1.5rem;">Lead scientists used to spend nights and weekends spot-checking spreadsheet formulas and clicking through notebook entries by hand. Now results are fully traceable: click on anything to see the sample, the notebook entry, the document behind it. If a result looks off, a scientist can check it in minutes instead of days.</p>
+      <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+        <img src="assets/img/worksheet-review.png" alt="Reviewing a lab worksheet" style="width: 100%; height: auto; display: block;">
+      </div>
+    </div>
+
+  </section>
+
+  <section id="outcomes" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ outcomesLabel }}</div>
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">{{ outcomesHeading }}</h3>
+    <p style="margin: 0 0 1rem;">After months of work and weeks of rigorous user acceptance testing, we saw Merck go live with a public announcement and 400 users onboarded.</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 1rem 0; padding-bottom: 2rem">
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">90%</p>
+        <p style="color: #6b6863; margin: 0;">reduction in data throughput time</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">25%</p>
+        <p style="color: #6b6863; margin: 0;">reduction in manual tasks</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">3</p>
+        <p style="color: #6b6863; margin: 0;">expansion or new customer opportunities</p>
+      </div>
+      <div>
+        <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">1.1M samples</p>
+        <p style="color: #6b6863; margin: 0;">supported, with six legacy systems phased out</p>
+      </div>
+    </div><div style="margin: 0 0 1rem;"><div>Within Merck, other teams began inquiring about Benchling and, despite shifting focus back to bioprocessing, we landed two more prospects organically through word-of-mouth. One deal advanced far enough to validate the solution and was on track to close within a few months.</div></div>
+    
+
+    
+
+    <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8; margin: 1.5rem 0;">
+      <img src="assets/img/scaling-bioanalysis.jpeg" alt="Scaling bioanalysis across teams" style="width: 100%; height: auto; display: block;">
+    </div>
+
+    <p style="margin: 0 0 1rem;">Our internal dashboards showed more than logins. Scientists were running an increasing number of experiments per user over time, and activity across the funnel looked healthy at every stage. We had no baseline to compare it against, but paired with the qualitative feedback, it pointed to real adoption: Merck scientists getting familiar with the product and working it into their day-to-day.</p>
+
+    </section>
+
+  <section id="reflections" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ reflectionsLabel }}</div>
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">{{ reflectionsHeading }}</h3>
+    <p style="margin: 0 0 1rem;">One call I'd make differently is how we sequenced the two products. We treated Bioprocess as far enough along to start ramping sales and marketing, then turned to scoping Bioanalytical, only to find Bioprocess wasn't actually ready to sell. We pushed hard into Bioanalytical instead, which landed well, but then had to shift back to Bioprocess: an expensive context switch for the whole org, and months where sales and marketing were trained up on a product that wasn't there yet.</p>
+    <p style="margin: 0 0 1rem;">Of course, this wasn't a decision that could be solely made at my level, but I did learn that, as an organization, you have to be disciplined about setting a concrete bar for "ready to sell" before moving on to build elsewhere.</p>
+
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 2.5rem 0 0.5rem;">Keeping the team motivated through hard calls</h3>
+    <p style="margin: 0 0 1rem;">This was a long, complicated project, made harder by a lot of organizational churn, including losing our head of design partway through. I got some tough feedback from our team early on when they felt like they didn't understand the approach and worried about shipping a product that met requirements, but didn't feel great to use.</p>
+    <p style="margin: 0 0 1rem;">Honestly, I felt it too, but I chose to focus on the bigger picture and what we could control. Going back to the core problem, scientists needed to us bring all these disparate systems into one place. As designers, we can pick apart a UI, but none of us had personally felt the pain of redoing weeks of lab work because an integration broke somewhere.&nbsp;We were building something huge and complicated that hadn't existed before and that kind of bet takes time to pay off.</p>
+    <p style="margin: 0 0 1rem;">Thankfully, it eventually did and, as scientists started using it, they saw the impact for themselves.&nbsp;</p>
+
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 2.5rem 0 0.5rem;">The growing role of AI</h3>
+    <div style="margin: 0 0 1rem;"><div><div>Watching data entry eat so much of scientists' time reinforced something I'd underestimated: the highest-leverage problems aren't always the ones inside your project's scope. When Benchling spun up a small AI team, I made a point of staying involved from the sidelines, contributing use cases and feedback on where the pain was worst, because I'd seen it firsthand in Bioanalytical."</div></div></div>
+    
+    <div style="margin: 0;"><div><div><span style="font-size: 1.09375rem;">That led me into an adjacent piece of the work myself: integrating with external ontologies so the LLM could reference a standard set of definitions per customer, making its output more accurate. The lesson for me was less about AI specifically and more about staying attached to the org's next bet instead of considering my job done once a project ships.</span></div></div></div>
+
+    <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8; margin: 1.5rem 0;">
+      <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/benchling-ai-demo.webm" type="video/webm"><source src="assets/video/benchling-ai-demo.mp4" type="video/mp4"></video>
+    </div>
+
+    </section>
+
+    <dc-import name="NextCaseStudy" eyebrow="LinkedIn" title="Redesigning Recruiter Inbox" href="linkedin-recruiter-inbox.html" image="assets/img/linkedin-recruiter-inbox.png" imageAlt="LinkedIn recruiter messaging inbox" color1="oklch(0.9 0.04 30)" color2="oklch(0.82 0.07 30)" hint-size="100%,180px"></dc-import>
+
+    </div>
+
+  </div>
+
+  <dc-import name="Footer" hint-size="100%,100"></dc-import>
+
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Dev tools&quot;},&quot;skillsChips&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Design Leadership, UX Research, Interaction Design, Enterprise SaaS&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;overviewTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Benchling Bioanalytical&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overview&quot;},&quot;overviewSubtitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A unified platform to design and execute lab tests at scale&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overview&quot;},&quot;backgroundLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Background&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Background&quot;},&quot;backgroundHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Breaking the bottleneck&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Background&quot;},&quot;problemLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Problem&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Problem&quot;},&quot;problemHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Getting out of Zoom meetings and into the lab&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Problem&quot;},&quot;approachLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Approach&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Approach&quot;},&quot;opportunityHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;What guided our work&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Approach&quot;},&quot;solutionLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Solution&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Solution&quot;},&quot;outcomesLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Outcomes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Outcomes&quot;},&quot;outcomesHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Shipped, validated, and expanded&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Outcomes&quot;},&quot;reflectionsLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Reflections&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Reflections&quot;},&quot;reflectionsHeading&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Leading through trade-offs&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Reflections&quot;},&quot;heroLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Editorial&quot;,&quot;options&quot;:[&quot;Stacked&quot;,&quot;Editorial&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
+  siteHeaderRef = React.createRef();
+  contactWrapRef = React.createRef();
+  lastSiteHeaderScrollY = 0;
+
+  initSiteHeader() {
+    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
+    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
+    this.handleDocClick = this.handleDocClick.bind(this);
+    document.addEventListener('mousedown', this.handleDocClick);
+    document.addEventListener('touchstart', this.handleDocClick, { passive: true });
+    this.onHeaderKeyDown = this.onHeaderKeyDown.bind(this);
+    document.addEventListener('keydown', this.onHeaderKeyDown);
+    this.measureHeaderHeight = this.measureHeaderHeight.bind(this);
+    this.measureHeaderHeight();
+    window.addEventListener('resize', this.measureHeaderHeight);
+  }
+
+  teardownSiteHeader() {
+    window.removeEventListener('scroll', this.onSiteHeaderScroll);
+    document.removeEventListener('mousedown', this.handleDocClick);
+    document.removeEventListener('touchstart', this.handleDocClick);
+    document.removeEventListener('keydown', this.onHeaderKeyDown);
+    window.removeEventListener('resize', this.measureHeaderHeight);
+  }
+
+  measureHeaderHeight() {
+    var el = this.siteHeaderRef.current;
+    if (!el) return;
+    var h = el.offsetHeight;
+    if (h && h !== this.state.siteHeaderHeightPx) this.setState({ siteHeaderHeightPx: h });
+  }
+
+  onHeaderKeyDown(e) {
+    if (e.key === 'Escape') {
+      if (this.state.contactOpen) this.setState({ contactOpen: false });
+      if (this.state.mobileContactOpen) this.setState({ mobileContactOpen: false });
+      else if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false });
+    }
+  }
+
+  toggleContact() { this.setState(function (s) { return { contactOpen: !s.contactOpen }; }); }
+  closeContact() { this.setState({ contactOpen: false }); }
+
+  handleDocClick(e) {
+    if (this.state.contactOpen) {
+      var el = this.contactWrapRef.current;
+      if (el && !el.contains(e.target)) this.setState({ contactOpen: false });
+    }
+    if (this.state.mobileNavOpen) {
+      var headerEl = this.siteHeaderRef.current;
+      if (headerEl && !headerEl.contains(e.target)) {
+        this.setState({ mobileNavOpen: false, mobileContactOpen: false });
+      }
+    }
+  }
+
+  copyEmail() {
+    var self = this;
+    var email = 'jia.eq.liu@gmail.com';
+    var flash = function () {
+      self.setState({ emailCopied: true });
+      setTimeout(function () { self.setState({ emailCopied: false }); }, 1800);
+    };
+    var fallback = function () {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, email.length);
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flash();
+      } catch (err) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(flash).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  toggleMobileNav() { this.setState(function (s) { return { mobileNavOpen: !s.mobileNavOpen }; }); }
+  closeMobileNav() { this.setState({ mobileNavOpen: false, mobileContactOpen: false }); }
+  toggleMobileContact() { this.setState(function (s) { return { mobileContactOpen: !s.mobileContactOpen }; }); }
+
+  scrollToSectionIfPresent(e) {
+    var id = e.currentTarget.getAttribute('data-section-id');
+    var el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      return true;
+    }
+    return false;
+  }
+
+  handleNavLinkClick(e) { this.scrollToSectionIfPresent(e); }
+  handleMobileNavLinkClick(e) { this.scrollToSectionIfPresent(e); this.closeMobileNav(); }
+
+  onSiteHeaderScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 76;
+    var hidden = this.state.siteHeaderHidden;
+    if (y <= headerH) hidden = false;
+    else if (y > this.lastSiteHeaderScrollY) hidden = true;
+    else if (y < this.lastSiteHeaderScrollY) hidden = false;
+    if (hidden !== this.state.siteHeaderHidden || headerH !== this.state.siteHeaderHeightPx) {
+      this.setState({ siteHeaderHidden: hidden, siteHeaderHeightPx: headerH });
+    }
+    this.lastSiteHeaderScrollY = y;
+  }
+
+  headerRenderVals() {
+    return {
+      siteHeaderRef: this.siteHeaderRef,
+      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      headerSpacerHeight: this.state.siteHeaderHeightPx + 'px',
+      mobileNavOpen: this.state.mobileNavOpen,
+      mobileNavClosed: !this.state.mobileNavOpen,
+      mobileNavMaxHeight: this.state.mobileNavOpen ? (this.state.mobileContactOpen ? '480px' : '220px') : '0px',
+      toggleMobileNav: this.toggleMobileNav.bind(this),
+      closeMobileNav: this.closeMobileNav.bind(this),
+      toggleMobileContact: this.toggleMobileContact.bind(this),
+      mobileContactOpen: this.state.mobileContactOpen,
+      mobileContactMaxHeight: this.state.mobileContactOpen ? '160px' : '0px',
+      mobileContactChevronTransform: this.state.mobileContactOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      handleNavLinkClick: this.handleNavLinkClick.bind(this),
+      handleMobileNavLinkClick: this.handleMobileNavLinkClick.bind(this),
+      contactWrapRef: this.contactWrapRef,
+      contactShapeWidth: this.state.contactOpen ? '280px' : '128px',
+      contactShapeHeight: this.state.contactOpen ? '216px' : '42px',
+      contactShapeRadius: this.state.contactOpen ? '20px' : '999px',
+      contactShapeShadow: this.state.contactOpen ? '0 24px 48px rgba(20,19,15,0.28)' : 'none',
+      contactButtonContentOpacity: this.state.contactOpen ? 0 : 1,
+      contactButtonContentDelay: this.state.contactOpen ? '0s' : '0.25s',
+      contactButtonPointerEvents: this.state.contactOpen ? 'none' : 'auto',
+      contactCardContentOpacity: this.state.contactOpen ? 1 : 0,
+      contactCardContentDelay: this.state.contactOpen ? '0.2s' : '0s',
+      contactCardPointerEvents: this.state.contactOpen ? 'auto' : 'none',
+      toggleContact: this.toggleContact.bind(this),
+      closeContact: this.closeContact.bind(this),
+      copyEmail: this.copyEmail.bind(this),
+      emailCopied: this.state.emailCopied,
+      notEmailCopied: !this.state.emailCopied,
+    };
+  }
+  // --- end SiteHeader ---
+
+  navRef = React.createRef();
+  overviewRef = React.createRef();
+  backgroundRef = React.createRef();
+  problemRef = React.createRef();
+  approachRef = React.createRef();
+  solutionRef = React.createRef();
+  outcomesRef = React.createRef();
+  reflectionsRef = React.createRef();
+  dlRef = React.createRef();
+  mainColRef = React.createRef();
+  wideBreakoutLeftRef = React.createRef();
+  wideBreakoutRightRef = React.createRef();
+  fullBreakoutLeftRef = React.createRef();
+  fullBreakoutRightRef = React.createRef();
+  personas = [
+    { label: 'Lead Scientist', src: 'assets/img/lead-scientist-persona.png', alt: 'Lead Scientist persona' },
+    { label: 'Lab Auto Operator', src: 'assets/img/lab-auto-persona.png', alt: 'Lab Automation Operator persona' },
+    { label: 'Lab Scientist', src: 'assets/img/scientist-persona.png', alt: 'Lab Scientist persona' },
+    { label: 'Data Scientist', src: 'assets/img/data-scientist-persona.png', alt: 'Data Scientist persona' },
+    { label: 'IT Manager', src: 'assets/img/it-manager-persona.png', alt: 'IT Manager persona' },
+  ];
+
+  tabsWrapRef = React.createRef();
+  tabRefs = this.personas.map(function () { return React.createRef(); });
+  touchStartX = 0;
+
+  selectPersona(i) { this.setState({ personaIndex: i }); }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.personaIndex !== this.state.personaIndex) {
+      var el = this.tabRefs[this.state.personaIndex] && this.tabRefs[this.state.personaIndex].current;
+      if (el) el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }
+
+  handlePersonaTouchStart(e) { this.touchStartX = e.touches[0].clientX; }
+
+  handlePersonaTouchEnd(e) {
+    var dx = e.changedTouches[0].clientX - this.touchStartX;
+    if (Math.abs(dx) < 40) return;
+    var n = this.personas.length;
+    var next = dx < 0 ? (this.state.personaIndex + 1) % n : (this.state.personaIndex - 1 + n) % n;
+    this.selectPersona(next);
+  }
+  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false, personaIndex: 0, teamSportTextPx: 300, teamSportImagePx: 450, teamSportFullPx: 780, teamSport8ColPx: 620, teamSport9ColPx: 700, teamSport7ColPx: 540, teamSport3ColPx: 230 };
+
+  componentDidMount() {
+    this.initSiteHeader();
+    var videos = document.querySelectorAll('video');
+    videos.forEach(function (v) { v.muted = true; v.preload = 'auto'; });
+    this.videoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.play().catch(function () {});
+        else entry.target.pause();
+      });
+    }, { rootMargin: '200px 0px', threshold: 0 });
+    videos.forEach(function (v) { this.videoObserver.observe(v); }.bind(this));
+
+    this.measureTeamSportExtra = this.measureTeamSportExtra.bind(this);
+    this.measureTeamSportExtra();
+    window.addEventListener('resize', this.measureTeamSportExtra);
+
+  }
+
+  componentDidUpdate() {
+    if (!this.videoObserver) return;
+    var videos = document.querySelectorAll('video');
+    videos.forEach(function (v) {
+      v.muted = true;
+      this.videoObserver.observe(v);
+    }.bind(this));
+  }
+
+
+  measureTeamSportExtra() {
+    var dlEl = this.dlRef.current;
+    var mainEl = this.mainColRef.current;
+    if (!dlEl || !mainEl) return;
+    var rowGap = 40; // 2.5rem
+    var fullWidth = dlEl.getBoundingClientRect().right - mainEl.getBoundingClientRect().left;
+    var textPx = Math.round((fullWidth - rowGap) * 4 / 10);
+    var imagePx = Math.round((fullWidth - rowGap) * 6 / 10);
+    var eightColPx = Math.round((fullWidth - rowGap) * 8 / 10);
+    var nineColPx = Math.round((fullWidth - rowGap) * 9 / 10);
+    var sevenColPx = Math.round((fullWidth - rowGap) * 7 / 10);
+    var threeColPx = Math.round((fullWidth - rowGap) * 3 / 10);
+    var fullPx = Math.round(fullWidth);
+    if (textPx > 0 && (textPx !== this.state.teamSportTextPx || imagePx !== this.state.teamSportImagePx || fullPx !== this.state.teamSportFullPx || eightColPx !== this.state.teamSport8ColPx || nineColPx !== this.state.teamSport9ColPx || sevenColPx !== this.state.teamSport7ColPx)) {
+      this.setState({ teamSportTextPx: textPx, teamSportImagePx: imagePx, teamSportFullPx: fullPx, teamSport8ColPx: eightColPx, teamSport9ColPx: nineColPx, teamSport7ColPx: sevenColPx, teamSport3ColPx: threeColPx });
+    }
+  }
+
+  componentWillUnmount() {
+    this.teardownSiteHeader();
+    if (this.videoObserver) this.videoObserver.disconnect();
+    window.removeEventListener('resize', this.measureTeamSportExtra);
+  }
+
+  renderVals() {
+    var personaIdx = this.state.personaIndex;
+    var self = this;
+    var personaTabs = this.personas.map(function (p, i) {
+      var isActive = i === personaIdx;
+      return { label: p.label, ref: self.tabRefs[i], select: function () { self.selectPersona(i); }, color: isActive ? '#14130f' : '#6b6863', borderColor: isActive ? '#0688f0' : 'transparent', fontWeight: isActive ? 600 : 400 };
+    });
+    var P = this.props;
+    return {
+      ...this.headerRenderVals(),
+      overviewTitle: P.overviewTitle ?? 'Benchling Bioanalytical',
+      overviewSubtitle: P.overviewSubtitle ?? 'A unified platform to design and execute lab tests at scale',
+      backgroundLabel: P.backgroundLabel ?? 'Background',
+      backgroundHeading: P.backgroundHeading ?? 'Breaking the bottleneck',
+      problemLabel: P.problemLabel ?? 'Problem',
+      problemHeading: P.problemHeading ?? 'Getting out of Zoom meetings and into the lab',
+      approachLabel: P.approachLabel ?? 'Approach',
+      opportunityHeading: P.opportunityHeading ?? 'What guided our work',
+      solutionLabel: P.solutionLabel ?? 'Solution',
+      outcomesLabel: P.outcomesLabel ?? 'Outcomes',
+      outcomesHeading: P.outcomesHeading ?? 'Shipped, validated, and expanded',
+      reflectionsLabel: P.reflectionsLabel ?? 'Reflections',
+      reflectionsHeading: P.reflectionsHeading ?? 'Getting the sequencing right',
+      skillsChips: (this.props.skillsChips ?? 'Design Leadership, UX Research, Interaction Design, Enterprise SaaS').split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+      currentPersonaSrc: this.personas[personaIdx].src,
+      currentPersonaAlt: this.personas[personaIdx].alt,
+      personaTabs: personaTabs,
+      tabsWrapRef: this.tabsWrapRef,
+      handlePersonaTouchStart: this.handlePersonaTouchStart.bind(this),
+      handlePersonaTouchEnd: this.handlePersonaTouchEnd.bind(this),
+      navRef: this.navRef,
+      dlRef: this.dlRef,
+      mainColRef: this.mainColRef,
+      wideBreakoutLeftRef: this.wideBreakoutLeftRef,
+      wideBreakoutRightRef: this.wideBreakoutRightRef,
+      fullBreakoutLeftRef: this.fullBreakoutLeftRef,
+      fullBreakoutRightRef: this.fullBreakoutRightRef,
+      teamSportTextPx: this.state.teamSportTextPx,
+      teamSportImagePx: this.state.teamSportImagePx,
+      teamSportFullPx: this.state.teamSportFullPx,
+      teamSport8ColPx: this.state.teamSport8ColPx,
+      teamSport9ColPx: this.state.teamSport9ColPx,
+      teamSport7ColPx: this.state.teamSport7ColPx,
+      teamSport3ColPx: this.state.teamSport3ColPx,
+      gridOverlayDisplay: this.props.showGridOverlay ? 'grid' : 'none',
+      gridOverlayCols: new Array(12).fill(0),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

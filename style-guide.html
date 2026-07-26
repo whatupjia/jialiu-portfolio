@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Semibold.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Semibold.otf" crossorigin="anonymous">
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Extralight.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Black.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Mori', -apple-system, system-ui, 'Segoe UI', sans-serif; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    @media (max-width: 640px) { .type-scale-row { grid-template-columns: 1fr !important; gap: 0.4rem !important; } }
+  </style>
+</helmet>
+
+<header ref="{{ siteHeaderRef }}" style="position: sticky; top: 0; z-index: 5; width: 100%; box-sizing: border-box; background: #fbfaf9; border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 1.5rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" style="font-weight: 600; font-size: 1.05rem; color: #14130f; text-decoration: none;">Jia Liu</a>
+    <nav style="display: flex; gap: 1.5rem;">
+      <a href="index.html#work" style="font-size: 1.05rem; font-weight: 600; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
+      <span style="font-size: 1.05rem; font-weight: 600; color: #14130f; opacity: 0.4;">Resume</span>
+      <span style="font-size: 1.05rem; font-weight: 600; color: #14130f; opacity: 0.4;">Bio</span>
+    </nav>
+  </div>
+</header>
+
+<div style="max-width: 1120px; margin: 0 auto; padding: 3rem clamp(1.25rem, 4vw, 3rem) 6rem;">
+
+  <header style="margin-bottom: 4rem; margin-top: 2rem;">
+    <p style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin: 0 0 0.5rem;">Reference</p>
+    <h1 style="font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; margin: 0 0 0.5rem;">Style guide</h1>
+    <p style="color: #6b6863; max-width: 640px; margin: 0;">Every color, type size, and repeating UI piece used across the portfolio and case study pages, gathered here so a tweak only has to be made once and then matched. Editing this page is documentation-only — copy a value across when you update Portfolio.dc.html or CaseStudy-Benchling.dc.html.</p>
+  </header>
+
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">Color palette</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;">
+      <sc-for list="{{ colors }}" as="c" hint-placeholder-count="9">
+        <div>
+          <div style="aspect-ratio: 3/2; border-radius: 10px; border: 1px solid rgba(0,0,0,0.08); background: {{ c.hex }};"></div>
+          <p style="font-weight: 600; margin: 0.6em 0 0.1em; font-size: 0.95rem;">{{ c.name }}</p>
+          <p style="color: #6b6863; margin: 0; font-size: 0.85rem; font-family: monospace;">{{ c.hex }}</p>
+          <p style="color: #6b6863; margin: 0.15em 0 0; font-size: 0.8rem;">{{ c.usage }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">Extended palette</h2>
+    <p style="color: #6b6863; margin: 0 0 1.5rem; max-width: 640px;">Generated in oklch from the core accent, success and error hues — for gradients, tints, and states the core 9 colors don't cover.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;">
+      <sc-for list="{{ extendedColors }}" as="c" hint-placeholder-count="11">
+        <div>
+          <div style="aspect-ratio: 3/2; border-radius: 10px; border: 1px solid rgba(0,0,0,0.08); background: {{ c.hex }};"></div>
+          <p style="font-weight: 600; margin: 0.6em 0 0.1em; font-size: 0.95rem;">{{ c.name }}</p>
+          <p style="color: #6b6863; margin: 0; font-size: 0.85rem; font-family: monospace;">{{ c.hex }}</p>
+          <p style="color: #6b6863; margin: 0.15em 0 0; font-size: 0.8rem;">{{ c.usage }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">Typographic scale</h2>
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+      <sc-for list="{{ typeScale }}" as="t" hint-placeholder-count="7">
+        <div class="type-scale-row" style="display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: baseline; border-bottom: 1px solid #f2f1ec; padding-bottom: 1.5rem;">
+          <div>
+            <p style="font-weight: 600; margin: 0 0 0.2em; font-size: 0.95rem;">{{ t.label }}</p>
+            <p style="color: #6b6863; margin: 0; font-size: 0.8rem; font-family: monospace;">{{ t.spec }}</p>
+          </div>
+          <p style="margin: 0; font-size: {{ t.size }}; font-weight: {{ t.weight }}; text-transform: {{ t.transform }}; letter-spacing: {{ t.tracking }}; color: {{ t.color }};">{{ t.sample }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">UI elements</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Tag / chip</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5em;">
+          <dc-import name="Chip" label="B2B" hint-size="auto,32px"></dc-import>
+          <dc-import name="Chip" label="Research" hint-size="auto,32px"></dc-import>
+        </div>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">Chip.dc.html · bg #f2f1ec · pill radius</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Status tag</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5em;">
+          <span style="font-family: 'Mori', -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: #3a7d56; background: rgba(58,125,86,0.1); padding: 0.35em 0.9em; border: 1px solid rgba(58,125,86,0.35); border-radius: 8px; letter-spacing: 0.06em;">Success</span>
+          <span style="font-family: 'Mori', -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: #c1453a; background: rgba(193,69,58,0.1); padding: 0.35em 0.9em; border: 1px solid rgba(193,69,58,0.35); border-radius: 8px; letter-spacing: 0.06em;">Error</span>
+        </div>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">same tag shape, tinted 10% bg / 35% border of the state color</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Section eyebrow</p>
+        <p style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin: 0;">Background</p>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">1.05rem · 600 · uppercase · tracking 0.1em · #6b6863</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Nav link</p>
+        <div style="display: flex; gap: 1.5rem;">
+          <span style="font-size: 1.05rem; font-weight: 600; color: #14130f; opacity: 0.75;">Work</span>
+          <span style="font-size: 1.05rem; font-weight: 600; color: #14130f; opacity: 0.4;">Resume</span>
+        </div>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">active opacity 0.75 (hover 1) · inactive opacity 0.4</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Blockquote — with author</p>
+        <dc-import name="Blockquote" quote="“A representative pull quote.”" author="Attribution" style="margin: 0;" hint-size="100%,140px"></dc-import>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">Blockquote.dc.html · border-left 3px #0688f0 · background #f2f1ec</p>
+      </div>
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Blockquote — without author</p>
+        <dc-import name="Blockquote" quote="“A representative pull quote, used when there's no attribution to show.”" style="margin: 0;" hint-size="100%,120px"></dc-import>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">Blockquote.dc.html · same styling, cite omitted</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Media card (default)</p>
+        <div style="aspect-ratio: 4/3; background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px;"></div>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">bg #ffffff · border #e4e0d8 · radius 10px — default for image/video frames (case study media, thumbnails)</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Media card (no radius)</p>
+        <div style="aspect-ratio: 4/3; background: #ffffff; padding: 10px;"></div>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">bg #ffffff, no border/radius, 10px inner padding — used for full-bleed home-grid work thumbnails</p>
+      </div>
+
+      <div>
+        <p style="font-weight: 600; margin: 0 0 0.75rem; font-size: 0.95rem;">Metadata label (dt/dd)</p>
+        <p style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin: 0 0 0.25em;">Timeline</p>
+        <p style="margin: 0;">2024–2025</p>
+        <p style="color: #6b6863; margin: 0.75rem 0 0; font-size: 0.8rem;">label 0.9rem/600/uppercase #6b6863 · value inherits body</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">Icons</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.5rem;">
+      <sc-for list="{{ icons }}" as="icon" hint-placeholder-count="5">
+        <div>
+          <div style="aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px;">
+            <img src="{{ icon.src }}" alt="{{ icon.name }}" style="width: 22px; height: 22px;" />
+          </div>
+          <p style="font-weight: 600; margin: 0.6em 0 0.1em; font-size: 0.85rem;">{{ icon.name }}</p>
+          <p style="color: #6b6863; margin: 0; font-size: 0.78rem;">{{ icon.usage }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="color: #6b6863; margin: 1.25rem 0 0; font-size: 0.8rem;">18–22px, single color, paired inline with H4 detail headings — swap fill to <code>#6b6863</code> (muted) to match body copy.</p>
+  </section>
+
+  <section>
+    <h2 style="font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e4e0d8;">Spacing &amp; grid</h2>
+    <ul style="margin: 0; padding-left: 1.2rem; color: #6b6863; line-height: 1.9;">
+      <li>Content grid: 12 columns, 16px gutters, container padding <code>clamp(1.25rem, 4vw, 3rem)</code>, max-width 1280px.</li>
+      <li>Section rhythm: 4–6rem top/bottom padding, 1px <code>#e4e0d8</code> dividers between major sections.</li>
+      <li>Card radius: 10px for image/video frames (or none, for full-bleed home-grid thumbnails), 8px for tags.</li>
+    </ul>
+  </section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  siteHeaderRef = React.createRef();
+  lastSiteHeaderScrollY = 0;
+  siteHeaderScrollAccum = 0;
+  siteHeaderScrollDir = 0;
+  state = { siteHeaderHidden: false };
+
+  componentDidMount() {
+    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
+    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onSiteHeaderScroll);
+  }
+
+  onSiteHeaderScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var delta = y - this.lastSiteHeaderScrollY;
+    var dir = delta > 0 ? 1 : delta < 0 ? -1 : this.siteHeaderScrollDir;
+    if (dir !== this.siteHeaderScrollDir) { this.siteHeaderScrollAccum = 0; this.siteHeaderScrollDir = dir; }
+    this.siteHeaderScrollAccum += Math.abs(delta);
+    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 72;
+    var hidden = this.state.siteHeaderHidden;
+    if (y <= headerH) hidden = false;
+    else if (dir > 0 && this.siteHeaderScrollAccum > 24) hidden = true;
+    else if (dir < 0 && this.siteHeaderScrollAccum > 8) hidden = false;
+    if (hidden !== this.state.siteHeaderHidden) this.setState({ siteHeaderHidden: hidden });
+    this.lastSiteHeaderScrollY = y;
+  }
+
+  renderVals() {
+    return {
+      siteHeaderRef: this.siteHeaderRef,
+      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      colors: [
+        { name: 'Background', hex: '#fbfaf9', usage: 'Page background' },
+        { name: 'Ink', hex: '#14130f', usage: 'Primary text, headings' },
+        { name: 'Muted', hex: '#6b6863', usage: 'Secondary text, labels' },
+        { name: 'Muted (dark)', hex: '#4a4642', usage: 'Sub-headline accents' },
+        { name: 'Border', hex: '#e4e0d8', usage: 'Dividers, card borders' },
+        { name: 'Border (tag)', hex: '#d7d2c7', usage: 'Tag/chip borders' },
+        { name: 'Surface', hex: '#f2f1ec', usage: 'Tag/chip background' },
+        { name: 'Card white', hex: '#ffffff', usage: 'Media card background' },
+        { name: 'Accent', hex: '#0688f0', usage: 'Links, blockquote rule' },
+        { name: 'Accent (hover)', hex: '#0576d1', usage: 'Link hover' },
+        { name: 'Success', hex: '#3a7d56', usage: 'Success states, confirmations' },
+        { name: 'Error', hex: '#c1453a', usage: 'Error states, destructive actions' },
+      ],
+      extendedColors: [
+        { name: 'Accent 100', hex: 'oklch(0.94 0.03 240)', usage: 'Subtle blue tint — hover surfaces' },
+        { name: 'Accent 300', hex: 'oklch(0.83 0.08 240)', usage: 'Light accent — chart fills, badges' },
+        { name: 'Accent 500', hex: '#0688f0', usage: 'Core accent (existing)' },
+        { name: 'Accent 700', hex: 'oklch(0.55 0.16 240)', usage: 'Deep accent — pressed states' },
+        { name: 'Accent 900', hex: 'oklch(0.32 0.1 240)', usage: 'Darkest accent — text on light blue' },
+        { name: 'Sand', hex: 'oklch(0.88 0.045 80)', usage: 'Warm complement — gradient wrapper tail' },
+        { name: 'Sand (deep)', hex: 'oklch(0.72 0.06 75)', usage: 'Warm complement, deeper — accents on sand' },
+        { name: 'Sage 200', hex: 'oklch(0.9 0.04 150)', usage: 'Muted green tint — success surfaces' },
+        { name: 'Sage 700', hex: 'oklch(0.5 0.08 150)', usage: 'Muted green, deep — extends Success' },
+        { name: 'Clay 200', hex: 'oklch(0.9 0.04 30)', usage: 'Muted red tint — error surfaces' },
+        { name: 'Clay 700', hex: 'oklch(0.5 0.1 30)', usage: 'Muted red, deep — extends Error' },
+      ],
+      icons: [
+        { name: 'Benchling', src: 'assets/img/benchling-logo.png', usage: 'Nav wordmark, case study logo' },
+        { name: 'Tree structure', src: 'assets/img/tree-structure-icon.svg', usage: 'End-to-end data flow' },
+        { name: 'Swap', src: 'assets/img/swap-icon.svg', usage: 'Flexibility where it matters' },
+        { name: 'Sketch', src: 'assets/img/sketch-logo-icon.svg', usage: 'Consistency and clarity' },
+        { name: 'Lego', src: 'assets/img/lego-icon.svg', usage: 'Build with leverage' },
+      ],
+      typeScale: [
+        { label: 'H1 / Hero headline', spec: "clamp(1.75rem, 1.2rem+2.2vw, 2.75rem) · 600", size: 'clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem)', weight: 600, transform: 'none', tracking: 'normal', color: '#14130f', sample: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
+        { label: 'H2 / Hero subhead', spec: 'clamp(1.2rem, 1rem+1vw, 1.7rem) · 400', size: 'clamp(1.2rem, 1rem + 1vw, 1.7rem)', weight: 400, transform: 'none', tracking: 'normal', color: '#6b6863', sample: 'A unified platform to design and execute lab tests at scale' },
+        { label: 'H3 / Section subhead', spec: 'clamp(1.25rem, 1.05rem+0.8vw, 1.625rem) · 600', size: 'clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem)', weight: 600, transform: 'none', tracking: 'normal', color: '#14130f', sample: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
+        { label: 'H4 / Detail heading', spec: 'clamp(1.1rem, 1rem+0.4vw, 1.3rem) · 600', size: 'clamp(1.1rem, 1rem + 0.4vw, 1.3rem)', weight: 600, transform: 'none', tracking: 'normal', color: '#14130f', sample: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' },
+        { label: 'Body', spec: '1.09375rem · 400 · line-height 1.6', size: '1.09375rem', weight: 400, transform: 'none', tracking: 'normal', color: '#14130f', sample: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+        { label: 'Eyebrow label', spec: '1.05rem · 600 · uppercase · tracking 0.1em', size: '1.05rem', weight: 600, transform: 'uppercase', tracking: '0.1em', color: '#6b6863', sample: 'Work highlights' },
+        { label: 'Metadata label', spec: '0.9rem · 600 · uppercase · tracking 0.03em', size: '0.9rem', weight: 600, transform: 'uppercase', tracking: '0.03em', color: '#6b6863', sample: 'Role' },
+        { label: 'Tag text', spec: '0.78rem · 500 · uppercase · tracking 0.06em', size: '0.78rem', weight: 500, transform: 'uppercase', tracking: '0.06em', color: '#6b6863', sample: 'Product Design' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

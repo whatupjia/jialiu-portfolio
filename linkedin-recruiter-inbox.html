@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    .nav-desktop, .contact-desktop { display: flex; }
+    .nav-mobile-toggle { display: none; }
+    @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
+    .header-spacer-default { height: 76px; }
+  </style>
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Semibold.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Semibold.otf" crossorigin="anonymous">
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    strong, b { font-weight: 600; }
+    @keyframes csFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .cs-intro-1 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .cs-intro-2 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+    .cs-intro-3 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .cs-intro-4 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+    @media (prefers-reduced-motion: reduce) { .cs-intro-1, .cs-intro-2, .cs-intro-3, .cs-intro-4 { animation: none !important; } }
+    @media (max-width: 820px) { .cs-col { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; } }
+    @media (max-width: 1100px) {
+      .cs-title-grid, .cs-shell { display: block !important; }
+      .cs-title-block { padding-top: 2.5rem !important; }
+      .cs-dl { margin-bottom: 2.5rem !important; grid-template-columns: 1fr !important; }
+      .cs-divider { display: none !important; }
+      .cs-overview-wrap { padding-bottom: 1.5rem !important; }
+    }
+  </style>
+  <script src="image-slot.js"></script>
+</helmet>
+
+<div style="position: relative;">
+<header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
+  <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+      <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
+      Jia Liu
+    </a>
+    <div style="display: flex; align-items: center; gap: 1.75rem;">
+      <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
+        <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
+        <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
+        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+      </nav>
+      <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
+        <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </sc-if>
+        <sc-if value="{{ mobileNavClosed }}" hint-placeholder-val="{{ true }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </sc-if>
+      </button>
+      <div ref="{{ contactWrapRef }}" class="contact-desktop-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
+        <div style="position: absolute; top: 0; right: 0; background: #14130f; overflow: hidden; width: {{ contactShapeWidth }}; height: {{ contactShapeHeight }}; border-radius: {{ contactShapeRadius }}; box-shadow: {{ contactShapeShadow }}; transition: width 0.45s cubic-bezier(0.16,1,0.3,1), height 0.45s cubic-bezier(0.16,1,0.3,1), border-radius 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; z-index: 20;">
+          <button class="contact-desktop" onClick="{{ toggleContact }}" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border: none; color: #ffffff; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: {{ contactButtonContentOpacity }}; pointer-events: {{ contactButtonPointerEvents }}; transition: opacity 0.2s ease {{ contactButtonContentDelay }};">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+            Contact
+          </button>
+          <div style="position: absolute; inset: 0; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: {{ contactCardContentOpacity }}; pointer-events: {{ contactCardPointerEvents }}; transition: opacity 0.25s ease {{ contactCardContentDelay }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
+              <span style="font-size: 0.95rem; color: #9a968f;">Get in touch</span>
+              <button onClick="{{ closeContact }}" aria-label="Close" style="background: none; border: none; color: #9a968f; cursor: pointer; padding: 0; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">Email</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">jia.eq.liu@gmail.com</div>
+              </div>
+              <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: rgba(255,255,255,0.1); border: none; border-radius: 8px; width: 34px; height: 34px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                </sc-if>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">LinkedIn</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">@jia-eq-liu</div>
+              </div>
+              <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255,255,255,0.1); border-radius: 8px; width: 34px; height: 34px; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: {{ mobileNavMaxHeight }}; border-top: 1px solid #e4e0d8; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+   <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
+    <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
+      <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
+      <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
+      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+        Contact
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+      <div style="overflow: hidden; max-height: {{ mobileContactMaxHeight }}; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div style="padding: 0.25rem 0 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">Email</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">jia.eq.liu@gmail.com</div>
+            </div>
+            <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: #f2f1ec; border: none; border-radius: 8px; width: 34px; height: 34px; color: #14130f; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+              </sc-if>
+              <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+              </sc-if>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">LinkedIn</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">@jia-eq-liu</div>
+            </div>
+            <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: #f2f1ec; border-radius: 8px; width: 34px; height: 34px; color: #14130f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   </div>
+  </div>
+</header>
+<div class="header-spacer-default" style="height: {{ headerSpacerHeight }}; flex-shrink: 0;"></div>
+
+<div style="position: relative; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+
+  <div class="cs-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+    <div class="cs-title-block cs-intro-1" style="grid-column: 3 / 11; padding: 4rem 0 1.5rem;">
+      <div class="cs-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+        <h1 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; line-height: 1.25; margin: 0 0 0.5rem;">{{ projectTitle }}</h1>
+        <h2 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 400; line-height: 1.3; color: #6b6863; margin: 0;">{{ projectSubtitle }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start;">
+
+    <div class="cs-overview-wrap" style="grid-column: 3 / 11; grid-row: 1; padding-bottom: 3rem;">
+      <section id="overview" class="cs-col cs-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+        <p style="margin: 0 0 1rem;">LinkedIn Recruiter is the paid product talent professionals use to search for candidates, reach out to them, and track those conversations. Messaging is where most of that work actually happens. A single recruiter can be running hundreds of open threads across several roles at once. I owned the messaging features and led an end-to-end redesign of the inbox.</p>
+
+        <dl class="cs-dl cs-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0 0;">
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Role</dt>
+            <dd style="margin: 0;">Product Designer, LinkedIn, Sep 2018 to May 2021. Owned Recruiter messaging, partnering with one product manager and an engineering team.</dd>
+          </div>
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Outcome</dt>
+            <dd style="margin: 0;">Redesigned inbox shipped in 2022, after I'd moved on from LinkedIn; landed well with recruiters, who called out the project-based organization as the standout improvement.</dd>
+          </div>
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Skills</dt>
+            <dd style="margin: 0; display: flex; flex-wrap: wrap; gap: 0.5em;">
+              <sc-for list="{{ skillsChips }}" as="chip" hint-placeholder-count="4">
+                <dc-import name="Chip" label="{{ chip }}" hint-size="auto,32px"></dc-import>
+              </sc-for>
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <div class="cs-divider" style="grid-column: 3 / 11; grid-row: 1; align-self: end;">
+      <div style="max-width: 760px; margin: 0 auto; height: 0; border-bottom: 1px solid #e4e0d8;"></div>
+    </div>
+
+    <dc-import name="SectionNav" hint-size="1px,1px"></dc-import>
+
+    <div style="grid-column: 3 / 11; grid-row: 2;">
+
+      <section id="background" class="cs-col cs-intro-4" style="max-width: 760px; margin-left: auto; margin-right: auto; margin-top: 1rem; margin-bottom: 4rem;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Background</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">A decade of accumulated product</h3>
+        <p style="margin: 0 0 1rem;">Recruiter dates back to the early 2010s, when it was a much simpler search-and-contact tool bolted onto LinkedIn's consumer product. Messaging was an afterthought then, a plain thread with none of the project tracking, templates, or team collaboration that recruiters rely on today.</p>
+        <p style="margin: 0;">Every year since, new capabilities got layered on to meet whatever the immediate need was: pipeline stages, InMail credits, team sharing, scheduling. By the time I joined, the inbox was carrying almost a decade of that accretion, and it showed.</p>
+
+        <div style="margin: 1.5rem 0;">
+          <dc-import name="ExpandableImage" src="assets/img/linkedin-recruiter-2010s-upscaled.png" alt="Screenshot of LinkedIn Recruiter's inbox/messaging, circa early-to-mid 2010s" hint-size="100%,420px"></dc-import>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Part of a bigger platform relaunch</h3>
+          <p style="margin: 0 0 1rem;">This redesign was one piece of a larger effort to relaunch Talent Solutions as a unified platform across customer segments, integrating disparate products like Recruiter and Jobs and building toward a future powered by AI. The underlying platform foundations were being reworked at the same time.</p>
+          <p style="margin: 0;">That was a real opportunity, but it also meant constantly weighing how Inbox's design language, components, terminology, and voice could hold together with everything else on the platform. inbox got a fresh start, but how far we could push new component behavior or rework the information architecture stayed bounded by that larger effort.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-talent-solutions-search.png" alt="A candidate search results screen elsewhere in the Talent Solutions platform, sharing the same design language" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+      </section>
+
+      <section id="problem" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Problem</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">What recruiters were struggling with</h3>
+        <p style="margin: 0 0 2rem;">Recruiters had been raising versions of these same complaints about messaging for years: InMails that got buried once a recruiter was running more than a handful of open roles, no good way to tell whether a candidate's silence meant "not interested" or "hasn't seen it yet," and message history that lived apart from the pipeline and project context recruiters needed to act on it. Our research confirmed these problems hadn't gone away on their own. They'd just been worked around for years.</p>
+
+        <div>
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span style="color: #6b6863; flex-shrink: 0; font-variant-numeric: tabular-nums;">1.</span>Too many roles, one inbox</h4>
+            <p style="margin: 0;">Managing and prioritizing messages when juggling different roles.</p>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span style="color: #6b6863; flex-shrink: 0; font-variant-numeric: tabular-nums;">2.</span>Candidate info, scattered everywhere</h4>
+            <p style="margin: 0;">Finding candidate information, given different types of candidates and recruiting workflows.</p>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span style="color: #6b6863; flex-shrink: 0; font-variant-numeric: tabular-nums;">3.</span>Follow-ups fell through the cracks</h4>
+            <p style="margin: 0;">Updating candidate activity and following up more quickly, especially when collaborating with teammates in larger recruiting teams.</p>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span style="color: #6b6863; flex-shrink: 0; font-variant-numeric: tabular-nums;">4.</span>An "accept" that didn't mean much</h4>
+            <p style="margin: 0;">Clarifying message "accepts," where recruiters get notified that a candidate is interested in their job opportunity.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="approach" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Approach</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">A migration first, an improvement second</h3>
+        <p style="margin: 0 0 1rem;">Foremost, we needed to migrate the inbox to our new platform, laying the foundation for future improvements. We believed, for instance, that improved recommendations would be a core element of our long-term strategy, but we couldn't make progress until we moved off the old tech stack.</p>
+        <p style="margin: 0 0 1.5rem;">While we knew these changes were unlikely to significantly improve our hiring funnel, we also believed there were opportunities to make our users happier and feel more productive.</p>
+
+        <dc-import name="ExpandableImage" src="assets/img/linkedin-inbox-annotated.png" alt="The original LinkedIn Recruiter inbox, annotated with the four problem areas surfaced in research" hint-size="100%,420px"></dc-import>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Balancing enterprise vs. small business users</h3>
+          <p style="margin: 0 0 1rem;">Enterprise recruiters typically had more complex workflows and larger teams to collaborate with, while small business recruiters were the opposite in many ways. Our principle was to help enterprise users do more without getting in the way of small business users. This meant focusing on the essentials while ensuring more advanced features were readily available.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-enterprise-smb.png" alt="Comparison of enterprise and small business recruiter workflows across team size, volume, templates, and projects" padding="32" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Managing and prioritizing messages</h3>
+          <p style="margin: 0 0 1rem;">In tackling this problem, I initially started with concepts intended to make managing messages more "intelligent," but through our user testing, we narrowed down to a standard folder architecture for the MVP.</p>
+          <p style="margin: 0 0 1rem;">It turned out participants loved the familiarity and usefulness of folders, especially since that's already how they managed their email. This was a recurring theme for us: is this more of an email "thing" or a chat "thing"? We'd decidedly leaned into the former, and that suited most of our participants just fine.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-inbox-concepts-comparison.png" alt="Four inbox concepts compared: priority messages, automatic archiving, suggested follow-ups, and folders, with folders as the chosen direction" hint-size="100%,420px"></dc-import>
+          </div>
+          
+          <p style="margin: 0 0 1rem;">One early direction explored surfacing folders as tabs across the top of the inbox, alongside a persistent left panel, and where profile details would go if they moved out of the message thread into a slide-in panel.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-inbox-concepts-combined.png" alt="Early concepts compared: folders as tabs across the top, a persistent left panel layout, and profile details moved into a slide-in panel" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1rem;">I ultimately placed these folders into a persistent left panel, making them more discoverable, while moving the right panel's contents to a secondary level in the slide-in profile. From there, I iterated on the panel itself across a few rounds before landing on a condensed folder list with a secondary status filter.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-inbox-folders-iterations.png" alt="Three iterations of the folders panel: an early flat list, a version with recent projects grouped underneath, and the final version with a condensed folder list and status filter" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1.5rem;">In the final design, I polished down the folder list to the most essential ones (Inbox, Awaiting Reply, Archived) and pushed others to a secondary-level filter (Accepted, Declined, and others). Conceptually, this filter also made sense because "Accepted" and "Declined" were message types that could exist across any folder, not just the inbox.</p>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Finding past messages and files</h3>
+          <p style="margin: 0 0 1rem;">According to our usage data, search was one of the more frequently used features. Users would want to find a past conversation but forget its exact name, most often searching by a role in the subject line, like "product designers." Other times, they were looking for a resume attachment.</p>
+          <p style="margin: 0 0 1rem;">This led me to two directions: a typeahead tuned to role-based subject lines, and a more advanced, filtered search for attachments.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-search-explorations.png" alt="Three search explorations: a role-based typeahead, an advanced filtered search modal, and the shipped direction of faster dynamic loading on the existing search" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1rem;">Testing didn't give us a strong enough signal to call either a priority. Users were largely fine with search as it stood, and building either well would have taken a lot of time before the initial release.</p>
+          <p style="margin: 0;">We shipped simple performance improvements to the existing search and left the bigger ideas on the roadmap.</p>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Refreshing your memory while replying</h3>
+          <p style="margin: 0 0 1rem;">We needed to surface just enough information for a recruiter to take action, without pushing the message content too far down the page.</p>
+          <p style="margin: 0 0 1rem;">I explored modifying the profile card to elevate the essentials, pushing everything else into the slide-in panel or an overflow menu.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-profile-card-comparison.png" alt="Comparison of the original slide-in profile with a full right panel against a condensed profile card with an expanded activity summary" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1rem;">I'd originally favored keeping the full right panel in place, but internal feedback and user testing changed my view. It broke from how we represented profiles elsewhere in the app, an inconsistency that had already confused users in other feature areas.</p>
+          <p style="margin: 0 0 1rem;">Testing surfaced a real cost, too: several existing users felt that moving the profile card disrupted how they were used to scanning for information.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-profile-card-refinement.png" alt="Three iterations of the profile card, refining its information and controls for usefulness in the inbox and consistency across the app" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Following up and taking action</h3>
+          <p style="margin: 0 0 1rem;">I was interested in "suggested actions," where we might suggest or even automatically trigger follow-up actions based on a message's contents.</p>
+          <p style="margin: 0 0 1rem;">It turned out it's not so easy to "AI magic" your way to relevant suggestions, and ensuring trust and privacy would be a major requirement of a feature like this.</p>
+          <p style="margin: 0 0 1rem;">Instead, I focused on cleaning up and reorganizing our existing Recruiting Tools to be discoverable for power users while getting out of the way of the main message content.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-recruiting-tools-templates.png" alt="Recruiting Tools reorganized, with quick actions for reminders and notes, and a template picker for sending saved message text" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1rem;">Before, adding a note meant a click-through flow with the field tucked away. After, quick actions sit right alongside the message thread, and the redesigned inbox carries that same clarity throughout.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-recruiting-tools-before-after.png" alt="Before and after: the original note-adding flow with a hidden text field, versus the final redesigned Recruiter inbox" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+      </section>
+
+      <section id="solution" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Solution</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 2.5rem;">Recruiter Inbox</h3>
+
+        <dc-import name="ExpandableImage" src="assets/img/linkedin-recruiter-shipped-final.gif" alt="The final shipped Recruiter inbox" padding="32" hint-size="100%,420px"></dc-import>
+
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Onboarding</h3>
+          <p style="margin: 0 0 1rem;">Onboarding had never been a major part of the old inbox, so we had an opportunity to improve things this time around. As I refined the design, I explored onboarding by asking: what are the essential tasks and workflows for new users? What are the more advanced features we can introduce over time? What about different types of users? And how can we draw attention and guide them without disrupting their workflow?</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-onboarding-tooltips.png" alt="Onboarding tooltip sequence mapped to trigger conditions, from a user's first inbox view through follow-up actions, project folders, and later reminders" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Accessibility</h3>
+          <p style="margin: 0 0 1rem;">Inclusive design had become a key focus area for LinkedIn's design team, and I made sure to include accessibility specs in my designs. One challenge was that, across all our apps, we over-relied on tabbing to select elements, so keyboard users would get "tab fatigue."</p>
+          <p style="margin: 0 0 1rem;">One change I proposed was to start introducing arrow keys into our specs, so users could quickly tab between UI areas while using arrows to navigate within those areas.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-accessibility-arrow-keys.png" alt="Keyboard navigation spec showing tab stops between UI areas and arrow-key navigation within each area" padding="32" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Transitioning design systems</h3>
+          <p style="margin: 0 0 1rem;">If you're familiar with the LinkedIn app, you might've noticed a new design language being phased in. As an enterprise team, we'd started exploring how it'd translate to our UIs, but the transition would take many months, if not years.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-new-design-language.png" alt="LinkedIn's new consumer design language being phased in across the app" padding="32" hint-size="100%,420px"></dc-import>
+          </div>
+          <p style="margin: 0 0 1rem;">The upshot was that I had to stick to a limited set of existing components to ensure we could make the transition, which was a bit painful at times, but also promised to pay off in the long term with a smoother transition down the line.</p>
+          <div style="margin: 1.5rem 0;">
+            <dc-import name="ExpandableImage" src="assets/img/linkedin-recruiter-design-system-explore.png" alt="Early exploration of the Recruiter inbox in the new design language, including a dark mode variant" padding="32" hint-size="100%,420px"></dc-import>
+          </div>
+        </div>
+      </section>
+
+      <section id="outcomes" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Outcomes</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">What happened after launch</h3>
+        <p style="margin: 0 0 1rem;">The refreshed inbox launched in 2022, after I'd already left LinkedIn. From what I've heard, it landed well: it felt more integrated into the overall hiring platform, and our investment in a consistent design language, components, and interactions paid off.</p>
+        
+        <dc-import name="Blockquote" quote="&quot;My favorite thing about Recruiter Inbox is the fact you can see what project you are in and go straight to your project from the Inbox. Also, I love that I can search messages by project so I don't have to scroll through all the messages.&quot;" author="Kristina Hughes, solutions consultant at Ploy" style="margin: 1.5rem 0 0;" hint-size="100%,160px"></dc-import>
+      </section>
+
+      <section id="reflections" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Reflections</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Working inside someone else's design system</h3>
+        <p style="margin: 0 0 1rem;">A lot of the friction in this project traced back to design systems. Ours was built largely around the consumer experience, and there was a lot of politicking between consumer and enterprise: we'd bring complex use cases, and after many rounds of discussion, they'd decide they couldn't support them, so we'd end up building from scratch anyway. By the time I left, we'd started defining a better model, with embedded liaisons and more federated ownership. If I tackled a project like this again, I'd push for that earlier and consider stepping into that liaison role myself, since it's the kind of thing that saves a lot of unproductive meetings.</p>
+        <p style="margin: 0;">A related tension showed up closer to home, in the profile card. It became a centerpiece of the design, but I always felt uneasy about how crowded it had gotten, especially in a messaging context, since it was derived from a search experience where it just sits in a scannable list. As the product got more complex, it grew overloaded and wasn't particularly responsive-friendly. With more experience now, I'd push for real design workshopping with other designers to rethink its layout and behavior from scratch, so it could be both information-dense and scalable as a shared component.</p>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">An email paradigm reaching its limit</h3>
+          <p style="margin: 0 0 1rem;">By the time I left, there was a lot of talk about revamping the Recruiter homepage for a future where AI powered much of the workflow and cut down on tedious, manual work. I immediately thought of the inbox: recruiters do want a personal touch in their outreach, but so much of the work is tedious and repetitive.</p>
+          <p style="margin: 0;">Much of the UI I built was about surfacing information, grabbing attention, and making sure nothing fell through the cracks, but it was fundamentally derived from an email paradigm: cranking through messages one by one. I think there was a real opportunity to rethink that model from the ground up, but I left before we started digging into it seriously.</p>
+        </div>
+      </section>
+
+      <dc-import name="NextCaseStudy" eyebrow="LinkedIn" title="Quick reply for job candidates" href="linkedin-quick-reply.html" image="assets/img/linkedin-quick-reply.png" imageAlt="LinkedIn smart reply for job candidates" color1="oklch(0.9 0.04 150)" color2="oklch(0.82 0.06 150)" hint-size="100%,180px"></dc-import>
+
+    </div>
+  </div>
+
+  <dc-import name="Footer" hint-size="100%,100"></dc-import>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;projectTitle&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Redesigning the LinkedIn Recruiter inbox&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Header&quot;}, &quot;projectSubtitle&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Rebuilding the surface recruiters live in all day&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Header&quot;}, &quot;skillsChips&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Interaction Design, UX Research, Design Systems, Enterprise SaaS&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Header&quot;}}">
+class Component extends DCLogic {
+  // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
+  siteHeaderRef = React.createRef();
+  contactWrapRef = React.createRef();
+  lastSiteHeaderScrollY = 0;
+
+  initSiteHeader() {
+    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
+    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
+    this.handleDocClick = this.handleDocClick.bind(this);
+    document.addEventListener('mousedown', this.handleDocClick);
+    document.addEventListener('touchstart', this.handleDocClick, { passive: true });
+    this.onHeaderKeyDown = this.onHeaderKeyDown.bind(this);
+    document.addEventListener('keydown', this.onHeaderKeyDown);
+    this.measureHeaderHeight = this.measureHeaderHeight.bind(this);
+    this.measureHeaderHeight();
+    window.addEventListener('resize', this.measureHeaderHeight);
+  }
+
+  teardownSiteHeader() {
+    window.removeEventListener('scroll', this.onSiteHeaderScroll);
+    document.removeEventListener('mousedown', this.handleDocClick);
+    document.removeEventListener('touchstart', this.handleDocClick);
+    document.removeEventListener('keydown', this.onHeaderKeyDown);
+    window.removeEventListener('resize', this.measureHeaderHeight);
+  }
+
+  measureHeaderHeight() {
+    var el = this.siteHeaderRef.current;
+    if (!el) return;
+    var h = el.offsetHeight;
+    if (h && h !== this.state.siteHeaderHeightPx) this.setState({ siteHeaderHeightPx: h });
+  }
+
+  onHeaderKeyDown(e) {
+    if (e.key === 'Escape') {
+      if (this.state.contactOpen) this.setState({ contactOpen: false });
+      if (this.state.mobileContactOpen) this.setState({ mobileContactOpen: false });
+      else if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false });
+    }
+  }
+
+  toggleContact() { this.setState(function (s) { return { contactOpen: !s.contactOpen }; }); }
+  closeContact() { this.setState({ contactOpen: false }); }
+
+  handleDocClick(e) {
+    if (this.state.contactOpen) {
+      var el = this.contactWrapRef.current;
+      if (el && !el.contains(e.target)) this.setState({ contactOpen: false });
+    }
+    if (this.state.mobileNavOpen) {
+      var headerEl = this.siteHeaderRef.current;
+      if (headerEl && !headerEl.contains(e.target)) {
+        this.setState({ mobileNavOpen: false, mobileContactOpen: false });
+      }
+    }
+  }
+
+  copyEmail() {
+    var self = this;
+    var email = 'jia.eq.liu@gmail.com';
+    var flash = function () {
+      self.setState({ emailCopied: true });
+      setTimeout(function () { self.setState({ emailCopied: false }); }, 1800);
+    };
+    var fallback = function () {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, email.length);
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flash();
+      } catch (err) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(flash).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  toggleMobileNav() { this.setState(function (s) { return { mobileNavOpen: !s.mobileNavOpen }; }); }
+  closeMobileNav() { this.setState({ mobileNavOpen: false, mobileContactOpen: false }); }
+  toggleMobileContact() { this.setState(function (s) { return { mobileContactOpen: !s.mobileContactOpen }; }); }
+
+  scrollToSectionIfPresent(e) {
+    var id = e.currentTarget.getAttribute('data-section-id');
+    var el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      return true;
+    }
+    return false;
+  }
+
+  handleNavLinkClick(e) { this.scrollToSectionIfPresent(e); }
+  handleMobileNavLinkClick(e) { this.scrollToSectionIfPresent(e); this.closeMobileNav(); }
+
+  onSiteHeaderScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 76;
+    var hidden = this.state.siteHeaderHidden;
+    if (y <= headerH) hidden = false;
+    else if (y > this.lastSiteHeaderScrollY) hidden = true;
+    else if (y < this.lastSiteHeaderScrollY) hidden = false;
+    if (hidden !== this.state.siteHeaderHidden || headerH !== this.state.siteHeaderHeightPx) {
+      this.setState({ siteHeaderHidden: hidden, siteHeaderHeightPx: headerH });
+    }
+    this.lastSiteHeaderScrollY = y;
+  }
+
+  componentDidMount() { this.initSiteHeader(); }
+
+  componentWillUnmount() { this.teardownSiteHeader(); }
+
+  headerRenderVals() {
+    return {
+      siteHeaderRef: this.siteHeaderRef,
+      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      headerSpacerHeight: this.state.siteHeaderHeightPx + 'px',
+      mobileNavOpen: this.state.mobileNavOpen,
+      mobileNavClosed: !this.state.mobileNavOpen,
+      mobileNavMaxHeight: this.state.mobileNavOpen ? (this.state.mobileContactOpen ? '480px' : '220px') : '0px',
+      toggleMobileNav: this.toggleMobileNav.bind(this),
+      closeMobileNav: this.closeMobileNav.bind(this),
+      toggleMobileContact: this.toggleMobileContact.bind(this),
+      mobileContactOpen: this.state.mobileContactOpen,
+      mobileContactMaxHeight: this.state.mobileContactOpen ? '160px' : '0px',
+      mobileContactChevronTransform: this.state.mobileContactOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      handleNavLinkClick: this.handleNavLinkClick.bind(this),
+      handleMobileNavLinkClick: this.handleMobileNavLinkClick.bind(this),
+      contactWrapRef: this.contactWrapRef,
+      contactShapeWidth: this.state.contactOpen ? '280px' : '128px',
+      contactShapeHeight: this.state.contactOpen ? '216px' : '42px',
+      contactShapeRadius: this.state.contactOpen ? '20px' : '999px',
+      contactShapeShadow: this.state.contactOpen ? '0 24px 48px rgba(20,19,15,0.28)' : 'none',
+      contactButtonContentOpacity: this.state.contactOpen ? 0 : 1,
+      contactButtonContentDelay: this.state.contactOpen ? '0s' : '0.25s',
+      contactButtonPointerEvents: this.state.contactOpen ? 'none' : 'auto',
+      contactCardContentOpacity: this.state.contactOpen ? 1 : 0,
+      contactCardContentDelay: this.state.contactOpen ? '0.2s' : '0s',
+      contactCardPointerEvents: this.state.contactOpen ? 'auto' : 'none',
+      toggleContact: this.toggleContact.bind(this),
+      closeContact: this.closeContact.bind(this),
+      copyEmail: this.copyEmail.bind(this),
+      emailCopied: this.state.emailCopied,
+      notEmailCopied: !this.state.emailCopied,
+    };
+  }
+  // --- end SiteHeader ---
+
+  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false };
+
+  renderVals() {
+    return {
+      ...this.headerRenderVals(),
+      projectTitle: this.props.projectTitle ?? 'Redesigning the LinkedIn Recruiter inbox',
+      projectSubtitle: this.props.projectSubtitle ?? 'Rebuilding the surface recruiters live in all day',
+      skillsChips: (this.props.skillsChips ?? 'Interaction Design, UX Research, Design Systems, Enterprise SaaS').split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+      messagingFlowSteps: ['Search candidate', 'Initial outreach', 'Reply', 'Schedule interview', 'Hire'].map(function (label, i, arr) {
+        return { label: label, hasNext: i < arr.length - 1 };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>

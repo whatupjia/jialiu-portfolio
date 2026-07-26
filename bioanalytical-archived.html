@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preload" as="fetch" href="SiteHeader.dc.html" crossorigin="anonymous">
+  <style>
+    .site-header-reserve { min-height: 76px; }
+    @media (max-width: 768px) { .site-header-reserve { min-height: 60px; } }
+  </style>
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    strong, b { font-weight: 600; }
+  </style>
+</helmet>
+
+<div class="site-header-reserve"><dc-import name="SiteHeader" hint-size="100%,76"></dc-import></div>
+
+<div style="max-width: 760px; margin: 0 auto; padding: 3rem clamp(1.25rem, 4vw, 3rem) 6rem;">
+  <a href="benchling-bioanalytical.html" style="display: inline-flex; align-items: center; gap: 0.4em; color: #6b6863; text-decoration: none; font-size: 0.92rem; font-weight: 600; margin-bottom: 2rem;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+    Back to Bioanalytical case study
+  </a>
+
+  <p style="font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6863; margin: 0 0 0.5rem;">Archived</p>
+  <h1 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 600; line-height: 1.3; margin: 0 0 2.5rem;">Bioanalytical: cut content</h1>
+
+  <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">What guided our work</h3>
+
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/tree-structure-icon.svg" alt="" style="width: 18px; height: 18px;">End-to-end data flow</h4>
+    <p style="margin: 0;">Data needs to move seamlessly from one step to the next without anyone having to double-check it survived the hand-off. This was the core job we had to get right and it requires us to think rigorously about how our individual features fit into the big picture.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/swap-icon.svg" alt="" style="width: 18px; height: 18px;">Flexibility where it matters</h4>
+    <p style="margin: 0;">We need to consistently ask, "What does this look like in early development vs. later when it's locked down?" We need to articulate the difference and establish patterns and language that help scientists distinguish the two.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/sketch-logo-icon.svg" alt="" style="width: 18px; height: 18px;">Consistency and clarity</h4>
+    <p style="margin: 0;">We should always care about this, but remember the stakes are higher in drug development. We're introducing a lot of new concepts and UIs, and we need to be thoughtful what they mean and how they sync together. Ultimately, consistency builds trust in our system.</p>
+  </div>
+  <div style="margin-bottom: 1.5rem;">
+    <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/lego-icon.svg" alt="" style="width: 18px; height: 18px;">Build with leverage</h4>
+    <p style="margin: 0;">We must think about how to build on shared components and extending before re-inventing the wheel. This means getting out of team siloes and actually looking for points of leverage, whether it's a backend system or a UI component.</p>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Store and track lab materials</h3>
+    <p style="margin: 0 0 1rem;">Lab managers intake materials and make sure they're safely stored in the right place, with full traceability when they're used in experiments.</p>
+    <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+      <video loop="" muted="" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source src="assets/video/sample-import-tabs.webm" type="video/webm"><source src="assets/video/sample-import-tabs.mp4" type="video/mp4"></video>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Leading the design work</h3>
+    <p style="margin: 0 0 1rem;">My approach to leading design work was to give people real ownership, and step in deliberately when they needed it, whether that meant pairing on design explorations or troubleshooting team dynamics.</p>
+    <p style="margin: 0 0 1rem;">I led a design kickoff to walk through our insights and conceptual flows, then worked to balance that ownership with speed. Sometimes that meant helping a designer sift through explorations to focus on one core idea. Other times, it meant genuinely listening when someone was struggling and helping them find their footing.</p>
+    <p style="margin: 0;">Underneath it all, I just wanted to be a steady presence for the team. Things got overwhelming at times, and I tried to be someone people could count on to listen without judgment and keep them moving forward.</p>
+    <div style="margin-top: 2rem; border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8;">
+      <img src="assets/img/bioa-design-review.png" alt="BioA design review session" style="width: 100%; height: auto; display: block;">
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

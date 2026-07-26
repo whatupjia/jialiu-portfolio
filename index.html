@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    .nav-desktop, .contact-desktop { display: flex; }
+    .nav-mobile-toggle { display: none; }
+    @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
+    .header-spacer-default { height: 76px; }
+  </style>
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Semibold.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Semibold.otf" crossorigin="anonymous">
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Extralight.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Black.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    html { overflow-x: hidden; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    strong, b { font-weight: 600; }
+    @keyframes wordIn { from { transform: translateY(110%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes dotsFadeOut { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes blobFloatA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
+    @keyframes blobFloatB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
+    .word-in { animation: wordIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .hero-dots { animation: dotsFadeOut 2.3s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both; }
+    @keyframes workFadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .work-reveal { animation: workFadeUp 1.3s cubic-bezier(0.16, 1, 0.3, 1) 3s both; }
+    .blob-reveal { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .word-in { animation: none; } .hero-dots { animation: none; } .work-reveal { animation: none; } }
+    html.skip-intro .word-in { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html.skip-intro .hero-dots { animation: none !important; opacity: 0 !important; }
+    html.skip-intro .work-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+    @media (max-width: 1100px) { .work-section { display: block !important; } .work-intro, .work-grid { grid-column: 1 / -1 !important; max-width: none !important; } .hero-title { grid-column: 1 / -1 !important; } .about-divider, .about-content { grid-column: 1 / -1 !important; margin-left: 0 !important; margin-right: 0 !important; } }
+    @media (max-width: 768px) { .hero-title { margin-top: 2.5rem !important; } .work-card-inner { padding: 20px !important; border-radius: 14px !important; } .work-card-meta { margin-top: 0.75rem !important; margin-bottom: 0 !important; gap: 0.2em !important; } .work-grid { gap: 4.5rem !important; } }
+    @media (max-width: 1024px) { .work-grid { grid-template-columns: 1fr !important; } .work-grid > article { grid-column: 1 / -1 !important; margin-bottom: 5rem !important; } .work-grid > article:last-child { margin-bottom: 0 !important; } #work { display: block !important; } #work > div { grid-column: auto !important; } .about-divider { grid-column: 1 / -1 !important; } }
+    @media (max-width: 900px) { .bio-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; } .bio-photo { width: 180px !important; } .bio-skills-edu { grid-template-columns: 1fr !important; gap: 1.25rem !important; } }
+  </style>
+</helmet>
+
+<header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
+  <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+      <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
+      Jia Liu
+    </a>
+    <div style="display: flex; align-items: center; gap: 1.75rem;">
+      <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
+        <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
+        <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
+        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+      </nav>
+      <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
+        <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </sc-if>
+        <sc-if value="{{ mobileNavClosed }}" hint-placeholder-val="{{ true }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </sc-if>
+      </button>
+      <div ref="{{ contactWrapRef }}" class="contact-desktop-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
+        <div style="position: absolute; top: 0; right: 0; background: #14130f; overflow: hidden; width: {{ contactShapeWidth }}; height: {{ contactShapeHeight }}; border-radius: {{ contactShapeRadius }}; box-shadow: {{ contactShapeShadow }}; transition: width 0.45s cubic-bezier(0.16,1,0.3,1), height 0.45s cubic-bezier(0.16,1,0.3,1), border-radius 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; z-index: 20;">
+          <button class="contact-desktop" onClick="{{ toggleContact }}" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border: none; color: #ffffff; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: {{ contactButtonContentOpacity }}; pointer-events: {{ contactButtonPointerEvents }}; transition: opacity 0.2s ease {{ contactButtonContentDelay }};">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+            Contact
+          </button>
+          <div style="position: absolute; inset: 0; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: {{ contactCardContentOpacity }}; pointer-events: {{ contactCardPointerEvents }}; transition: opacity 0.25s ease {{ contactCardContentDelay }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
+              <span style="font-size: 0.95rem; color: #9a968f;">Get in touch</span>
+              <button onClick="{{ closeContact }}" aria-label="Close" style="background: none; border: none; color: #9a968f; cursor: pointer; padding: 0; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">Email</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">jia.eq.liu@gmail.com</div>
+              </div>
+              <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: rgba(255,255,255,0.1); border: none; border-radius: 8px; width: 34px; height: 34px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                </sc-if>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">LinkedIn</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">@jia-eq-liu</div>
+              </div>
+              <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255,255,255,0.1); border-radius: 8px; width: 34px; height: 34px; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: {{ mobileNavMaxHeight }}; border-top: 1px solid #e4e0d8; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+   <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
+    <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
+      <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
+      <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
+      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+        Contact
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+      <div style="overflow: hidden; max-height: {{ mobileContactMaxHeight }}; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div style="padding: 0.25rem 0 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">Email</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">jia.eq.liu@gmail.com</div>
+            </div>
+            <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: #f2f1ec; border: none; border-radius: 8px; width: 34px; height: 34px; color: #14130f; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+              </sc-if>
+              <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+              </sc-if>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">LinkedIn</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">@jia-eq-liu</div>
+            </div>
+            <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: #f2f1ec; border-radius: 8px; width: 34px; height: 34px; color: #14130f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   </div>
+  </div>
+</header>
+<div class="header-spacer-default" style="height: {{ headerSpacerHeight }}; flex-shrink: 0;"></div>
+
+<div style="position: fixed; inset: 0; display: {{ gridOverlayDisplay }}; z-index: 9999; pointer-events: none;">
+  <div style="max-width: 1280px; margin: 0 auto; height: 100%; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;">
+    <sc-for list="{{ gridOverlayCols }}" as="col" hint-placeholder-count="12">
+      <div style="background: rgba(6,136,240,0.08); border-left: 1px dashed rgba(6,136,240,0.4); border-right: 1px dashed rgba(6,136,240,0.4); height: 100%;"></div>
+    </sc-for>
+  </div>
+</div>
+
+<section style="position: relative; min-height: 42vh; display: flex; align-items: center; padding-top: 5rem; padding-bottom: 1.5rem; overflow: visible; width: 100%; box-sizing: border-box;">
+    <canvas ref="{{ heroCanvasRef }}" class="hero-dots" style="position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+    <div style="position: relative; z-index: 1; width: 100%; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;">
+      <div class="hero-title" style="grid-column: 3 / 11; position: relative; margin-top: 6rem;">
+        <div style="position: absolute; inset: calc(-0.6em - 2rem) calc(-1.8em - 2rem); background: radial-gradient(ellipse 70% 75% at 50% 50%, #fbfaf9 55%, rgba(251,250,249,0) 100%); z-index: 0; pointer-events: none;"></div>
+
+        <div style="position: relative; z-index: 1;">
+          <h1 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.9rem, 1.35rem + 2.1vw, 3rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; max-width: 26ch; color: #6b6863; margin: 0;"><sc-for list="{{ heroWordsLead }}" as="w" hint-placeholder-count="7"><span style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span class="word-in" style="display: inline-block; animation-delay: {{ w.delay }}s;">{{ w.word }}&nbsp;</span></span></sc-for><sc-for list="{{ heroWordsEmph }}" as="w" hint-placeholder-count="5"><span style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span class="word-in" style="display: inline-block; color: #14130f; animation-delay: {{ w.delay }}s;">{{ w.word }}&nbsp;</span></span></sc-for></h1>
+          <p style="font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; font-size: 1.09375rem; font-weight: 400; line-height: 1.5; color: #6b6863; max-width: 46ch; margin: 1.75rem 0 0;"><sc-for list="{{ heroWords2 }}" as="w" hint-placeholder-count="10"><span style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span class="word-in" style="display: inline-block; animation-delay: {{ w.delay }}s;">{{ w.word }}&nbsp;</span></span></sc-for></p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<div class="work-reveal" style="position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+
+  <section class="work-section" style="padding-bottom: 6rem; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+    <div class="work-intro" style="max-width: 640px; margin-bottom: 1.5rem; grid-column: 3 / 11;">
+      
+    </div>
+
+    <div id="work" class="work-grid" style="display: grid; grid-template-columns: 1fr; gap: 5rem; grid-column: 3 / 11;">
+
+      <article style="grid-column: 1 / -1;">
+        <a href="benchling-bioanalytical.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
+          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px; transform: translateY(2px);">
+            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
+              <div style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.83 0.08 240); filter: blur(40px); animation: blobFloatA 16s ease-in-out infinite;"></div>
+              <div style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.78 0.1 240); filter: blur(40px); animation: blobFloatB 20s ease-in-out infinite;"></div>
+            </div>
+                                    <img src="assets/img/benchling-bioa-chrome-cropped.png" alt="Benchling Bioanalytical plate design interface" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.008)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+          </div>
+        </a>
+        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="benchling-bioanalytical.html" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4em; --arrow-o: 0;" style-hover="--arrow-o: 1;">{{ card1Title }}</a></h3>
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0;">{{ card1Description }}</p>
+        </div>
+      </article>
+
+      <article style="grid-column: 1 / -1;">
+        <a href="linkedin-recruiter-inbox.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
+          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px;">
+            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
+              <div style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.9 0.04 30); filter: blur(40px); animation: blobFloatA 17s ease-in-out infinite;"></div>
+              <div style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.82 0.07 30); filter: blur(40px); animation: blobFloatB 21s ease-in-out infinite;"></div>
+            </div>
+                                    <img src="assets/img/linkedin-recruiter-inbox.png" alt="LinkedIn recruiter messaging inbox" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; transform: scale(calc(0.98 + var(--deepen, 0) * 0.01)); display: block; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+          </div>
+        </a>
+        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="linkedin-recruiter-inbox.html" style="color: inherit; text-decoration: none;">{{ card3Title }}</a></h3>
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0">{{ card3Description }}</p>
+        </div>
+      </article>
+
+      
+
+      <article style="grid-column: 1 / -1;">
+        <a href="linkedin-quick-reply.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
+          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px;">
+            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
+              <div style="position: absolute; width: 70%; height: 70%; left: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.9 0.04 150); filter: blur(40px); animation: blobFloatB 19s ease-in-out infinite;"></div>
+              <div style="position: absolute; width: 60%; height: 60%; right: 5%; top: 0%; border-radius: 50%; background: oklch(0.82 0.06 150); filter: blur(40px); animation: blobFloatA 23s ease-in-out infinite;"></div>
+            </div>
+                                    <img src="assets/img/linkedin-quick-reply.png" alt="LinkedIn smart reply for job candidates" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; transform: scale(calc(1 + var(--deepen, 0) * 0.008)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+          </div>
+        </a>
+        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="linkedin-quick-reply.html" style="color: inherit; text-decoration: none;">{{ card4Title }}</a></h3>
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0">{{ card4Description }}</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+  <section id="about" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+    <div class="about-divider" style="grid-column: 3 / 11; padding-top: 4rem; border-top: 1px solid #e4e0d8;"></div>
+    <div class="about-content" style="grid-column: 3 / 11; padding-bottom: 6rem; margin-left: -1.5rem; margin-right: -1.5rem;">
+    <div class="bio-grid" style="display: grid; grid-template-columns: 220px 1fr; gap: 4rem; align-items: start;">
+      <div class="bio-photo">
+        <div style="border-radius: 10px; border: 1px solid #e4e0d8; overflow: hidden; background: #ffffff; aspect-ratio: 1 / 1;">
+          <img src="assets/img/jia-profile.jpg" alt="Jia Liu" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
+        </div>
+      </div>
+      <div>
+        
+        <div style="color: #14130F;">
+          
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09rem; font-weight: 600; line-height: 1.4; margin: 0 0 1.2rem">My winding path has made me better at connecting the dots.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">I taught and worked in nonprofits before landing at Coursera, where I learned how modern product gets built. I've spent the years since at LinkedIn and Benchling, designing for people navigating complex systems.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">That path gave me a working sense of how systems function and where they let people down. I'm a problem-solver first, more interested in what's actually happening on the ground than in any particular tool or medium.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">Outside of work, I make electronic music, play with my kid, and build tools for little things that bug me.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; color: #14130F; margin: 0;">If there's a throughline, it's that good design gets out of the way and helps people do what they want, whether that's a scientist reviewing lab data or a producer finishing a track.</p>
+        </div>
+
+        <div class="bio-skills-edu" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem;">
+          <div>
+            <p style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #6b6863; margin: 0 0 0.5rem">Skills</p>
+            <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Research</p>
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Strategy</p>
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Information Architecture</p>
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Interaction Design</p>
+            </div>
+          </div>
+          <div>
+            <p style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #6b6863; margin: 0 0 0.5rem">Education</p>
+            <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">MHCI, Carnegie Mellon University</p>
+              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">B.A. Molecular Cell Biology, UC Berkeley</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  </div>
+
+
+</div>
+
+<dc-import name="Footer" hint-size="100%,100"></dc-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysReplayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro animation&quot;},&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
+  siteHeaderRef = React.createRef();
+  contactWrapRef = React.createRef();
+  lastSiteHeaderScrollY = 0;
+
+  initSiteHeader() {
+    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
+    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
+    this.handleDocClick = this.handleDocClick.bind(this);
+    document.addEventListener('mousedown', this.handleDocClick);
+    document.addEventListener('touchstart', this.handleDocClick, { passive: true });
+    this.onHeaderKeyDown = this.onHeaderKeyDown.bind(this);
+    document.addEventListener('keydown', this.onHeaderKeyDown);
+    this.measureHeaderHeight = this.measureHeaderHeight.bind(this);
+    this.measureHeaderHeight();
+    window.addEventListener('resize', this.measureHeaderHeight);
+  }
+
+  teardownSiteHeader() {
+    window.removeEventListener('scroll', this.onSiteHeaderScroll);
+    document.removeEventListener('mousedown', this.handleDocClick);
+    document.removeEventListener('touchstart', this.handleDocClick);
+    document.removeEventListener('keydown', this.onHeaderKeyDown);
+    window.removeEventListener('resize', this.measureHeaderHeight);
+  }
+
+  measureHeaderHeight() {
+    var el = this.siteHeaderRef.current;
+    if (!el) return;
+    var h = el.offsetHeight;
+    if (h && h !== this.state.siteHeaderHeightPx) this.setState({ siteHeaderHeightPx: h });
+  }
+
+  onHeaderKeyDown(e) {
+    if (e.key === 'Escape') {
+      if (this.state.contactOpen) this.setState({ contactOpen: false });
+      if (this.state.mobileContactOpen) this.setState({ mobileContactOpen: false });
+      else if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false });
+    }
+  }
+
+  toggleContact() { this.setState(function (s) { return { contactOpen: !s.contactOpen }; }); }
+  closeContact() { this.setState({ contactOpen: false }); }
+
+  handleDocClick(e) {
+    if (this.state.contactOpen) {
+      var el = this.contactWrapRef.current;
+      if (el && !el.contains(e.target)) this.setState({ contactOpen: false });
+    }
+    if (this.state.mobileNavOpen) {
+      var headerEl = this.siteHeaderRef.current;
+      if (headerEl && !headerEl.contains(e.target)) {
+        this.setState({ mobileNavOpen: false, mobileContactOpen: false });
+      }
+    }
+  }
+
+  copyEmail() {
+    var self = this;
+    var email = 'jia.eq.liu@gmail.com';
+    var flash = function () {
+      self.setState({ emailCopied: true });
+      setTimeout(function () { self.setState({ emailCopied: false }); }, 1800);
+    };
+    var fallback = function () {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, email.length);
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flash();
+      } catch (err) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(flash).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  toggleMobileNav() { this.setState(function (s) { return { mobileNavOpen: !s.mobileNavOpen }; }); }
+  closeMobileNav() { this.setState({ mobileNavOpen: false, mobileContactOpen: false }); }
+  toggleMobileContact() { this.setState(function (s) { return { mobileContactOpen: !s.mobileContactOpen }; }); }
+
+  scrollToSectionIfPresent(e) {
+    var id = e.currentTarget.getAttribute('data-section-id');
+    var el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      return true;
+    }
+    return false;
+  }
+
+  handleNavLinkClick(e) { this.scrollToSectionIfPresent(e); }
+  handleMobileNavLinkClick(e) { this.scrollToSectionIfPresent(e); this.closeMobileNav(); }
+
+  onSiteHeaderScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 76;
+    var hidden = this.state.siteHeaderHidden;
+    if (y <= headerH) hidden = false;
+    else if (y > this.lastSiteHeaderScrollY) hidden = true;
+    else if (y < this.lastSiteHeaderScrollY) hidden = false;
+    if (hidden !== this.state.siteHeaderHidden || headerH !== this.state.siteHeaderHeightPx) {
+      this.setState({ siteHeaderHidden: hidden, siteHeaderHeightPx: headerH });
+    }
+    this.lastSiteHeaderScrollY = y;
+  }
+
+  headerRenderVals() {
+    return {
+      siteHeaderRef: this.siteHeaderRef,
+      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      headerSpacerHeight: this.state.siteHeaderHeightPx + 'px',
+      mobileNavOpen: this.state.mobileNavOpen,
+      mobileNavClosed: !this.state.mobileNavOpen,
+      mobileNavMaxHeight: this.state.mobileNavOpen ? (this.state.mobileContactOpen ? '480px' : '220px') : '0px',
+      toggleMobileNav: this.toggleMobileNav.bind(this),
+      closeMobileNav: this.closeMobileNav.bind(this),
+      toggleMobileContact: this.toggleMobileContact.bind(this),
+      mobileContactOpen: this.state.mobileContactOpen,
+      mobileContactMaxHeight: this.state.mobileContactOpen ? '160px' : '0px',
+      mobileContactChevronTransform: this.state.mobileContactOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      handleNavLinkClick: this.handleNavLinkClick.bind(this),
+      handleMobileNavLinkClick: this.handleMobileNavLinkClick.bind(this),
+      contactWrapRef: this.contactWrapRef,
+      contactShapeWidth: this.state.contactOpen ? '280px' : '128px',
+      contactShapeHeight: this.state.contactOpen ? '216px' : '42px',
+      contactShapeRadius: this.state.contactOpen ? '20px' : '999px',
+      contactShapeShadow: this.state.contactOpen ? '0 24px 48px rgba(20,19,15,0.28)' : 'none',
+      contactButtonContentOpacity: this.state.contactOpen ? 0 : 1,
+      contactButtonContentDelay: this.state.contactOpen ? '0s' : '0.25s',
+      contactButtonPointerEvents: this.state.contactOpen ? 'none' : 'auto',
+      contactCardContentOpacity: this.state.contactOpen ? 1 : 0,
+      contactCardContentDelay: this.state.contactOpen ? '0.2s' : '0s',
+      contactCardPointerEvents: this.state.contactOpen ? 'auto' : 'none',
+      toggleContact: this.toggleContact.bind(this),
+      closeContact: this.closeContact.bind(this),
+      copyEmail: this.copyEmail.bind(this),
+      emailCopied: this.state.emailCopied,
+      notEmailCopied: !this.state.emailCopied,
+    };
+  }
+  // --- end SiteHeader ---
+
+  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false };
+
+  heroCanvasRef = React.createRef();
+
+  componentDidMount() {
+    this.initSiteHeader();
+    var introSeen = sessionStorage.getItem('portfolio-intro-seen');
+    var alwaysReplay = this.props.alwaysReplayIntro;
+    if (!alwaysReplay && (window.location.hash === '#work' || introSeen)) {
+      document.documentElement.classList.add('skip-intro');
+    } else {
+      sessionStorage.setItem('portfolio-intro-seen', '1');
+    }
+    this.setupDots();
+  }
+
+  componentWillUnmount() {
+    this.teardownSiteHeader();
+    if (this.stopDots) this.stopDots();
+    window.removeEventListener('resize', this.onResize);
+    if (this.io) this.io.disconnect();
+    document.removeEventListener('visibilitychange', this.onVisibility);
+  }
+
+  setupDots() {
+    var canvas = this.heroCanvasRef.current;
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var SPACING = 32, BASE_RADIUS = 1.7, EASE = 0.2;
+    var BASE_COLOR = [20, 19, 15];
+    var dots = [];
+    var width = 0, height = 0;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var running = false;
+    var self = this;
+
+    function buildGrid() {
+      width = window.innerWidth; height = window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var cols = Math.ceil(width / SPACING) + 1;
+      var rows = Math.ceil(height / SPACING) + 1;
+      var offsetX = (width - (cols - 1) * SPACING) / 2;
+      var offsetY = (height - (rows - 1) * SPACING) / 2;
+      var existing = dots;
+      dots = [];
+      var idx = 0;
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var bx = offsetX + c * SPACING, by = offsetY + r * SPACING;
+          var prev = existing[idx];
+          var startX = bx, startY = by;
+          if (!prefersReducedMotion && !prev) {
+            startX = bx + (Math.random() - 0.5) * 170;
+            startY = by + (Math.random() - 0.5) * 170;
+          }
+          dots.push({ bx: bx, by: by, x: prev ? prev.x : startX, y: prev ? prev.y : startY });
+          idx++;
+        }
+      }
+    }
+
+    function draw() {
+      var elapsed = performance.now() - self.introStart;
+      var introT = Math.min(elapsed / 1600, 1);
+      var rampT = introT * introT * introT * introT * introT;
+      self.introEase = introT < 1 ? (0.006 + 0.5 * rampT) : EASE;
+      ctx.clearRect(0, 0, width, height);
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        var targetX = d.bx, targetY = d.by;
+        d.x += (targetX - d.x) * self.introEase;
+        d.y += (targetY - d.y) * self.introEase;
+        ctx.beginPath();
+        ctx.globalAlpha = 0.42;
+        ctx.fillStyle = 'rgb(' + BASE_COLOR[0] + ',' + BASE_COLOR[1] + ',' + BASE_COLOR[2] + ')';
+        ctx.arc(d.x, d.y, BASE_RADIUS, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop() {
+      draw();
+      self.rafId = requestAnimationFrame(loop);
+    }
+
+    function start() {
+      if (running || prefersReducedMotion) return;
+      running = true;
+      self.rafId = requestAnimationFrame(loop);
+    }
+    function stop() {
+      running = false;
+      if (self.rafId) cancelAnimationFrame(self.rafId);
+      self.rafId = null;
+    }
+
+    this.stopDots = stop;
+
+    self.introStart = performance.now();
+    self.introEase = 0.035;
+    buildGrid();
+    draw();
+    if (prefersReducedMotion) return;
+
+    var resizeTimer;
+    this.onResize = function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { buildGrid(); draw(); }, 150);
+    };
+    window.addEventListener('resize', this.onResize);
+
+    this.onVisibility = function () {
+      if (document.hidden) stop(); else start();
+    };
+    document.addEventListener('visibilitychange', this.onVisibility);
+
+    if ('IntersectionObserver' in window) {
+      this.io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) start(); else stop();
+        });
+      }, { threshold: 0.05 });
+      this.io.observe(canvas);
+    } else {
+      start();
+    }
+  }
+
+  renderVals() {
+    var self = this;
+    var variants = {
+      'A. Level and proof': [
+        "I'm a product designer who crafts tools that quietly make your day easier.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia."
+      ],
+      'B. Leads with the problem': [
+        "I design for the messy middle of enterprise software, where the workflow spans six teams and nobody owns the whole thing.",
+        "Most recently at Benchling, building the platform behind clinical drug testing. Before that, messaging at LinkedIn. Based near Philadelphia."
+      ],
+      'C. Keeps the voice': [
+        "I'm a product designer who likes the unglamorous problems: the workflow with twelve handoffs, the tool everyone works around.",
+        "Four years of them at Benchling, and messaging systems at LinkedIn before that. Based near Philadelphia."
+      ]
+    };
+    var picked = variants[this.props.heroVariant] || variants['A. Level and proof'];
+    var s2 = (this.props.heroLine2 || picked[1]).split(' ');
+    var base = 1.6, step = 0.045;
+
+    var emphasis = this.props.heroEmphasis ?? "quietly make your day easier.";
+    var line1Text = this.props.heroLine1 || picked[0];
+    var cut = emphasis ? line1Text.indexOf(emphasis) : -1;
+    var leadText = cut > 0 ? line1Text.slice(0, cut).trim() : line1Text;
+    var emphText = cut > 0 ? line1Text.slice(cut).trim() : '';
+    var leadWords = leadText ? leadText.split(' ') : [];
+    var emphWords = emphText ? emphText.split(' ') : [];
+    var heroWordsLead = leadWords.map(function (word, i) { return { word: word, delay: base + i * step }; });
+    var heroWordsEmph = emphWords.map(function (word, i) { return { word: word, delay: base + (leadWords.length + i) * step }; });
+    var heroWords2 = s2.map(function (word, i) { return { word: word, delay: base + (leadWords.length + emphWords.length + i) * step }; });
+    return {
+      ...this.headerRenderVals(),
+      heroWordsLead: heroWordsLead,
+      heroWordsEmph: heroWordsEmph,
+      heroWords2: heroWords2,
+      heroCanvasRef: this.heroCanvasRef,
+      card1Title: 'Benchling',
+      card1Description: 'A platform for complex, automated testing during drug development',
+      card3Title: 'LinkedIn',
+      card3Description: 'Redesigning Recruiter Inbox',
+      card4Title: 'LinkedIn',
+      card4Description: 'Quicky reply for job candidates',
+      card5Title: 'NYC Senior Service Finder',
+      card5Description: 'Helping seniors and caregivers find nearby city services.',
+      card6Title: 'Dashboard for CleanRobotics',
+      card6Description: 'Monitoring waste-sorting robots on the shop floor.',
+      card7Title: 'Mobile App for Financial Literacy',
+      card7Description: 'Teaching financial literacy fundamentals to PNC customers.',
+      gridOverlayDisplay: this.props.showGridOverlay ? 'block' : 'none',
+      gridOverlayCols: new Array(12).fill(0),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; left: max(2rem, calc((100vw - 1280px) / 2 + clamp(1.25rem, 4vw, 3rem) - 1rem)); top: 260px; z-index: 3; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
+  </style>
+</helmet>
+
+<nav aria-label="Page sections" class="section-nav">
+  <div>
+    <sc-for list="{{ sectionTabs }}" as="tab" hint-placeholder-count="7">
+      <button data-id="{{ tab.id }}" onClick="{{ handleNavClick }}" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border: none; padding: 0; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: {{ tab.weight }}; color: {{ tab.color }}; cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s ease;">
+        <span style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: {{ tab.numColor }}; font-variant-numeric: tabular-nums; transition: color 0.25s ease;">{{ tab.num }}</span>
+        {{ tab.label }}
+      </button>
+    </sc-for>
+  </div>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 220, &quot;height&quot;: 320}, &quot;sections&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;overview:Overview, background:Background, problem:Problem, approach:Approach, solution:Solution, outcomes:Outcomes, reflections:Reflections&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;activeOffset&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 160, &quot;min&quot;: 0, &quot;max&quot;: 400, &quot;tsType&quot;: &quot;number&quot;}, &quot;scrollOffset&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 96, &quot;min&quot;: 0, &quot;max&quot;: 300, &quot;tsType&quot;: &quot;number&quot;}}">
+class Component extends DCLogic {
+  defaultSections = 'overview:Overview, background:Background, problem:Problem, approach:Approach, solution:Solution, outcomes:Outcomes, reflections:Reflections';
+  state = { activeId: null };
+
+  parseSections() {
+    var raw = this.props.sections || this.defaultSections;
+    return raw.split(',').map(function (pair) {
+      var parts = pair.split(':');
+      var id = (parts[0] || '').trim();
+      var label = (parts[1] || '').trim() || (id.charAt(0).toUpperCase() + id.slice(1));
+      return { id: id, label: label };
+    }).filter(function (s) { return s.id; });
+  }
+
+  componentDidMount() {
+    this.handleNavClick = this.handleNavClick.bind(this);
+    this.onSectionScroll = this.onSectionScroll.bind(this);
+    requestAnimationFrame(this.onSectionScroll);
+    window.addEventListener('scroll', this.onSectionScroll, { passive: true });
+    window.addEventListener('resize', this.onSectionScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onSectionScroll);
+    window.removeEventListener('resize', this.onSectionScroll);
+  }
+
+  onSectionScroll() {
+    var sections = this.parseSections();
+    if (!sections.length) return;
+    var refLine = this.props.activeOffset ?? 160;
+    var activeId = sections[0].id;
+    for (var i = 0; i < sections.length; i++) {
+      var el = document.getElementById(sections[i].id);
+      if (!el) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.height === 0) continue;
+      if (rect.top <= refLine) activeId = sections[i].id;
+    }
+    if (activeId !== this.state.activeId) this.setState({ activeId: activeId });
+  }
+
+  handleNavClick(e) {
+    e.preventDefault();
+    var id = e.currentTarget.getAttribute('data-id');
+    var sections = this.parseSections();
+    if (sections.length && id === sections[0].id) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var el = document.getElementById(id);
+    if (!el) return;
+    var top = el.getBoundingClientRect().top + window.scrollY - (this.props.scrollOffset ?? 96);
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    var sections = this.parseSections();
+    var active = this.state.activeId || (sections[0] && sections[0].id);
+    return {
+      handleNavClick: this.handleNavClick,
+      sectionTabs: sections.map(function (s, i) {
+        var isActive = s.id === active;
+        return {
+          id: s.id,
+          label: s.label,
+          num: (i + 1 < 10 ? '0' : '') + (i + 1),
+          color: isActive ? '#14130f' : '#6b6863',
+          weight: isActive ? 600 : 400,
+          numColor: isActive ? '#14130f' : '#9a968f',
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>
