@@ -56,7 +56,7 @@
 
 <header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
   <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
-    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
       <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
       Jia Liu
     </a>
@@ -64,7 +64,7 @@
       <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
         <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
         <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
-        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+        <a href="index.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
       </nav>
       <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
         <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
@@ -120,7 +120,7 @@
     <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
       <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
       <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
-      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <a href="index.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
       <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
         Contact
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
@@ -253,14 +253,13 @@
         </div>
       </div>
       <div>
-        
         <div style="color: #14130F;">
           
-          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 500; line-height: 1.4; margin: 0 0 1.2rem">My winding path has made me better at connecting the dots.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">I taught and worked in nonprofits before landing at Coursera, where I learned how modern product gets built. I've spent the years since at LinkedIn and Benchling, designing for people navigating complex systems.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">That path taught me how systems nest inside larger ones, and gave me empathy for the people navigating them. Understanding a problem fully means understanding every layer of it, from people to pixels.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; color: #14130F; margin: 0 0 1rem;">If there's a throughline, it's that good design gets out of the way and empowers people, whether that's a scientist reviewing lab data or a producer finishing a track.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0;">Outside of work, I make electronic music, play with my kid, and build tools for little things that bug me. Always happy to talk design, ideas, or whatever you're building.</p>
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 500; line-height: 1.4; margin: 0 0 1.2rem">Hey, I'm Jia.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">I didn't start out in product design – I taught kids, managed a non-profit, and grew university partnerships at Coursera. In the years since, I've worked at LinkedIn and Benchling, designing messaging experiences and tools for scientists.</p>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">This path's made me a pretty good problem-solver and it's taught me that the best solutions, no matter how simple or complex, are rooted in a deep understanding of people.</p>
+          
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">Outside of work, I make electronic music, play with my kid, and learn about as many things as I can.</p>
           
         </div>
 
@@ -294,7 +293,7 @@
 <dc-import name="Footer" hint-size="100%,100"></dc-import>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysReplayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro animation&quot;},&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysReplayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro animation&quot;},&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Outcome-first&quot;,&quot;options&quot;:[&quot;Outcome-first&quot;,&quot;Original&quot;,&quot;Complexity-first&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero text&quot;}}">
 class Component extends DCLogic {
   // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
   siteHeaderRef = React.createRef();
@@ -589,24 +588,27 @@ class Component extends DCLogic {
   renderVals() {
     var self = this;
     var variants = {
-      'A. Level and proof': [
+      'Outcome-first': [
+        "I design for how people actually think and work.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "how people actually think and work."
+      ],
+      'Original': [
         "I'm a product designer who crafts tools that quietly make your day easier.",
-        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia."
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "quietly make your day easier."
       ],
-      'B. Leads with the problem': [
-        "I design for the messy middle of enterprise software, where the workflow spans six teams and nobody owns the whole thing.",
-        "Most recently at Benchling, building the platform behind clinical drug testing. Before that, messaging at LinkedIn. Based near Philadelphia."
-      ],
-      'C. Keeps the voice': [
-        "I'm a product designer who likes the unglamorous problems: the workflow with twelve handoffs, the tool everyone works around.",
-        "Four years of them at Benchling, and messaging systems at LinkedIn before that. Based near Philadelphia."
+      'Complexity-first': [
+        "I help teams build products that make complicated work feel simple.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "feel simple."
       ]
     };
-    var picked = variants[this.props.heroVariant] || variants['A. Level and proof'];
+    var picked = variants[this.props.heroVariant] || variants['Outcome-first'];
     var s2 = (this.props.heroLine2 || picked[1]).split(' ');
     var base = 1.6, step = 0.045;
 
-    var emphasis = this.props.heroEmphasis ?? "quietly make your day easier.";
+    var emphasis = this.props.heroEmphasis ?? picked[2];
     var line1Text = this.props.heroLine1 || picked[0];
     var cut = emphasis ? line1Text.indexOf(emphasis) : -1;
     var leadText = cut > 0 ? line1Text.slice(0, cut).trim() : line1Text;
@@ -623,7 +625,7 @@ class Component extends DCLogic {
       heroWords2: heroWords2,
       heroCanvasRef: this.heroCanvasRef,
       card1Title: 'Benchling',
-      card1Description: 'A platform for complex, automated testing during drug development',
+      card1Description: 'A platform for designing and running clinical tests at scale',
       card3Title: 'LinkedIn',
       card3Description: 'Redesigning Recruiter Inbox',
       card4Title: 'LinkedIn',
