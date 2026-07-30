@@ -371,8 +371,35 @@
     });
   }
 
+
+  // ── autoplaying loops ────────────────────────────────────────────────────
+  // The DC pages drive playback from an IntersectionObserver in their logic
+  // class, and no <video> carries an autoplay attribute — so without this the
+  // pre-rendered pages show every clip frozen on frame one.
+  function initVideos() {
+    var vids = $('video');
+    if (!vids.length) return;
+    vids.forEach(function (v) {
+      v.muted = true;
+      v.loop = true;
+      v.setAttribute('playsinline', '');
+    });
+    if (!('IntersectionObserver' in window)) {
+      vids.forEach(function (v) { v.play().catch(function () {}); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.play().catch(function () {});
+        else entry.target.pause();
+      });
+    }, { threshold: 0.25 });
+    vids.forEach(function (v) { io.observe(v); });
+  }
+
   function initAll() {
     initHeader();
+    initVideos();
     initSectionNav();
     initCarousels();
     initLightbox();
