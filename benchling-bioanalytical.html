@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design_doc_mode" content="canvas">
 <script>window.__resources = {};</script>
 <script src="./support.js"></script>
 </head>
@@ -61,10 +62,21 @@
   <script src="./image-slot.js"></script>
 </helmet>
 
+
+
+
+
+
+
+
+
+
+
+
 <div style="position: relative;">
 <header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
   <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
-    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
       <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
       Jia Liu
     </a>
@@ -72,7 +84,7 @@
       <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
         <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
         <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
-        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+        <a href="index.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
       </nav>
       <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
         <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
@@ -128,7 +140,7 @@
     <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
       <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
       <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
-      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <a href="index.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
       <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
         Contact
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
@@ -188,7 +200,7 @@
     <div class="bio-overview-wrap" style="grid-column: 3 / 11; grid-row: 1; padding-bottom: 3rem;">
 
     <section id="overview" class="bio-col bio-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
-      <p style="margin: 0 0 1rem;">Benchling creates software for life science teams, ranging from academic labs to some of the largest pharmaceutical companies in the world. What started as a simple set of tools had evolved into a full platform, with over 200K scientists and 1,300 companies relying on it. In 2025, we launched <span style="font-weight: 600;"><span style="font-weight: normal;">Benchling Bioanalytical</span></span>, a product to help large enterprise customers develop and execute tests during drug development.</p>
+      <p style="margin: 0 0 1rem;">Benchling builds software for life science teams, everyone from university labs to the biggest pharma companies around. It started small and turned into a full platform that over 200,000 scientists and 1,300 companies now depend on, which is a lot of pressure for something that began as a handful of tools. In 2025 we launched <span style="font-weight: 600;"><span style="font-weight: normal;">Benchling Bioanalytical</span></span>, built to help large enterprise customers design and run the tests that get a drug through development.</p>
       
 
       <dl ref="{{ dlRef }}" class="bio-dl bio-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0 0;">
@@ -228,8 +240,8 @@
   <section id="background" class="bio-col bio-intro-4" style="max-width: 760px; margin-left: auto; margin-right: auto; margin-top: 1rem; margin-bottom: 4rem;">
     <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ backgroundLabel }}</div>
     <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">{{ backgroundHeading }}</h3>
-    <p style="margin: 0 0 1rem;">During drug development, companies run countless analytical tests to ensure the quality and efficacy of their products and processes. Developing them is a massive investment, where each test must be experimentally designed and validated. Novel biologics make this even harder, since cells are super sensitive and easily contaminated.</p>
-    <div style="margin: 0 0 1rem;"><div>For companies like Merck, this process can be excruciating. It's like running a high-end test kitchen. Processes need to be meticulously orchestrated, with each step eventually documented and reported to internal auditors and government regulators. Scientists often complain about how hard it is to keep up with the sheer number of systems, physical materials, and data that needs to flow from start to finish.<br></div></div>
+    <p style="margin: 0 0 1rem;">During drug development, companies run through a staggering number of analytical tests to prove a product actually works and can be manufactured reliably. Each one has to be painstakingly designed and validated.&nbsp;Throwing biological materials into this mix makes it even harder, since living cells are fussy and contaminate easily.</p>
+    <div style="margin: 0 0 1rem;"><div>For a company like Merck, this reality can be grueling. Think of it like running a high-end test kitchen where every step gets optimized and documented, with auditors and regulators watching over your shoulder. Scientists we talked to kept coming back to the same complaints: too many systems, too many physical samples, too much data to keep straight from start to finish.<br></div></div>
 
     <video loop="" muted="" playsinline="" preload="auto" poster="assets/img/benchling-tour-sm.jpg" style="width: 100%; height: auto; display: block; border-radius: 10px; margin-top: 2.5rem; margin-bottom: 2.5rem"><source src="assets/video/automated-workcell.webm" type="video/webm"><source src="assets/video/automated-workcell.mp4" type="video/mp4"></video>
 
@@ -237,24 +249,19 @@
 
     <div style="margin-top: 4rem; max-width: {{ teamSportFullPx }}px;">
       <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Every handoff is a chance for something to slip</h3>
-      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">Analytical test development requires work that passes from person to person, system to system. Every one of those handoffs is a place where something can slip. A sample ID gets typed into a different system and comes out in a slightly different format. A spreadsheet gets exported, edited by hand, then reimported somewhere else. Context that made sense to the scientist who ran the test doesn't always make it into the report someone reads three weeks later.</p>
+      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">Analytical test development requires work that passes from person to person, system to system. Every handoff is a place where something can slip. A sample ID gets typed into a different system and comes out in a slightly different format. A spreadsheet gets exported, edited by hand, then reimported somewhere else. Context that made sense to the scientist who ran the test doesn't always make it into the report someone reads three weeks later.<br></p>
 
 </div>
       
     </div>
 
-    <div ref="{{ tabsWrapRef }}" style="display: flex; gap: 1.75rem; margin-top: 2rem; border-bottom: 1px solid #e4e0d8; overflow-x: auto; scrollbar-width: none;">
-      <sc-for list="{{ personaTabs }}" as="tab" hint-placeholder-count="3">
-        <button ref="{{ tab.ref }}" onClick="{{ tab.select }}" style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.9rem; font-weight: {{ tab.fontWeight }}; padding: 0 0 0.7em; border: none; border-bottom: 2px solid {{ tab.borderColor }}; background: none; color: {{ tab.color }}; cursor: pointer; margin-bottom: -1px; flex-shrink: 0; white-space: nowrap;">{{ tab.label }}</button>
-      </sc-for>
-    </div>
-    <div style="margin-top: 1.25rem;" onTouchStart="{{ handlePersonaTouchStart }}" onTouchEnd="{{ handlePersonaTouchEnd }}">
-      <dc-import name="ExpandableImage" src="{{ currentPersonaSrc }}" alt="{{ currentPersonaAlt }}" hint-size="100%,400px"></dc-import>
+    <div style="margin-top: 2rem;">
+      <dc-import name="ExpandableImage" src="assets/img/bioanalytical-assay-execution.png" alt="Bioanalytical assay execution swimlane" hint-size="100%,500px"></dc-import>
     </div>
 
     <div style="margin-top: 3rem;">
       <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Plate design is central to any bioanalytical software</h3>
-      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">A plate is a physical grid of tiny wells that slots into an automated lab instrument. Load it correctly and a robot can run hundreds of samples in a single pass. Designing a plate can be highly complex, with each well carefully mapped out to test a specific condition while accounting for evaporative effects or cross-contamination risks. Any system that handles plate design must be flexible, error-proof and efficient to use.</p>
+      <div style="margin: 0 0 1rem;"><p class="font-claude-response-body break-words whitespace-normal" dir="ltr">A plate is basically a grid of tiny wells that slides into an automated lab instrument. Get the loading right and a robot can chew through hundreds of samples in one pass. Designing one is trickier than it sounds, since every single well has to be mapped to a specific condition while accounting for things like evaporation or cross-contamination. Whatever system handles that job needs to be flexible, hard to mess up, and fast to use.</p>
 
 </div>
 
@@ -262,6 +269,15 @@
         <img src="assets/img/plate-loading.jpg" alt="Loading a 96-well plate into a QuantStudio instrument" class="lab-tour-img" style="width: 100%; height: 400px; max-height: 400px; object-fit: cover; display: block;">
       </div>
       
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">The basic workflow</h3>
+      <p style="margin: 0 0 1rem;">Underneath all the complexity, Bioanalytical had to support one basic path. A scientist defines a testing procedure: the rules for what's being measured and how. From that procedure, they design an experiment, setting the specific parameters for this run. Next comes designing the plates, mapping samples to the physical wells that go into the instrument. The plates run, generating data. That data gets analyzed, often through a template built for the test type. Finally, a lead scientist or quality team reviews the results and signs off.</p>
+
+      <div style="margin-top: 2.5rem;">
+        <dc-import name="ExpandableImage" src="assets/img/approach-flow-diagram.png" alt="Six-step flow: define procedure, design experiment, design plates, run plates and generate data, analyze data, review and sign off" hint-size="100%,220px"></dc-import>
+      </div>
     </div>
   </section>
 
@@ -316,8 +332,8 @@
     <div style="margin: 0 0 1rem;"></div>
 
     <div style="margin-top: 3rem;">
-      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Nobody could fully trust the data</h3>
-      <p style="margin: 0;">The bottom line is that their scientists couldn't always trust their data, relying instead on manual reviews to make sure everything looked correct. When things did go wrong, it required days or weeks to figure out why. In the worst scenario, they might have to re-do an entire set of experiments.&nbsp;It's why it was so important for them to have reliable end-to-end data flow, and they were looking to us at Benchling&nbsp;to help them.&nbsp;</p>
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Data integrity kept people up at night</h3>
+      <p style="margin: 0;">Bottom line, their scientists couldn't fully trust their own data, so they leaned on manual reviews just to double check everything looked right. When something did go wrong, it could take days or weeks to track down why. Worst case, they'd have to redo an entire set of experiments from scratch. That's exactly why reliable end-to-end data flow mattered so much to them, and why they came to us at Benchling for help.</p>
     </div>
 
     <div style="border-radius: 10px; overflow: hidden; background: #ffffff; border: 1px solid #e4e0d8; margin: 2.5rem 0 0;">
@@ -328,40 +344,36 @@
 
   <section id="approach" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto">
     <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ approachLabel }}</div>
-    <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">The basic workflow</h3>
-    <p style="margin: 0 0 1rem;">Underneath all the complexity, Bioanalytical had to support one basic path. A scientist defines a testing procedure: the rules for what's being measured and how. From that procedure, they design an experiment, setting the specific parameters for this run. Next comes designing the plates, mapping samples to the physical wells that go into the instrument. The plates run, generating data. That data gets analyzed, often through a template built for the test type. Finally, a lead scientist or quality team reviews the results and signs off.</p>
-    <p style="margin: 0 0 1rem;">Every decision in this case study traces back to one of those six steps. Some steps got the experience we originally wanted while others got a more pragmatic version, shaped by constraints we hit along the way.</p>
-    <p style="margin: 0;">Plates and structured data configuration are the two I'll walk through here, since they carry the throughline of the whole project, but they were part of a much larger set of decisions across all six steps.</p>
-
-    <div style="margin-top: 2.5rem;">
-      <dc-import name="ExpandableImage" src="assets/img/approach-flow-diagram.png" alt="Six-step flow: define procedure, design experiment, design plates, run plates and generate data, analyze data, review and sign off" hint-size="100%,220px"></dc-import>
-    </div>
-
     <div style="margin-top: 3.5rem;">
       <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Building two products on a single foundation</h3>
-      <div style="margin: 0 0 1rem;"><div>We made a major technical bet early on that we could build Bioanalytical on the same foundation as Bioprocess, another product under development. Both use cases required step-by-step procedures through systematic experimentation, and both needed those procedures to eventually be locked down and executed reliably.</div></div>
+      <div style="margin: 0 0 1rem;"><div>Early on, we made a big bet: build Bioanalytical on the same foundation as Bioprocess, another product we had in the works. Both products needed the same basic thing, step-by-step procedures built through systematic experimentation that could eventually get locked down and run reliably every time.</div></div>
       <div style="margin: 1.5rem 0;">
-        <image-slot id="building-two-products" shape="rounded" radius="10" placeholder="Drop an image for Building two products on a single foundation"></image-slot>
+        <dc-import name="ExpandableImage" src="assets/img/three-tier-foundation.png" alt="Three-tier foundation: Bioanalytical and Bioprocess sharing a Core platform layer" hint-size="100%,500px"></dc-import>
       </div>
-      <p style="margin: 0 0 1rem;">Throughout discovery we incrementally validated this approach, but also identified gaps and risks. Bioanalytical required first-class support for designing plates that were highly integrated with lab robotics. We also hadn't yet built out a "locked down" version of Benchling, which was critical for automated sampling testing later in the project.<br></p>
+      <p style="margin: 0 0 1rem;">We spent discovery stress-testing that assumption, and it mostly held, but not without some obvious gaps showing up. Plates needed first-class support tightly integrated with lab robotics, which Bioanalytical specifically required. And we hadn't yet built a "locked down" version of Benchling, something that turned out to matter a lot for automated sampling testing down the line.</p>
     </div>
 
     <div style="margin-top: 3.5rem;">
       <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Exploring configuration under technical constraints</h3>
-      <p style="margin: 0 0 1rem;">Configuration got the most of my attention, since it's the part scientists interact with every day. But building on Bioprocess's foundation limited what we could do about it in this timeline.</p>
-      <p style="margin: 0 0 1rem;">Structured data wasn't optional. Freeform notes and spreadsheets don't hold up when you need to trace a result back to a sample months later, and search, traceability, and analysis all depend on data living somewhere a database can reach.</p>
+      <p style="margin: 0 0 1rem;">During the design sprint, configuring and editing documents initially got a lot of my attention, since it's the manual data entry that scientists often complain about. Structured data wasn't optional. Freeform notes and spreadsheets don't hold up when you need to trace a result back to a sample months later, and search, traceability, and analysis all depend on data living somewhere a database can reach.</p>
       <p style="margin: 0 0 1rem;">So we explored structured entry that worked more like building a document in Notion than filling out the rigid tables already in the product, with scientists choosing what to capture and how to lay it out. Early concepts tested well on-site.</p>
 
       <div style="margin: 1.5rem 0;">
-        <image-slot id="configuration-exploration" shape="rounded" radius="10" placeholder="Drop an image of the configuration exploration"></image-slot>
+        <dc-import name="ExpandableImage" src="assets/img/configuration-exploration.webp" alt="Configuration exploration: structured entry built like a Notion-style document" hint-size="100%,500px"></dc-import>
       </div>
 
-      <p style="margin: 0 0 1rem; font-weight: 500">However, we eventually realized that we couldn't build this in time. The UI components, registration behavior and validation rules all made this basically impossible. It also required more of a platform-wide approach, as any improvements here should ultimately extend to our document framework. During our on-site design sprint, Bioprocess had already reached the same conclusion, leaning on Benchling's existing document table framework, making both our UIs stick closer to the existing components than we had envisioned.</p>
-      <p style="margin: 1rem 0 0;">We traded a better configuration experience for clean data flow that could ship in time, staying consistent with what Bioprocess was planning to build.</p>
+      <p style="margin: 0 0 1rem;">Meanwhile, the Bioprocess team had scoped a solution that looked much closer to our existing notebook configuration / editing UX. It was clunky, but familiar and doable. There's a lot of complex logic behind our document tables (registration, validation, audits) that make them hard to change or swap out.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <image-slot id="bioprocess-notebook-ux" shape="rounded" radius="10" placeholder="Drop an image of Bioprocess's existing notebook configuration / editing UX"></image-slot>
+      </div>
+
+      <p style="margin: 0 0 1rem; font-weight: 500">Eventually, my PM and I decided to follow the Bioprocess approach. We all knew that our document config / editing UX needed work, but that needed to be a platform-wide fix with a clear path for maintaining and extending them.</p>
+      <p style="margin: 1rem 0 0;">So we traded a better configuration experience for clean data flow we could actually ship on time, staying consistent with what Bioprocess was already building toward.</p>
     </div>
 
     <div style="margin-top: 3.5rem;">
-      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Rethinking plate design, still bounded by the platform</h3>
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Exploring experiment planning and plate design</h3>
       <p style="margin: 0 0 1rem;">My first instinct was to treat plates the way I'd treat any other step in the experiment planning flow. A scientist works through experiment planning linearly, so why not add plate design as another step, maybe even auto-populate a layout based on what they'd already entered earlier? From a pure UX standpoint it made a lot of sense. Fill in the details up top, get a recommended plate design, assign it to a run, done.</p>
 
       <div style="margin: 1.5rem 0;">
@@ -371,20 +383,20 @@
         </div>
       </div>
 
-      <p style="margin: 0 0 1rem;">My version wouldn't work. Another team had already scoped plate design as a generic component elsewhere in the product, not built around Bioanalytical's flow, and wiring it into the middle of experiment planning would have taken integration work we didn't have time for.</p>
-      <p style="margin: 0 0 1rem;">I led a short internal design sprint on this, exploring options. The only viable path would be for scientists to just create the plate designs, one-by-one, in the documents after experiment planning.</p>
+      <p style="margin: 0 0 1rem;">The concept landed well with scientists and our sprint team, but ran into a snag during further scoping. It turned out that it'd require a lot more integration work than we anticipated. It was doable, but probably not in the time that we had. We circled up to work through the options and trade-offs: the only path that actually held up was letting scientists create plate designs one by one, in the documents, after experiment planning was done.</p>
+      
 
       <div style="margin: 1.5rem 0;">
         <dc-import name="ExpandableImage" src="assets/img/plates-proposed-workaround.png" alt="Initial exploration vs. proposed workaround: passing plate design or param values between Design experiment, Study, and Worksheet screens" hint-size="100%,400px"></dc-import>
       </div>
 
-      <p style="margin: 0 0 1rem;">We traced the impact through every layer, data flow to UI, catching rough edges like unclear parameter hand-off to plates, and how to make it easier to design a large number of plates across different documents once they were created.</p>
+      <p style="margin: 0 0 1rem;">From there we traced the impact through every layer, from data flow up to UI, and caught the rough edges along the way: unclear parameter hand-off to plates, and how to make designing a large number of plates across different documents less painful once they existed.</p>
 
       <div style="margin: 1.5rem 0;">
         <image-slot id="plates-usability-polish" shape="rounded" radius="10" placeholder="Drop an image showing the usability polish for plate hand-off and multi-document design"></image-slot>
       </div>
 
-      <p style="margin: 0 0 1rem;">The silver lining in banking this decision was that we also focused on improvements to the plate design UI itself. Because of the complexity of bioanalytical experiments, there was a real problem around visualizing the layers of experimental parameters and metadata within the plate. I did multiple rounds of hands-on exploration with the team, in particular pushing for a browser in the left panel, which I felt could be reused elsewhere in the product to tackle similar challenges.</p>
+      <p style="margin: 0 0 1rem;">The silver lining in banking that decision was that it freed us up to focus on the plate design UI itself. Bioanalytical experiments are complicated enough that visualizing the layers of experimental parameters and metadata inside a plate was a real problem on its own. I ran several rounds of hands-on exploration with the team, pushing hardest for a browser in the left panel, something I thought could get reused elsewhere in the product.</p>
 
       <div style="margin: 1.5rem 0;">
         <image-slot id="plate-design-ui-browser" shape="rounded" radius="10" placeholder="Drop an image of the plate design UI with left-panel browser"></image-slot>
@@ -392,10 +404,10 @@
     </div>
 
     <div style="margin-top: 3.5rem;">
-      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Reorganizing around the work instead of our app teams</h3>
-      <p style="margin: 0 0 1rem;">Looking back, hitting these constraints was never really a technical problem. We had pulled people from other teams into the on-site discovery, but their attention was split across their own workstreams, so our ideas didn't get scoped deeply until we'd already spent significant time fleshing them out ourselves.</p>
-      <p style="margin: 0 0 1rem;">Teams at Benchling were organized around app-level areas, but Bioanalytical needed work to move across several at once: plates, documents, data pipelines, the core experiment flow. We brought the resulting friction to product and engineering leadership as a structural issue, and re-organized into squads around a slice of the user journey instead, each with a lead from design, engineering and product.</p>
-      <p style="margin: 0 0 1rem;">In that new structure, I became a kind of connective tissue across squads. I set up weekly design reviews across all the teams, assembling designs and specs at increasing levels of fidelity into end-to-end flows.&nbsp;&nbsp;These reviews also became a forum where all of us, including product and engineer, could stress-test how the pieces fit together, especially around handoffs.</p>
+      <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Reorganizing around the work instead of our app boundaries</h3>
+      <p style="margin: 0 0 1rem;">These scoping conversations made us realize that we were moving too slowly given the work ahead. We'd loop in team leads for our design sprints, but it wasn't being distilled down to the individual engineers who owned detailed scoping, and their attention was split across existing work. Decisions were getting stuck in slow follow-ups and unclear ownership.</p>
+      <p style="margin: 0 0 1rem;">We raised this as a structural issue with leadership, eventually reorganizing into squads around a slice of the user journey, pulling people from different app teams together. Our entire team, from leadership to individual ICs, was finally focused entirely on Bioanalytical until it launched.</p>
+      <p style="margin: 0 0 1rem;">In that new structure, I became connective tissue across squads, running weekly design reviews that pulled designs and specs into end-to-end flows and gave everyone a place to stress-test the handoffs.</p>
       
 
       <div style="margin-top: 1.5rem;">
@@ -490,7 +502,7 @@
         <p style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0;">1.1M samples</p>
         <p style="color: #6b6863; margin: 0;">supported, with six legacy systems phased out</p>
       </div>
-    </div><div style="margin: 0 0 1rem;"><div>Within Merck, other teams began inquiring about Benchling and, despite shifting focus back to bioprocessing, we landed two more prospects organically through word-of-mouth. One deal advanced far enough to validate the solution and was on track to close within a few months.</div></div>
+    </div><div style="margin: 0 0 1rem;"><div>Word got around inside Merck. Other teams started asking about Benchling on their own, and even as we shifted focus back to bioprocessing, we picked up two more prospects purely through word-of-mouth. One deal got far enough along to validate the whole approach and was on track to close within a few months.</div></div>
     
 
     
@@ -499,20 +511,20 @@
       <img src="assets/img/scaling-bioanalysis.jpeg" alt="Scaling bioanalysis across teams" style="width: 100%; height: auto; display: block;">
     </div>
 
-    <p style="margin: 0 0 1rem;">Our internal dashboards showed more than logins. Scientists were running an increasing number of experiments per user over time, and activity across the funnel looked healthy at every stage. We had no baseline to compare it against, but paired with the qualitative feedback, it pointed to real adoption: Merck scientists getting familiar with the product and working it into their day-to-day.</p>
+    <p style="margin: 0 0 1rem;">Our dashboards showed more than just logins, too: scientists were running more experiments per user over time. We had no baseline to measure that against, but combined with what we were hearing directly, it added up to real adoption, Merck scientists actually working this into their day-to-day.</p>
 
     </section>
 
   <section id="reflections" class="bio-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
     <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">{{ reflectionsLabel }}</div>
     <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">{{ reflectionsHeading }}</h3>
-    <p style="margin: 0 0 1rem;">One call I'd make differently is how we sequenced the two products. We treated Bioprocess as far enough along to start ramping sales and marketing, then turned to scoping Bioanalytical, only to find Bioprocess wasn't actually ready to sell. We pushed hard into Bioanalytical instead, which landed well, but then had to shift back to Bioprocess: an expensive context switch for the whole org, and months where sales and marketing were trained up on a product that wasn't there yet.</p>
-    <p style="margin: 0 0 1rem;">Of course, this wasn't a decision that could be solely made at my level, but I did learn that, as an organization, you have to be disciplined about setting a concrete bar for "ready to sell" before moving on to build elsewhere.</p>
+    <p style="margin: 0 0 1rem;">If I could redo one call, it'd be realizing how the sequencing of Bioprocess and Bioanalytical created a pretty huge risk and pushing for scoping earlier. We treated Bioprocess as far enough along to start ramping up sales and marketing, then shifted to scoping Bioanalytical, only to discover Bioprocess wasn't actually ready to sell. So we pushed hard into Bioanalytical instead, which landed well, but then had to swing back to Bioprocess, an expensive context switch for the whole org, plus months where sales and marketing were trained up on a product that wasn't actually there yet.</p>
+    <p style="margin: 0 0 1rem;">Overall, it just created a lot of anxiety, last-minute meetings, and I think having some hard conversations up front could've at least prepared us better for the journey ahead.</p>
 
     <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 2.5rem 0 0.5rem;">Keeping the team motivated through hard calls</h3>
-    <p style="margin: 0 0 1rem;">This was a long, complicated project, made harder by a lot of organizational churn, including losing our head of design partway through. I got some tough feedback from our team early on when they felt like they didn't understand the approach and worried about shipping a product that met requirements, but didn't feel great to use.</p>
-    <p style="margin: 0 0 1rem;">Honestly, I felt it too, but I chose to focus on the bigger picture and what we could control. Going back to the core problem, scientists needed to us bring all these disparate systems into one place. As designers, we can pick apart a UI, but none of us had personally felt the pain of redoing weeks of lab work because an integration broke somewhere.&nbsp;We were building something huge and complicated that hadn't existed before and that kind of bet takes time to pay off.</p>
-    <p style="margin: 0 0 1rem;">Thankfully, it eventually did and, as scientists started using it, they saw the impact for themselves.&nbsp;</p>
+    <p style="margin: 0 0 1rem;">This project was long and complicated, and a lot of organizational churn made it harder still. Early on, I got some tough feedback from the team: they felt like they didn't understand the approach and worried we'd end up shipping something that checked the requirements boxes but didn't feel good to actually use.</p>
+    <p style="margin: 0 0 1rem;">I felt that worry too, if I'm honest, but I made a point of focusing on the bigger picture and what we could actually control. Go back to the core problem: scientists needed us to pull a pile of disparate systems into one place. Designers are good at picking apart a UI, but none of us had personally felt the pain of redoing weeks of lab work because some integration broke. We were building something big and complicated that hadn't existed before, and bets like that take time to pay off.</p>
+    
 
     <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 2.5rem 0 0.5rem;">The growing role of AI</h3>
     <div style="margin: 0 0 1rem;"><div><div>Watching data entry eat so much of scientists' time reinforced something I'd underestimated: the highest-leverage problems aren't always the ones inside your project's scope. When Benchling spun up a small AI team, I made a point of staying involved from the sidelines, contributing use cases and feedback on where the pain was worst, because I'd seen it firsthand in Bioanalytical."</div></div></div>
@@ -709,37 +721,7 @@ class Component extends DCLogic {
   wideBreakoutRightRef = React.createRef();
   fullBreakoutLeftRef = React.createRef();
   fullBreakoutRightRef = React.createRef();
-  personas = [
-    { label: 'Lead Scientist', src: 'assets/img/lead-scientist-persona.png', alt: 'Lead Scientist persona' },
-    { label: 'Lab Auto Operator', src: 'assets/img/lab-auto-persona.png', alt: 'Lab Automation Operator persona' },
-    { label: 'Lab Scientist', src: 'assets/img/scientist-persona.png', alt: 'Lab Scientist persona' },
-    { label: 'Data Scientist', src: 'assets/img/data-scientist-persona.png', alt: 'Data Scientist persona' },
-    { label: 'IT Manager', src: 'assets/img/it-manager-persona.png', alt: 'IT Manager persona' },
-  ];
-
-  tabsWrapRef = React.createRef();
-  tabRefs = this.personas.map(function () { return React.createRef(); });
-  touchStartX = 0;
-
-  selectPersona(i) { this.setState({ personaIndex: i }); }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.personaIndex !== this.state.personaIndex) {
-      var el = this.tabRefs[this.state.personaIndex] && this.tabRefs[this.state.personaIndex].current;
-      if (el) el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  }
-
-  handlePersonaTouchStart(e) { this.touchStartX = e.touches[0].clientX; }
-
-  handlePersonaTouchEnd(e) {
-    var dx = e.changedTouches[0].clientX - this.touchStartX;
-    if (Math.abs(dx) < 40) return;
-    var n = this.personas.length;
-    var next = dx < 0 ? (this.state.personaIndex + 1) % n : (this.state.personaIndex - 1 + n) % n;
-    this.selectPersona(next);
-  }
-  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false, personaIndex: 0, teamSportTextPx: 300, teamSportImagePx: 450, teamSportFullPx: 780, teamSport8ColPx: 620, teamSport9ColPx: 700, teamSport7ColPx: 540, teamSport3ColPx: 230 };
+  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false, teamSportTextPx: 300, teamSportImagePx: 450, teamSportFullPx: 780, teamSport8ColPx: 620, teamSport9ColPx: 700, teamSport7ColPx: 540, teamSport3ColPx: 230 };
 
   componentDidMount() {
     this.initSiteHeader();
@@ -794,12 +776,6 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    var personaIdx = this.state.personaIndex;
-    var self = this;
-    var personaTabs = this.personas.map(function (p, i) {
-      var isActive = i === personaIdx;
-      return { label: p.label, ref: self.tabRefs[i], select: function () { self.selectPersona(i); }, color: isActive ? '#14130f' : '#6b6863', borderColor: isActive ? '#0688f0' : 'transparent', fontWeight: isActive ? 600 : 400 };
-    });
     var P = this.props;
     return {
       ...this.headerRenderVals(),
@@ -817,12 +793,6 @@ class Component extends DCLogic {
       reflectionsLabel: P.reflectionsLabel ?? 'Reflections',
       reflectionsHeading: P.reflectionsHeading ?? 'Getting the sequencing right',
       skillsChips: (this.props.skillsChips ?? 'Design Leadership, UX Research, Interaction Design, Enterprise SaaS').split(',').map(function (s) { return s.trim(); }).filter(Boolean),
-      currentPersonaSrc: this.personas[personaIdx].src,
-      currentPersonaAlt: this.personas[personaIdx].alt,
-      personaTabs: personaTabs,
-      tabsWrapRef: this.tabsWrapRef,
-      handlePersonaTouchStart: this.handlePersonaTouchStart.bind(this),
-      handlePersonaTouchEnd: this.handlePersonaTouchEnd.bind(this),
       navRef: this.navRef,
       dlRef: this.dlRef,
       mainColRef: this.mainColRef,

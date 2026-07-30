@@ -29,6 +29,8 @@
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply Mono'; src: url('assets/fonts/PPSupplyMono-Ultralight.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Supply Mono'; src: url('assets/fonts/PPSupplyMono-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
     html { overflow-x: hidden; }
     body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; }
     a { color: #0688f0; }
@@ -51,112 +53,15 @@
     @media (max-width: 768px) { .hero-title { margin-top: 2.5rem !important; } .work-card-inner { padding: 20px !important; border-radius: 14px !important; } .work-card-meta { margin-top: 0.75rem !important; margin-bottom: 0 !important; gap: 0.2em !important; } .work-grid { gap: 4.5rem !important; } }
     @media (max-width: 1024px) { .work-grid { grid-template-columns: 1fr !important; } .work-grid > article { grid-column: 1 / -1 !important; margin-bottom: 5rem !important; } .work-grid > article:last-child { margin-bottom: 0 !important; } #work { display: block !important; } #work > div { grid-column: auto !important; } .about-divider { grid-column: 1 / -1 !important; } }
     @media (max-width: 900px) { .bio-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; } .bio-photo { width: 180px !important; } .bio-skills-edu { grid-template-columns: 1fr !important; gap: 1.25rem !important; } }
+    @media (max-width: 900px) { .spec-grid { grid-template-columns: 1fr !important; } }
+    @media (max-width: 800px) { .work-masonry { grid-template-columns: 1fr !important; } }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
 </helmet>
 
-<header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
-  <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
-    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
-      <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
-      Jia Liu
-    </a>
-    <div style="display: flex; align-items: center; gap: 1.75rem;">
-      <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
-        <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
-        <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
-        <a href="index.dc.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
-      </nav>
-      <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
-        <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
-        </sc-if>
-        <sc-if value="{{ mobileNavClosed }}" hint-placeholder-val="{{ true }}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
-        </sc-if>
-      </button>
-      <div ref="{{ contactWrapRef }}" class="contact-desktop-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
-        <div style="position: absolute; top: 0; right: 0; background: #14130f; overflow: hidden; width: {{ contactShapeWidth }}; height: {{ contactShapeHeight }}; border-radius: {{ contactShapeRadius }}; box-shadow: {{ contactShapeShadow }}; transition: width 0.45s cubic-bezier(0.16,1,0.3,1), height 0.45s cubic-bezier(0.16,1,0.3,1), border-radius 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; z-index: 20;">
-          <button class="contact-desktop" onClick="{{ toggleContact }}" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border: none; color: #ffffff; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: {{ contactButtonContentOpacity }}; pointer-events: {{ contactButtonPointerEvents }}; transition: opacity 0.2s ease {{ contactButtonContentDelay }};">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
-            Contact
-          </button>
-          <div style="position: absolute; inset: 0; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: {{ contactCardContentOpacity }}; pointer-events: {{ contactCardPointerEvents }}; transition: opacity 0.25s ease {{ contactCardContentDelay }};">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
-              <span style="font-size: 0.95rem; color: #9a968f;">Get in touch</span>
-              <button onClick="{{ closeContact }}" aria-label="Close" style="background: none; border: none; color: #9a968f; cursor: pointer; padding: 0; display: flex;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
-              </button>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-              <div>
-                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">Email</div>
-                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">jia.eq.liu@gmail.com</div>
-              </div>
-              <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: rgba(255,255,255,0.1); border: none; border-radius: 8px; width: 34px; height: 34px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
-                </sc-if>
-                <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
-                </sc-if>
-              </button>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div>
-                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">LinkedIn</div>
-                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">@jia-eq-liu</div>
-              </div>
-              <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255,255,255,0.1); border-radius: 8px; width: 34px; height: 34px; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: {{ mobileNavMaxHeight }}; border-top: 1px solid #e4e0d8; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-   <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
-    <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
-      <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
-      <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
-      <a href="index.dc.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
-      <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
-        Contact
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
-      </button>
-      <div style="overflow: hidden; max-height: {{ mobileContactMaxHeight }}; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div style="padding: 0.25rem 0 1rem;">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-            <div>
-              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">Email</div>
-              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">jia.eq.liu@gmail.com</div>
-            </div>
-            <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: #f2f1ec; border: none; border-radius: 8px; width: 34px; height: 34px; color: #14130f; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
-              </sc-if>
-              <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
-              </sc-if>
-            </button>
-          </div>
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div>
-              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">LinkedIn</div>
-              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">@jia-eq-liu</div>
-            </div>
-            <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: #f2f1ec; border-radius: 8px; width: 34px; height: 34px; color: #14130f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-   </div>
-  </div>
-</header>
-<div class="header-spacer-default" style="height: {{ headerSpacerHeight }}; flex-shrink: 0;"></div>
+<dc-import name="SiteHeader" hint-size="100%,80"></dc-import>
 
 <div style="position: fixed; inset: 0; display: {{ gridOverlayDisplay }}; z-index: 9999; pointer-events: none;">
   <div style="max-width: 1280px; margin: 0 auto; height: 100%; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;">
@@ -182,107 +87,119 @@
 
 <div class="work-reveal" style="position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
 
-  <section class="work-section" style="padding-bottom: 6rem; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+  <section class="work-section" id="work" style="padding-bottom: 6rem; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
     <div class="work-intro" style="max-width: 640px; margin-bottom: 1.5rem; grid-column: 3 / 11;">
       
     </div>
 
-    <div id="work" class="work-grid" style="display: grid; grid-template-columns: 1fr; gap: 5rem; grid-column: 3 / 11;">
+    <div class="work-masonry" style="grid-column: 2 / 12; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <sc-for list="{{ workColLeft }}" as="tile" hint-placeholder-count="2">
+          <article style="position: relative; outline: {{ workGridOutline }}; outline-offset: -1px;">
+            <a href="{{ tile.href }}" onClick="{{ tile.onClick }}" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
+              <div class="work-card-inner" style="aspect-ratio: {{ tile.ratio }}; position: relative; overflow: hidden; box-sizing: border-box; padding: {{ tile.padding }}; background: #ebe8e2; border-radius: 12px;">
+                <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
+                  <div style="{{ tile.blob1Style }}"></div>
+                  <div style="{{ tile.blob2Style }}"></div>
+                </div>
+                <sc-if value="{{ tile.isPlaceholder }}" hint-placeholder-val="{{ false }}">
+                  <image-slot id="work-copy-placeholder-1" shape="rect" placeholder="Drop a 4th case study image" style="position: relative; z-index: 1; width: 100%; height: 100%; display: block;"></image-slot>
+                </sc-if>
+                <sc-if value="{{ tile.isImage }}" hint-placeholder-val="{{ false }}">
+                  <div role="img" aria-label="{{ tile.imgAlt }}" style="{{ tile.imgStyle }}"></div>
+                </sc-if>
+                <div style="position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s ease; pointer-events: none;">
+                  <span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 500; color: #ffffff;">{{ tile.hoverText }}</span>
+                </div>
+                <span style="display: {{ workGridLabelDisplay }}; position: absolute; top: 8px; left: 8px; z-index: 5; background: rgba(255,255,255,0.85); padding: 2px 6px; border-radius: 4px; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.65rem; color: #14130f;">{{ tile.badgeText }}</span>
+              </div>
+            </a>
+          </article>
+        </sc-for>
+      </div>
 
-      <article style="grid-column: 1 / -1;">
-        <a href="benchling-bioanalytical.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
-          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px; transform: translateY(2px);">
-            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
-              <div style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.83 0.08 240); filter: blur(40px); animation: blobFloatA 16s ease-in-out infinite;"></div>
-              <div style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.78 0.1 240); filter: blur(40px); animation: blobFloatB 20s ease-in-out infinite;"></div>
-            </div>
-                                    <img src="assets/img/benchling-bioa-chrome-cropped.png" alt="Benchling Bioanalytical plate design interface" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.008)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
-          </div>
-        </a>
-        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
-          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="benchling-bioanalytical.html" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4em; --arrow-o: 0;" style-hover="--arrow-o: 1;">{{ card1Title }}</a></h3>
-          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0;">{{ card1Description }}</p>
-        </div>
-      </article>
-
-      <article style="grid-column: 1 / -1;">
-        <a href="linkedin-recruiter-inbox.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
-          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px;">
-            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
-              <div style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.9 0.04 30); filter: blur(40px); animation: blobFloatA 17s ease-in-out infinite;"></div>
-              <div style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.82 0.07 30); filter: blur(40px); animation: blobFloatB 21s ease-in-out infinite;"></div>
-            </div>
-                                    <img src="assets/img/linkedin-recruiter-inbox.png" alt="LinkedIn recruiter messaging inbox" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; transform: scale(calc(0.98 + var(--deepen, 0) * 0.01)); display: block; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
-          </div>
-        </a>
-        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
-          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="linkedin-recruiter-inbox.html" style="color: inherit; text-decoration: none;">{{ card3Title }}</a></h3>
-          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0">{{ card3Description }}</p>
-        </div>
-      </article>
-
-      
-
-      <article style="grid-column: 1 / -1;">
-        <a href="linkedin-quick-reply.html" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
-          <div class="work-card-inner" style="aspect-ratio: 16/10; position: relative; overflow: hidden; box-sizing: border-box; padding: 48px; background: #ebe8e2; border-radius: 20px;">
-            <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
-              <div style="position: absolute; width: 70%; height: 70%; left: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.9 0.04 150); filter: blur(40px); animation: blobFloatB 19s ease-in-out infinite;"></div>
-              <div style="position: absolute; width: 60%; height: 60%; right: 5%; top: 0%; border-radius: 50%; background: oklch(0.82 0.06 150); filter: blur(40px); animation: blobFloatA 23s ease-in-out infinite;"></div>
-            </div>
-                                    <img src="assets/img/linkedin-quick-reply.png" alt="LinkedIn smart reply for job candidates" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; transform: scale(calc(1 + var(--deepen, 0) * 0.008)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
-          </div>
-        </a>
-        <div class="work-card-meta" style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; margin-top: 1.5rem; margin-bottom: 1.5rem;">
-          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin: 0;"><a href="linkedin-quick-reply.html" style="color: inherit; text-decoration: none;">{{ card4Title }}</a></h3>
-          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: #6b6863; margin: 0">{{ card4Description }}</p>
-        </div>
-      </article>
-
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <sc-for list="{{ workColRight }}" as="tile" hint-placeholder-count="2">
+          <article style="position: relative; outline: {{ workGridOutline }}; outline-offset: -1px;">
+            <a href="{{ tile.href }}" onClick="{{ tile.onClick }}" style="display: block; text-decoration: none; color: inherit; --deepen: 0;" style-hover="--deepen: 1;">
+              <div class="work-card-inner" style="aspect-ratio: {{ tile.ratio }}; position: relative; overflow: hidden; box-sizing: border-box; padding: {{ tile.padding }}; background: #ebe8e2; border-radius: 12px;">
+                <div class="blob-reveal" style="position: absolute; inset: 0; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s ease;">
+                  <div style="{{ tile.blob1Style }}"></div>
+                  <div style="{{ tile.blob2Style }}"></div>
+                </div>
+                <sc-if value="{{ tile.isPlaceholder }}" hint-placeholder-val="{{ false }}">
+                  <image-slot id="work-copy-placeholder-1" shape="rect" placeholder="Drop a 4th case study image" style="position: relative; z-index: 1; width: 100%; height: 100%; display: block;"></image-slot>
+                </sc-if>
+                <sc-if value="{{ tile.isImage }}" hint-placeholder-val="{{ false }}">
+                  <div role="img" aria-label="{{ tile.imgAlt }}" style="{{ tile.imgStyle }}"></div>
+                </sc-if>
+                <div style="position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s ease; pointer-events: none;">
+                  <span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 500; color: #ffffff;">{{ tile.hoverText }}</span>
+                </div>
+                <span style="display: {{ workGridLabelDisplay }}; position: absolute; top: 8px; left: 8px; z-index: 5; background: rgba(255,255,255,0.85); padding: 2px 6px; border-radius: 4px; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.65rem; color: #14130f;">{{ tile.badgeText }}</span>
+              </div>
+            </a>
+          </article>
+        </sc-for>
+      </div>
     </div>
   </section>
 
   <div style="max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
   <section id="about" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
-    <div class="about-divider" style="grid-column: 3 / 11; padding-top: 4rem; border-top: 1px solid #e4e0d8;"></div>
-    <div class="about-content" style="grid-column: 3 / 11; padding-bottom: 6rem; margin-left: -1.5rem; margin-right: -1.5rem;">
-    <div class="bio-grid" style="display: grid; grid-template-columns: 220px 1fr; gap: 4rem; align-items: start;">
-      <div class="bio-photo">
-        <div style="border-radius: 10px; border: 1px solid #e4e0d8; overflow: hidden; background: #ffffff; aspect-ratio: 1 / 1;">
-          <img src="assets/img/jia-profile.jpg" alt="Jia Liu" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%;">
-        </div>
-      </div>
-      <div>
-        
-        <div style="color: #14130F;">
-          
-          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09rem; font-weight: 600; line-height: 1.4; margin: 0 0 1.2rem">My winding path has made me better at connecting the dots.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">I taught and worked in nonprofits before landing at Coursera, where I learned how modern product gets built. I've spent the years since at LinkedIn and Benchling, designing for people navigating complex systems.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">That path gave me a working sense of how systems function and where they let people down. I'm a problem-solver first, more interested in what's actually happening on the ground than in any particular tool or medium.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem;">Outside of work, I make electronic music, play with my kid, and build tools for little things that bug me.</p>
-          <p style="font-size: 1.09375rem; line-height: 1.6; color: #14130F; margin: 0;">If there's a throughline, it's that good design gets out of the way and helps people do what they want, whether that's a scientist reviewing lab data or a producer finishing a track.</p>
+    <div class="about-content" style="grid-column: 3 / 11; padding-bottom: 5rem;">
+
+      <div class="spec-grid" style="display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; margin-bottom: 3rem;">
+
+        <div>
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem; text-wrap: pretty;">I didn't start out in product design. I studied molecular bio, taught kids, and ran a non-profit. That took me to Coursera, where I helped grow it from its early days. Eventually, I jumped into product design because I wanted to build solutions instead of just talking about them.</p>
+
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0 0 1rem; text-wrap: pretty;">This winding path's made me a pretty good problem-solver and it's taught me that the best solutions, no matter how simple or complex, are rooted in a deep understanding of people.</p>
+
+          <p style="font-size: 1.09375rem; line-height: 1.6; margin: 0; text-wrap: pretty;">Outside of work, I dig for records and make electronic music, play with my kid, and learn about as many things as I can.</p>
         </div>
 
-        <div class="bio-skills-edu" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem;">
-          <div>
-            <p style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #6b6863; margin: 0 0 0.5rem">Skills</p>
-            <div style="display: flex; flex-direction: column; gap: 0.2rem;">
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Research</p>
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Strategy</p>
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Information Architecture</p>
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">Interaction Design</p>
+        <div>
+          <div style="border-top: 1px solid #d7d2c7;">
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #6b6863;">Role</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">Sr. Product Designer</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #6b6863;">Based</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">SF → Philadelphia</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #6b6863;">Est.</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">7 yrs practice</span>
             </div>
           </div>
-          <div>
-            <p style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: #6b6863; margin: 0 0 0.5rem">Education</p>
-            <div style="display: flex; flex-direction: column; gap: 0.2rem;">
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">MHCI, Carnegie Mellon University</p>
-              <p style="font-size: 1.09375rem; line-height: 1.4; color: #14130F; margin: 0;">B.A. Molecular Cell Biology, UC Berkeley</p>
+
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; color: #6b6863; margin: 2.25rem 0 0.75rem; font-size: 0.85rem;">Experience</p>
+          <div style="border-top: 1px solid #d7d2c7;">
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #9a968f;">01</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">LinkedIn</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #9a968f;">02</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">Benchling</span>
+            </div>
+          </div>
+
+          <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6b6863; margin: 2.25rem 0 0.75rem;">Education</p>
+          <div style="border-top: 1px solid #d7d2c7;">
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #6b6863;">MHCI</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">Carnegie Mellon</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px dashed #d7d2c7; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span style="color: #6b6863;">BA</span><span style="font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;">UC Berkeley</span>
             </div>
           </div>
         </div>
+
       </div>
-    </div>
+
+      <div style="margin-top: 3.5rem; max-width: 400px;">
+        <p style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin: 0 0 0.75rem;"><span style="font-weight: normal;">CURRENT LISTENING</span></p>
+        <iframe style="border: 0; width: 100%; height: 120px; border-radius: 10px; overflow: hidden;" src="https://bandcamp.com/EmbeddedPlayer/album=1450821438/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=small/transparent=true/" seamless="seamless" title="Give U Space by K Wata"><a href="https://kwata.bandcamp.com/album/give-u-space">Give U Space by K Wata</a></iframe>
+      </div>
+
     </div>
   </section>
   </div>
@@ -293,169 +210,13 @@
 <dc-import name="Footer" hint-size="100%,100"></dc-import>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysReplayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro animation&quot;},&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;alwaysReplayIntro&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intro animation&quot;},&quot;showGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showWorkGridOverlay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;heroVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;People-first&quot;,&quot;options&quot;:[&quot;Outcome-first&quot;,&quot;Original&quot;,&quot;Complexity-first&quot;,&quot;Clarity-first&quot;,&quot;Sense-first&quot;,&quot;People-first&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero text&quot;},&quot;workTile1Shape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Landscape (3/2)&quot;,&quot;options&quot;:[&quot;Portrait (2/3)&quot;,&quot;Tall (4/5)&quot;,&quot;Square (1/1)&quot;,&quot;Classic (5/4)&quot;,&quot;Landscape (3/2)&quot;,&quot;Golden (1.618/1)&quot;,&quot;Wide (16/10)&quot;,&quot;Cinematic (16/9)&quot;,&quot;Panorama (2/1)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile2Shape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Square (1/1)&quot;,&quot;options&quot;:[&quot;Portrait (2/3)&quot;,&quot;Tall (4/5)&quot;,&quot;Square (1/1)&quot;,&quot;Classic (5/4)&quot;,&quot;Landscape (3/2)&quot;,&quot;Golden (1.618/1)&quot;,&quot;Wide (16/10)&quot;,&quot;Cinematic (16/9)&quot;,&quot;Panorama (2/1)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile3Shape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Tall (4/5)&quot;,&quot;options&quot;:[&quot;Portrait (2/3)&quot;,&quot;Tall (4/5)&quot;,&quot;Square (1/1)&quot;,&quot;Classic (5/4)&quot;,&quot;Landscape (3/2)&quot;,&quot;Golden (1.618/1)&quot;,&quot;Wide (16/10)&quot;,&quot;Cinematic (16/9)&quot;,&quot;Panorama (2/1)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile4Shape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Tall (4/5)&quot;,&quot;options&quot;:[&quot;Portrait (2/3)&quot;,&quot;Tall (4/5)&quot;,&quot;Square (1/1)&quot;,&quot;Classic (5/4)&quot;,&quot;Landscape (3/2)&quot;,&quot;Golden (1.618/1)&quot;,&quot;Wide (16/10)&quot;,&quot;Cinematic (16/9)&quot;,&quot;Panorama (2/1)&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile1HoverText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Benchling Bioanalytical&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile2HoverText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LinkedIn Recruiter Inbox&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile3HoverText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LinkedIn Quick Reply&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;},&quot;workTile4HoverText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;New Project&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Case study grid&quot;}}">
 class Component extends DCLogic {
-  // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
-  siteHeaderRef = React.createRef();
-  contactWrapRef = React.createRef();
-  lastSiteHeaderScrollY = 0;
-
-  initSiteHeader() {
-    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
-    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
-    this.handleDocClick = this.handleDocClick.bind(this);
-    document.addEventListener('mousedown', this.handleDocClick);
-    document.addEventListener('touchstart', this.handleDocClick, { passive: true });
-    this.onHeaderKeyDown = this.onHeaderKeyDown.bind(this);
-    document.addEventListener('keydown', this.onHeaderKeyDown);
-    this.measureHeaderHeight = this.measureHeaderHeight.bind(this);
-    this.measureHeaderHeight();
-    window.addEventListener('resize', this.measureHeaderHeight);
-  }
-
-  teardownSiteHeader() {
-    window.removeEventListener('scroll', this.onSiteHeaderScroll);
-    document.removeEventListener('mousedown', this.handleDocClick);
-    document.removeEventListener('touchstart', this.handleDocClick);
-    document.removeEventListener('keydown', this.onHeaderKeyDown);
-    window.removeEventListener('resize', this.measureHeaderHeight);
-  }
-
-  measureHeaderHeight() {
-    var el = this.siteHeaderRef.current;
-    if (!el) return;
-    var h = el.offsetHeight;
-    if (h && h !== this.state.siteHeaderHeightPx) this.setState({ siteHeaderHeightPx: h });
-  }
-
-  onHeaderKeyDown(e) {
-    if (e.key === 'Escape') {
-      if (this.state.contactOpen) this.setState({ contactOpen: false });
-      if (this.state.mobileContactOpen) this.setState({ mobileContactOpen: false });
-      else if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false });
-    }
-  }
-
-  toggleContact() { this.setState(function (s) { return { contactOpen: !s.contactOpen }; }); }
-  closeContact() { this.setState({ contactOpen: false }); }
-
-  handleDocClick(e) {
-    if (this.state.contactOpen) {
-      var el = this.contactWrapRef.current;
-      if (el && !el.contains(e.target)) this.setState({ contactOpen: false });
-    }
-    if (this.state.mobileNavOpen) {
-      var headerEl = this.siteHeaderRef.current;
-      if (headerEl && !headerEl.contains(e.target)) {
-        this.setState({ mobileNavOpen: false, mobileContactOpen: false });
-      }
-    }
-  }
-
-  copyEmail() {
-    var self = this;
-    var email = 'jia.eq.liu@gmail.com';
-    var flash = function () {
-      self.setState({ emailCopied: true });
-      setTimeout(function () { self.setState({ emailCopied: false }); }, 1800);
-    };
-    var fallback = function () {
-      try {
-        var ta = document.createElement('textarea');
-        ta.value = email;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.top = '-1000px';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        ta.setSelectionRange(0, email.length);
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        flash();
-      } catch (err) {}
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(flash).catch(fallback);
-    } else {
-      fallback();
-    }
-  }
-
-  toggleMobileNav() { this.setState(function (s) { return { mobileNavOpen: !s.mobileNavOpen }; }); }
-  closeMobileNav() { this.setState({ mobileNavOpen: false, mobileContactOpen: false }); }
-  toggleMobileContact() { this.setState(function (s) { return { mobileContactOpen: !s.mobileContactOpen }; }); }
-
-  scrollToSectionIfPresent(e) {
-    var id = e.currentTarget.getAttribute('data-section-id');
-    var el = document.getElementById(id);
-    if (el) {
-      e.preventDefault();
-      var top = el.getBoundingClientRect().top + window.scrollY - 88;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-      return true;
-    }
-    return false;
-  }
-
-  handleNavLinkClick(e) { this.scrollToSectionIfPresent(e); }
-  handleMobileNavLinkClick(e) { this.scrollToSectionIfPresent(e); this.closeMobileNav(); }
-
-  onSiteHeaderScroll() {
-    var y = window.scrollY || window.pageYOffset;
-    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 76;
-    var hidden = this.state.siteHeaderHidden;
-    if (y <= headerH) hidden = false;
-    else if (y > this.lastSiteHeaderScrollY) hidden = true;
-    else if (y < this.lastSiteHeaderScrollY) hidden = false;
-    if (hidden !== this.state.siteHeaderHidden || headerH !== this.state.siteHeaderHeightPx) {
-      this.setState({ siteHeaderHidden: hidden, siteHeaderHeightPx: headerH });
-    }
-    this.lastSiteHeaderScrollY = y;
-  }
-
-  headerRenderVals() {
-    return {
-      siteHeaderRef: this.siteHeaderRef,
-      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
-      headerSpacerHeight: this.state.siteHeaderHeightPx + 'px',
-      mobileNavOpen: this.state.mobileNavOpen,
-      mobileNavClosed: !this.state.mobileNavOpen,
-      mobileNavMaxHeight: this.state.mobileNavOpen ? (this.state.mobileContactOpen ? '480px' : '220px') : '0px',
-      toggleMobileNav: this.toggleMobileNav.bind(this),
-      closeMobileNav: this.closeMobileNav.bind(this),
-      toggleMobileContact: this.toggleMobileContact.bind(this),
-      mobileContactOpen: this.state.mobileContactOpen,
-      mobileContactMaxHeight: this.state.mobileContactOpen ? '160px' : '0px',
-      mobileContactChevronTransform: this.state.mobileContactOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      handleNavLinkClick: this.handleNavLinkClick.bind(this),
-      handleMobileNavLinkClick: this.handleMobileNavLinkClick.bind(this),
-      contactWrapRef: this.contactWrapRef,
-      contactShapeWidth: this.state.contactOpen ? '280px' : '128px',
-      contactShapeHeight: this.state.contactOpen ? '216px' : '42px',
-      contactShapeRadius: this.state.contactOpen ? '20px' : '999px',
-      contactShapeShadow: this.state.contactOpen ? '0 24px 48px rgba(20,19,15,0.28)' : 'none',
-      contactButtonContentOpacity: this.state.contactOpen ? 0 : 1,
-      contactButtonContentDelay: this.state.contactOpen ? '0s' : '0.25s',
-      contactButtonPointerEvents: this.state.contactOpen ? 'none' : 'auto',
-      contactCardContentOpacity: this.state.contactOpen ? 1 : 0,
-      contactCardContentDelay: this.state.contactOpen ? '0.2s' : '0s',
-      contactCardPointerEvents: this.state.contactOpen ? 'auto' : 'none',
-      toggleContact: this.toggleContact.bind(this),
-      closeContact: this.closeContact.bind(this),
-      copyEmail: this.copyEmail.bind(this),
-      emailCopied: this.state.emailCopied,
-      notEmailCopied: !this.state.emailCopied,
-    };
-  }
-  // --- end SiteHeader ---
-
-  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false };
+  state = {};
 
   heroCanvasRef = React.createRef();
 
   componentDidMount() {
-    this.initSiteHeader();
     var introSeen = sessionStorage.getItem('portfolio-intro-seen');
     var alwaysReplay = this.props.alwaysReplayIntro;
     if (!alwaysReplay && (window.location.hash === '#work' || introSeen)) {
@@ -467,7 +228,6 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
-    this.teardownSiteHeader();
     if (this.stopDots) this.stopDots();
     window.removeEventListener('resize', this.onResize);
     if (this.io) this.io.disconnect();
@@ -587,25 +347,110 @@ class Component extends DCLogic {
 
   renderVals() {
     var self = this;
+
+    var shapeRatios = {
+      'Portrait (2/3)': '2/3',
+      'Tall (4/5)': '4/5',
+      'Square (1/1)': '1/1',
+      'Classic (5/4)': '5/4',
+      'Landscape (3/2)': '3/2',
+      'Golden (1.618/1)': '1.618/1',
+      'Wide (16/10)': '16/10',
+      'Cinematic (16/9)': '16/9',
+      'Panorama (2/1)': '2/1'
+    };
+
+    function ratioNum(r) { var parts = r.split('/'); return parseFloat(parts[0]) / parseFloat(parts[1]); }
+    function blobStyle(pos, color, anim, dur) {
+      return 'position: absolute; width: 70%; height: 70%; ' + pos + ' border-radius: 50%; background: ' + color + '; filter: blur(40px); animation: ' + anim + ' ' + dur + 's ease-in-out infinite;';
+    }
+    // background-image rather than <img src>: an unresolved style hole renders nothing,
+    // whereas an unresolved src fires a real request for the literal "{{ … }}" string.
+    function imgStyle(src) {
+      return 'position: relative; z-index: 1; width: 100%; height: 100%; background-image: url("' + src + '"); background-size: contain; background-position: center; background-repeat: no-repeat; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);';
+    }
+    var noNav = function (e) { e.preventDefault(); };
+    var ratio1 = shapeRatios[this.props.workTile1Shape] || '3/2';
+    var ratio2 = shapeRatios[this.props.workTile2Shape] || '1/1';
+    var ratio3 = shapeRatios[this.props.workTile3Shape] || '4/5';
+    var ratio4 = shapeRatios[this.props.workTile4Shape] || '4/5';
+    var tilesData = [
+      { href: 'benchling-bioanalytical.dc.html', ratio: ratio1, padding: '40px', isPlaceholder: false, isImage: true,
+        imgStyle: imgStyle('assets/img/benchling-bioa-chrome-cropped.png'), imgAlt: 'Benchling Bioanalytical plate design interface',
+        hoverText: this.props.workTile1HoverText, badgeText: 'Tile 1 · ' + ratio1,
+        blob1Style: blobStyle('left: 5%; top: 0%;', 'oklch(0.83 0.08 240)', 'blobFloatA', 16),
+        blob2Style: blobStyle('right: 0%; bottom: 0%;', 'oklch(0.78 0.1 240)', 'blobFloatB', 20) },
+      { href: 'linkedin-recruiter-inbox.dc.html', ratio: ratio2, padding: '40px', isPlaceholder: false, isImage: true,
+        imgStyle: imgStyle('assets/img/linkedin-recruiter-inbox.png'), imgAlt: 'LinkedIn recruiter messaging inbox',
+        hoverText: this.props.workTile2HoverText, badgeText: 'Tile 2 · ' + ratio2,
+        blob1Style: blobStyle('left: 5%; top: 0%;', 'oklch(0.9 0.04 30)', 'blobFloatA', 17),
+        blob2Style: blobStyle('right: 0%; bottom: 0%;', 'oklch(0.82 0.07 30)', 'blobFloatB', 21) },
+      { href: 'linkedin-quick-reply.dc.html', ratio: ratio3, padding: '40px', isPlaceholder: false, isImage: true,
+        imgStyle: imgStyle('assets/img/linkedin-quick-reply.png'), imgAlt: 'LinkedIn smart reply for job candidates',
+        hoverText: this.props.workTile3HoverText, badgeText: 'Tile 3 · ' + ratio3,
+        blob1Style: blobStyle('left: 0%; bottom: 0%;', 'oklch(0.9 0.04 150)', 'blobFloatB', 19),
+        blob2Style: blobStyle('right: 5%; top: 0%;', 'oklch(0.82 0.06 150)', 'blobFloatA', 23) },
+      { href: '', onClick: noNav, ratio: ratio4, padding: '0', isPlaceholder: true, isImage: false,
+        imgStyle: '', imgAlt: '',
+        hoverText: this.props.workTile4HoverText, badgeText: 'Tile 4 · ' + ratio4,
+        blob1Style: blobStyle('left: 5%; top: 0%;', 'oklch(0.86 0.06 300)', 'blobFloatA', 18),
+        blob2Style: blobStyle('right: 0%; bottom: 0%;', 'oklch(0.8 0.08 300)', 'blobFloatB', 22) }
+    ];
+    var colTotals = [0, 0];
+    var workColumns = [[], []];
+    // Alternate strictly so tiles keep reading order (1,2 across the top; 3,4 below);
+    // the last-tile stretch below absorbs any height difference.
+    tilesData.forEach(function (t, i) {
+      t.units = 1 / ratioNum(t.ratio);
+      var col = i % 2;
+      workColumns[col].push(t);
+      colTotals[col] += t.units;
+    });
+    // Stretch the last tile of the shorter column so both columns end flush.
+    var shortCol = colTotals[0] < colTotals[1] ? 0 : 1;
+    var deficit = Math.abs(colTotals[0] - colTotals[1]);
+    var lastTile = workColumns[shortCol][workColumns[shortCol].length - 1];
+    if (lastTile && deficit > 0.001) {
+      lastTile.ratio = String(1 / (lastTile.units + deficit));
+    }
+
     var variants = {
-      'A. Level and proof': [
+      'Outcome-first': [
+        "I design for how people actually think and work.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "how people actually think and work."
+      ],
+      'Original': [
         "I'm a product designer who crafts tools that quietly make your day easier.",
-        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia."
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "quietly make your day easier."
       ],
-      'B. Leads with the problem': [
-        "I design for the messy middle of enterprise software, where the workflow spans six teams and nobody owns the whole thing.",
-        "Most recently at Benchling, building the platform behind clinical drug testing. Before that, messaging at LinkedIn. Based near Philadelphia."
+      'Complexity-first': [
+        "I help teams build products that make complicated work feel simple.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "feel simple."
       ],
-      'C. Keeps the voice': [
-        "I'm a product designer who likes the unglamorous problems: the workflow with twelve handoffs, the tool everyone works around.",
-        "Four years of them at Benchling, and messaging systems at LinkedIn before that. Based near Philadelphia."
+      'Clarity-first': [
+        "I help people find clarity in a complex world.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "in a complex world."
+      ],
+      'Sense-first': [
+        "I help people make sense of a complicated world.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "a complicated world."
+      ],
+      'People-first': [
+        "The best solutions come from understanding people first.",
+        "Previously designed enterprise apps at Benchling and LinkedIn. Based in Philadelphia.",
+        "understanding people first."
       ]
     };
-    var picked = variants[this.props.heroVariant] || variants['A. Level and proof'];
+    var picked = variants[this.props.heroVariant] || variants['Outcome-first'];
     var s2 = (this.props.heroLine2 || picked[1]).split(' ');
     var base = 1.6, step = 0.045;
 
-    var emphasis = this.props.heroEmphasis ?? "quietly make your day easier.";
+    var emphasis = this.props.heroEmphasis ?? picked[2];
     var line1Text = this.props.heroLine1 || picked[0];
     var cut = emphasis ? line1Text.indexOf(emphasis) : -1;
     var leadText = cut > 0 ? line1Text.slice(0, cut).trim() : line1Text;
@@ -616,23 +461,20 @@ class Component extends DCLogic {
     var heroWordsEmph = emphWords.map(function (word, i) { return { word: word, delay: base + (leadWords.length + i) * step }; });
     var heroWords2 = s2.map(function (word, i) { return { word: word, delay: base + (leadWords.length + emphWords.length + i) * step }; });
     return {
-      ...this.headerRenderVals(),
       heroWordsLead: heroWordsLead,
       heroWordsEmph: heroWordsEmph,
       heroWords2: heroWords2,
       heroCanvasRef: this.heroCanvasRef,
-      card1Title: 'Benchling',
-      card1Description: 'A platform for complex, automated testing during drug development',
-      card3Title: 'LinkedIn',
-      card3Description: 'Redesigning Recruiter Inbox',
-      card4Title: 'LinkedIn',
-      card4Description: 'Quicky reply for job candidates',
       card5Title: 'NYC Senior Service Finder',
       card5Description: 'Helping seniors and caregivers find nearby city services.',
       card6Title: 'Dashboard for CleanRobotics',
       card6Description: 'Monitoring waste-sorting robots on the shop floor.',
       card7Title: 'Mobile App for Financial Literacy',
       card7Description: 'Teaching financial literacy fundamentals to PNC customers.',
+      workColLeft: workColumns[0],
+      workColRight: workColumns[1],
+      workGridOutline: this.props.showWorkGridOverlay ? '2px dashed #0688f0' : 'none',
+      workGridLabelDisplay: this.props.showWorkGridOverlay ? 'inline-flex' : 'none',
       gridOverlayDisplay: this.props.showGridOverlay ? 'block' : 'none',
       gridOverlayCols: new Array(12).fill(0),
     };

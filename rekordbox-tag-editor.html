@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources = {};</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    .nav-desktop, .contact-desktop { display: flex; }
+    .nav-mobile-toggle { display: none; }
+    @media (max-width: 700px) {
+      .cs-approach-table, .cs-approach-table thead, .cs-approach-table tbody, .cs-approach-table tr, .cs-approach-table th, .cs-approach-table td { display: block !important; }
+      .cs-approach-table thead { display: none !important; }
+      .cs-approach-table tr { padding: 2rem 0 !important; border-bottom: 1px solid #e4e0d8 !important; }
+      .cs-approach-table tr:last-child { border-bottom: none !important; }
+      .cs-approach-table td { border-bottom: none !important; padding: 1.1rem 0 0 !important; white-space: normal !important; }
+      .cs-approach-table td:first-child { padding-top: 0 !important; font-size: 1.02rem !important; }
+      .cs-approach-table td[data-label]::before { content: attr(data-label); display: block; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; margin-bottom: 0.3rem; }
+    }
+    @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
+    .header-spacer-default { height: 76px; }
+  </style>
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPMori-Semibold.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Regular.otf" crossorigin="anonymous">
+  <link rel="preload" as="font" type="font/otf" href="assets/fonts/PPNeueMontreal-Semibold.otf" crossorigin="anonymous">
+  <style>
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    a { color: #0688f0; }
+    a:hover { color: #0576d1; }
+    strong, b { font-weight: 600; }
+    @keyframes csFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .cs-intro-1 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .cs-intro-2 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both; }
+    .cs-intro-3 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .cs-intro-4 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
+    @media (prefers-reduced-motion: reduce) { .cs-intro-1, .cs-intro-2, .cs-intro-3, .cs-intro-4 { animation: none !important; } }
+    @media (max-width: 820px) { .cs-col { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; } }
+    @media (max-width: 1100px) {
+      .cs-title-grid, .cs-shell { display: block !important; }
+      .cs-title-block { padding-top: 2.5rem !important; }
+      .cs-dl { margin-bottom: 2.5rem !important; grid-template-columns: 1fr !important; }
+      .cs-divider { display: none !important; }
+      .cs-overview-wrap { padding-bottom: 1.5rem !important; }
+    }
+  </style>
+  <script src="./image-slot.js"></script>
+</helmet>
+
+<div style="position: relative;">
+<header ref="{{ siteHeaderRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251,250,249,0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid #e4e0d8; margin-bottom: -1px; transform: {{ siteHeaderTransform }}; transition: transform 0.3s ease;">
+  <div class="site-header-row" style="max-width: 1280px; margin: 0 auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+    <a href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: #14130f; text-decoration: none;">
+      <img src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
+      Jia Liu
+    </a>
+    <div style="display: flex; align-items: center; gap: 1.75rem;">
+      <nav class="nav-desktop" style="display: flex; gap: 1.5rem;">
+        <a href="index.html#work" onClick="{{ handleNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Work</a>
+        <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Resume</a>
+        <a href="index.html#about" onClick="{{ handleNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; opacity: 0.75; text-decoration: none;" style-hover="opacity: 1;">Bio</a>
+      </nav>
+      <button class="nav-mobile-toggle" onClick="{{ toggleMobileNav }}" aria-label="Menu" aria-expanded="{{ mobileNavOpen }}" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border: none; cursor: pointer; color: #14130f; padding: 0; flex-shrink: 0;">
+        <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </sc-if>
+        <sc-if value="{{ mobileNavClosed }}" hint-placeholder-val="{{ true }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </sc-if>
+      </button>
+      <div ref="{{ contactWrapRef }}" class="contact-desktop-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
+        <div style="position: absolute; top: 0; right: 0; background: #14130f; overflow: hidden; width: {{ contactShapeWidth }}; height: {{ contactShapeHeight }}; border-radius: {{ contactShapeRadius }}; box-shadow: {{ contactShapeShadow }}; transition: width 0.45s cubic-bezier(0.16,1,0.3,1), height 0.45s cubic-bezier(0.16,1,0.3,1), border-radius 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; z-index: 20;">
+          <button class="contact-desktop" onClick="{{ toggleContact }}" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border: none; color: #ffffff; font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: {{ contactButtonContentOpacity }}; pointer-events: {{ contactButtonPointerEvents }}; transition: opacity 0.2s ease {{ contactButtonContentDelay }};">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+            Contact
+          </button>
+          <div style="position: absolute; inset: 0; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: {{ contactCardContentOpacity }}; pointer-events: {{ contactCardPointerEvents }}; transition: opacity 0.25s ease {{ contactCardContentDelay }};">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
+              <span style="font-size: 0.95rem; color: #9a968f;">Get in touch</span>
+              <button onClick="{{ closeContact }}" aria-label="Close" style="background: none; border: none; color: #9a968f; cursor: pointer; padding: 0; display: flex;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">Email</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">jia.eq.liu@gmail.com</div>
+              </div>
+              <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: rgba(255,255,255,0.1); border: none; border-radius: 8px; width: 34px; height: 34px; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+                </sc-if>
+                <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                </sc-if>
+              </button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.82rem; color: #9a968f; margin-bottom: 0.2em;">LinkedIn</div>
+                <div style="font-size: 1rem; font-weight: 400; color: #ffffff;">@jia-eq-liu</div>
+              </div>
+              <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255,255,255,0.1); border-radius: 8px; width: 34px; height: 34px; color: #ffffff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: {{ mobileNavMaxHeight }}; border-top: 1px solid #e4e0d8; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+   <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
+    <nav style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
+      <a href="index.html#work" onClick="{{ handleMobileNavLinkClick }}" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Work</a>
+      <a href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMobileNav }}" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Resume</a>
+      <a href="index.html#about" onClick="{{ handleMobileNavLinkClick }}" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: #14130f; text-decoration: none; padding: 0.6rem 0;">Bio</a>
+      <button onClick="{{ toggleMobileContact }}" aria-expanded="{{ mobileContactOpen }}" style="background: none; border: none; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: #14130f; padding: 0.6rem 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+        Contact
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; transform: {{ mobileContactChevronTransform }}; transition: transform 0.25s ease;"><path d="M6 9l6 6 6-6"></path></svg>
+      </button>
+      <div style="overflow: hidden; max-height: {{ mobileContactMaxHeight }}; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div style="padding: 0.25rem 0 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">Email</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">jia.eq.liu@gmail.com</div>
+            </div>
+            <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background: #f2f1ec; border: none; border-radius: 8px; width: 34px; height: 34px; color: #14130f; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M20 6L9 17l-5-5"></path></svg>
+              </sc-if>
+              <sc-if value="{{ notEmailCopied }}" hint-placeholder-val="{{ true }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+              </sc-if>
+            </button>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.78rem; color: #6b6863; margin-bottom: 0.2em;">LinkedIn</div>
+              <div style="font-size: 0.95rem; font-weight: 500; color: #14130f;">@jia-eq-liu</div>
+            </div>
+            <a href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: #f2f1ec; border-radius: 8px; width: 34px; height: 34px; color: #14130f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   </div>
+  </div>
+</header>
+<div class="header-spacer-default" style="height: {{ headerSpacerHeight }}; flex-shrink: 0;"></div>
+
+<div style="position: relative; max-width: 1280px; margin: 0 auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+
+  <div class="cs-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
+    <div class="cs-title-block cs-intro-1" style="grid-column: 3 / 11; padding: 4rem 0 1.5rem;">
+      <div class="cs-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+        <h1 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; line-height: 1.25; margin: 0 0 0.5rem;">{{ projectTitle }}</h1>
+        <h2 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 400; line-height: 1.3; color: #6b6863; margin: 0;">{{ projectSubtitle }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start;">
+
+    <div class="cs-overview-wrap" style="grid-column: 3 / 11; grid-row: 1; padding-bottom: 3rem;">
+      <section id="overview" class="cs-col cs-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+        <p style="margin: 0 0 1rem;">This case study covers a personal project to build a mobile app to help DJs tag and organize music, tackling a notoriously tedious part of the job.</p>
+        
+
+        <dl class="cs-dl cs-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0 0;">
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Role</dt>
+            <dd style="margin: 0;">Solo concept, 2026. Designed and vibe-coded the prototype end to end.</dd>
+          </div>
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Status</dt>
+            <dd style="margin: 0;">A working mobile prototype of the tagging flow. Speculative, not shipped, and not yet tested with other DJs.</dd>
+          </div>
+          <div>
+            <dt style="font-size: 0.9rem; font-weight: 600; color: #6b6863; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Skills</dt>
+            <dd style="margin: 0; display: flex; flex-wrap: wrap; gap: 0.5em;">
+              <sc-for list="{{ skillsChips }}" as="chip" hint-placeholder-count="4">
+                <dc-import name="Chip" label="{{ chip }}" hint-size="auto,32px"></dc-import>
+              </sc-for>
+            </dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <div class="cs-divider" style="grid-column: 3 / 11; grid-row: 1; align-self: end;">
+      <div style="max-width: 760px; margin: 0 auto; height: 0; border-bottom: 1px solid #e4e0d8;"></div>
+    </div>
+
+    <dc-import name="SectionNav" hint-size="1px,1px"></dc-import>
+
+    <div style="grid-column: 3 / 11; grid-row: 2;">
+
+      <section id="background" class="cs-col cs-intro-4" style="max-width: 760px; margin-left: auto; margin-right: auto; margin-top: 1rem; margin-bottom: 4rem;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Background</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">An industry stuck with one tool</h3>
+        <p style="margin: 0 0 1rem;">Nearly every CDJ in every club and festival booth is a Pioneer CDJ. That hardware lock-in is what makes Rekordbox the standard, not the software itself. DJs use it because it's what the hardware speaks, not because they'd choose it on its merits.</p>
+        <p style="margin: 0 0 1rem;">Rekordbox is also widely known for being buggy, and Pioneer's parent company keeps prioritizing new physical hardware releases over fixing the app. That means real, long-standing pain points in the software just sit there, with no real pressure on the company to fix them.</p>
+
+        <div style="margin: 1.5rem 0;">
+          <image-slot id="rekordbox-tagging-context" shape="rounded" radius="10" placeholder="Drop a screenshot of Rekordbox's tagging UI"></image-slot>
+        </div>
+      </section>
+
+      <section id="problem" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Problem</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Tagging is crucial, but tedious</h3>
+        <p style="margin: 0 0 2rem;">Tags aren't just genre labels. For most DJs they encode the vibe of a track, where it might sit in a set, and overlapping subgenres, all of it personal and subjective to how that DJ hears and mixes music. That's exactly why an AI can't just auto-tag a library: it's not a lookup problem, it's a matter of taste.</p>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/eye.svg" alt="" style="width: 20px; height: 20px;">An interaction that hurts to use</h4>
+          <p style="margin: 0;">Rekordbox's tagging UI is a dense grid of dropdowns and checkboxes, track by track. It's slow enough that DJs online describe genuine repetitive strain injury from sitting through it, and there's no fix coming soon.</p>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img src="assets/img/plugs.svg" alt="" style="width: 20px; height: 20px;">No way to do it away from a desk</h4>
+          <p style="margin: 0;">Rekordbox only exists as a desktop app, so tagging only ever happens sitting at a computer. There's no way to chip away at a backlog on a train, backstage, or anywhere else dead time shows up.</p>
+        </div>
+
+        <p style="margin: 2rem 0 0;">The result is a library that keeps growing faster than it gets organized, because the only tool for organizing it demands a desk and a lot of patience.</p>
+      </section>
+
+      <section id="approach" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Approach</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">A mobile companion, not a rebuilt Rekordbox</h3>
+        <p style="margin: 0 0 1rem;">I scoped this narrowly on purpose: a phone-first companion focused only on tagging and library metadata, syncing against your existing Rekordbox library rather than trying to replace it.</p>
+
+        <div style="margin-top: 2.5rem;">
+          <image-slot id="rekordbox-sync-flow" shape="rounded" radius="10" placeholder="Drop a diagram of the library sync flow: Rekordbox library, mobile tag editor, sync back"></image-slot>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Weighing desktop, mobile, and both</h3>
+          <p style="margin: 0 0 1.5rem;">Before committing to a mobile companion, I weighed it against a desktop-only fix and against building both. Here's how the three options compared.</p>
+          <div style="overflow-x: auto;">
+            <table class="cs-approach-table" style="width: 100%; border-collapse: collapse; font-size: 1.09375rem; line-height: 1.6;">
+              <thead>
+                <tr>
+                  <th style="text-align: left; font-weight: 600; padding: 0 1rem 0.75rem 0; border-bottom: 1px solid #e4e0d8;"></th>
+                  <th style="text-align: left; font-weight: 600; padding: 0 1rem 0.75rem; border-bottom: 1px solid #e4e0d8;">How it'd work</th>
+                  <th style="text-align: left; font-weight: 600; padding: 0 1rem 0.75rem; border-bottom: 1px solid #e4e0d8;">Tagging efficiency</th>
+                  <th style="text-align: left; font-weight: 600; padding: 0 1rem 0.75rem; border-bottom: 1px solid #e4e0d8;">Ease of setup</th>
+                  <th style="text-align: left; font-weight: 600; padding: 0 0 0.75rem; border-bottom: 1px solid #e4e0d8;">Build effort</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 600; padding: 1.25rem 1rem 1.25rem 0; border-bottom: 1px solid #e4e0d8; vertical-align: top; white-space: nowrap;">Desktop only</td>
+                  <td data-label="How it'd work" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">A local app running on the same machine as Rekordbox, reading and writing directly through pyrekordbox and python-vlc.</td>
+                  <td data-label="Tagging efficiency" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">Fastest per track by a wide margin, but total volume capped by how often you sit down for a session.</td>
+                  <td data-label="Ease of setup" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">Easiest. One native app, nothing networked.</td>
+                  <td data-label="Build effort" style="padding: 1.25rem 0; border-bottom: 1px solid #e4e0d8; vertical-align: top;">Moderate. Needs the pyrekordbox integration built out (reading and writing tags reliably against Rekordbox's own, partly encrypted format) plus a real keyboard-driven bulk-tagging UI, multi-select, playback controls, shortcut handling. No networking or security work required, which keeps it lighter than the other two, but a polished native UI from scratch is still genuine, nontrivial work, not a small one.</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; padding: 1.25rem 1rem 1.25rem 0; border-bottom: 1px solid #e4e0d8; vertical-align: top; white-space: nowrap;">Mobile only</td>
+                  <td data-label="How it'd work" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">A backend service plus a lightweight web app, tagging via touch and swipe.</td>
+                  <td data-label="Tagging efficiency" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">Slower per track, but more frequent sessions can push total volume higher. Artist suggestions narrow some of the per-track gap.</td>
+                  <td data-label="Ease of setup" style="padding: 1.25rem 1rem; border-bottom: 1px solid #e4e0d8; vertical-align: top;">A packaged background service, no Docker needed, plus Tailscale on the phone.</td>
+                  <td data-label="Build effort" style="padding: 1.25rem 0; border-bottom: 1px solid #e4e0d8; vertical-align: top;">Moderate. Streaming and tag-writing were both estimated at close to an evening's work once scoped. The real remaining effort is the tagging interaction itself, gesture conflicts and the multi-directional design are still open, though the riskiest unknowns, background audio surviving a lock screen, the interaction feeling responsive, are already tested rather than assumed.</td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; padding: 1.25rem 1rem 0 0; vertical-align: top; white-space: nowrap;">Desktop + Mobile</td>
+                  <td data-label="How it'd work" style="padding: 1.25rem 1rem 0; vertical-align: top;">A shared backend, plus a native bulk-tagging editor at the desk and a touch-driven web app on the phone, all bundled into one installer.</td>
+                  <td data-label="Tagging efficiency" style="padding: 1.25rem 1rem 0; vertical-align: top;">Highest total throughput, additive rather than a compromise between the other two.</td>
+                  <td data-label="Ease of setup" style="padding: 1.25rem 1rem 0; vertical-align: top;">About the same as mobile only, one installer covers both.</td>
+                  <td data-label="Build effort" style="padding: 1.25rem 0 0; vertical-align: top;">Highest, and genuinely so now, not just a small add-on. This is the full scope of both builds combined, the pyrekordbox integration and native editor from the desktop column, plus the backend and web app from the mobile column, plus the packaging work to bundle it all into a single native installer.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="solution" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Solution</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 2.5rem;">What the concept looks like</h3>
+
+        <div style="padding-top: 1rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">A tag editor built for your thumb</h3>
+          <p style="margin: 0 0 1.5rem;">Instead of Rekordbox's dense dropdown grid, tagging happens through scrollable rows of chips sized for one hand: vibe, set placement, and subgenre, tap to assign, swipe to move to the next track.</p>
+          <div style="margin: 0;">
+            <image-slot id="rekordbox-tag-editor-screen" shape="rounded" radius="10" placeholder="Drop a screenshot of the mobile tag editor screen"></image-slot>
+          </div>
+        </div>
+
+        <div style="padding-top: 4rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Tag anywhere, sync when you're back</h3>
+          <p style="margin: 0 0 1.5rem;">Tagging works fully offline, so a commute or the dead time before a set becomes time spent on the backlog instead of lost. Everything queues up and syncs back into the Rekordbox library the next time you're at your laptop.</p>
+          <div style="margin: 0;">
+            <image-slot id="rekordbox-offline-sync-screen" shape="rounded" radius="10" placeholder="Drop a screenshot of the offline tagging queue and sync screen"></image-slot>
+          </div>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Mobile web had its own tax</h3>
+          <p style="margin: 0 0 1rem;">Building this as a mobile web app instead of native surfaced problems the interaction design never anticipated: layouts that wouldn't reliably respect the viewport, chip rows that jumped or reflowed mid-gesture, transitions that stayed janky under real touch input, and autosuggested tags that lagged behind typing.</p>
+          <p style="margin: 0;">None of that was a UX flaw to redesign around. It's the cost of building for reach on the browser instead of native performance, and it ate a real share of the build time.</p>
+        </div>
+
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0 0 0.5rem;">Two tools that don't talk to each other</h3>
+          <p style="margin: 0 0 1rem;">The workflow itself split across two disconnected tools: prompting the live build and testing real interactions in Claude Code, then switching to Claude Design to sketch a new interaction quickly and dropping the result back into Claude Code as a screenshot with a prompt describing what to build.</p>
+          <p style="margin: 0;">That back-and-forth worked, but it was manual every time. The two tools not sharing context directly was the actual friction, more than either one individually.</p>
+        </div>
+      </section>
+
+      <section id="outcomes" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Outcomes</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">A working prototype, not a launch</h3>
+        <p style="margin: 0 0 1rem;">This exists today as a working mobile prototype, built to pressure-test whether the tagging interaction itself could actually be faster on a phone. It hasn't shipped, and it hasn't been tested with other DJs yet.</p>
+        <p style="margin: 0;">The open question that matters most is syncing cleanly back into Rekordbox's own library format without corrupting anyone's crates. That's the next thing to solve before this could go in front of anyone else.</p>
+      </section>
+
+      <section id="reflections" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid #e4e0d8; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6863; margin-bottom: 0.5rem;">Reflections</div>
+        <h3 style="font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0 0 0.5rem;">Designing around a platform that won't fix itself</h3>
+        <p style="margin: 0 0 1rem;">This wasn't just a UX problem. Rekordbox's owner has no real incentive to fix tagging when its hardware sells regardless, so any real fix has to work around the platform rather than through it. That framing shaped the whole scope: a companion, not a pitch to replace anything.</p>
+        <p style="margin: 0 0 1rem;">Building a working prototype instead of static screens forced real interaction decisions much earlier than a mockup would have. Chip sizing, gesture direction, and how offline queuing should feel all got settled by actually using it, not by describing it.</p>
+        <p style="margin: 0;">The honest next step is putting this in front of other DJs who've felt this exact pain. Until then, it's a strong hunch backed by a prototype, not a validated solution.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <dc-import name="NextCaseStudy" eyebrow="Benchling" title="A platform for complex, automated testing during drug development" href="benchling-bioanalytical.html" image="assets/img/benchling-bioa-chrome-cropped.png" imageAlt="Benchling Bioanalytical plate design interface" color1="oklch(0.9 0.05 220)" color2="oklch(0.82 0.08 220)" hint-size="100%,180px"></dc-import>
+
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,100"></dc-import>
+
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;projectTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rekordbox Mobile Tag Editor&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;projectSubtitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A concept for tagging your library from your phone, not hunched over a desktop grid&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;skillsChips&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mobile Design, Concept Exploration, Interaction Design, AI-Assisted Prototyping&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  // --- SiteHeader (inlined from SiteHeader.dc.html — keep in sync) ---
+  siteHeaderRef = React.createRef();
+  contactWrapRef = React.createRef();
+  lastSiteHeaderScrollY = 0;
+
+  initSiteHeader() {
+    this.onSiteHeaderScroll = this.onSiteHeaderScroll.bind(this);
+    window.addEventListener('scroll', this.onSiteHeaderScroll, { passive: true });
+    this.handleDocClick = this.handleDocClick.bind(this);
+    document.addEventListener('mousedown', this.handleDocClick);
+    document.addEventListener('touchstart', this.handleDocClick, { passive: true });
+    this.onHeaderKeyDown = this.onHeaderKeyDown.bind(this);
+    document.addEventListener('keydown', this.onHeaderKeyDown);
+    this.measureHeaderHeight = this.measureHeaderHeight.bind(this);
+    this.measureHeaderHeight();
+    window.addEventListener('resize', this.measureHeaderHeight);
+  }
+
+  teardownSiteHeader() {
+    window.removeEventListener('scroll', this.onSiteHeaderScroll);
+    document.removeEventListener('mousedown', this.handleDocClick);
+    document.removeEventListener('touchstart', this.handleDocClick);
+    document.removeEventListener('keydown', this.onHeaderKeyDown);
+    window.removeEventListener('resize', this.measureHeaderHeight);
+  }
+
+  measureHeaderHeight() {
+    var el = this.siteHeaderRef.current;
+    if (!el) return;
+    var h = el.offsetHeight;
+    if (h && h !== this.state.siteHeaderHeightPx) this.setState({ siteHeaderHeightPx: h });
+  }
+
+  onHeaderKeyDown(e) {
+    if (e.key === 'Escape') {
+      if (this.state.contactOpen) this.setState({ contactOpen: false });
+      if (this.state.mobileContactOpen) this.setState({ mobileContactOpen: false });
+      else if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false });
+    }
+  }
+
+  toggleContact() { this.setState(function (s) { return { contactOpen: !s.contactOpen }; }); }
+  closeContact() { this.setState({ contactOpen: false }); }
+
+  handleDocClick(e) {
+    if (this.state.contactOpen) {
+      var el = this.contactWrapRef.current;
+      if (el && !el.contains(e.target)) this.setState({ contactOpen: false });
+    }
+    if (this.state.mobileNavOpen) {
+      var headerEl = this.siteHeaderRef.current;
+      if (headerEl && !headerEl.contains(e.target)) {
+        this.setState({ mobileNavOpen: false, mobileContactOpen: false });
+      }
+    }
+  }
+
+  copyEmail() {
+    var self = this;
+    var email = 'jia.eq.liu@gmail.com';
+    var flash = function () {
+      self.setState({ emailCopied: true });
+      setTimeout(function () { self.setState({ emailCopied: false }); }, 1800);
+    };
+    var fallback = function () {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, email.length);
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        flash();
+      } catch (err) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(flash).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  toggleMobileNav() { this.setState(function (s) { return { mobileNavOpen: !s.mobileNavOpen }; }); }
+  closeMobileNav() { this.setState({ mobileNavOpen: false, mobileContactOpen: false }); }
+  toggleMobileContact() { this.setState(function (s) { return { mobileContactOpen: !s.mobileContactOpen }; }); }
+
+  scrollToSectionIfPresent(e) {
+    var id = e.currentTarget.getAttribute('data-section-id');
+    var el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      return true;
+    }
+    return false;
+  }
+
+  handleNavLinkClick(e) { this.scrollToSectionIfPresent(e); }
+  handleMobileNavLinkClick(e) { this.scrollToSectionIfPresent(e); this.closeMobileNav(); }
+
+  onSiteHeaderScroll() {
+    var y = window.scrollY || window.pageYOffset;
+    var headerH = this.siteHeaderRef.current ? this.siteHeaderRef.current.offsetHeight : 76;
+    var hidden = this.state.siteHeaderHidden;
+    if (y <= headerH) hidden = false;
+    else if (y > this.lastSiteHeaderScrollY) hidden = true;
+    else if (y < this.lastSiteHeaderScrollY) hidden = false;
+    if (hidden !== this.state.siteHeaderHidden || headerH !== this.state.siteHeaderHeightPx) {
+      this.setState({ siteHeaderHidden: hidden, siteHeaderHeightPx: headerH });
+    }
+    this.lastSiteHeaderScrollY = y;
+  }
+
+  headerRenderVals() {
+    return {
+      siteHeaderRef: this.siteHeaderRef,
+      siteHeaderTransform: this.state.siteHeaderHidden ? 'translateY(-100%)' : 'translateY(0)',
+      headerSpacerHeight: this.state.siteHeaderHeightPx + 'px',
+      mobileNavOpen: this.state.mobileNavOpen,
+      mobileNavClosed: !this.state.mobileNavOpen,
+      mobileNavMaxHeight: this.state.mobileNavOpen ? (this.state.mobileContactOpen ? '480px' : '220px') : '0px',
+      toggleMobileNav: this.toggleMobileNav.bind(this),
+      closeMobileNav: this.closeMobileNav.bind(this),
+      toggleMobileContact: this.toggleMobileContact.bind(this),
+      mobileContactOpen: this.state.mobileContactOpen,
+      mobileContactMaxHeight: this.state.mobileContactOpen ? '160px' : '0px',
+      mobileContactChevronTransform: this.state.mobileContactOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      handleNavLinkClick: this.handleNavLinkClick.bind(this),
+      handleMobileNavLinkClick: this.handleMobileNavLinkClick.bind(this),
+      contactWrapRef: this.contactWrapRef,
+      contactShapeWidth: this.state.contactOpen ? '280px' : '128px',
+      contactShapeHeight: this.state.contactOpen ? '216px' : '42px',
+      contactShapeRadius: this.state.contactOpen ? '20px' : '999px',
+      contactShapeShadow: this.state.contactOpen ? '0 24px 48px rgba(20,19,15,0.28)' : 'none',
+      contactButtonContentOpacity: this.state.contactOpen ? 0 : 1,
+      contactButtonContentDelay: this.state.contactOpen ? '0s' : '0.25s',
+      contactButtonPointerEvents: this.state.contactOpen ? 'none' : 'auto',
+      contactCardContentOpacity: this.state.contactOpen ? 1 : 0,
+      contactCardContentDelay: this.state.contactOpen ? '0.2s' : '0s',
+      contactCardPointerEvents: this.state.contactOpen ? 'auto' : 'none',
+      toggleContact: this.toggleContact.bind(this),
+      closeContact: this.closeContact.bind(this),
+      copyEmail: this.copyEmail.bind(this),
+      emailCopied: this.state.emailCopied,
+      notEmailCopied: !this.state.emailCopied,
+    };
+  }
+  // --- end SiteHeader ---
+
+  sectionIds = ['overview', 'background', 'problem', 'approach', 'solution', 'outcomes', 'reflections'];
+  sectionLabels = { overview: 'Overview', background: 'Background', problem: 'Problem', approach: 'Approach', solution: 'Solution', outcomes: 'Outcomes', reflections: 'Reflections' };
+  state = { siteHeaderHidden: false, siteHeaderHeightPx: 76, contactOpen: false, emailCopied: false, mobileNavOpen: false, mobileContactOpen: false, activeId: 'overview' };
+
+  componentDidMount() {
+    this.initSiteHeader();
+    this.handleNavClick = this.handleNavClick.bind(this);
+    this.onSectionScroll = this.onSectionScroll.bind(this);
+    requestAnimationFrame(this.onSectionScroll);
+    window.addEventListener('scroll', this.onSectionScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    this.teardownSiteHeader();
+    window.removeEventListener('scroll', this.onSectionScroll);
+  }
+
+  onSectionScroll() {
+    var refLine = 160;
+    var activeId = this.sectionIds[0];
+    for (var i = 0; i < this.sectionIds.length; i++) {
+      var el = document.getElementById(this.sectionIds[i]);
+      if (!el) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.height === 0) continue;
+      if (rect.top <= refLine) activeId = this.sectionIds[i];
+    }
+    if (activeId !== this.state.activeId) this.setState({ activeId: activeId });
+  }
+
+  handleNavClick(e) {
+    e.preventDefault();
+    var id = e.currentTarget.getAttribute('data-id');
+    if (id === 'overview') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var el = document.getElementById(id);
+    if (!el) return;
+    var top = el.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    var self = this;
+    return {
+      ...this.headerRenderVals(),
+      projectTitle: this.props.projectTitle ?? 'Rekordbox Mobile Tag Editor',
+      projectSubtitle: this.props.projectSubtitle ?? "A concept for tagging your library from your phone, not hunched over a desktop grid",
+      skillsChips: (this.props.skillsChips ?? 'Mobile Design, Concept Exploration, Interaction Design, AI-Assisted Prototyping').split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+      handleNavClick: this.handleNavClick,
+      sectionTabs: this.sectionIds.map(function (id, i) {
+        var isActive = id === self.state.activeId;
+        return {
+          id: id,
+          label: self.sectionLabels[id],
+          num: ('0' + (i + 1)),
+          color: isActive ? '#14130f' : '#6b6863',
+          weight: isActive ? 600 : 400,
+          numColor: isActive ? '#14130f' : '#9a968f',
+        };
+      }),
+    };
+  }
+}
+</script>
+</body>
+</html>
