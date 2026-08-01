@@ -189,7 +189,7 @@
   function initSectionNav() {
     var nav = by('section-nav');
     if (!nav) return;
-    var btns = $('button[data-id]', nav);
+    var btns = $$('button[data-id]', nav);
     if (!btns.length) return;
     var ACTIVE = '#14130f', IDLE = '#6b6863', NUM_ACTIVE = '#14130f', NUM_IDLE = '#9a968f';
 
@@ -311,7 +311,7 @@
 
       media = sourceEl.cloneNode(true);
       media.removeAttribute('data-behavior');
-      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff;';
+      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff; touch-action: manipulation;';
       media.setAttribute('style', MEDIA_STYLE);
       if (media.tagName === 'VIDEO') { media.muted = true; media.loop = true; media.autoplay = true; }
 
@@ -362,10 +362,12 @@
       var src = $('img', wrap) || $('video', wrap);
       if (!src) return;
       src.style.cursor = 'zoom-in';
+      src.style.touchAction = 'manipulation';
       src.addEventListener('click', function () { open(src); });
-      $('button', wrap).forEach(function (b) {
+      $$('button', wrap).forEach(function (b) {
         b.style.pointerEvents = 'auto';
         b.style.cursor = 'zoom-in';
+        b.style.touchAction = 'manipulation';
         b.addEventListener('click', function (e) { e.stopPropagation(); open(src); });
       });
     });
@@ -377,7 +379,7 @@
   // class, and no <video> carries an autoplay attribute — so without this the
   // pre-rendered pages show every clip frozen on frame one.
   function initVideos() {
-    var vids = $('video');
+    var vids = $$('video');
     if (!vids.length) return;
     vids.forEach(function (v) {
       v.muted = true;
@@ -499,12 +501,9 @@
   }
 
   function initAll() {
-    initHeader();
-    initHeroDots();
-    initVideos();
-    initSectionNav();
-    initCarousels();
-    initLightbox();
+    [initHeader, initHeroDots, initVideos, initSectionNav, initCarousels, initLightbox].forEach(function (fn) {
+      try { fn(); } catch (e) { console.error('[site-behaviors] ' + fn.name + ' failed:', e); }
+    });
   }
 
   if (document.readyState === 'loading') {
