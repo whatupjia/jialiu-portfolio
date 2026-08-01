@@ -45,7 +45,12 @@
 
     // ---- header hide on scroll down, show on scroll up -------------------
     var lastY = window.scrollY || 0;
-    var hidden = false;
+    // The pre-render bakes whatever transform the header had at capture time
+    // (e.g. mid-scroll, hidden) as a literal inline style. hidden must reflect
+    // that actual state on load, not assume visible, or a page captured
+    // scrolled-down loads with a permanently missing header until a scroll
+    // event happens to cross the hide/show threshold twice.
+    var hidden = header.style.transform === 'translateY(-100%)';
 
     function syncSpacer() {
       if (spacer) spacer.style.height = header.offsetHeight + 'px';
@@ -53,8 +58,7 @@
     syncSpacer();
     window.addEventListener('resize', syncSpacer);
 
-    window.addEventListener('scroll', function () {
-      var y = window.scrollY || window.pageYOffset;
+    function syncHeader(y) {
       var h = header.offsetHeight;
       var next = hidden;
       if (y <= h) next = false;
@@ -65,6 +69,10 @@
         header.style.transform = hidden ? 'translateY(-100%)' : 'translateY(0)';
       }
       lastY = y;
+    }
+    syncHeader(window.scrollY || window.pageYOffset);
+    window.addEventListener('scroll', function () {
+      syncHeader(window.scrollY || window.pageYOffset);
     }, { passive: true });
 
     // ---- mobile nav ------------------------------------------------------
@@ -186,67 +194,186 @@
   }
 
   // ── section nav (case study pages) ───────────────────────────────────────
-  // Deployed markup is a single vertical track: a "jump to nearest section"
-  // hit-target holding a static background line + a small progress thumb,
-  // plus a floating "N / total" counter alongside it. There's no per-section
-  // button here (that's a different, unused design) — this drives the thumb
-  // position, the counter, the nav's fade in/out, and click-to-seek against
-  // the page's real <section id> elements.
+  // Two variants, told apart by what the pre-render left behind: the tabs
+  // variant ships a button[data-id] per section, the ticks variant ships one
+  // full-height rail button with a track span and a fill span. Both get the
+  // ambient fade (recede when idle, hide behind full-bleed imagery); the ticks
+  // variant additionally needs its fill, counter and click math rebuilt here,
+  // since in the DC source all three come from React state and the snapshot
+  // freezes them at whatever the capture scroll position happened to be.
   function initSectionNav() {
     var nav = by('section-nav');
     if (!nav) return;
-    var track = $('div', nav);
-    var jumpBtn = track && $('button[aria-label="Jump to nearest section"]', track);
-    var spans = jumpBtn ? $$('span', jumpBtn) : [];
-    var thumb = spans[1];
-    var counterWrap = track && $$('div', track)[0];
-    var counterSpan = counterWrap && $('span', counterWrap);
-    if (!track || !jumpBtn || !thumb || !counterWrap || !counterSpan) return;
+    var REF_LINE = 160, SCROLL_OFFSET = 96, IDLE_MS = 1400;
 
-    var sections = $$('section[id]').filter(function (s) { return s.id; });
-    if (!sections.length) return;
-
-    var TRACK_H = 260, SCROLL_OFFSET = 96;
-    var THUMB_H = thumb.getBoundingClientRect().height || 3;
-    var totalMatch = counterSpan.textContent.match(/\/\s*(\d+)/);
-    var total = totalMatch ? parseInt(totalMatch[1], 10) : sections.length;
-
-    function bounds() {
-      var first = sections[0].getBoundingClientRect();
-      var last = sections[sections.length - 1].getBoundingClientRect();
-      return { top: first.top + window.scrollY, bottom: last.bottom + window.scrollY };
+    var hovering = false, idleFaded = false, breakoutFaded = false, idleTimer = null;
+    function applyFade() {
+      var off = idleFaded || breakoutFaded;
+      nav.style.opacity = off ? '0' : '1';
+      nav.style.pointerEvents = off ? 'none' : 'auto';
     }
-
-    function sync() {
-      var b = bounds();
-      var range = Math.max(1, b.bottom - b.top - window.innerHeight);
-      var progress = Math.min(1, Math.max(0, (window.scrollY - b.top) / range));
-      var thumbTop = Math.round(progress * (TRACK_H - THUMB_H));
-      thumb.style.top = thumbTop + 'px';
-      counterWrap.style.top = thumbTop + 'px';
-      counterSpan.textContent = (Math.min(total, Math.max(1, Math.round(progress * (total - 1)) + 1))) + ' / ' + total;
-
-      var visible = window.scrollY > b.top - window.innerHeight * 0.5 && window.scrollY < b.bottom;
-      nav.style.opacity = visible ? '1' : '0';
-      nav.style.pointerEvents = visible ? 'auto' : 'none';
+    function resetIdle() {
+      clearTimeout(idleTimer);
+      if (idleFaded) { idleFaded = false; applyFade(); }
+      if (hovering) return;
+      idleTimer = setTimeout(function () { idleFaded = true; applyFade(); }, IDLE_MS);
     }
+    nav.addEventListener('mouseenter', function () { hovering = true; clearTimeout(idleTimer); });
+    nav.addEventListener('mouseleave', function () { hovering = false; resetIdle(); });
 
-    jumpBtn.addEventListener('click', function (e) {
-      var rect = track.getBoundingClientRect();
-      var frac = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
-      var b = bounds();
-      var targetY = b.top + frac * (b.bottom - b.top);
-      var nearest = sections[0], nearestDist = Infinity;
-      sections.forEach(function (s) {
-        var sTop = s.getBoundingClientRect().top + window.scrollY;
-        var d = Math.abs(sTop - targetY);
-        if (d < nearestDist) { nearestDist = d; nearest = s; }
+    // Wide breakout images reach the nav's column, so it steps out of their way.
+    // Re-scanned on DOM changes because a lightbox clone or late image can add
+    // targets after this runs.
+    var FADE_SEL = '[data-nav-fade], [data-breakout="10"], [data-breakout="11"], [data-breakout="12"]';
+    if ('IntersectionObserver' in window) {
+      var intersecting = [], observed = [];
+      var fadeObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var at = intersecting.indexOf(e.target);
+          if (e.isIntersecting && at === -1) intersecting.push(e.target);
+          else if (!e.isIntersecting && at !== -1) intersecting.splice(at, 1);
+        });
+        breakoutFaded = intersecting.length > 0;
+        applyFade();
+      }, { threshold: 0 });
+      var rescan = function () {
+        $$(FADE_SEL).forEach(function (t) {
+          if (observed.indexOf(t) !== -1) return;
+          observed.push(t);
+          fadeObs.observe(t);
+        });
+        for (var i = observed.length - 1; i >= 0; i--) {
+          if (observed[i].isConnected) continue;
+          fadeObs.unobserve(observed[i]);
+          var gone = intersecting.indexOf(observed[i]);
+          if (gone !== -1) intersecting.splice(gone, 1);
+          observed.splice(i, 1);
+        }
+        breakoutFaded = intersecting.length > 0;
+        applyFade();
+      };
+      rescan();
+      if (window.MutationObserver) {
+        new MutationObserver(rescan).observe(document.body, { childList: true, subtree: true });
+      }
+    }
+    applyFade();
+
+    var btns = $$('button[data-id]', nav);
+    if (btns.length) {
+      var ACTIVE = '#14130f', IDLE = '#6b6863', NUM_ACTIVE = '#14130f', NUM_IDLE = '#9a968f';
+
+      function paint(activeId) {
+        btns.forEach(function (b) {
+          var on = b.getAttribute('data-id') === activeId;
+          b.style.color = on ? ACTIVE : IDLE;
+          b.style.fontWeight = on ? '600' : '400';
+          var num = $('span', b);
+          if (num) num.style.color = on ? NUM_ACTIVE : NUM_IDLE;
+        });
+      }
+
+      function current() {
+        var activeId = btns[0].getAttribute('data-id');
+        btns.forEach(function (b) {
+          var el = document.getElementById(b.getAttribute('data-id'));
+          if (!el) return;
+          var r = el.getBoundingClientRect();
+          if (r.height === 0) return;
+          if (r.top <= REF_LINE) activeId = b.getAttribute('data-id');
+        });
+        return activeId;
+      }
+      var last = null;
+      function sync() {
+        resetIdle();
+        var id = current();
+        if (id !== last) { last = id; paint(id); }
+      }
+      btns.forEach(function (b, i) {
+        b.addEventListener('click', function (e) {
+          e.preventDefault();
+          var id = b.getAttribute('data-id');
+          if (i === 0) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+          var el = document.getElementById(id);
+          if (!el) return;
+          window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+        });
       });
-      window.scrollTo({ top: nearest.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+      window.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      requestAnimationFrame(sync);
+      return;
+    }
+
+    var rail = $('button', nav);
+    if (!rail) return;
+    var track = $$('span', rail);
+    var fill = track[1];
+    var wrap = rail.parentNode;
+    var counter = $('div', wrap);
+    if (!fill) return;
+
+    // Every h3 outside the nav is a section. Position is the heading's share of
+    // total document height, the same space the fill is drawn in, so the line
+    // glides past each heading instead of snapping between them.
+    var headings = [];
+    function scanHeadings() {
+      var docHeight = document.documentElement.scrollHeight || 1;
+      headings = $$('h3').filter(function (el) {
+        return !el.closest('[data-behavior="section-nav"]');
+      }).map(function (el) {
+        var absTop = el.getBoundingClientRect().top + window.scrollY;
+        return { el: el, frac: Math.max(0, Math.min(1, absTop / docHeight)) };
+      });
+    }
+
+    var lastFill = -1, lastLabel = null;
+    function sync() {
+      resetIdle();
+      var railHeight = wrap.clientHeight || rail.offsetHeight || 260;
+      var docHeight = document.documentElement.scrollHeight || 1;
+      var frac = Math.max(0, Math.min(1, (window.scrollY + REF_LINE) / docHeight));
+      var px = Math.round(frac * railHeight);
+      if (px !== lastFill) {
+        lastFill = px;
+        fill.style.height = px + 'px';
+        if (counter) counter.style.top = px + 'px';
+      }
+      if (counter && headings.length) {
+        var activeIndex = 0;
+        for (var i = 0; i < headings.length; i++) {
+          if (headings[i].el.getBoundingClientRect().top <= REF_LINE) activeIndex = i;
+        }
+        var label = (activeIndex + 1) + ' / ' + headings.length;
+        if (label !== lastLabel) { lastLabel = label; counter.textContent = label; }
+      }
+    }
+
+    // The bare line is the control: click anywhere along it and land on whichever
+    // heading sits nearest that point.
+    rail.addEventListener('click', function (e) {
+      if (!headings.length) return;
+      var rect = rail.getBoundingClientRect();
+      var clickFrac = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+      var nearest = 0, best = Infinity;
+      for (var i = 0; i < headings.length; i++) {
+        var d = Math.abs(headings[i].frac - clickFrac);
+        if (d < best) { best = d; nearest = i; }
+      }
+      var el = headings[nearest].el;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
     });
 
+    scanHeadings();
+    sync();
     window.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
+    window.addEventListener('resize', function () { scanHeadings(); sync(); });
+    // Heading positions move once webfonts swap in, so the first measurement is
+    // provisional.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { scanHeadings(); sync(); });
+    }
     requestAnimationFrame(sync);
   }
 
@@ -258,7 +385,7 @@
       var tabs;
       try { tabs = JSON.parse(root.getAttribute('data-tabs') || '[]'); } catch (e) { return; }
       if (!tabs.length) return;
-      var btns = $('button[data-index]', root);
+      var btns = $$('button[data-index]', root);
       var img = $('img', root);
       if (!img || !btns.length) return;
 
@@ -313,7 +440,6 @@
     function open(sourceEl) {
       close();
       overlay = document.createElement('div');
-      overlay.setAttribute('data-lightbox-overlay', '');
       overlay.setAttribute('style', 'position: fixed; inset: 0; background: rgba(20,19,15,0.85); z-index: 100; overflow: auto; padding: 3rem; box-sizing: border-box;');
 
       var closeBtn = document.createElement('button');
@@ -327,7 +453,7 @@
 
       media = sourceEl.cloneNode(true);
       media.removeAttribute('data-behavior');
-      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff; touch-action: manipulation;';
+      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff;';
       media.setAttribute('style', MEDIA_STYLE);
       if (media.tagName === 'VIDEO') { media.muted = true; media.loop = true; media.autoplay = true; }
 
@@ -378,12 +504,10 @@
       var src = $('img', wrap) || $('video', wrap);
       if (!src) return;
       src.style.cursor = 'zoom-in';
-      src.style.touchAction = 'manipulation';
       src.addEventListener('click', function () { open(src); });
       $$('button', wrap).forEach(function (b) {
         b.style.pointerEvents = 'auto';
         b.style.cursor = 'zoom-in';
-        b.style.touchAction = 'manipulation';
         b.addEventListener('click', function (e) { e.stopPropagation(); open(src); });
       });
     });
@@ -516,10 +640,109 @@
     }
   }
 
-  function initAll() {
-    [initHeader, initHeroDots, initVideos, initSectionNav, initCarousels, initLightbox].forEach(function (fn) {
-      try { fn(); } catch (e) { console.error('[site-behaviors] ' + fn.name + ' failed:', e); }
+  // Margin notes ship both branches: a floated .margin-note sidenote (desktop)
+  // and a .margin-note-trigger button (mobile), with CSS choosing per breakpoint.
+  // The mobile modal is built here by cloning the sidenote's own content, so the
+  // copy exists once in the markup and the two can never drift.
+  function initMarginNotes() {
+    var triggers = byAll('margin-note-trigger');
+    if (!triggers.length) return;
+    var overlay = null;
+
+    function close() {
+      if (!overlay) return;
+      overlay.remove();
+      overlay = null;
+      document.body.style.overflow = '';
+    }
+
+    function open(note) {
+      close();
+      overlay = document.createElement('div');
+      overlay.className = 'margin-note-modal-backdrop';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+
+      var sheet = document.createElement('div');
+      sheet.className = 'margin-note-modal';
+
+      var label = $('.margin-note-label', note);
+      var head = document.createElement('div');
+      head.setAttribute('style', 'display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.85rem;');
+      var title = document.createElement('span');
+      title.setAttribute('style', "font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #9a968f;");
+      title.textContent = label ? label.textContent : '';
+      if (title.textContent) overlay.setAttribute('aria-label', title.textContent);
+      var closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.setAttribute('aria-label', 'Close');
+      closeBtn.setAttribute('style', 'background: none; border: 0; padding: 0; margin: 0; color: #9a968f; cursor: pointer; font-size: 1.1rem; line-height: 1; flex-shrink: 0;');
+      closeBtn.textContent = '✕';
+      closeBtn.addEventListener('click', close);
+      head.appendChild(title);
+      head.appendChild(closeBtn);
+      sheet.appendChild(head);
+
+      var body = $('.margin-note-body', note);
+      if (body) {
+        var p = document.createElement('p');
+        p.setAttribute('style', "margin: 0; font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 1rem; line-height: 1.55; color: #3a3833;");
+        p.textContent = body.textContent;
+        sheet.appendChild(p);
+      }
+
+      $$('img, video', note).forEach(function (el) {
+        var media = el.cloneNode(true);
+        media.setAttribute('style', 'width: 100%; height: auto; display: block; margin-top: 1rem; border: 1px solid #e4e0d8; border-radius: 8px; background: #ffffff;');
+        if (media.tagName === 'VIDEO') { media.muted = true; media.loop = true; media.autoplay = true; }
+        sheet.appendChild(media);
+        if (media.tagName === 'VIDEO' && media.play) media.play().catch(function () {});
+      });
+
+      overlay.appendChild(sheet);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+      document.body.appendChild(overlay);
+      document.body.style.overflow = 'hidden';
+    }
+
+    triggers.forEach(function (trigger) {
+      var scope = trigger.closest('.note-scope') || trigger.parentNode;
+      trigger.addEventListener('click', function () {
+        var note = $('.margin-note', scope);
+        if (note) open(note);
+      });
     });
+
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  }
+
+  // The 12-col grid publishes its own width so breakout images can size off it
+  // in pure CSS. In the DC source a ResizeObserver in the page's logic class does
+  // this; deployed, the capture leaves behind whatever pixel value the editor
+  // canvas measured, so without this every visitor at a different width sizes
+  // breakouts against a stale number.
+  function initGridWidth() {
+    var shell = $('.bio-shell');
+    if (!shell) return;
+    function publish() {
+      var w = shell.clientWidth;
+      if (w > 0) shell.style.setProperty('--bio-grid-w', w + 'px');
+    }
+    publish();
+    if (window.ResizeObserver) new ResizeObserver(publish).observe(shell);
+    window.addEventListener('resize', publish);
+    requestAnimationFrame(publish);
+  }
+
+  function initAll() {
+    initHeader();
+    initGridWidth();
+    initHeroDots();
+    initVideos();
+    initSectionNav();
+    initCarousels();
+    initLightbox();
+    initMarginNotes();
   }
 
   if (document.readyState === 'loading') {
