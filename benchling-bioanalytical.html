@@ -45,8 +45,6 @@
       }
     }
   </style>
-<style data-omelette-injected="">html,body{background:transparent}</style>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Benchling Bioanalytical · Jia Liu</title>
@@ -108,16 +106,6 @@
        and a looser paragraph rhythm to stay readable in long runs. */
     p { line-height: 1.55; }
   </style><style data-dc-tpl="1">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
-    @media (max-width: 1100px) { .section-nav { display: none !important; } }
-  </style><style data-dc-tpl="1">
-    @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
-    @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
-    .ncs-thumb { flex: 0 0 132px; }
-    @media (min-width: 640px) { .ncs-thumb { flex-basis: 200px; } }
-  </style><style data-dc-tpl="1">
     @media (max-width: 900px) {
       .expandable-image-wrap { width: 100% !important; margin-left: 0 !important; }
     }
@@ -133,6 +121,16 @@
         transform: none !important;
       }
     }
+  </style><style data-dc-tpl="1">
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
+  </style><style data-dc-tpl="1">
+    @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
+    @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
+    .ncs-thumb { flex: 0 0 132px; }
+    @media (min-width: 640px) { .ncs-thumb { flex-basis: 200px; } }
   </style><style data-dc-tpl="1">
     /* Floated rather than absolutely positioned, so two notes near the same
        paragraph stack instead of overlapping. The negative margin pushes it
@@ -218,8 +216,12 @@
        that expands into a modal — a full-width image or autoplaying video at
        note scale reads as oversized inline on a phone, so it moves behind an
        explicit tap instead of loading and floating in the flow. */
+    /* Both branches are always in the markup and CSS decides which one shows.
+       A JS-gated one-of-two render bakes whichever branch the viewport happened
+       to be in at capture time into the pre-render, so the other one is simply
+       missing on the deployed site. */
     .margin-note-trigger {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 0.5em;
       width: 100%;
@@ -243,6 +245,8 @@
        Reordering as a flex column instead puts it last, after everything it
        annotates, without touching the host markup's DOM order. */
     @media (max-width: 1100px) {
+      .margin-note { display: none; }
+      .margin-note-trigger { display: flex; }
       .note-scope { display: flex; flex-direction: column; }
       /* dc-import mounts each child in a wrapper div, so the actual flex
          child of .note-scope is that wrapper, not the button inside it —
@@ -279,11 +283,13 @@
       .margin-note-modal-backdrop { align-items: center; padding: 1.5rem; }
       .margin-note-modal { border-radius: 14px; box-shadow: 0 24px 60px rgba(20,19,15,0.3); }
     }
-  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><style>image-slot { display: none !important; }</style><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style>image-slot { display: none !important; }</style>
+<script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script>
 <script src="site-behaviors.js" defer></script>
+<noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
 </head>
 <body>
-<div id="dc-root"><div class="sc-host" data-sc-name="benchling-bioanalytical"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251, 250, 249, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
+<div id="dc-root"><div class="sc-host" data-sc-name="benchling-bioanalytical"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251, 250, 249, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(-100%); transition: transform 0.3s;">
   <div data-dc-tpl="11" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <a data-dc-tpl="12" href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: rgb(20, 19, 15); text-decoration: none;">
       <img data-dc-tpl="13" src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
@@ -377,7 +383,7 @@
       </div>
     </nav>
    </div>
-  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 60px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 76px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
 
   <div data-dc-tpl="92" style="position: absolute; inset: 0px; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: none; grid-template-columns: repeat(12, 1fr); gap: 32px; z-index: 9999; pointer-events: none;">
     
@@ -416,7 +422,7 @@
     </div>
   </div>
 
-  <div data-dc-tpl="100" class="bio-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; --bio-grid-w: 349px;">
+  <div data-dc-tpl="100" class="bio-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; --bio-grid-w: 1194px;">
 
     <div data-dc-tpl="101" class="bio-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 1.5rem;">
 
@@ -459,10 +465,10 @@
     <div data-dc-tpl="4" style="position: relative; width: 40px; height: 260px; margin-left: -3px;">
       <button data-dc-tpl="5" aria-label="Jump to nearest section" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
         <span data-dc-tpl="6" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 100%; border-radius: 1px; background: rgb(228, 224, 216);"></span>
-        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 3px; border-radius: 1px; background: rgb(20, 19, 15);"></span>
+        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 80px; border-radius: 1px; background: rgb(20, 19, 15);"></span>
       </button>
       
-        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 3px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">1 / 16</span></div>
+        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 80px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">4 / 16</span></div>
       
     </div>
   
@@ -475,13 +481,21 @@
       <p data-dc-tpl="130" style="margin: 0px 0px 1.5rem;">During bioanalytical development, scientists develop lab tests that can detect and measure things.&nbsp;The level of precision and complexity goes way beyond what you might remember from biology lab. In many cases, these tests involve sensitive living organisms, complex lab robotics, and very expensive reagents.</p>
 
       <div data-dc-tpl="131" class="note-scope">
-        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="132">
-  <button data-dc-tpl="3" type="button" class="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="4">Learn more:</span>
-    <span data-dc-tpl="5" class="margin-note-trigger-label"><span class="sc-interp">Microtiter plates</span></span>
+        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="132"><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
+    <span data-dc-tpl="3">Learn more:</span>
+    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Microtiter plates</span></span>
   </button>
 
-  </div>
+  
+
+  <aside data-dc-tpl="18" class="margin-note">
+    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Microtiter plates</span></span>
+    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">A plastic grid with wells that automated instruments can handle. Used heavily in bioanalytical work to increase efficiency and throughput.</span></span>
+    
+      <img data-dc-tpl="22" src="assets/img/plate-96-well-photo.png" alt="A hand holding three microplates of different well densities side by side" loading="lazy" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);">
+    
+    
+  </aside></div>
         
         <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="133"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(242, 241, 236); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
@@ -496,13 +510,21 @@
 
     <div data-dc-tpl="134" class="note-scope" style="margin-top: 1.5rem;">
       
-      <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="135">
-  <button data-dc-tpl="3" type="button" class="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="4">Learn more:</span>
-    <span data-dc-tpl="5" class="margin-note-trigger-label"><span class="sc-interp">Lab automation</span></span>
+      <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="135"><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
+    <span data-dc-tpl="3">Learn more:</span>
+    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Lab automation</span></span>
   </button>
 
-  </div>
+  
+
+  <aside data-dc-tpl="18" class="margin-note">
+    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Lab automation</span></span>
+    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">The use of robotics to improve accuracy and efficiency. Human operators are kept in the loop, loading samples, troubleshooting errors, or switching to manual workflows when necessary.</span></span>
+    
+    
+      <video data-dc-tpl="24" src="assets/video/lab-automation-short.mp4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);"></video>
+    
+  </aside></div>
       <p data-dc-tpl="136" style="margin: 0px 0px 1rem;">After tests are developed, they need to be executed reliably&nbsp;for weeks or months on end.&nbsp;The most crucial tests are for human clinical trials because you can't go back and get more if something goes wrong. At this point, teams are trying to smoothly run a conveyer belt of samples and tests, not doing real investigative work.</p>
 
       <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="137"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(242, 241, 236); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
@@ -520,13 +542,21 @@
     <p data-dc-tpl="140" style="margin: 0px 0px 1rem;">The systems orchestrating the work are often patchworks of legacy software, custom tools and offline know-how. Scientists used up to <i data-dc-tpl="141">nine</i> systems to do their job. Each had slightly different sample ID format, materials were tracked in different ways, and notebook was so slow that scientists often waited until hours later to transcribe their work.</p><p data-dc-tpl="142" style="margin: 0px 0px 1rem;">This often left the people in charge one asking:</p>
     <blockquote data-dc-tpl="143" style="margin: 1.5rem 0px; border-left: 3px solid rgb(6, 136, 240); padding-left: 1.5rem;">"Can we trust this data?"</blockquote>
     <div data-dc-tpl="144" class="note-scope">
-      <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="145">
-  <button data-dc-tpl="3" type="button" class="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="4">Learn more:</span>
-    <span data-dc-tpl="5" class="margin-note-trigger-label"><span class="sc-interp">IND filing</span></span>
+      <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="145"><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
+    <span data-dc-tpl="3">Learn more:</span>
+    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">IND filing</span></span>
   </button>
 
-  </div>
+  
+
+  <aside data-dc-tpl="18" class="margin-note">
+    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">IND filing</span></span>
+    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">Formal filing to the FDA to test an experimental product in human clinical trials. It takes a huge amount of work to reach this point, so a delay or rejection is very, very bad.</span></span>
+    
+      <img data-dc-tpl="22" src="assets/img/ind-filing-paperwork.png" alt="A thick stack of paper documents tabbed with colorful sticky notes" loading="lazy" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);">
+    
+    
+  </aside></div>
       <p data-dc-tpl="146" style="margin: 0px 0px 1rem;">They're right to be worried.&nbsp;Across the industry, around <button data-dc-tpl="147" class="term-ref">20-30% of IND filings</button> get delayed or rejected by the FDA due to incomplete data or poor documentation. It isn't really the fault of any one person so much the breakdown of an overall process and system. Customers like Merck want their tools to steer them away from that nightmare scenario as much as possible.</p>
     </div>
 
@@ -571,13 +601,21 @@
       <p data-dc-tpl="169" style="margin: 0px 0px 1rem;">The good news was that our data model <i data-dc-tpl="170">mostly</i> worked. Scientists could define their procedure, plan experiments, and run them to get data. Importantly, we could join the data together automatically to make analysis and reporting much, much faster.<br data-dc-tpl="171"></p><p data-dc-tpl="172" style="margin: 0px 0px 1rem;">What broke down was how scientists could plan experiments involving plates.</p>
 
       <div data-dc-tpl="173" class="note-scope">
-        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="174">
-  <button data-dc-tpl="3" type="button" class="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="4">Learn more:</span>
-    <span data-dc-tpl="5" class="margin-note-trigger-label"><span class="sc-interp">Bioreactor</span></span>
+        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="174"><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
+    <span data-dc-tpl="3">Learn more:</span>
+    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Bioreactor</span></span>
   </button>
 
-  </div>
+  
+
+  <aside data-dc-tpl="18" class="margin-note">
+    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Bioreactor</span></span>
+    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">Vessel used to grows cells and living material, which drug products are harvested from. Scientists start with small-scale experimentation, eventually scaling up to industrial quantities.</span></span>
+    
+      <img data-dc-tpl="22" src="assets/img/bioreactor-lineup.png" alt="A lineup of four stainless steel bioreactors of increasing size" loading="lazy" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);">
+    
+    
+  </aside></div>
         <p data-dc-tpl="175" style="margin: 0px 0px 1rem;">In Bioprocess, each condition runs in <button data-dc-tpl="176" class="term-ref">bioreactor</button>, which maps cleanly to each column in a planning table UI. However, a single plate can hold many conditions at once and their work could be split up across multiple runs. Basically, users could design and run them however they wanted, as long as it scientifically made sense.</p>
       </div>
 
