@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /pages/
 
 Sitemap: https://www.jialiudesign.com/sitemap.xml
