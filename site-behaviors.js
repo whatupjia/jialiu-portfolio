@@ -397,8 +397,110 @@
     vids.forEach(function (v) { io.observe(v); });
   }
 
+  // ── hero dot grid (home page intro) ──────────────────────────────────────
+  // Draws the same converging dot grid as the authoring-time canvas: dots
+  // start scattered, ease into a regular grid, then the .hero-dots CSS fades
+  // the whole canvas to opacity 0 — so this only needs to run once per load.
+  function initHeroDots() {
+    var canvas = $('.hero-dots');
+    if (!canvas || canvas.tagName !== 'CANVAS') return;
+    var ctx = canvas.getContext('2d');
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var SPACING = 32, BASE_RADIUS = 1.7, EASE = 0.2;
+    var BASE_COLOR = [20, 19, 15];
+    var dots = [];
+    var width = 0, height = 0;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var running = false;
+    var rafId = null;
+    var introStart = performance.now();
+    var introEase = 0.035;
+
+    function buildGrid() {
+      width = window.innerWidth; height = window.innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var cols = Math.ceil(width / SPACING) + 1;
+      var rows = Math.ceil(height / SPACING) + 1;
+      var offsetX = (width - (cols - 1) * SPACING) / 2;
+      var offsetY = (height - (rows - 1) * SPACING) / 2;
+      var existing = dots;
+      dots = [];
+      var idx = 0;
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var bx = offsetX + c * SPACING, by2 = offsetY + r * SPACING;
+          var prev = existing[idx];
+          var startX = bx, startY = by2;
+          if (!prefersReducedMotion && !prev) {
+            startX = bx + (Math.random() - 0.5) * 170;
+            startY = by2 + (Math.random() - 0.5) * 170;
+          }
+          dots.push({ bx: bx, by: by2, x: prev ? prev.x : startX, y: prev ? prev.y : startY });
+          idx++;
+        }
+      }
+    }
+
+    function draw() {
+      var elapsed = performance.now() - introStart;
+      var introT = Math.min(elapsed / 1600, 1);
+      var rampT = introT * introT * introT * introT * introT;
+      introEase = introT < 1 ? (0.006 + 0.5 * rampT) : EASE;
+      ctx.clearRect(0, 0, width, height);
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i];
+        d.x += (d.bx - d.x) * introEase;
+        d.y += (d.by - d.y) * introEase;
+        ctx.beginPath();
+        ctx.globalAlpha = 0.42;
+        ctx.fillStyle = 'rgb(' + BASE_COLOR[0] + ',' + BASE_COLOR[1] + ',' + BASE_COLOR[2] + ')';
+        ctx.arc(d.x, d.y, BASE_RADIUS, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop() { draw(); rafId = requestAnimationFrame(loop); }
+    function start() {
+      if (running || prefersReducedMotion) return;
+      running = true;
+      rafId = requestAnimationFrame(loop);
+    }
+    function stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    buildGrid();
+    draw();
+    if (prefersReducedMotion) return;
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { buildGrid(); draw(); }, 150);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) start(); else stop(); });
+      }, { threshold: 0.05 }).observe(canvas);
+    } else {
+      start();
+    }
+  }
+
   function initAll() {
     initHeader();
+    initHeroDots();
     initVideos();
     initSectionNav();
     initCarousels();

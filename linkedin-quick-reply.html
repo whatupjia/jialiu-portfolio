@@ -73,7 +73,7 @@
     @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.55; font-size: 1.078125rem; }
     a { color: #0688f0; }
     a:hover { color: #0576d1; }
     strong, b { font-weight: 600; }
@@ -84,28 +84,53 @@
     .cs-intro-4 { animation: csFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both; }
     @media (prefers-reduced-motion: reduce) { .cs-intro-1, .cs-intro-2, .cs-intro-3, .cs-intro-4 { animation: none !important; } }
     @media (max-width: 820px) { .cs-col { max-width: none !important; margin-left: 0 !important; margin-right: 0 !important; } }
+    @media (max-width: 640px) {
+      .qr-problem-row { flex-wrap: wrap !important; }
+      .qr-problem-img { max-width: none !important; flex-basis: 100% !important; }
+    }
     @media (max-width: 1100px) {
       .cs-title-grid, .cs-shell { display: block !important; }
       .cs-title-block { padding-top: 2.5rem !important; }
-      .cs-dl { margin-bottom: 2.5rem !important; grid-template-columns: 1fr !important; }
-      .cs-divider { display: none !important; }
+      .cs-dl { margin-bottom: 2.5rem !important; padding-bottom: 0 !important; }
       .cs-overview-wrap { padding-bottom: 1.5rem !important; }
     }
-  </style><style data-dc-tpl="1">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    .section-nav { position: fixed; left: max(2rem, calc((100vw - 1280px) / 2 + clamp(1.25rem, 4vw, 3rem) - 1rem)); top: 260px; z-index: 3; }
-    @media (max-width: 1100px) { .section-nav { display: none !important; } }
-  </style><style data-dc-tpl="1">
-    @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
-    @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
-    .ncs-thumb { flex: 0 0 160px; }
-    @media (min-width: 640px) { .ncs-thumb { flex-basis: 280px; } }
+  
+    /* Body copy sits a step back from full ink; headings hold #14130f so the
+       hierarchy comes from weight AND contrast, not size alone. */
+    body { color: #3a3833; }
+    h1, h2, h3, h4 { color: #14130f; }
+  
+    /* Case studies run much longer than the home page, so they get more leading
+       and a looser paragraph rhythm to stay readable in long runs. */
+    p { line-height: 1.55; }
   </style><style data-dc-tpl="1">
     @media (max-width: 900px) {
       .expandable-image-wrap { width: 100% !important; margin-left: 0 !important; }
     }
-  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script><script src="site-behaviors.js" defer=""></script><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+    /* Breakout width is a column count (1-12) resolved to a calc() formula against
+       --bio-grid-w (the 12-col grid's own width, published once by the page) in JS —
+       self-centering and needing no per-image measurement, so an image mounting at
+       any time gets correct geometry from the first paint. The grid collapses to a
+       single column below 1100px, so breakout has nothing left to escape there. */
+    @media (max-width: 1100px) {
+      .expandable-image-wrap[data-breakout]:not([data-breakout=""]) {
+        width: 100% !important;
+        margin-left: 0 !important;
+        transform: none !important;
+      }
+    }
+  </style><style data-dc-tpl="1">
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
+  </style><style data-dc-tpl="1">
+    @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
+    @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
+    .ncs-thumb { flex: 0 0 132px; }
+    @media (min-width: 640px) { .ncs-thumb { flex-basis: 200px; } }
+  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><style>image-slot { display: none !important; }</style><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+<script src="site-behaviors.js" defer></script>
 </head>
 <body>
 <div id="dc-root"><div class="sc-host" data-sc-name="linkedin-quick-reply"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251, 250, 249, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
@@ -202,309 +227,282 @@
       </div>
     </nav>
    </div>
-  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 76px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 60px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
 
   <div data-dc-tpl="92" class="cs-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
     <div data-dc-tpl="93" class="cs-title-block cs-intro-1" style="grid-column: 3 / 11; padding: 4rem 0px 1.5rem;">
-      <div data-dc-tpl="94" class="cs-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
-        <h1 data-dc-tpl="95" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; line-height: 1.25; margin: 0px 0px 0.5rem;"><span class="sc-interp">Quick Replies</span></h1>
-        <h2 data-dc-tpl="96" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 400; line-height: 1.3; color: rgb(107, 104, 99); margin: 0px;"><span class="sc-interp">Faster, clearer replies for in-demand candidates on LinkedIn</span></h2>
+      <div data-dc-tpl="94" class="cs-col" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+        <h1 data-dc-tpl="95" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.6rem, 1.15rem + 1.6vw, 2.25rem); font-weight: 400; line-height: 1.2; margin: 0px 0px 0.75rem;"><span class="sc-interp">Quick Replies</span></h1>
+        <h2 data-dc-tpl="96" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.25rem; font-weight: 400; line-height: 1.5; color: rgb(107, 104, 99); margin: 0px;"><span class="sc-interp">Faster, clearer replies for in-demand candidates on LinkedIn</span></h2>
       </div>
     </div>
   </div>
 
   <div data-dc-tpl="97" class="cs-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start;">
 
-    <div data-dc-tpl="98" class="cs-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 3rem;">
-      <section data-dc-tpl="99" id="overview" class="cs-col cs-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div data-dc-tpl="98" class="cs-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 1.5rem;">
+      <section data-dc-tpl="99" id="overview" class="cs-col cs-intro-2" style="max-width: 580px; margin-left: auto; margin-right: auto;">
         <p data-dc-tpl="100" style="margin: 0px 0px 1rem;">For in-demand candidates, replying to recruiter outreach on LinkedIn takes time, and a lot of inquiries don't feel relevant. For recruiters, sending that outreach costs time and money, and many candidates never reply at all. Underneath both problems, LinkedIn's own systems couldn't reliably classify these messaging interactions, which limited how well search and matching could work in the first place. I designed an updated quick-reply feature that enables candidates to send quick, templated replies while also more accurately inferring their interest in these opportunities for recruiters and LinkedIn's algorithms.</p>
 
-        <dl data-dc-tpl="101" class="cs-dl cs-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0px 0px;">
-          <div data-dc-tpl="102">
-            <dt data-dc-tpl="103" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Role</dt>
-            <dd data-dc-tpl="104" style="margin: 0px;">Product Designer, LinkedIn. Partnered with a designer on the consumer messaging team and a UX researcher.</dd>
+        <dl data-dc-tpl="101" class="cs-dl cs-intro-3" style="margin: 2.5rem 0px 0px; border-top: 1px solid rgb(215, 210, 199);">
+          <div data-dc-tpl="102" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="103" style="color: rgb(107, 104, 99); margin: 0px;">Role</dt>
+            <dd data-dc-tpl="104" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">Product Designer</dd>
           </div>
-          <div data-dc-tpl="105">
-            <dt data-dc-tpl="106" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Outcome</dt>
-            <dd data-dc-tpl="107" style="margin: 0px;">+5% message accept rate in the shipped A/B test, leading to more hires down the funnel.</dd>
+          <div data-dc-tpl="105" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="106" style="color: rgb(107, 104, 99); margin: 0px;">Team</dt>
+            <dd data-dc-tpl="107" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">1 designer, 1 researcher</dd>
           </div>
-          <div data-dc-tpl="108">
-            <dt data-dc-tpl="109" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Skills</dt>
-            <dd data-dc-tpl="110" style="margin: 0px; display: flex; flex-wrap: wrap; gap: 0.5em;">
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">Interaction Design</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">UX Research</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">Product Strategy</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">A/B Testing</span></span></div>
-              
-            </dd>
+          <div data-dc-tpl="108" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="109" style="color: rgb(107, 104, 99); margin: 0px;">Outcome</dt>
+            <dd data-dc-tpl="110" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">+5% message accept rate in the shipped A/B test</dd>
+          </div>
+          <div data-dc-tpl="111" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="112" style="color: rgb(107, 104, 99); margin: 0px; flex-shrink: 0;">Skills</dt>
+            <dd data-dc-tpl="113" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;"><span class="sc-interp">Interaction Design, UX Research, Product Strategy, A/B Testing</span></dd>
           </div>
         </dl>
       </section>
     </div>
 
-    <div data-dc-tpl="113" class="cs-divider" style="grid-area: 1 / 3 / auto / 11; align-self: end;">
-      <div data-dc-tpl="114" style="max-width: 760px; margin: 0px auto; height: 0px; border-bottom: 1px solid rgb(228, 224, 216);"></div>
+    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="114"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav" style="right: calc(50% + 426px); opacity: 0; pointer-events: none;">
+  
+    <div data-dc-tpl="4" style="position: relative; width: 40px; height: 260px; margin-left: -3px;">
+      <button data-dc-tpl="5" aria-label="Jump to nearest section" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
+        <span data-dc-tpl="6" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 100%; border-radius: 1px; background: rgb(228, 224, 216);"></span>
+        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 5px; border-radius: 1px; background: rgb(20, 19, 15);"></span>
+      </button>
+      
+        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 5px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">1 / 9</span></div>
+      
     </div>
+  
+  </nav></div>
 
-    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="115"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav">
-  <div data-dc-tpl="3">
-    
-      <button data-dc-tpl="5" data-id="overview" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; color: rgb(20, 19, 15); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(20, 19, 15); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">01</span></span>
-        <span class="sc-interp">Overview</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="background" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">02</span></span>
-        <span class="sc-interp">Background</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="problem" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">03</span></span>
-        <span class="sc-interp">Problem</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="approach" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">04</span></span>
-        <span class="sc-interp">Approach</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="solution" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">05</span></span>
-        <span class="sc-interp">Solution</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="outcomes" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">06</span></span>
-        <span class="sc-interp">Outcomes</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="reflections" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">07</span></span>
-        <span class="sc-interp">Reflections</span>
-      </button>
-    
-  </div></nav></div>
+    <div data-dc-tpl="115" style="grid-area: 2 / 3 / auto / 11;">
 
-    <div data-dc-tpl="116" style="grid-area: 2 / 3 / auto / 11;">
+      <section data-dc-tpl="116" id="background" class="cs-col cs-intro-4" style="max-width: 580px; margin: 1rem auto 4rem;">
+        <div data-dc-tpl="117" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Background</div>
+        <h3 data-dc-tpl="118" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">A feature built to generate a signal, at the cost of candidate confusion</h3>
+        <p data-dc-tpl="119" style="margin: 0px 0px 1rem;">Quick replies started with a narrower goal than what we eventually shipped: help in-demand candidates reply faster, while improving LinkedIn's own search and recommendation models along the way. The original idea asked a candidate to explicitly signal their interest before continuing a conversation, so every message carried a clean label we could feed back into the system.</p>
 
-      <section data-dc-tpl="117" id="background" class="cs-col cs-intro-4" style="max-width: 760px; margin: 1rem auto 4rem;">
-        <div data-dc-tpl="118" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Background</div>
-        <h3 data-dc-tpl="119" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">A feature built to generate a signal, at the cost of candidate confusion</h3>
-        <p data-dc-tpl="120" style="margin: 0px 0px 1rem;">Quick replies started with a narrower goal than what we eventually shipped: help in-demand candidates reply faster, while improving LinkedIn's own search and recommendation models along the way. The original idea asked a candidate to explicitly signal their interest before continuing a conversation, so every message carried a clean label we could feed back into the system.</p>
-
-        <div data-dc-tpl="121" style="margin-top: 2.5rem;">
-          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="122"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+        <div data-dc-tpl="120" style="margin-top: 2.5rem;">
+          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="121"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/quick-reply-versions-comparison.png" alt="Version 1.0 versus version 2.0 of the quick-reply prompt, showing the original explicit yes/no choice and the updated design" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
         </div>
 
-        <p data-dc-tpl="123" style="margin: 2.5rem 0px 1rem;">That worked, in a sense. Candidates were declining messages far more often than before, which was actually a good signal from an AI relevance perspective, feeding back into our search and recommendation algorithms. But it also created confusion for candidates and awkward conversational turn-taking for recruiters, and when someone tapped "No thanks," it still wasn't clear why.</p>
+        <p data-dc-tpl="122" style="margin: 2.5rem 0px 1rem;">That worked, in a sense. Candidates were declining messages far more often than before, which was actually a good signal from an AI relevance perspective, feeding back into our search and recommendation algorithms. But it also created confusion for candidates and awkward conversational turn-taking for recruiters, and when someone tapped "No thanks," it still wasn't clear why.</p>
 
-        <div data-dc-tpl="124" style="margin-top: 2.5rem;">
-          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="125"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="123" style="margin-top: 2.5rem;">
+          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="124"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/quick-reply-funnel.png" alt="Funnel showing message outcomes: reply, accept, decline, and ignore rates, with the gaps in recruiter and LinkedIn signal highlighted" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
         </div>
       </section>
 
-      <section data-dc-tpl="126" id="problem" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="127" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Problem</div>
-        <h3 data-dc-tpl="128" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 2rem;">What the existing interaction got wrong</h3>
+      <section data-dc-tpl="125" id="problem" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="126" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Problem</div>
+        <h3 data-dc-tpl="127" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 2rem;">What the existing interaction got wrong</h3>
 
-        <div data-dc-tpl="129">
-          <div data-dc-tpl="130" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
-            <div data-dc-tpl="131" style="flex: 1 1 240px; min-width: 200px;">
-              <img data-dc-tpl="132" src="assets/img/quick-reply-problem1-wireframe.png" alt="Wireframe of the yes/no prompt, showing the ambiguity around what tapping Yes actually does" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
+        <div data-dc-tpl="128">
+          <div data-dc-tpl="129" class="qr-problem-row" style="margin-bottom: 1.5rem; display: flex; flex-wrap: nowrap; gap: 1.5rem; align-items: flex-start;">
+            <div data-dc-tpl="130" class="qr-problem-img" style="flex: 0 1 200px; min-width: 150px; max-width: 225px;">
+              <img data-dc-tpl="131" src="assets/img/quick-reply-problem1-wireframe.png" alt="Wireframe of the yes/no prompt, showing the ambiguity around what tapping Yes actually does" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
             </div>
-            <div data-dc-tpl="133" style="flex: 1 1 320px; min-width: 280px;">
-              <h4 data-dc-tpl="134" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="135" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">1.</span>Unclear what happens next</h4>
-              <p data-dc-tpl="136" style="margin: 0px;">Some candidates thought tapping "Yes" sent an actual reply on its own, and didn't realize they could still write in after choosing an option.</p>
-            </div>
-          </div>
-          <div data-dc-tpl="137" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
-            <div data-dc-tpl="138" style="flex: 1 1 240px; min-width: 200px;">
-              <img data-dc-tpl="139" src="assets/img/quick-reply-problem2-wireframe.png" alt="Wireframe of an accepted message with no reply text, followed by the recruiter asking the candidate to actually respond" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
-            </div>
-            <div data-dc-tpl="140" style="flex: 1 1 320px; min-width: 280px;">
-              <h4 data-dc-tpl="141" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="142" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">2.</span>A "yes" with no words</h4>
-              <p data-dc-tpl="143" style="margin: 0px;">Candidates could signal interest without writing anything, which read to recruiters like a silent nod, or worse, a bug.</p>
+            <div data-dc-tpl="132" style="flex: 1 1 320px; min-width: 280px;">
+              <h4 data-dc-tpl="133" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="134" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">1.</span>Unclear what happens next</h4>
+              <p data-dc-tpl="135" style="margin: 0px;">Some candidates thought tapping "Yes" sent an actual reply on its own, and didn't realize they could still write in after choosing an option.</p>
             </div>
           </div>
-          <div data-dc-tpl="144" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
-            <div data-dc-tpl="145" style="flex: 1 1 240px; min-width: 200px;">
-              <img data-dc-tpl="146" src="assets/img/quick-reply-problem3-wireframe.png" alt="Wireframe of a decline forced into a binary no, followed by the candidate manually explaining they'd still like to stay in touch for future roles" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
+          <div data-dc-tpl="136" class="qr-problem-row" style="margin-bottom: 1.5rem; display: flex; flex-wrap: nowrap; gap: 1.5rem; align-items: flex-start;">
+            <div data-dc-tpl="137" class="qr-problem-img" style="flex: 0 1 200px; min-width: 150px; max-width: 225px;">
+              <img data-dc-tpl="138" src="assets/img/quick-reply-problem2-wireframe.png" alt="Wireframe of an accepted message with no reply text, followed by the recruiter asking the candidate to actually respond" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
             </div>
-            <div data-dc-tpl="147" style="flex: 1 1 320px; min-width: 280px;">
-              <h4 data-dc-tpl="148" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="149" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">3.</span>No room for "maybe"</h4>
-              <p data-dc-tpl="150" style="margin: 0px;">A binary yes or no was an awkward fit for a candidate who was interested in the company, but not that specific role.</p>
+            <div data-dc-tpl="139" style="flex: 1 1 320px; min-width: 280px;">
+              <h4 data-dc-tpl="140" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="141" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">2.</span>A "yes" with no words</h4>
+              <p data-dc-tpl="142" style="margin: 0px;">Candidates could signal interest without writing anything, which read to recruiters like a silent nod, or worse, a bug.</p>
+            </div>
+          </div>
+          <div data-dc-tpl="143" class="qr-problem-row" style="margin-bottom: 1.5rem; display: flex; flex-wrap: nowrap; gap: 1.5rem; align-items: flex-start;">
+            <div data-dc-tpl="144" class="qr-problem-img" style="flex: 0 1 200px; min-width: 150px; max-width: 225px;">
+              <img data-dc-tpl="145" src="assets/img/quick-reply-problem3-wireframe.png" alt="Wireframe of a decline forced into a binary no, followed by the candidate manually explaining they'd still like to stay in touch for future roles" style="width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid rgb(228, 224, 216); background: rgb(255, 255, 255);">
+            </div>
+            <div data-dc-tpl="146" style="flex: 1 1 320px; min-width: 280px;">
+              <h4 data-dc-tpl="147" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="148" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">3.</span>No room for "maybe"</h4>
+              <p data-dc-tpl="149" style="margin: 0px;">A binary yes or no was an awkward fit for a candidate who was interested in the company, but not that specific role.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section data-dc-tpl="151" id="approach" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="152" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
-        <h3 data-dc-tpl="153" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Two directions, not one</h3>
-        <p data-dc-tpl="154" style="margin: 0px 0px 1rem;">I worked with a designer on our consumer messaging team to explore a wide range of concepts, reviewing them internally with design and product leadership. They mostly settled into two directions.</p>
+      <section data-dc-tpl="150" id="approach" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="151" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
+        <h3 data-dc-tpl="152" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Two directions, not one</h3>
+        <p data-dc-tpl="153" style="margin: 0px 0px 1rem;">I worked with a designer on our consumer messaging team to explore a wide range of concepts, reviewing them internally with design and product leadership. They mostly settled into two directions.</p>
 
-        <div data-dc-tpl="155" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="156" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Direction 1: Clarifying the current experience</h3>
-          <p data-dc-tpl="157" style="margin: 0px 0px 2rem;">These concepts centered on explaining or clarifying the interaction, but otherwise fundamentally preserving the idea that a user would explicitly select an option before being able to reply.</p>
+        <div data-dc-tpl="154" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="155" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Direction 1: Clarifying the current experience</h3>
+          <p data-dc-tpl="156" style="margin: 0px 0px 2rem;">These concepts centered on explaining or clarifying the interaction, but otherwise fundamentally preserving the idea that a user would explicitly select an option before being able to reply.</p>
 
-          <h4 data-dc-tpl="158" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem;">Onboarding</h4>
-          <p data-dc-tpl="159" style="margin: 0px 0px 1rem;">Maybe we should just explain things better because that always works, right?</p>
-          <p data-dc-tpl="160" style="margin: 0px 0px 1.5rem;">But seriously, much of the negative feedback came from existing users who suddenly experienced a change without an explanation, so this wasn't an unreasonable idea.</p>
-          <div data-dc-tpl="161">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="162"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <h4 data-dc-tpl="157" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem;">Onboarding</h4>
+          <p data-dc-tpl="158" style="margin: 0px 0px 1rem;">Maybe we should just explain things better because that always works, right?</p>
+          <p data-dc-tpl="159" style="margin: 0px 0px 1.5rem;">But seriously, much of the negative feedback came from existing users who suddenly experienced a change without an explanation, so this wasn't an unreasonable idea.</p>
+          <div data-dc-tpl="160">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="161"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/thor-v3-onboarding.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
 
-          <h4 data-dc-tpl="163" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Optional response field</h4>
-          <p data-dc-tpl="164" style="margin: 0px 0px 1.5rem;">Users would still be required to quickly select "yes" or "no," but an optional response CTA helps clarify that it's still possible to write a reply.</p>
-          <div data-dc-tpl="165">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="166"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <h4 data-dc-tpl="162" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Optional response field</h4>
+          <p data-dc-tpl="163" style="margin: 0px 0px 1.5rem;">Users would still be required to quickly select "yes" or "no," but an optional response CTA helps clarify that it's still possible to write a reply.</p>
+          <div data-dc-tpl="164">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="165"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/optional-response-no-1.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
 
-          <h4 data-dc-tpl="167" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Maybe?</h4>
-          <p data-dc-tpl="168" style="margin: 0px 0px 1rem;">We also explored a middle CTA which could better support users who were on the fence about an opportunity, although it also complicated the interaction.</p>
-          <p data-dc-tpl="169" style="margin: 0px 0px 1.5rem;">Am I accepting or declining an invite, or am I rating an opportunity?</p>
-          <div data-dc-tpl="170">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="171"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <h4 data-dc-tpl="166" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Maybe?</h4>
+          <p data-dc-tpl="167" style="margin: 0px 0px 1rem;">We also explored a middle CTA which could better support users who were on the fence about an opportunity, although it also complicated the interaction.</p>
+          <p data-dc-tpl="168" style="margin: 0px 0px 1.5rem;">Am I accepting or declining an invite, or am I rating an opportunity?</p>
+          <div data-dc-tpl="169">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="170"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/thor-maybe-1.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="172" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="173" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Direction 2: Stepping out of the way</h3>
-          <p data-dc-tpl="174" style="margin: 0px 0px 2rem;">This direction let a candidate just reply, using natural language processing to infer their interest from what they actually wrote, the same approach behind our suggested-reply feature. It also meant revisiting the original templated-reply idea, now with more confidence in the underlying model than we'd had the first time around.</p>
+        <div data-dc-tpl="171" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="172" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Direction 2: Stepping out of the way</h3>
+          <p data-dc-tpl="173" style="margin: 0px 0px 2rem;">This direction let a candidate just reply, using natural language processing to infer their interest from what they actually wrote, the same approach behind our suggested-reply feature. It also meant revisiting the original templated-reply idea, now with more confidence in the underlying model than we'd had the first time around.</p>
 
-          <h4 data-dc-tpl="175" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem;">Inferring from natural language, plus reply templates</h4>
-          <p data-dc-tpl="176" style="margin: 0px 0px 1rem;">This was a re-styled version of the flow that existed before we introduced the "yes / no" button treatment. The consumer team had originally pushed for this, but it had been overruled because, at the time, we didn't have high confidence that the inference would be accurate.</p>
-          <p data-dc-tpl="177" style="margin: 0px 0px 1.5rem;">The idea was revived because our inference models had grown more accurate since then, and the assumption that had ruled it out no longer held.</p>
-          <div data-dc-tpl="178">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="179"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <h4 data-dc-tpl="174" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem;">Inferring from natural language, plus reply templates</h4>
+          <p data-dc-tpl="175" style="margin: 0px 0px 1rem;">This was a re-styled version of the flow that existed before we introduced the "yes / no" button treatment. The consumer team had originally pushed for this, but it had been overruled because, at the time, we didn't have high confidence that the inference would be accurate.</p>
+          <p data-dc-tpl="176" style="margin: 0px 0px 1.5rem;">The idea was revived because our inference models had grown more accurate since then, and the assumption that had ruled it out no longer held.</p>
+          <div data-dc-tpl="177">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="178"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/quick-reply-custom.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
 
-          <h4 data-dc-tpl="180" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Gathering feedback from candidates</h4>
-          <p data-dc-tpl="181" style="margin: 0px 0px 1.5rem;">In addition to each direction, we also explored how we could better explicitly understand why a role wasn't a fit. The challenge here was balancing simplicity vs. comprehensiveness and offering clarity and control over what was actually shared back to a recruiter.</p>
-          <div data-dc-tpl="182">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="183"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <h4 data-dc-tpl="179" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 2rem 0px 0.4rem;">Gathering feedback from candidates</h4>
+          <p data-dc-tpl="180" style="margin: 0px 0px 1.5rem;">In addition to each direction, we also explored how we could better explicitly understand why a role wasn't a fit. The challenge here was balancing simplicity vs. comprehensiveness and offering clarity and control over what was actually shared back to a recruiter.</p>
+          <div data-dc-tpl="181">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="182"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/quick-reply-decline-feedback.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="184" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="185" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">A/B Testing</h3>
-          <p data-dc-tpl="186" style="margin: 0px 0px 1rem;">We took the template plus inference idea and A/B tested it against the current experience. When we ramped the experimental variant, we saw a lift in accept rates and more recruiters replying, since we'd solved the problem of "why are these message accepts blank?"</p>
-          <div data-dc-tpl="187" style="margin: 2.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="188"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="183" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="184" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">A/B Testing</h3>
+          <p data-dc-tpl="185" style="margin: 0px 0px 1rem;">We took the template plus inference idea and A/B tested it against the current experience. When we ramped the experimental variant, we saw a lift in accept rates and more recruiters replying, since we'd solved the problem of "why are these message accepts blank?"</p>
+          <div data-dc-tpl="186" style="margin: 2.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="187"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/quick-reply-current-vs-experiment.png" alt="Side by side comparison of the current messaging experience and the A/B test experiment variant" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <div class="sc-host" data-sc-name="Blockquote" data-dc-tpl="189"><blockquote data-dc-tpl="0" style="font-weight: 500; font-size: clamp(1.09375rem, 1.02rem + 0.3vw, 1.2rem); line-height: 1.5; border-left: 3px solid rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 1.25rem 1.5rem; margin: 0px;">
+          <div class="sc-host" data-sc-name="Blockquote" data-dc-tpl="188"><blockquote data-dc-tpl="0" style="font-weight: 500; font-size: clamp(1.09375rem, 1.02rem + 0.3vw, 1.2rem); line-height: 1.5; border-left: 3px solid rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 1.25rem 1.5rem; margin: 0px;">
   <span class="sc-interp">The experimental variant won out, making us realize that we no longer needed the current "yes vs. no thanks" UI after all.</span>
   </blockquote></div>
-          <p data-dc-tpl="190" style="margin: 0px 0px 1.5rem;">We'd originally introduced those buttons because, despite the confusion they caused, they provided the clearest signal of job interest, which improved hiring efficiency overall. This experiment proved we could get that same signal with the previous UI because our inference models had become more accurate.</p>
+          <p data-dc-tpl="189" style="margin: 0px 0px 1.5rem;">We'd originally introduced those buttons because, despite the confusion they caused, they provided the clearest signal of job interest, which improved hiring efficiency overall. This experiment proved we could get that same signal with the previous UI because our inference models had become more accurate.</p>
         </div>
       </section>
 
-      <section data-dc-tpl="191" id="solution" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="192" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Solution</div>
+      <section data-dc-tpl="190" id="solution" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="191" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Solution</div>
 
-        <div data-dc-tpl="193" style="padding-top: 1rem;">
-          <h3 data-dc-tpl="194" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Just let people talk</h3>
-          <p data-dc-tpl="195" style="margin: 0px 0px 1.5rem;">What ultimately shipped was a slightly improved version of the flow we'd originally had a year ago, before I joined the project. Candidates could reply naturally via text or use the templates, and the system would infer their interest from what they wrote.</p>
-          <div data-dc-tpl="196">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="197"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="192" style="padding-top: 1rem;">
+          <h3 data-dc-tpl="193" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Just let people talk</h3>
+          <p data-dc-tpl="194" style="margin: 0px 0px 1.5rem;">What ultimately shipped was a slightly improved version of the flow we'd originally had a year ago, before I joined the project. Candidates could reply naturally via text or use the templates, and the system would infer their interest from what they wrote.</p>
+          <div data-dc-tpl="195">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="196"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
     <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/quick-reply-flow-1.mp4" type="video/mp4"></video>
   
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="198" style="margin: 1.5rem 0px 0px;">For all the designers in the room, this was a relief, since we'd been looking for a way to just let people talk from the start. Now we had rigorous data to back the case that doing so would also improve recommendation quality and hiring efficiency.</p>
+          <p data-dc-tpl="197" style="margin: 1.5rem 0px 0px;">For all the designers in the room, this was a relief, since we'd been looking for a way to just let people talk from the start. Now we had rigorous data to back the case that doing so would also improve recommendation quality and hiring efficiency.</p>
         </div>
       </section>
 
-      <section data-dc-tpl="199" id="outcomes" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="200" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Outcomes</div>
-        <h3 data-dc-tpl="201" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Clearer for users, better signals for our AI models</h3>
-        <p data-dc-tpl="202" style="margin: 0px 0px 1rem;">There's often a trade-off in consumer products between what users want and what companies need to power their AI systems with data. In this case, we managed to get the best of both by rolling back a confusing UI decision that had over-prioritized the latter.</p>
+      <section data-dc-tpl="198" id="outcomes" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="199" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Outcomes</div>
+        <h3 data-dc-tpl="200" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Clearer for users, better signals for our AI models</h3>
+        <p data-dc-tpl="201" style="margin: 0px 0px 1rem;">There's often a trade-off in consumer products between what users want and what companies need to power their AI systems with data. In this case, we managed to get the best of both by rolling back a confusing UI decision that had over-prioritized the latter.</p>
 
-        <div data-dc-tpl="203" style="padding: 1rem 0px 2rem;">
-          <p data-dc-tpl="204" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">+5%</p>
-          <p data-dc-tpl="205" style="color: rgb(107, 104, 99); margin: 0px;">lift in message accept rate</p>
+        <div data-dc-tpl="202" style="padding: 1rem 0px 2rem;">
+          <p data-dc-tpl="203" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">+5%</p>
+          <p data-dc-tpl="204" style="color: rgb(107, 104, 99); margin: 0px;">lift in message accept rate</p>
         </div>
-        <p data-dc-tpl="206" style="margin: 0px 0px 1rem;">We saw a lift in message accept rates and, importantly, the complete disappearance of confused user feedback about the "yes / no" buttons that had appeared in their message threads.</p>
+        <p data-dc-tpl="205" style="margin: 0px 0px 1rem;">We saw a lift in message accept rates and, importantly, the complete disappearance of confused user feedback about the "yes / no" buttons that had appeared in their message threads.</p>
       </section>
 
-      <section data-dc-tpl="207" id="reflections" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="208" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Reflections</div>
-        <h3 data-dc-tpl="209" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Forcing an organization to revisit a past decision</h3>
-        <p data-dc-tpl="210" style="margin: 0px 0px 1rem;">The hardest part of this project wasn't the interaction design, it was getting the organization to reconsider a decision it had already made. The root of the conflict was that the consumer team optimized for a clear user experience, while the talent solutions team had pushed for something that improved hiring efficiency, but at the expense of clarity for everyday candidates.</p>
-        <p data-dc-tpl="211" style="margin: 0px 0px 1rem;">Getting the balance right was hard, especially in high-stakes meetings with product and design leaders. Personally, I wanted a solution that felt clearer than the yes/no buttons, and so did every other designer in the room, but we were butting heads against product and data science on the talent solutions side. It became a juggling act: balancing competing interests, quiet lobbying outside of meetings, and a series of qualitative and A/B tests to make the case.</p>
-        <p data-dc-tpl="212" style="margin: 0px 0px 1rem;">We landed in a good spot that I'm happy with, one that respected both what candidates needed and what the business needed, but only because we were willing to keep pushing on a decision everyone else considered settled.</p>
-        <p data-dc-tpl="213" style="margin: 0px;">My big lesson was not taking past decisions at face value, and explicitly calling out the assumptions we'd made and asking whether they were still true. We hadn't revisited the natural-language option because we'd assumed our models weren't accurate enough, something we could have actively tracked and worked on instead of discovering several rounds into the conversation. Surfacing that context earlier would have prevented a ton of tense meetings and, more importantly, gotten a better experience to candidates sooner.</p>
+      <section data-dc-tpl="206" id="reflections" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="207" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Reflections</div>
+        <h3 data-dc-tpl="208" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Forcing an organization to revisit a past decision</h3>
+        <p data-dc-tpl="209" style="margin: 0px 0px 1rem;">The hardest part of this project wasn't the interaction design, it was getting the organization to reconsider a decision it had already made. The root of the conflict was that the consumer team optimized for a clear user experience, while the talent solutions team had pushed for something that improved hiring efficiency, but at the expense of clarity for everyday candidates.</p>
+        <p data-dc-tpl="210" style="margin: 0px 0px 1rem;">Getting the balance right was hard, especially in high-stakes meetings with product and design leaders. Personally, I wanted a solution that felt clearer than the yes/no buttons, and so did every other designer in the room, but we were butting heads against product and data science on the talent solutions side. It became a juggling act: balancing competing interests, quiet lobbying outside of meetings, and a series of qualitative and A/B tests to make the case.</p>
+        <p data-dc-tpl="211" style="margin: 0px 0px 1rem;">We landed in a good spot that I'm happy with, one that respected both what candidates needed and what the business needed, but only because we were willing to keep pushing on a decision everyone else considered settled.</p>
+        <p data-dc-tpl="212" style="margin: 0px;">My big lesson was not taking past decisions at face value, and explicitly calling out the assumptions we'd made and asking whether they were still true. We hadn't revisited the natural-language option because we'd assumed our models weren't accurate enough, something we could have actively tracked and worked on instead of discovering several rounds into the conversation. Surfacing that context earlier would have prevented a ton of tense meetings and, more importantly, gotten a better experience to candidates sooner.</p>
       </section>
 
-      <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="214"><section data-dc-tpl="2" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-  <div data-dc-tpl="3" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 1.5rem;">Next case study</div>
-  <a data-dc-tpl="4" href="benchling-bioanalytical.html" class="scp1" style="display: flex; gap: 1.5rem; align-items: center; text-decoration: none; color: inherit; --deepen: 0;">
-    <div data-dc-tpl="5" class="ncs-thumb" style="aspect-ratio: 16 / 10; position: relative; overflow: hidden; border-radius: 14px; background: rgb(235, 232, 226); box-sizing: border-box;">
+      <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="213"><section data-dc-tpl="2" class="cs-col" style="padding-top: 4rem; padding-bottom: 5rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
+  <div data-dc-tpl="3" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 1.5rem;">Next case study</div>
+  <a data-dc-tpl="4" href="benchling-bioanalytical.html" class="scp1" style="display: flex; align-items: stretch; box-sizing: border-box; text-decoration: none; color: inherit; min-height: 132px; overflow: hidden; border: 1px solid rgb(228, 224, 216); border-radius: 10px; background: rgb(255, 255, 255); --deepen: 0; transition: border-color 0.2s;">
+    <div data-dc-tpl="5" class="ncs-thumb" style="position: relative; overflow: hidden; border-right: 1px solid rgb(228, 224, 216); background: rgb(235, 232, 226); box-sizing: border-box;">
       <div data-dc-tpl="6" style="position: absolute; inset: 0px; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s;">
         <div data-dc-tpl="7" style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.83 0.08 240); filter: blur(26px); animation: 18s ease-in-out 0s infinite normal none running ncsBlobA;"></div>
         <div data-dc-tpl="8" style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.78 0.1 240); filter: blur(26px); animation: 22s ease-in-out 0s infinite normal none running ncsBlobB;"></div>
       </div>
-      <img data-dc-tpl="9" src="assets/img/benchling-bioa-chrome-cropped.png" alt="Benchling Bioanalytical plate design interface" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.01)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+      <img data-dc-tpl="9" src="assets/img/benchling-bioa-chrome-cropped.png" loading="lazy" alt="Benchling Bioanalytical plate design interface" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.01)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
     </div>
-    <div data-dc-tpl="10" style="flex: 1 1 0%; min-width: 0px;">
+    <div data-dc-tpl="10" style="flex: 1 1 0%; min-width: 0px; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; justify-content: center;">
       <div data-dc-tpl="11" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: rgb(107, 104, 99); font-weight: 600; margin-bottom: 0.35em;"><span class="sc-interp">Benchling</span></div>
-      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; display: flex; align-items: center; gap: 0.5em;">
+      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; color: rgb(20, 19, 15); display: flex; align-items: center; gap: 0.5em;">
         <span class="sc-interp">A platform for complex, automated testing during drug development</span>
         <svg data-dc-tpl="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; flex-shrink: 0; transform: translateX(calc(var(--deepen, 0) * 4px)); transition: transform 0.3s;"><path data-dc-tpl="14" d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </div>
@@ -514,7 +512,7 @@
     </div>
   </div>
 
-  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="215"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
+  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="214"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
   <div data-dc-tpl="1" style="max-width: 1280px; margin: 0px auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <span data-dc-tpl="2" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; color: rgb(20, 19, 15);">
       <img data-dc-tpl="3" src="assets/img/logo-mark-solid.svg" alt="" style="width: 20px; height: 20px; display: block; flex-shrink: 0;">

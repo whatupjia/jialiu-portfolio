@@ -73,7 +73,7 @@
     @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
+    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.55; font-size: 1.078125rem; }
     a { color: #0688f0; }
     a:hover { color: #0576d1; }
     strong, b { font-weight: 600; }
@@ -87,25 +87,46 @@
     @media (max-width: 1100px) {
       .cs-title-grid, .cs-shell { display: block !important; }
       .cs-title-block { padding-top: 2.5rem !important; }
-      .cs-dl { margin-bottom: 2.5rem !important; grid-template-columns: 1fr !important; }
-      .cs-divider { display: none !important; }
+      .cs-dl { margin-bottom: 2.5rem !important; padding-bottom: 0 !important; }
       .cs-overview-wrap { padding-bottom: 1.5rem !important; }
     }
+  
+    /* Body copy sits a step back from full ink; headings hold #14130f so the
+       hierarchy comes from weight AND contrast, not size alone. */
+    body { color: #3a3833; }
+    h1, h2, h3, h4 { color: #14130f; }
+  
+    /* Case studies run much longer than the home page, so they get more leading
+       and a looser paragraph rhythm to stay readable in long runs. */
+    p { line-height: 1.55; }
   </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style data-dc-tpl="1">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    .section-nav { position: fixed; left: max(2rem, calc((100vw - 1280px) / 2 + clamp(1.25rem, 4vw, 3rem) - 1rem)); top: 260px; z-index: 3; }
-    @media (max-width: 1100px) { .section-nav { display: none !important; } }
-  </style><style data-dc-tpl="1">
     @media (max-width: 900px) {
       .expandable-image-wrap { width: 100% !important; margin-left: 0 !important; }
+    }
+    /* Breakout width is a column count (1-12) resolved to a calc() formula against
+       --bio-grid-w (the 12-col grid's own width, published once by the page) in JS —
+       self-centering and needing no per-image measurement, so an image mounting at
+       any time gets correct geometry from the first paint. The grid collapses to a
+       single column below 1100px, so breakout has nothing left to escape there. */
+    @media (max-width: 1100px) {
+      .expandable-image-wrap[data-breakout]:not([data-breakout=""]) {
+        width: 100% !important;
+        margin-left: 0 !important;
+        transform: none !important;
+      }
     }
   </style><style data-dc-tpl="1">
     @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
     @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
-    .ncs-thumb { flex: 0 0 160px; }
-    @media (min-width: 640px) { .ncs-thumb { flex-basis: 280px; } }
-  </style><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script><script src="site-behaviors.js" defer=""></script><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+    .ncs-thumb { flex: 0 0 132px; }
+    @media (min-width: 640px) { .ncs-thumb { flex-basis: 200px; } }
+  </style><style data-dc-tpl="1">
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
+  </style><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><style>image-slot { display: none !important; }</style><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+<script src="site-behaviors.js" defer></script>
 </head>
 <body>
 <div id="dc-root"><div class="sc-host" data-sc-name="linkedin-recruiter-inbox"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251, 250, 249, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
@@ -202,394 +223,379 @@
       </div>
     </nav>
    </div>
-  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 76px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
+  </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 60px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
 
   <div data-dc-tpl="92" class="cs-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
     <div data-dc-tpl="93" class="cs-title-block cs-intro-1" style="grid-column: 3 / 11; padding: 4rem 0px 1.5rem;">
-      <div data-dc-tpl="94" class="cs-col" style="max-width: 760px; margin-left: auto; margin-right: auto;">
-        <h1 data-dc-tpl="95" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem); font-weight: 600; line-height: 1.25; margin: 0px 0px 0.5rem;"><span class="sc-interp">Redesigning the LinkedIn Recruiter inbox</span></h1>
-        <h2 data-dc-tpl="96" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem); font-weight: 400; line-height: 1.3; color: rgb(107, 104, 99); margin: 0px;"><span class="sc-interp">Rebuilding the surface recruiters live in all day</span></h2>
+      <div data-dc-tpl="94" class="cs-col" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+        <h1 data-dc-tpl="95" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.6rem, 1.15rem + 1.6vw, 2.25rem); font-weight: 400; line-height: 1.2; margin: 0px 0px 0.75rem;"><span class="sc-interp">Redesigning the LinkedIn Recruiter inbox</span></h1>
+        <h2 data-dc-tpl="96" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.25rem; font-weight: 400; line-height: 1.5; color: rgb(107, 104, 99); margin: 0px;"><span class="sc-interp">Rebuilding the surface recruiters live in all day</span></h2>
       </div>
     </div>
   </div>
 
   <div data-dc-tpl="97" class="cs-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start;">
 
-    <div data-dc-tpl="98" class="cs-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 3rem;">
-      <section data-dc-tpl="99" id="overview" class="cs-col cs-intro-2" style="max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div data-dc-tpl="98" class="cs-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 1.5rem;">
+      <section data-dc-tpl="99" id="overview" class="cs-col cs-intro-2" style="max-width: 580px; margin-left: auto; margin-right: auto;">
         <p data-dc-tpl="100" style="margin: 0px 0px 1rem;">LinkedIn Recruiter is the paid product talent professionals use to search for candidates, reach out to them, and track those conversations. Messaging is where most of that work actually happens. A single recruiter can be running hundreds of open threads across several roles at once. I owned the messaging features and led an end-to-end redesign of the inbox.</p>
 
-        <dl data-dc-tpl="101" class="cs-dl cs-intro-3" style="display: grid; gap: 1.5rem; margin: 2rem 0px 0px;">
-          <div data-dc-tpl="102">
-            <dt data-dc-tpl="103" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Role</dt>
-            <dd data-dc-tpl="104" style="margin: 0px;">Product Designer, LinkedIn, Sep 2018 to May 2021. Owned Recruiter messaging, partnering with one product manager and an engineering team.</dd>
+        <dl data-dc-tpl="101" class="cs-dl cs-intro-3" style="margin: 2.5rem 0px 0px; border-top: 1px solid rgb(215, 210, 199);">
+          <div data-dc-tpl="102" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="103" style="color: rgb(107, 104, 99); margin: 0px;">Role</dt>
+            <dd data-dc-tpl="104" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">Product Designer</dd>
           </div>
-          <div data-dc-tpl="105">
-            <dt data-dc-tpl="106" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Outcome</dt>
-            <dd data-dc-tpl="107" style="margin: 0px;">Redesigned inbox shipped in 2022, after I'd moved on from LinkedIn; landed well with recruiters, who called out the project-based organization as the standout improvement.</dd>
+          <div data-dc-tpl="105" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="106" style="color: rgb(107, 104, 99); margin: 0px;">Timeline</dt>
+            <dd data-dc-tpl="107" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">Sep 2018 – May 2021</dd>
           </div>
-          <div data-dc-tpl="108">
-            <dt data-dc-tpl="109" style="font-size: 0.9rem; font-weight: 600; color: rgb(107, 104, 99); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25em;">Skills</dt>
-            <dd data-dc-tpl="110" style="margin: 0px; display: flex; flex-wrap: wrap; gap: 0.5em;">
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">Interaction Design</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">UX Research</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">Design Systems</span></span></div>
-              
-                <div class="sc-host" data-sc-name="Chip" data-dc-tpl="112"><span data-dc-tpl="0" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; font-size: 0.78rem; font-weight: 500; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.35em 1em; border-radius: 999px; letter-spacing: 0.06em;"><span class="sc-interp">Enterprise SaaS</span></span></div>
-              
-            </dd>
+          <div data-dc-tpl="108" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="109" style="color: rgb(107, 104, 99); margin: 0px;">Team</dt>
+            <dd data-dc-tpl="110" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">1 PM, 1 eng team</dd>
+          </div>
+          <div data-dc-tpl="111" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="112" style="color: rgb(107, 104, 99); margin: 0px;">Outcome</dt>
+            <dd data-dc-tpl="113" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">Shipped 2022; recruiters praised the project-based organization</dd>
+          </div>
+          <div data-dc-tpl="114" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+            <dt data-dc-tpl="115" style="color: rgb(107, 104, 99); margin: 0px; flex-shrink: 0;">Skills</dt>
+            <dd data-dc-tpl="116" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;"><span class="sc-interp">Interaction Design, UX Research, Design Systems, Enterprise SaaS</span></dd>
           </div>
         </dl>
       </section>
     </div>
 
-    <div data-dc-tpl="113" class="cs-divider" style="grid-area: 1 / 3 / auto / 11; align-self: end;">
-      <div data-dc-tpl="114" style="max-width: 760px; margin: 0px auto; height: 0px; border-bottom: 1px solid rgb(228, 224, 216);"></div>
+    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="117"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav" style="right: calc(50% + 426px); opacity: 0; pointer-events: none;">
+  
+    <div data-dc-tpl="4" style="position: relative; width: 40px; height: 260px; margin-left: -3px;">
+      <button data-dc-tpl="5" aria-label="Jump to nearest section" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
+        <span data-dc-tpl="6" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 100%; border-radius: 1px; background: rgb(228, 224, 216);"></span>
+        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 4px; border-radius: 1px; background: rgb(20, 19, 15);"></span>
+      </button>
+      
+        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 4px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">1 / 16</span></div>
+      
     </div>
+  
+  </nav></div>
 
-    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="115"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav">
-  <div data-dc-tpl="3">
-    
-      <button data-dc-tpl="5" data-id="overview" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; color: rgb(20, 19, 15); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(20, 19, 15); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">01</span></span>
-        <span class="sc-interp">Overview</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="background" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">02</span></span>
-        <span class="sc-interp">Background</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="problem" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">03</span></span>
-        <span class="sc-interp">Problem</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="approach" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">04</span></span>
-        <span class="sc-interp">Approach</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="solution" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">05</span></span>
-        <span class="sc-interp">Solution</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="outcomes" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">06</span></span>
-        <span class="sc-interp">Outcomes</span>
-      </button>
-    
-      <button data-dc-tpl="5" data-id="reflections" style="display: flex; align-items: baseline; gap: 0.55em; height: 40px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 400; color: rgb(107, 104, 99); cursor: pointer; text-align: left; white-space: nowrap; transition: color 0.25s;">
-        <span data-dc-tpl="6" style="font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; color: rgb(154, 150, 143); font-variant-numeric: tabular-nums; transition: color 0.25s;"><span class="sc-interp">07</span></span>
-        <span class="sc-interp">Reflections</span>
-      </button>
-    
-  </div></nav></div>
+    <div data-dc-tpl="118" style="grid-area: 2 / 3 / auto / 11;">
 
-    <div data-dc-tpl="116" style="grid-area: 2 / 3 / auto / 11;">
+      <section data-dc-tpl="119" id="background" class="cs-col cs-intro-4" style="max-width: 580px; margin: 1rem auto 4rem;">
+        <div data-dc-tpl="120" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Background</div>
+        <h3 data-dc-tpl="121" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">A decade of accumulated product</h3>
+        <p data-dc-tpl="122" style="margin: 0px 0px 1rem;">Recruiter dates back to the early 2010s, when it was a much simpler search-and-contact tool bolted onto LinkedIn's consumer product. Messaging was an afterthought then, a plain thread with none of the project tracking, templates, or team collaboration that recruiters rely on today.</p>
+        <p data-dc-tpl="123" style="margin: 0px;">Every year since, new capabilities got layered on to meet whatever the immediate need was: pipeline stages, InMail credits, team sharing, scheduling. By the time I joined, the inbox was carrying almost a decade of that accretion, and it showed.</p>
 
-      <section data-dc-tpl="117" id="background" class="cs-col cs-intro-4" style="max-width: 760px; margin: 1rem auto 4rem;">
-        <div data-dc-tpl="118" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Background</div>
-        <h3 data-dc-tpl="119" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">A decade of accumulated product</h3>
-        <p data-dc-tpl="120" style="margin: 0px 0px 1rem;">Recruiter dates back to the early 2010s, when it was a much simpler search-and-contact tool bolted onto LinkedIn's consumer product. Messaging was an afterthought then, a plain thread with none of the project tracking, templates, or team collaboration that recruiters rely on today.</p>
-        <p data-dc-tpl="121" style="margin: 0px;">Every year since, new capabilities got layered on to meet whatever the immediate need was: pipeline stages, InMail credits, team sharing, scheduling. By the time I joined, the inbox was carrying almost a decade of that accretion, and it showed.</p>
-
-        <div data-dc-tpl="122" style="margin: 1.5rem 0px;">
-          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="123"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="124" style="margin: 1.5rem 0px;">
+          <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="125"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-recruiter-2010s-upscaled.png" alt="Screenshot of LinkedIn Recruiter's inbox/messaging, circa early-to-mid 2010s" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
         </div>
 
-        <div data-dc-tpl="124" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="125" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Part of a bigger platform relaunch</h3>
-          <p data-dc-tpl="126" style="margin: 0px 0px 1rem;">This redesign was one piece of a larger effort to relaunch Talent Solutions as a unified platform across customer segments, integrating disparate products like Recruiter and Jobs and building toward a future powered by AI. The underlying platform foundations were being reworked at the same time.</p>
-          <p data-dc-tpl="127" style="margin: 0px;">That was a real opportunity, but it also meant constantly weighing how Inbox's design language, components, terminology, and voice could hold together with everything else on the platform. inbox got a fresh start, but how far we could push new component behavior or rework the information architecture stayed bounded by that larger effort.</p>
-          <div data-dc-tpl="128" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="129"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="126" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="127" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Part of a bigger platform relaunch</h3>
+          <p data-dc-tpl="128" style="margin: 0px 0px 1rem;">This redesign was one piece of a larger effort to relaunch Talent Solutions as a unified platform across customer segments, integrating disparate products like Recruiter and Jobs and building toward a future powered by AI. The underlying platform foundations were being reworked at the same time.</p>
+          <p data-dc-tpl="129" style="margin: 0px;">That was a real opportunity, but it also meant constantly weighing how Inbox's design language, components, terminology, and voice could hold together with everything else on the platform. inbox got a fresh start, but how far we could push new component behavior or rework the information architecture stayed bounded by that larger effort.</p>
+          <div data-dc-tpl="130" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="131"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-talent-solutions-search.png" alt="A candidate search results screen elsewhere in the Talent Solutions platform, sharing the same design language" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
       </section>
 
-      <section data-dc-tpl="130" id="problem" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="131" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Problem</div>
-        <h3 data-dc-tpl="132" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">What recruiters were struggling with</h3>
-        <p data-dc-tpl="133" style="margin: 0px 0px 2rem;">Recruiters had been raising versions of these same complaints about messaging for years: InMails that got buried once a recruiter was running more than a handful of open roles, no good way to tell whether a candidate's silence meant "not interested" or "hasn't seen it yet," and message history that lived apart from the pipeline and project context recruiters needed to act on it. Our research confirmed these problems hadn't gone away on their own. They'd just been worked around for years.</p>
+      <section data-dc-tpl="132" id="problem" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="133" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Problem</div>
+        <h3 data-dc-tpl="134" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">What recruiters were struggling with</h3>
+        <p data-dc-tpl="135" style="margin: 0px 0px 2rem;">Recruiters had been raising versions of these same complaints about messaging for years: InMails that got buried once a recruiter was running more than a handful of open roles, no good way to tell whether a candidate's silence meant "not interested" or "hasn't seen it yet," and message history that lived apart from the pipeline and project context recruiters needed to act on it. Our research confirmed these problems hadn't gone away on their own. They'd just been worked around for years.</p>
 
-        <div data-dc-tpl="134">
-          <div data-dc-tpl="135" style="margin-bottom: 1.5rem;">
-            <h4 data-dc-tpl="136" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="137" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">1.</span>Too many roles, one inbox</h4>
-            <p data-dc-tpl="138" style="margin: 0px;">Managing and prioritizing messages when juggling different roles.</p>
+        <div data-dc-tpl="136">
+          <div data-dc-tpl="137" style="margin-bottom: 1.5rem;">
+            <h4 data-dc-tpl="138" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="139" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">1.</span>Too many roles, one inbox</h4>
+            <p data-dc-tpl="140" style="margin: 0px;">Managing and prioritizing messages when juggling different roles.</p>
           </div>
-          <div data-dc-tpl="139" style="margin-bottom: 1.5rem;">
-            <h4 data-dc-tpl="140" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="141" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">2.</span>Candidate info, scattered everywhere</h4>
-            <p data-dc-tpl="142" style="margin: 0px;">Finding candidate information, given different types of candidates and recruiting workflows.</p>
+          <div data-dc-tpl="141" style="margin-bottom: 1.5rem;">
+            <h4 data-dc-tpl="142" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="143" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">2.</span>Candidate info, scattered everywhere</h4>
+            <p data-dc-tpl="144" style="margin: 0px;">Finding candidate information, given different types of candidates and recruiting workflows.</p>
           </div>
-          <div data-dc-tpl="143" style="margin-bottom: 1.5rem;">
-            <h4 data-dc-tpl="144" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="145" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">3.</span>Follow-ups fell through the cracks</h4>
-            <p data-dc-tpl="146" style="margin: 0px;">Updating candidate activity and following up more quickly, especially when collaborating with teammates in larger recruiting teams.</p>
+          <div data-dc-tpl="145" style="margin-bottom: 1.5rem;">
+            <h4 data-dc-tpl="146" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="147" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">3.</span>Follow-ups fell through the cracks</h4>
+            <p data-dc-tpl="148" style="margin: 0px;">Updating candidate activity and following up more quickly, especially when collaborating with teammates in larger recruiting teams.</p>
           </div>
-          <div data-dc-tpl="147" style="margin-bottom: 1.5rem;">
-            <h4 data-dc-tpl="148" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="149" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">4.</span>An "accept" that didn't mean much</h4>
-            <p data-dc-tpl="150" style="margin: 0px;">Clarifying message "accepts," where recruiters get notified that a candidate is interested in their job opportunity.</p>
+          <div data-dc-tpl="149" style="margin-bottom: 1.5rem;">
+            <h4 data-dc-tpl="150" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><span data-dc-tpl="151" style="color: rgb(107, 104, 99); flex-shrink: 0; font-variant-numeric: tabular-nums;">4.</span>An "accept" that didn't mean much</h4>
+            <p data-dc-tpl="152" style="margin: 0px;">Clarifying message "accepts," where recruiters get notified that a candidate is interested in their job opportunity.</p>
           </div>
         </div>
 
       </section>
 
-      <section data-dc-tpl="151" id="approach" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="152" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
-        <h3 data-dc-tpl="153" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">A migration first, an improvement second</h3>
-        <p data-dc-tpl="154" style="margin: 0px 0px 1rem;">Foremost, we needed to migrate the inbox to our new platform, laying the foundation for future improvements. We believed, for instance, that improved recommendations would be a core element of our long-term strategy, but we couldn't make progress until we moved off the old tech stack.</p>
-        <p data-dc-tpl="155" style="margin: 0px 0px 1.5rem;">While we knew these changes were unlikely to significantly improve our hiring funnel, we also believed there were opportunities to make our users happier and feel more productive.</p>
+      <section data-dc-tpl="153" id="approach" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="154" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
+        <h3 data-dc-tpl="155" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">A migration first, an improvement second</h3>
+        <p data-dc-tpl="156" style="margin: 0px 0px 1rem;">Foremost, we needed to migrate the inbox to our new platform, laying the foundation for future improvements. We believed, for instance, that improved recommendations would be a core element of our long-term strategy, but we couldn't make progress until we moved off the old tech stack.</p>
+        <p data-dc-tpl="157" style="margin: 0px 0px 1.5rem;">While we knew these changes were unlikely to significantly improve our hiring funnel, we also believed there were opportunities to make our users happier and feel more productive.</p>
 
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="156"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="158"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-inbox-annotated.png" alt="The original LinkedIn Recruiter inbox, annotated with the four problem areas surfaced in research" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
 
-        <div data-dc-tpl="157" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="158" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Balancing enterprise vs. small business users</h3>
-          <p data-dc-tpl="159" style="margin: 0px 0px 1rem;">Enterprise recruiters typically had more complex workflows and larger teams to collaborate with, while small business recruiters were the opposite in many ways. Our principle was to help enterprise users do more without getting in the way of small business users. This meant focusing on the essentials while ensuring more advanced features were readily available.</p>
-          <div data-dc-tpl="160" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="161"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+        <div data-dc-tpl="159" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="160" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Balancing enterprise vs. small business users</h3>
+          <p data-dc-tpl="161" style="margin: 0px 0px 1rem;">Enterprise recruiters typically had more complex workflows and larger teams to collaborate with, while small business recruiters were the opposite in many ways. Our principle was to help enterprise users do more without getting in the way of small business users. This meant focusing on the essentials while ensuring more advanced features were readily available.</p>
+          <div data-dc-tpl="162" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="163"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-enterprise-smb.png" alt="Comparison of enterprise and small business recruiter workflows across team size, volume, templates, and projects" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="162" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="163" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Managing and prioritizing messages</h3>
-          <p data-dc-tpl="164" style="margin: 0px 0px 1rem;">In tackling this problem, I initially started with concepts intended to make managing messages more "intelligent," but through our user testing, we narrowed down to a standard folder architecture for the MVP.</p>
-          <p data-dc-tpl="165" style="margin: 0px 0px 1rem;">It turned out participants loved the familiarity and usefulness of folders, especially since that's already how they managed their email. This was a recurring theme for us: is this more of an email "thing" or a chat "thing"? We'd decidedly leaned into the former, and that suited most of our participants just fine.</p>
-          <div data-dc-tpl="166" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="167"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="164" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="165" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Managing and prioritizing messages</h3>
+          <p data-dc-tpl="166" style="margin: 0px 0px 1rem;">In tackling this problem, I initially started with concepts intended to make managing messages more "intelligent," but through our user testing, we narrowed down to a standard folder architecture for the MVP.</p>
+          <p data-dc-tpl="167" style="margin: 0px 0px 1rem;">It turned out participants loved the familiarity and usefulness of folders, especially since that's already how they managed their email. This was a recurring theme for us: is this more of an email "thing" or a chat "thing"? We'd decidedly leaned into the former, and that suited most of our participants just fine.</p>
+          <div data-dc-tpl="168" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="169"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-inbox-concepts-comparison.png" alt="Four inbox concepts compared: priority messages, automatic archiving, suggested follow-ups, and folders, with folders as the chosen direction" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
           
-          <p data-dc-tpl="168" style="margin: 0px 0px 1rem;">One early direction explored surfacing folders as tabs across the top of the inbox, alongside a persistent left panel, and where profile details would go if they moved out of the message thread into a slide-in panel.</p>
-          <div data-dc-tpl="169" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="170"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <p data-dc-tpl="170" style="margin: 0px 0px 1rem;">One early direction explored surfacing folders as tabs across the top of the inbox, alongside a persistent left panel, and where profile details would go if they moved out of the message thread into a slide-in panel.</p>
+          <div data-dc-tpl="171" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="172"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-inbox-concepts-combined.png" alt="Early concepts compared: folders as tabs across the top, a persistent left panel layout, and profile details moved into a slide-in panel" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="171" style="margin: 0px 0px 1rem;">I ultimately placed these folders into a persistent left panel, making them more discoverable, while moving the right panel's contents to a secondary level in the slide-in profile. From there, I iterated on the panel itself across a few rounds before landing on a condensed folder list with a secondary status filter.</p>
-          <div data-dc-tpl="172" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="173"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <p data-dc-tpl="173" style="margin: 0px 0px 1rem;">I ultimately placed these folders into a persistent left panel, making them more discoverable, while moving the right panel's contents to a secondary level in the slide-in profile. From there, I iterated on the panel itself across a few rounds before landing on a condensed folder list with a secondary status filter.</p>
+          <div data-dc-tpl="174" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="175"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-inbox-folders-iterations.png" alt="Three iterations of the folders panel: an early flat list, a version with recent projects grouped underneath, and the final version with a condensed folder list and status filter" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="174" style="margin: 0px 0px 1.5rem;">In the final design, I polished down the folder list to the most essential ones (Inbox, Awaiting Reply, Archived) and pushed others to a secondary-level filter (Accepted, Declined, and others). Conceptually, this filter also made sense because "Accepted" and "Declined" were message types that could exist across any folder, not just the inbox.</p>
+          <p data-dc-tpl="176" style="margin: 0px 0px 1.5rem;">In the final design, I polished down the folder list to the most essential ones (Inbox, Awaiting Reply, Archived) and pushed others to a secondary-level filter (Accepted, Declined, and others). Conceptually, this filter also made sense because "Accepted" and "Declined" were message types that could exist across any folder, not just the inbox.</p>
         </div>
 
-        <div data-dc-tpl="175" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="176" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Finding past messages and files</h3>
-          <p data-dc-tpl="177" style="margin: 0px 0px 1rem;">According to our usage data, search was one of the more frequently used features. Users would want to find a past conversation but forget its exact name, most often searching by a role in the subject line, like "product designers." Other times, they were looking for a resume attachment.</p>
-          <p data-dc-tpl="178" style="margin: 0px 0px 1rem;">This led me to two directions: a typeahead tuned to role-based subject lines, and a more advanced, filtered search for attachments.</p>
-          <div data-dc-tpl="179" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="180"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="177" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="178" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Finding past messages and files</h3>
+          <p data-dc-tpl="179" style="margin: 0px 0px 1rem;">According to our usage data, search was one of the more frequently used features. Users would want to find a past conversation but forget its exact name, most often searching by a role in the subject line, like "product designers." Other times, they were looking for a resume attachment.</p>
+          <p data-dc-tpl="180" style="margin: 0px 0px 1rem;">This led me to two directions: a typeahead tuned to role-based subject lines, and a more advanced, filtered search for attachments.</p>
+          <div data-dc-tpl="181" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="182"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-search-explorations.png" alt="Three search explorations: a role-based typeahead, an advanced filtered search modal, and the shipped direction of faster dynamic loading on the existing search" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="181" style="margin: 0px 0px 1rem;">Testing didn't give us a strong enough signal to call either a priority. Users were largely fine with search as it stood, and building either well would have taken a lot of time before the initial release.</p>
-          <p data-dc-tpl="182" style="margin: 0px;">We shipped simple performance improvements to the existing search and left the bigger ideas on the roadmap.</p>
+          <p data-dc-tpl="183" style="margin: 0px 0px 1rem;">Testing didn't give us a strong enough signal to call either a priority. Users were largely fine with search as it stood, and building either well would have taken a lot of time before the initial release.</p>
+          <p data-dc-tpl="184" style="margin: 0px;">We shipped simple performance improvements to the existing search and left the bigger ideas on the roadmap.</p>
         </div>
 
-        <div data-dc-tpl="183" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="184" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Refreshing your memory while replying</h3>
-          <p data-dc-tpl="185" style="margin: 0px 0px 1rem;">We needed to surface just enough information for a recruiter to take action, without pushing the message content too far down the page.</p>
-          <p data-dc-tpl="186" style="margin: 0px 0px 1rem;">I explored modifying the profile card to elevate the essentials, pushing everything else into the slide-in panel or an overflow menu.</p>
-          <div data-dc-tpl="187" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="188"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="185" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="186" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Refreshing your memory while replying</h3>
+          <p data-dc-tpl="187" style="margin: 0px 0px 1rem;">We needed to surface just enough information for a recruiter to take action, without pushing the message content too far down the page.</p>
+          <p data-dc-tpl="188" style="margin: 0px 0px 1rem;">I explored modifying the profile card to elevate the essentials, pushing everything else into the slide-in panel or an overflow menu.</p>
+          <div data-dc-tpl="189" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="190"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-profile-card-comparison.png" alt="Comparison of the original slide-in profile with a full right panel against a condensed profile card with an expanded activity summary" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="189" style="margin: 0px 0px 1rem;">I'd originally favored keeping the full right panel in place, but internal feedback and user testing changed my view. It broke from how we represented profiles elsewhere in the app, an inconsistency that had already confused users in other feature areas.</p>
-          <p data-dc-tpl="190" style="margin: 0px 0px 1rem;">Testing surfaced a real cost, too: several existing users felt that moving the profile card disrupted how they were used to scanning for information.</p>
-          <div data-dc-tpl="191" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="192"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <p data-dc-tpl="191" style="margin: 0px 0px 1rem;">I'd originally favored keeping the full right panel in place, but internal feedback and user testing changed my view. It broke from how we represented profiles elsewhere in the app, an inconsistency that had already confused users in other feature areas.</p>
+          <p data-dc-tpl="192" style="margin: 0px 0px 1rem;">Testing surfaced a real cost, too: several existing users felt that moving the profile card disrupted how they were used to scanning for information.</p>
+          <div data-dc-tpl="193" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="194"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-profile-card-refinement.png" alt="Three iterations of the profile card, refining its information and controls for usefulness in the inbox and consistency across the app" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="193" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="194" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Following up and taking action</h3>
-          <p data-dc-tpl="195" style="margin: 0px 0px 1rem;">I was interested in "suggested actions," where we might suggest or even automatically trigger follow-up actions based on a message's contents.</p>
-          <p data-dc-tpl="196" style="margin: 0px 0px 1rem;">It turned out it's not so easy to "AI magic" your way to relevant suggestions, and ensuring trust and privacy would be a major requirement of a feature like this.</p>
-          <p data-dc-tpl="197" style="margin: 0px 0px 1rem;">Instead, I focused on cleaning up and reorganizing our existing Recruiting Tools to be discoverable for power users while getting out of the way of the main message content.</p>
-          <div data-dc-tpl="198" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="199"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="195" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="196" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Following up and taking action</h3>
+          <p data-dc-tpl="197" style="margin: 0px 0px 1rem;">I was interested in "suggested actions," where we might suggest or even automatically trigger follow-up actions based on a message's contents.</p>
+          <p data-dc-tpl="198" style="margin: 0px 0px 1rem;">It turned out it's not so easy to "AI magic" your way to relevant suggestions, and ensuring trust and privacy would be a major requirement of a feature like this.</p>
+          <p data-dc-tpl="199" style="margin: 0px 0px 1rem;">Instead, I focused on cleaning up and reorganizing our existing Recruiting Tools to be discoverable for power users while getting out of the way of the main message content.</p>
+          <div data-dc-tpl="200" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="201"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-recruiting-tools-templates.png" alt="Recruiting Tools reorganized, with quick actions for reminders and notes, and a template picker for sending saved message text" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="200" style="margin: 0px 0px 1rem;">Before, adding a note meant a click-through flow with the field tucked away. After, quick actions sit right alongside the message thread, and the redesigned inbox carries that same clarity throughout.</p>
-          <div data-dc-tpl="201" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="202"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+          <p data-dc-tpl="202" style="margin: 0px 0px 1rem;">Before, adding a note meant a click-through flow with the field tucked away. After, quick actions sit right alongside the message thread, and the redesigned inbox carries that same clarity throughout.</p>
+          <div data-dc-tpl="203" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="204"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-recruiting-tools-before-after.png" alt="Before and after: the original note-adding flow with a hidden text field, versus the final redesigned Recruiter inbox" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
       </section>
 
-      <section data-dc-tpl="203" id="solution" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="204" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Solution</div>
-        <h3 data-dc-tpl="205" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 2.5rem;">Recruiter Inbox</h3>
+      <section data-dc-tpl="205" id="solution" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="206" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Solution</div>
+        <h3 data-dc-tpl="207" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 2.5rem;">Recruiter Inbox</h3>
 
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="206"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="208"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-recruiter-shipped-final.gif" alt="The final shipped Recruiter inbox" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
 
 
-        <div data-dc-tpl="207" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="208" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Onboarding</h3>
-          <p data-dc-tpl="209" style="margin: 0px 0px 1rem;">Onboarding had never been a major part of the old inbox, so we had an opportunity to improve things this time around. As I refined the design, I explored onboarding by asking: what are the essential tasks and workflows for new users? What are the more advanced features we can introduce over time? What about different types of users? And how can we draw attention and guide them without disrupting their workflow?</p>
-          <div data-dc-tpl="210" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="211"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+        <div data-dc-tpl="209" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="210" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Onboarding</h3>
+          <p data-dc-tpl="211" style="margin: 0px 0px 1rem;">Onboarding had never been a major part of the old inbox, so we had an opportunity to improve things this time around. As I refined the design, I explored onboarding by asking: what are the essential tasks and workflows for new users? What are the more advanced features we can introduce over time? What about different types of users? And how can we draw attention and guide them without disrupting their workflow?</p>
+          <div data-dc-tpl="212" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="213"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-onboarding-tooltips.png" alt="Onboarding tooltip sequence mapped to trigger conditions, from a user's first inbox view through follow-up actions, project folders, and later reminders" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="212" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="213" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Accessibility</h3>
-          <p data-dc-tpl="214" style="margin: 0px 0px 1rem;">Inclusive design had become a key focus area for LinkedIn's design team, and I made sure to include accessibility specs in my designs. One challenge was that, across all our apps, we over-relied on tabbing to select elements, so keyboard users would get "tab fatigue."</p>
-          <p data-dc-tpl="215" style="margin: 0px 0px 1rem;">One change I proposed was to start introducing arrow keys into our specs, so users could quickly tab between UI areas while using arrows to navigate within those areas.</p>
-          <div data-dc-tpl="216" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="217"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+        <div data-dc-tpl="214" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="215" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Accessibility</h3>
+          <p data-dc-tpl="216" style="margin: 0px 0px 1rem;">Inclusive design had become a key focus area for LinkedIn's design team, and I made sure to include accessibility specs in my designs. One challenge was that, across all our apps, we over-relied on tabbing to select elements, so keyboard users would get "tab fatigue."</p>
+          <p data-dc-tpl="217" style="margin: 0px 0px 1rem;">One change I proposed was to start introducing arrow keys into our specs, so users could quickly tab between UI areas while using arrows to navigate within those areas.</p>
+          <div data-dc-tpl="218" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="219"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-accessibility-arrow-keys.png" alt="Keyboard navigation spec showing tab stops between UI areas and arrow-key navigation within each area" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
 
-        <div data-dc-tpl="218" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="219" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Transitioning design systems</h3>
-          <p data-dc-tpl="220" style="margin: 0px 0px 1rem;">If you're familiar with the LinkedIn app, you might've noticed a new design language being phased in. As an enterprise team, we'd started exploring how it'd translate to our UIs, but the transition would take many months, if not years.</p>
-          <div data-dc-tpl="221" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="222"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+        <div data-dc-tpl="220" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="221" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Transitioning design systems</h3>
+          <p data-dc-tpl="222" style="margin: 0px 0px 1rem;">If you're familiar with the LinkedIn app, you might've noticed a new design language being phased in. As an enterprise team, we'd started exploring how it'd translate to our UIs, but the transition would take many months, if not years.</p>
+          <div data-dc-tpl="223" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="224"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-new-design-language.png" alt="LinkedIn's new consumer design language being phased in across the app" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="223" style="margin: 0px 0px 1rem;">The upshot was that I had to stick to a limited set of existing components to ensure we could make the transition, which was a bit painful at times, but also promised to pay off in the long term with a smoother transition down the line.</p>
-          <div data-dc-tpl="224" style="margin: 1.5rem 0px;">
-            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="225"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
+          <p data-dc-tpl="225" style="margin: 0px 0px 1rem;">The upshot was that I had to stick to a limited set of existing components to ensure we could make the transition, which was a bit painful at times, but also promised to pay off in the long term with a smoother transition down the line.</p>
+          <div data-dc-tpl="226" style="margin: 1.5rem 0px;">
+            <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="227"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 32px; display: block;">
   
   
     <img data-dc-tpl="10" src="assets/img/linkedin-recruiter-design-system-explore.png" alt="Early exploration of the Recruiter inbox in the new design language, including a dark mode variant" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
   
   
-  <button data-dc-tpl="13" style="position: absolute; right: 12px; bottom: 12px; background: rgba(20, 19, 15, 0.8); color: rgb(255, 255, 255); font-size: 0.8rem; padding: 7px 12px; border-radius: 6px; display: flex; align-items: center; gap: 0.4em; font-weight: 600; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="14" style="font-size: 0.95rem; line-height: 1;">⤢</span>Expand</button></div></div>
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
         </div>
       </section>
 
-      <section data-dc-tpl="226" id="outcomes" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="227" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Outcomes</div>
-        <h3 data-dc-tpl="228" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">What happened after launch</h3>
-        <p data-dc-tpl="229" style="margin: 0px 0px 1rem;">The refreshed inbox launched in 2022, after I'd already left LinkedIn. From what I've heard, it landed well: it felt more integrated into the overall hiring platform, and our investment in a consistent design language, components, and interactions paid off.</p>
+      <section data-dc-tpl="228" id="outcomes" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="229" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Outcomes</div>
+        <h3 data-dc-tpl="230" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">What happened after launch</h3>
+        <p data-dc-tpl="231" style="margin: 0px 0px 1rem;">The refreshed inbox launched in 2022, after I'd already left LinkedIn. From what I've heard, it landed well: it felt more integrated into the overall hiring platform, and our investment in a consistent design language, components, and interactions paid off.</p>
         
-        <div class="sc-host" data-sc-name="Blockquote" data-dc-tpl="230"><blockquote data-dc-tpl="0" style="font-weight: 500; font-size: clamp(1.09375rem, 1.02rem + 0.3vw, 1.2rem); line-height: 1.5; border-left: 3px solid rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 1.25rem 1.5rem; margin: 0px;">
+        <div class="sc-host" data-sc-name="Blockquote" data-dc-tpl="232"><blockquote data-dc-tpl="0" style="font-weight: 500; font-size: clamp(1.09375rem, 1.02rem + 0.3vw, 1.2rem); line-height: 1.5; border-left: 3px solid rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 1.25rem 1.5rem; margin: 0px;">
   <span class="sc-interp">"My favorite thing about Recruiter Inbox is the fact you can see what project you are in and go straight to your project from the Inbox. Also, I love that I can search messages by project so I don't have to scroll through all the messages."</span>
   
     <cite data-dc-tpl="2" style="display: block; font-style: normal; font-size: 0.9rem; color: rgb(107, 104, 99); margin-top: 0.75rem;">— <span class="sc-interp">Kristina Hughes, solutions consultant at Ploy</span></cite>
   </blockquote></div>
       </section>
 
-      <section data-dc-tpl="231" id="reflections" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-        <div data-dc-tpl="232" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Reflections</div>
-        <h3 data-dc-tpl="233" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Working inside someone else's design system</h3>
-        <p data-dc-tpl="234" style="margin: 0px 0px 1rem;">A lot of the friction in this project traced back to design systems. Ours was built largely around the consumer experience, and there was a lot of politicking between consumer and enterprise: we'd bring complex use cases, and after many rounds of discussion, they'd decide they couldn't support them, so we'd end up building from scratch anyway. By the time I left, we'd started defining a better model, with embedded liaisons and more federated ownership. If I tackled a project like this again, I'd push for that earlier and consider stepping into that liaison role myself, since it's the kind of thing that saves a lot of unproductive meetings.</p>
-        <p data-dc-tpl="235" style="margin: 0px;">A related tension showed up closer to home, in the profile card. It became a centerpiece of the design, but I always felt uneasy about how crowded it had gotten, especially in a messaging context, since it was derived from a search experience where it just sits in a scannable list. As the product got more complex, it grew overloaded and wasn't particularly responsive-friendly. With more experience now, I'd push for real design workshopping with other designers to rethink its layout and behavior from scratch, so it could be both information-dense and scalable as a shared component.</p>
+      <section data-dc-tpl="233" id="reflections" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+        <div data-dc-tpl="234" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Reflections</div>
+        <h3 data-dc-tpl="235" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Working inside someone else's design system</h3>
+        <p data-dc-tpl="236" style="margin: 0px 0px 1rem;">A lot of the friction in this project traced back to design systems. Ours was built largely around the consumer experience, and there was a lot of politicking between consumer and enterprise: we'd bring complex use cases, and after many rounds of discussion, they'd decide they couldn't support them, so we'd end up building from scratch anyway. By the time I left, we'd started defining a better model, with embedded liaisons and more federated ownership. If I tackled a project like this again, I'd push for that earlier and consider stepping into that liaison role myself, since it's the kind of thing that saves a lot of unproductive meetings.</p>
+        <p data-dc-tpl="237" style="margin: 0px;">A related tension showed up closer to home, in the profile card. It became a centerpiece of the design, but I always felt uneasy about how crowded it had gotten, especially in a messaging context, since it was derived from a search experience where it just sits in a scannable list. As the product got more complex, it grew overloaded and wasn't particularly responsive-friendly. With more experience now, I'd push for real design workshopping with other designers to rethink its layout and behavior from scratch, so it could be both information-dense and scalable as a shared component.</p>
 
-        <div data-dc-tpl="236" style="margin-top: 3.5rem;">
-          <h3 data-dc-tpl="237" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">An email paradigm reaching its limit</h3>
-          <p data-dc-tpl="238" style="margin: 0px 0px 1rem;">By the time I left, there was a lot of talk about revamping the Recruiter homepage for a future where AI powered much of the workflow and cut down on tedious, manual work. I immediately thought of the inbox: recruiters do want a personal touch in their outreach, but so much of the work is tedious and repetitive.</p>
-          <p data-dc-tpl="239" style="margin: 0px;">Much of the UI I built was about surfacing information, grabbing attention, and making sure nothing fell through the cracks, but it was fundamentally derived from an email paradigm: cranking through messages one by one. I think there was a real opportunity to rethink that model from the ground up, but I left before we started digging into it seriously.</p>
+        <div data-dc-tpl="238" style="margin-top: 3.5rem;">
+          <h3 data-dc-tpl="239" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 2.5rem 0px 0.5rem;">An email paradigm reaching its limit</h3>
+          <p data-dc-tpl="240" style="margin: 0px 0px 1rem;">By the time I left, there was a lot of talk about revamping the Recruiter homepage for a future where AI powered much of the workflow and cut down on tedious, manual work. I immediately thought of the inbox: recruiters do want a personal touch in their outreach, but so much of the work is tedious and repetitive.</p>
+          <p data-dc-tpl="241" style="margin: 0px;">Much of the UI I built was about surfacing information, grabbing attention, and making sure nothing fell through the cracks, but it was fundamentally derived from an email paradigm: cranking through messages one by one. I think there was a real opportunity to rethink that model from the ground up, but I left before we started digging into it seriously.</p>
         </div>
       </section>
 
-      <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="240"><section data-dc-tpl="2" class="cs-col" style="padding-top: 3rem; padding-bottom: 4rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
-  <div data-dc-tpl="3" style="font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 1.5rem;">Next case study</div>
-  <a data-dc-tpl="4" href="linkedin-quick-reply.html" class="scp1" style="display: flex; gap: 1.5rem; align-items: center; text-decoration: none; color: inherit; --deepen: 0;">
-    <div data-dc-tpl="5" class="ncs-thumb" style="aspect-ratio: 16 / 10; position: relative; overflow: hidden; border-radius: 14px; background: rgb(235, 232, 226); box-sizing: border-box;">
+      <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="242"><section data-dc-tpl="2" class="cs-col" style="padding-top: 4rem; padding-bottom: 5rem; border-top: 1px solid rgb(228, 224, 216); max-width: 760px; margin-left: auto; margin-right: auto;">
+  <div data-dc-tpl="3" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 1.5rem;">Next case study</div>
+  <a data-dc-tpl="4" href="linkedin-quick-reply.html" class="scp1" style="display: flex; align-items: stretch; box-sizing: border-box; text-decoration: none; color: inherit; min-height: 132px; overflow: hidden; border: 1px solid rgb(228, 224, 216); border-radius: 10px; background: rgb(255, 255, 255); --deepen: 0; transition: border-color 0.2s;">
+    <div data-dc-tpl="5" class="ncs-thumb" style="position: relative; overflow: hidden; border-right: 1px solid rgb(228, 224, 216); background: rgb(235, 232, 226); box-sizing: border-box;">
       <div data-dc-tpl="6" style="position: absolute; inset: 0px; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s;">
         <div data-dc-tpl="7" style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.9 0.04 150); filter: blur(26px); animation: 18s ease-in-out 0s infinite normal none running ncsBlobA;"></div>
         <div data-dc-tpl="8" style="position: absolute; width: 60%; height: 60%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.82 0.06 150); filter: blur(26px); animation: 22s ease-in-out 0s infinite normal none running ncsBlobB;"></div>
       </div>
-      <img data-dc-tpl="9" src="assets/img/linkedin-quick-reply.png" alt="LinkedIn smart reply for job candidates" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.01)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+      <img data-dc-tpl="9" src="assets/img/linkedin-quick-reply.png" loading="lazy" alt="LinkedIn smart reply for job candidates" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; display: block; transform: scale(calc(1 + var(--deepen, 0) * 0.01)); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
     </div>
-    <div data-dc-tpl="10" style="flex: 1 1 0%; min-width: 0px;">
+    <div data-dc-tpl="10" style="flex: 1 1 0%; min-width: 0px; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; justify-content: center;">
       <div data-dc-tpl="11" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: rgb(107, 104, 99); font-weight: 600; margin-bottom: 0.35em;"><span class="sc-interp">LinkedIn</span></div>
-      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; display: flex; align-items: center; gap: 0.5em;">
+      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; color: rgb(20, 19, 15); display: flex; align-items: center; gap: 0.5em;">
         <span class="sc-interp">Quick reply for job candidates</span>
         <svg data-dc-tpl="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; flex-shrink: 0; transform: translateX(calc(var(--deepen, 0) * 4px)); transition: transform 0.3s;"><path data-dc-tpl="14" d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </div>
@@ -599,7 +605,7 @@
     </div>
   </div>
 
-  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="241"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
+  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="243"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
   <div data-dc-tpl="1" style="max-width: 1280px; margin: 0px auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <span data-dc-tpl="2" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; color: rgb(20, 19, 15);">
       <img data-dc-tpl="3" src="assets/img/logo-mark-solid.svg" alt="" style="width: 20px; height: 20px; display: block; flex-shrink: 0;">
