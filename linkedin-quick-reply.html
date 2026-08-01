@@ -242,7 +242,7 @@
 
     <div data-dc-tpl="98" class="cs-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 1.5rem;">
       <section data-dc-tpl="99" id="overview" class="cs-col cs-intro-2" style="max-width: 580px; margin-left: auto; margin-right: auto;">
-        <p data-dc-tpl="100" style="margin: 0px 0px 1rem;">For in-demand candidates, replying to recruiter outreach on LinkedIn takes time, and a lot of inquiries don't feel relevant. For recruiters, sending that outreach costs time and money, and many candidates never reply at all. Underneath both problems, LinkedIn's own systems couldn't reliably classify these messaging interactions, which limited how well search and matching could work in the first place. I designed an updated quick-reply feature that enables candidates to send quick, templated replies while also more accurately inferring their interest in these opportunities for recruiters and LinkedIn's algorithms.</p>
+        <p data-dc-tpl="100" style="margin: 0px 0px 1rem;">For in-demand candidates, replying to recruiter outreach on LinkedIn takes time, and a lot of inquiries don't feel relevant. For recruiters, sending that outreach costs time and money, and many candidates never reply at all. Underneath both problems, LinkedIn's own systems couldn't reliably classify these messaging interactions, which limited how well search and matching could work in the first place. I designed an updated quick-reply feature that lets candidates send fast, templated replies to recruiter outreach. It also gave LinkedIn a much clearer read on whether a candidate was actually interested, instead of guessing from silence or a blank "yes."</p>
 
         <dl data-dc-tpl="101" class="cs-dl cs-intro-3" style="margin: 2.5rem 0px 0px; border-top: 1px solid rgb(215, 210, 199);">
           <div data-dc-tpl="102" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
@@ -297,7 +297,7 @@
   <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
         </div>
 
-        <p data-dc-tpl="122" style="margin: 2.5rem 0px 1rem;">That worked, in a sense. Candidates were declining messages far more often than before, which was actually a good signal from an AI relevance perspective, feeding back into our search and recommendation algorithms. But it also created confusion for candidates and awkward conversational turn-taking for recruiters, and when someone tapped "No thanks," it still wasn't clear why.</p>
+        <p data-dc-tpl="122" style="margin: 2.5rem 0px 1rem;">That worked, in a sense. Candidates were declining messages far more often than before, and that decline signal fed directly into the models that ranked which candidates recruiters saw for a given role. More declines meant cleaner training data, even though the experience that produced them was confusing. But it also created confusion for candidates and awkward conversational turn-taking for recruiters, and when someone tapped "No thanks," it still wasn't clear why.</p>
 
         <div data-dc-tpl="123" style="margin-top: 2.5rem;">
           <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="124"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
@@ -349,7 +349,7 @@
       <section data-dc-tpl="150" id="approach" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
         <div data-dc-tpl="151" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
         <h3 data-dc-tpl="152" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Two directions, not one</h3>
-        <p data-dc-tpl="153" style="margin: 0px 0px 1rem;">I worked with a designer on our consumer messaging team to explore a wide range of concepts, reviewing them internally with design and product leadership. They mostly settled into two directions.</p>
+        <p data-dc-tpl="153" style="margin: 0px 0px 1rem;">I worked with a designer on our consumer messaging team to explore a wide range of concepts, reviewing them internally with design and product leadership. Our researcher ran the qualitative sessions that first surfaced how confusing the "yes/no" buttons actually felt to candidates, that's what got this whole conversation restarted in the first place. They mostly settled into two directions.</p>
 
         <div data-dc-tpl="154" style="margin-top: 3.5rem;">
           <h3 data-dc-tpl="155" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Direction 1: Clarifying the current experience</h3>
@@ -465,14 +465,15 @@
   
   <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
           </div>
-          <p data-dc-tpl="197" style="margin: 1.5rem 0px 0px;">For all the designers in the room, this was a relief, since we'd been looking for a way to just let people talk from the start. Now we had rigorous data to back the case that doing so would also improve recommendation quality and hiring efficiency.</p>
+          <p data-dc-tpl="197" style="margin: 1.5rem 0px 0px;">For all the designers in the room, this was a relief, since we'd been looking for a way to just let people talk from the start. Now we had a real A/B test result to back the case that doing so would also improve recommendation quality and hiring efficiency.</p>
+          <p style="margin: 1rem 0px 0px;">It wasn't a perfect ending. The inference still got it wrong sometimes, and the templates were still pretty formulaic, closer to "good enough starting points" than something that felt personal. We shipped it anyway because it was a clear improvement over what existed, not because we'd solved the problem completely.</p>
         </div>
       </section>
 
       <section data-dc-tpl="198" id="outcomes" class="cs-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
         <div data-dc-tpl="199" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Outcomes</div>
         <h3 data-dc-tpl="200" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Clearer for users, better signals for our AI models</h3>
-        <p data-dc-tpl="201" style="margin: 0px 0px 1rem;">There's often a trade-off in consumer products between what users want and what companies need to power their AI systems with data. In this case, we managed to get the best of both by rolling back a confusing UI decision that had over-prioritized the latter.</p>
+        <p data-dc-tpl="201" style="margin: 0px 0px 1rem;">We rolled back a UI decision that had prioritized clean data over a clear experience, and it turned out we didn't have to choose. The new flow was both easier to use and gave LinkedIn a better signal than the confusing version ever had.</p>
 
         <div data-dc-tpl="202" style="padding: 1rem 0px 2rem;">
           <p data-dc-tpl="203" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">+5%</p>
