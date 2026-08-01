@@ -186,50 +186,65 @@
   }
 
   // ── section nav (case study pages) ───────────────────────────────────────
+  // Deployed markup is a single vertical track: a "jump to nearest section"
+  // hit-target holding a static background line + a small progress thumb,
+  // plus a floating "N / total" counter alongside it. There's no per-section
+  // button here (that's a different, unused design) — this drives the thumb
+  // position, the counter, the nav's fade in/out, and click-to-seek against
+  // the page's real <section id> elements.
   function initSectionNav() {
     var nav = by('section-nav');
     if (!nav) return;
-    var btns = $('button[data-id]', nav);
-    if (!btns.length) return;
-    var ACTIVE = '#14130f', IDLE = '#6b6863', NUM_ACTIVE = '#14130f', NUM_IDLE = '#9a968f';
+    var track = $('div', nav);
+    var jumpBtn = track && $('button[aria-label="Jump to nearest section"]', track);
+    var spans = jumpBtn ? $$('span', jumpBtn) : [];
+    var thumb = spans[1];
+    var counterWrap = track && $$('div', track)[0];
+    var counterSpan = counterWrap && $('span', counterWrap);
+    if (!track || !jumpBtn || !thumb || !counterWrap || !counterSpan) return;
 
-    function paint(activeId) {
-      btns.forEach(function (b) {
-        var on = b.getAttribute('data-id') === activeId;
-        b.style.color = on ? ACTIVE : IDLE;
-        b.style.fontWeight = on ? '600' : '400';
-        var num = $('span', b);
-        if (num) num.style.color = on ? NUM_ACTIVE : NUM_IDLE;
-      });
+    var sections = $$('section[id]').filter(function (s) { return s.id; });
+    if (!sections.length) return;
+
+    var TRACK_H = 260, SCROLL_OFFSET = 96;
+    var THUMB_H = thumb.getBoundingClientRect().height || 3;
+    var totalMatch = counterSpan.textContent.match(/\/\s*(\d+)/);
+    var total = totalMatch ? parseInt(totalMatch[1], 10) : sections.length;
+
+    function bounds() {
+      var first = sections[0].getBoundingClientRect();
+      var last = sections[sections.length - 1].getBoundingClientRect();
+      return { top: first.top + window.scrollY, bottom: last.bottom + window.scrollY };
     }
 
-    var REF_LINE = 160, SCROLL_OFFSET = 96;
-    function current() {
-      var activeId = btns[0].getAttribute('data-id');
-      btns.forEach(function (b) {
-        var el = document.getElementById(b.getAttribute('data-id'));
-        if (!el) return;
-        var r = el.getBoundingClientRect();
-        if (r.height === 0) return;
-        if (r.top <= REF_LINE) activeId = b.getAttribute('data-id');
-      });
-      return activeId;
-    }
-    var last = null;
     function sync() {
-      var id = current();
-      if (id !== last) { last = id; paint(id); }
+      var b = bounds();
+      var range = Math.max(1, b.bottom - b.top - window.innerHeight);
+      var progress = Math.min(1, Math.max(0, (window.scrollY - b.top) / range));
+      var thumbTop = Math.round(progress * (TRACK_H - THUMB_H));
+      thumb.style.top = thumbTop + 'px';
+      counterWrap.style.top = thumbTop + 'px';
+      counterSpan.textContent = (Math.min(total, Math.max(1, Math.round(progress * (total - 1)) + 1))) + ' / ' + total;
+
+      var visible = window.scrollY > b.top - window.innerHeight * 0.5 && window.scrollY < b.bottom;
+      nav.style.opacity = visible ? '1' : '0';
+      nav.style.pointerEvents = visible ? 'auto' : 'none';
     }
-    btns.forEach(function (b, i) {
-      b.addEventListener('click', function (e) {
-        e.preventDefault();
-        var id = b.getAttribute('data-id');
-        if (i === 0) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-        var el = document.getElementById(id);
-        if (!el) return;
-        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+
+    jumpBtn.addEventListener('click', function (e) {
+      var rect = track.getBoundingClientRect();
+      var frac = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+      var b = bounds();
+      var targetY = b.top + frac * (b.bottom - b.top);
+      var nearest = sections[0], nearestDist = Infinity;
+      sections.forEach(function (s) {
+        var sTop = s.getBoundingClientRect().top + window.scrollY;
+        var d = Math.abs(sTop - targetY);
+        if (d < nearestDist) { nearestDist = d; nearest = s; }
       });
+      window.scrollTo({ top: nearest.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
     });
+
     window.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync);
     requestAnimationFrame(sync);
@@ -298,6 +313,7 @@
     function open(sourceEl) {
       close();
       overlay = document.createElement('div');
+      overlay.setAttribute('data-lightbox-overlay', '');
       overlay.setAttribute('style', 'position: fixed; inset: 0; background: rgba(20,19,15,0.85); z-index: 100; overflow: auto; padding: 3rem; box-sizing: border-box;');
 
       var closeBtn = document.createElement('button');
@@ -311,7 +327,7 @@
 
       media = sourceEl.cloneNode(true);
       media.removeAttribute('data-behavior');
-      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff;';
+      var MEDIA_STYLE = 'max-width: none; height: auto; margin: auto; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); user-select: none; background: #ffffff; touch-action: manipulation;';
       media.setAttribute('style', MEDIA_STYLE);
       if (media.tagName === 'VIDEO') { media.muted = true; media.loop = true; media.autoplay = true; }
 
@@ -362,10 +378,12 @@
       var src = $('img', wrap) || $('video', wrap);
       if (!src) return;
       src.style.cursor = 'zoom-in';
+      src.style.touchAction = 'manipulation';
       src.addEventListener('click', function () { open(src); });
-      $('button', wrap).forEach(function (b) {
+      $$('button', wrap).forEach(function (b) {
         b.style.pointerEvents = 'auto';
         b.style.cursor = 'zoom-in';
+        b.style.touchAction = 'manipulation';
         b.addEventListener('click', function (e) { e.stopPropagation(); open(src); });
       });
     });
@@ -377,7 +395,7 @@
   // class, and no <video> carries an autoplay attribute — so without this the
   // pre-rendered pages show every clip frozen on frame one.
   function initVideos() {
-    var vids = $('video');
+    var vids = $$('video');
     if (!vids.length) return;
     vids.forEach(function (v) {
       v.muted = true;
@@ -499,12 +517,9 @@
   }
 
   function initAll() {
-    initHeader();
-    initHeroDots();
-    initVideos();
-    initSectionNav();
-    initCarousels();
-    initLightbox();
+    [initHeader, initHeroDots, initVideos, initSectionNav, initCarousels, initLightbox].forEach(function (fn) {
+      try { fn(); } catch (e) { console.error('[site-behaviors] ' + fn.name + ' failed:', e); }
+    });
   }
 
   if (document.readyState === 'loading') {
