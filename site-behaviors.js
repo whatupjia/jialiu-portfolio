@@ -525,6 +525,20 @@
       v.muted = true;
       v.loop = true;
       v.setAttribute('playsinline', '');
+      // [data-blob-src] marks a clip whose moov atom sits at the end of the file.
+      // The host ignores Range requests, so the browser can't seek to the metadata
+      // and fails with MEDIA_ERR_SRC_NOT_SUPPORTED. Fetching the whole file as a
+      // blob removes the need to seek at all.
+      var blobSrc = v.getAttribute('data-blob-src');
+      if (blobSrc && !v.src) {
+        fetch(blobSrc)
+          .then(function (res) { return res.blob(); })
+          .then(function (blob) {
+            v.src = URL.createObjectURL(blob);
+            v.play().catch(function () {});
+          })
+          .catch(function () {});
+      }
     });
     if (!('IntersectionObserver' in window)) {
       vids.forEach(function (v) { v.play().catch(function () {}); });

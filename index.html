@@ -69,7 +69,7 @@
     @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
     .header-spacer-default { height: 76px; }
   </style><link rel="preload" as="font" type="font/woff2" href="assets/fonts/PPMori-Regular.woff2" crossorigin="anonymous" data-dc-tpl="2"><link rel="preload" as="font" type="font/woff2" href="assets/fonts/PPMori-Semibold.woff2" crossorigin="anonymous" data-dc-tpl="3"><link rel="preload" as="font" type="font/woff2" href="assets/fonts/PPNeueMontreal-Regular.woff2" crossorigin="anonymous" data-dc-tpl="4"><link rel="preload" as="font" type="font/woff2" href="assets/fonts/PPNeueMontreal-Semibold.woff2" crossorigin="anonymous" data-dc-tpl="5"><style data-dc-tpl="6">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Extralight.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Extralight.otf') format('opentype'), url('assets/fonts/PPMori-Extralight.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
     @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
@@ -92,16 +92,23 @@
     @keyframes workFadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
     .intro-ready .work-reveal { animation: workFadeUp 1.3s cubic-bezier(0.16, 1, 0.3, 1) 3s both; }
     .blob-reveal { opacity: 1; }
-    @media (prefers-reduced-motion: reduce) { .word-in { animation: none; opacity: 1 !important; } .hero-dots { animation: none; } .work-reveal { animation: none; opacity: 1 !important; } }
+    @keyframes inkSettle { 0% { color: #6b6863; } 100% { color: #14130f; } }
+    @keyframes highlightWashIn { from { background-size: 0% 0.3em; } to { background-size: 100% 0.3em; } }
+    html.skip-intro .hero-emph { animation: none !important; }
+    @media (prefers-reduced-motion: reduce) { .word-in { animation: none; opacity: 1 !important; } .hero-dots { animation: none; } .work-reveal { animation: none; opacity: 1 !important; } .hero-emph { animation: none !important; } }
     html.skip-intro .word-in { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.skip-intro .hero-dots { animation: none !important; opacity: 0 !important; }
     html.skip-intro .work-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
-    @media (max-width: 1100px) { .work-section { display: block !important; } .hero-title { grid-column: 1 / -1 !important; } .about-divider, .about-content { grid-column: 1 / -1 !important; margin-left: 0 !important; margin-right: 0 !important; } #about { display: block !important; } .hero-title-glow { inset: calc(-0.6em - 2rem) 0 !important; } }
-    @media (max-width: 768px) { .hero-section { min-height: 0 !important; padding-top: 2.5rem !important; padding-bottom: 0 !important; } .hero-title { margin-top: 2rem !important; } .work-card-inner { padding: 20px !important; border-radius: 14px !important; } .work-card-meta { margin-top: 0.75rem !important; margin-bottom: 0 !important; gap: 0.2em !important; } }
-    @media (max-width: 1024px) { #work { display: block !important; } #work > div { grid-column: auto !important; } .about-divider { grid-column: 1 / -1 !important; } }
+    html:not(.intro-ready):not(.skip-intro) .word-in, html:not(.intro-ready):not(.skip-intro) .work-reveal { opacity: 1 !important; animation: none !important; transform: none !important; }
+    @media (max-width: 1100px) { .hero-title-glow { left: 0 !important; right: 0 !important; } .work-section { display: block !important; } .hero-title { grid-column: 1 / -1 !important; } .about-content { grid-column: 1 / -1 !important; margin-left: 0 !important; margin-right: 0 !important; } #about { display: block !important; } }
+    @media (max-width: 768px) { .hero-section { min-height: 0 !important; padding-top: 2.5rem !important; padding-bottom: 0 !important; } .hero-title { margin-top: 2rem !important; } .work-card-inner { padding: 20px !important; border-radius: 14px !important; } }
+    @media (max-width: 1024px) { #work { display: block !important; } #work > div { grid-column: auto !important; } }
     @media (max-width: 900px) { .bio-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; } .bio-photo { width: 180px !important; } .bio-skills-edu { grid-template-columns: 1fr !important; gap: 1.25rem !important; } }
     @media (max-width: 900px) { .spec-grid { grid-template-columns: 1fr !important; } }
     @media (max-width: 900px) { .work-pair { grid-template-columns: 1fr !important; } .work-hero-card { aspect-ratio: 1 / 1 !important; } }
+    @media (max-width: 1024px) { #side-projects { display: block !important; } #side-projects > div { margin: 0 !important; } }
+    @media (max-width: 900px) { .side-project-grid { grid-template-columns: 1fr 1fr !important; } }
+    @media (max-width: 600px) { .side-project-grid { grid-template-columns: 1fr !important; } }
   </style><noscript data-dc-tpl="8">
     .word-in, .work-reveal { opacity: 1 !important; animation: none !important; }
   </noscript><link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="10"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet" data-dc-tpl="11"><style data-dc-tpl="1">
@@ -114,7 +121,7 @@
 <script src="site-behaviors.js" defer></script>
 </head>
 <body>
-<div id="dc-root"><div class="sc-host" data-sc-name="index"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="13"></div><div class="sc-host" data-sc-name="SiteHeader" data-dc-tpl="14"><header data-dc-tpl="2" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(249, 248, 247, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
+<div id="dc-root"><div class="sc-host" data-sc-name="index"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="13"></div><div class="sc-host" data-sc-name="SiteHeader" data-dc-tpl="14"><header data-dc-tpl="2" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(249, 248, 247, 0.72); backdrop-filter: blur(14px) saturate(1.6); -webkit-backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
   <div data-dc-tpl="3" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <a data-dc-tpl="4" href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: rgb(20, 19, 15); text-decoration: none;">
       <img data-dc-tpl="5" src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
@@ -209,14 +216,14 @@
     </nav>
    </div>
   </div></header><div data-dc-tpl="82" class="header-spacer-default" style="height: 60px; flex-shrink: 0;"></div></div><section data-dc-tpl="19" class="hero-section" style="position: relative; min-height: 42vh; display: flex; align-items: center; padding-top: 5rem; padding-bottom: 1.5rem; overflow: visible; width: 100%; box-sizing: border-box;">
-    <canvas data-dc-tpl="20" class="hero-dots" width="808" height="1978" style="position: fixed; inset: 0px; width: 404px; height: 989px; z-index: 0; pointer-events: none;"></canvas>
+    <canvas data-dc-tpl="20" class="hero-dots" width="786" height="1242" style="position: fixed; inset: 0px; width: 393px; height: 621px; z-index: 0; pointer-events: none;"></canvas>
     <div data-dc-tpl="21" style="position: relative; z-index: 1; width: 100%; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;">
       <div data-dc-tpl="22" class="hero-title" style="grid-column: 3 / 11; position: relative; margin-top: 6rem;">
         <div data-dc-tpl="23" class="hero-title-glow" style="position: absolute; inset: calc(-0.6em - 2rem) calc(-1.8em - 2rem); background: radial-gradient(70% 75%, rgb(251, 250, 249) 55%, rgba(251, 250, 249, 0) 100%); z-index: 0; pointer-events: none;"></div>
 
         <div data-dc-tpl="24" style="position: relative; z-index: 1;">
-          <h1 data-dc-tpl="25" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.9rem, 1.35rem + 2.1vw, 3rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; max-width: 26ch; color: rgb(107, 104, 99); margin: 0px;"><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.6s;"><span class="sc-interp">I</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.645s;"><span class="sc-interp">design</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.69s;"><span class="sc-interp">tools</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.735s;"><span class="sc-interp">for</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.78s;"><span class="sc-interp">people</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.825s;"><span class="sc-interp">doing</span>&nbsp;</span></span><span data-dc-tpl="30" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="31" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.87s;"><span class="sc-interp">work</span>&nbsp;</span></span><span data-dc-tpl="30" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="31" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.915s;"><span class="sc-interp">that</span>&nbsp;</span></span><span data-dc-tpl="30" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="31" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.96s;"><span class="sc-interp">matters.</span>&nbsp;</span></span></h1>
-          <p data-dc-tpl="32" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; font-size: 1.09375rem; font-weight: 400; line-height: 1.5; color: rgb(107, 104, 99); max-width: 46ch; margin: 1.75rem 0px 0px;"><span data-dc-tpl="34" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="35" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.005s;"><span class="sc-interp">Previously</span>&nbsp;</span></span><span data-dc-tpl="34" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="35" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.05s;"><span class="sc-interp">at</span>&nbsp;</span></span><span data-dc-tpl="34" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="35" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.095s;"><span class="sc-interp">Benchling</span>&nbsp;</span></span><span data-dc-tpl="34" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="35" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.14s;"><span class="sc-interp">and</span>&nbsp;</span></span><span data-dc-tpl="34" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="35" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.185s;"><span class="sc-interp">LinkedIn.</span>&nbsp;</span></span><br data-dc-tpl="36"><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.23s;"><span class="sc-interp">Based</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.275s;"><span class="sc-interp">in</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.32s;"><span class="sc-interp">Philadelphia.</span>&nbsp;</span></span></p>
+<h1 data-dc-tpl="25" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.9rem, 1.35rem + 2.1vw, 3rem); font-weight: 400; font-style: normal; line-height: 1.08; letter-spacing: -0.01em; max-width: 26ch; color: rgb(107, 104, 99); margin: 0px;"><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.6s;"><span class="sc-interp">I</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.645s;"><span class="sc-interp">design</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.69s;"><span class="sc-interp">tools</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.735s;"><span class="sc-interp">for</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.78s;"><span class="sc-interp">people</span>&nbsp;</span></span><span data-dc-tpl="27" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="28" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 1.825s;"><span class="sc-interp">doing</span>&nbsp;</span></span><br data-dc-tpl="29"><span data-dc-tpl="31" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="32" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.87s;"><span data-dc-tpl="33" class="hero-emph" style="display: inline-block; color: rgb(20, 19, 15); animation: 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.02s both inkSettle;"><span class="sc-interp">work</span></span><span data-dc-tpl="34"><span class="sc-interp">&nbsp;</span></span></span></span><span data-dc-tpl="31" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="32" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.915s;"><span data-dc-tpl="33" class="hero-emph" style="display: inline-block; color: rgb(20, 19, 15); animation: 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.065s both inkSettle;"><span class="sc-interp">that</span></span><span data-dc-tpl="34"><span class="sc-interp">&nbsp;</span></span></span></span><span data-dc-tpl="31" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="32" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.96s;"><span data-dc-tpl="33" class="hero-emph" style="display: inline-block; color: rgb(20, 19, 15); animation: 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.11s both inkSettle;"><span class="sc-interp">matters</span></span><span data-dc-tpl="34"><span class="sc-interp"></span></span></span></span><span data-dc-tpl="35" class="word-in" style="display: inline-block; color: rgb(20, 19, 15); opacity: 0; animation-delay: 1.96s;"><span class="sc-interp">.</span></span></h1>
+<p data-dc-tpl="36" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; font-size: 1.09375rem; font-weight: 400; font-style: normal; line-height: 1.5; color: rgb(107, 104, 99); max-width: 46ch; margin: 1.75rem 0px 0px;"><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.005s;"><span class="sc-interp">Most</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.05s;"><span class="sc-interp">of</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.095s;"><span class="sc-interp">my</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.14s;"><span class="sc-interp">work's</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.185s;"><span class="sc-interp">been</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.23s;"><span class="sc-interp">in</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.275s;"><span class="sc-interp">biotech</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.32s;"><span class="sc-interp">and</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.365s;"><span class="sc-interp">enterprise</span>&nbsp;</span></span><span data-dc-tpl="38" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="39" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.41s;"><span class="sc-interp">tools.</span>&nbsp;</span></span><br data-dc-tpl="40"><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.455s;"><span class="sc-interp">Places</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.5s;"><span class="sc-interp">where</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.545s;"><span class="sc-interp">the</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.59s;"><span class="sc-interp">details</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.635s;"><span class="sc-interp">have</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.68s;"><span class="sc-interp">to</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.725s;"><span class="sc-interp">be</span>&nbsp;</span></span><span data-dc-tpl="42" style="display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.15em;"><span data-dc-tpl="43" class="word-in" style="display: inline-block; opacity: 0; animation-delay: 2.77s;"><span class="sc-interp">right.</span>&nbsp;</span></span></p>
         </div>
       </div>
     </div></section><div data-dc-tpl="40" class="work-reveal" style="opacity: 0; position: relative; z-index: 1; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
@@ -228,8 +235,8 @@
         <a data-dc-tpl="44" href="benchling-bioanalytical.html" class="scp0" style="display: block; text-decoration: none; color: inherit; --deepen: 0;">
           <div data-dc-tpl="45" class="work-card-inner work-hero-card" style="aspect-ratio: 2 / 1; position: relative; overflow: hidden; box-sizing: border-box; padding: 40px; background: rgb(235, 232, 226); border-radius: 12px;">
             <div data-dc-tpl="46" class="blob-reveal" style="position: absolute; inset: 0px; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s;">
-              <div data-dc-tpl="47" style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.83 0.08 240); filter: blur(40px); animation: 16s ease-in-out 0s infinite normal none running blobFloatA;"></div>
-              <div data-dc-tpl="48" style="position: absolute; width: 70%; height: 70%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.78 0.1 240); filter: blur(40px); animation: 20s ease-in-out 0s infinite normal none running blobFloatB;"></div>
+              <div data-dc-tpl="47" style="position: absolute; inset: 0px; background-image: url(&quot;assets/img/pipette-plate-bg.jpg&quot;); background-size: cover; background-position: center center; filter: saturate(0.6) brightness(0.85);"></div>
+              <div data-dc-tpl="48" style="position: absolute; inset: 0px; background: rgba(0, 0, 0, 0.38);"></div>
             </div>
             <div data-dc-tpl="49" role="img" aria-label="Benchling Bioanalytical plate design interface" style="position: relative; z-index: 1; width: 100%; height: 100%; background-image: url(&quot;assets/img/benchling-bioa-chrome-cropped.png&quot;); background-size: contain; background-position: center center; background-repeat: no-repeat; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);"></div>
             <div data-dc-tpl="50" style="position: absolute; inset: 0px; z-index: 2; display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
@@ -246,9 +253,9 @@
             <a data-dc-tpl="56" href="linkedin-recruiter-inbox.html" class="scp0" style="display: block; text-decoration: none; color: inherit; --deepen: 0;">
               <div data-dc-tpl="57" class="work-card-inner" style="aspect-ratio: 1 / 1; position: relative; overflow: hidden; box-sizing: border-box; padding: 40px; background: rgb(235, 232, 226); border-radius: 12px;">
                 <div data-dc-tpl="58" class="blob-reveal" style="position: absolute; inset: 0px; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s;">
-                  <div data-dc-tpl="59" style="position: absolute; width: 70%; height: 70%; left: 5%; top: 0%; border-radius: 50%; background: oklch(0.9 0.04 30); filter: blur(40px); animation: 17s ease-in-out 0s infinite normal none running blobFloatA;"></div>
-                  <div data-dc-tpl="60" style="position: absolute; width: 70%; height: 70%; right: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.82 0.07 30); filter: blur(40px); animation: 21s ease-in-out 0s infinite normal none running blobFloatB;"></div>
-                </div>
+                  <div data-dc-tpl="59" style="position: absolute; inset: 0px; background-image: url(&quot;assets/img/glass-facade-bg.jpg&quot;); background-size: cover; background-position: center center; filter: saturate(0.6) brightness(0.85);"></div>
+                  <div data-dc-tpl="60" style="position: absolute; inset: 0px; background: rgba(0, 0, 0, 0.38);"></div>
+            </div>
                 <div data-dc-tpl="61" role="img" aria-label="LinkedIn recruiter messaging inbox" style="position: relative; z-index: 1; width: 100%; height: 100%; background-image: url(&quot;assets/img/linkedin-recruiter-inbox.png&quot;); background-size: contain; background-position: center center; background-repeat: no-repeat; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);"></div>
                 <div data-dc-tpl="62" style="position: absolute; inset: 0px; z-index: 2; display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
                   <span data-dc-tpl="63" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 500; color: rgb(255, 255, 255);"><span class="sc-interp">LinkedIn Recruiter Inbox</span></span>
@@ -262,9 +269,9 @@
             <a data-dc-tpl="56" href="linkedin-quick-reply.html" class="scp0" style="display: block; text-decoration: none; color: inherit; --deepen: 0;">
               <div data-dc-tpl="57" class="work-card-inner" style="aspect-ratio: 1 / 1; position: relative; overflow: hidden; box-sizing: border-box; padding: 40px; background: rgb(235, 232, 226); border-radius: 12px;">
                 <div data-dc-tpl="58" class="blob-reveal" style="position: absolute; inset: 0px; z-index: 0; overflow: hidden; filter: saturate(calc(1 + var(--deepen, 0) * 0.45)) brightness(calc(1 - var(--deepen, 0) * 0.1)); transition: filter 0.35s;">
-                  <div data-dc-tpl="59" style="position: absolute; width: 70%; height: 70%; left: 0%; bottom: 0%; border-radius: 50%; background: oklch(0.9 0.04 150); filter: blur(40px); animation: 19s ease-in-out 0s infinite normal none running blobFloatB;"></div>
-                  <div data-dc-tpl="60" style="position: absolute; width: 70%; height: 70%; right: 5%; top: 0%; border-radius: 50%; background: oklch(0.82 0.06 150); filter: blur(40px); animation: 23s ease-in-out 0s infinite normal none running blobFloatA;"></div>
-                </div>
+                  <div data-dc-tpl="59" style="position: absolute; inset: 0px; background-image: url(&quot;assets/img/mail-bokeh-bg.jpg&quot;); background-size: cover; background-position: center center; filter: saturate(0.6) brightness(0.85);"></div>
+                  <div data-dc-tpl="60" style="position: absolute; inset: 0px; background: rgba(0, 0, 0, 0.38);"></div>
+            </div>
                 <div data-dc-tpl="61" role="img" aria-label="LinkedIn smart reply for job candidates" style="position: relative; z-index: 1; width: 100%; height: 100%; background-image: url(&quot;assets/img/linkedin-quick-reply.png&quot;); background-size: contain; background-position: center center; background-repeat: no-repeat; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);"></div>
                 <div data-dc-tpl="62" style="position: absolute; inset: 0px; z-index: 2; display: flex; align-items: flex-end; padding: 24px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
                   <span data-dc-tpl="63" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 500; color: rgb(255, 255, 255);"><span class="sc-interp">LinkedIn Quick Reply</span></span>
@@ -278,87 +285,86 @@
     </div>
   </section>
 
-  <div data-dc-tpl="65">
-  <section data-dc-tpl="66" id="about" style="display: grid; grid-template-columns: repeat(12, minmax(0px, 1fr)); gap: 32px;">
-    <div data-dc-tpl="67" class="about-content" style="grid-column: 3 / 11; padding-bottom: 5rem; min-width: 0px;">
-
-      <div data-dc-tpl="68" class="spec-grid" style="display: grid; grid-template-columns: minmax(0px, 3fr) minmax(0px, 2fr); gap: 4rem; align-items: start; margin-bottom: 3rem;">
-
-        <div data-dc-tpl="69">
-          <p data-dc-tpl="70" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px 0px 1rem; text-wrap: pretty;">I didn't start out in product design. I studied molecular bio and worked in education, which lead to me to Coursera. I learned there how modern products get built and decided I wanted to design them myself.</p>
-
-          <p data-dc-tpl="71" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px 0px 1rem; text-wrap: pretty;">This winding journey's made me a pretty good problem-solver and taught me that the best solutions, no matter how simple or complex, are grounded in a deep understanding of people.</p>
-
-          <p data-dc-tpl="72" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px; text-wrap: pretty;">Outside of work, I dig for records and make electronic music, play with my kid, and learn about as many things as I can.</p>
-        </div>
-
-        <div data-dc-tpl="73">
-          <div data-dc-tpl="74" style="border-top: 1px solid rgb(215, 210, 199);">
-            <div data-dc-tpl="75" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="76" style="color: rgb(107, 104, 99);">Role</span><span data-dc-tpl="77" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Sr. Product Designer</span>
-            </div>
-            <div data-dc-tpl="78" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="79" style="color: rgb(107, 104, 99);">Based</span><span data-dc-tpl="80" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">SF → Philadelphia</span>
-            </div>
-            <div data-dc-tpl="81" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="82" style="color: rgb(107, 104, 99);">Est.</span><span data-dc-tpl="83" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">7 yrs practice</span>
+  <section data-dc-tpl="69" id="side-projects" style="padding-bottom: 4rem; display: grid; grid-template-columns: repeat(12, minmax(0px, 1fr)); gap: 32px;">
+    <div data-dc-tpl="70" style="grid-column-start: 2; grid-column-end: 12; min-width: 0px;">
+      <p data-dc-tpl="71" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin: 0px 0px 0.75rem;"><span data-dc-tpl="72" style="font-weight: normal;">Side projects</span></p>
+      <div data-dc-tpl="73" class="side-project-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        <a data-dc-tpl="74" href="https://github.com/whatupjia/rbtagger-releases" target="_blank" rel="noopener" class="side-project-tile scp0" style="position: relative; display: block; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: rgb(20, 19, 15); border: 1px solid rgb(228, 224, 216); text-decoration: none; --deepen: 0;">
+          <video data-dc-tpl="75" data-blob-src="assets/video/rb-tagger-square.mp4" playsinline="" loop="" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center calc(50% + 50px); display: block;"></video>
+          <div data-dc-tpl="76" style="position: absolute; inset: 0px; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
+            <div data-dc-tpl="77" style="display: flex; align-items: baseline; gap: 0.4rem;">
+              <span data-dc-tpl="78" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; color: rgb(255, 255, 255);">RB Tagger</span>
+              <span data-dc-tpl="79" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.2); padding: 0.25em 0.55em; border-radius: 999px;">Beta</span>
             </div>
           </div>
-
-          <p data-dc-tpl="84" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(107, 104, 99); margin: 2.25rem 0px 0.75rem; font-size: 0.85rem;">Experience</p>
-          <div data-dc-tpl="85" style="border-top: 1px solid rgb(215, 210, 199);">
-            <div data-dc-tpl="86" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="87" style="color: rgb(154, 150, 143);">01</span><span data-dc-tpl="88" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">LinkedIn</span>
-            </div>
-            <div data-dc-tpl="89" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="90" style="color: rgb(154, 150, 143);">02</span><span data-dc-tpl="91" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Benchling</span>
-            </div>
+        </a>
+        <a data-dc-tpl="80" href="https://www.nyc.gov/assets/cto/downloads/annual-reports/2021_impact_report.pdf" target="_blank" rel="noopener" class="side-project-tile scp0" style="position: relative; display: block; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: rgb(0, 0, 0); border: 1px solid rgb(228, 224, 216); text-decoration: none; --deepen: 0;">
+          <img data-dc-tpl="81" src="assets/img/nyc-impact-report-cover.png" alt="NYC CTO 2021 Impact Report cover" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover;">
+          <div data-dc-tpl="82" style="position: absolute; inset: 0px; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
+            <span data-dc-tpl="83" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; color: rgb(255, 255, 255);">NYC 2021 Impact Report</span>
           </div>
-
-          <p data-dc-tpl="92" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(107, 104, 99); margin: 2.25rem 0px 0.75rem;">Education</p>
-          <div data-dc-tpl="93" style="border-top: 1px solid rgb(215, 210, 199);">
-            <div data-dc-tpl="94" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="95" style="color: rgb(107, 104, 99);">MHCI</span><span data-dc-tpl="96" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Carnegie Mellon</span>
-            </div>
-            <div data-dc-tpl="97" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
-              <span data-dc-tpl="98" style="color: rgb(107, 104, 99);">BA</span><span data-dc-tpl="99" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">UC Berkeley</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div data-dc-tpl="100" class="spec-grid" style="display: grid; grid-template-columns: minmax(0px, 3fr) minmax(0px, 2fr); gap: 4rem; margin-top: 3.5rem;">
-        <div data-dc-tpl="101" style="grid-column: 1; min-width: 0px;">
-      <div data-dc-tpl="102">
-        <p data-dc-tpl="103" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin: 0px 0px 0.75rem;"><span data-dc-tpl="104" style="font-weight: normal;">CURRENTLY WORKING ON</span></p>
-        <a data-dc-tpl="105" href="https://github.com/whatupjia/rbtagger-releases" target="_blank" rel="noopener" class="scp1" style="display: flex; align-items: stretch; box-sizing: border-box; text-decoration: none; color: inherit; min-height: 120px; max-width: 400px; overflow: hidden; border: 1px solid rgb(228, 224, 216); border-radius: 10px; background: rgb(255, 255, 255); transition: border-color 0.2s;">
-          <div data-dc-tpl="106" style="width: 120px; flex-shrink: 0; border-right: 1px solid rgb(228, 224, 216); background: rgb(20, 19, 15);">
-            <img data-dc-tpl="107" src="assets/img/rbtagger-preview.png" alt="RB Tagger Track Info panel showing tag chips below a waveform" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;">
-          </div>
-          <div data-dc-tpl="108" style="padding: 1.1rem 1.25rem; min-width: 0px;">
-            <div data-dc-tpl="109" style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
-              <span data-dc-tpl="110" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.05rem; font-weight: 600; color: rgb(20, 19, 15);">RB Tagger</span>
-              <span data-dc-tpl="111" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(107, 104, 99); background: rgb(242, 241, 236); padding: 0.25em 0.6em; border-radius: 999px;">Beta</span>
-            </div>
-            <p data-dc-tpl="112" style="margin: 0px 0px 0.7rem; font-size: 0.9rem; line-height: 1.45; color: rgb(107, 104, 99); text-wrap: pretty;">A custom tagger for DJs using Pioneer Rekordbox.</p>
-            <span data-dc-tpl="113" style="font-size: 0.85rem; color: rgb(6, 136, 240);">View on GitHub →</span>
+        </a>
+        <a data-dc-tpl="84" href="https://elicitrecords.bandcamp.com/album/polarize" target="_blank" rel="noopener" class="side-project-tile scp0" style="position: relative; display: block; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: rgb(0, 0, 0); border: 1px solid rgb(228, 224, 216); text-decoration: none; --deepen: 0;">
+          <img data-dc-tpl="85" src="assets/img/polarize-cover.jpg" alt="Polarize album cover" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover;">
+          <div data-dc-tpl="86" style="position: absolute; inset: 0px; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box; background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 55%); opacity: var(--deepen, 0); transition: opacity 0.3s; pointer-events: none;">
+            <span data-dc-tpl="87" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; color: rgb(255, 255, 255);">Polarize EP</span>
           </div>
         </a>
       </div>
+    </div>
+  </section>
 
-      <div data-dc-tpl="114" style="margin-top: 3rem;">
-        <p data-dc-tpl="115" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin: 0px 0px 0.75rem;"><span data-dc-tpl="116" style="font-weight: normal;">CURRENTLY LISTENING TO</span></p>
-        <div data-dc-tpl="117" style="max-width: 100%; overflow-x: auto;">
-        <iframe data-dc-tpl="118" src="https://bandcamp.com/EmbeddedPlayer/album=1450821438/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" style="border: 0px; width: 400px; height: 406px;"><a href="https://kwata.bandcamp.com/album/give-u-space">Give U Space by K Wata</a></iframe>
+  <section data-dc-tpl="88" id="about" style="display: grid; grid-template-columns: repeat(12, minmax(0px, 1fr)); gap: 32px;">
+    <div data-dc-tpl="89" class="about-content" style="grid-column-start: 3; grid-column-end: 11; padding-bottom: 5rem; min-width: 0px;">
+
+      <div data-dc-tpl="90" class="spec-grid" style="display: grid; grid-template-columns: minmax(0px, 3fr) minmax(0px, 2fr); gap: 4rem; align-items: start; margin-bottom: 3rem;">
+
+        <div data-dc-tpl="91">
+          <p data-dc-tpl="92" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px 0px 1rem; text-wrap: pretty;">I didn't start in product design. I studied molecular biology, then spent a few years in education before landing at Coursera. Learning how products actually get built helped me decide to design them myself.</p>
+
+          <p data-dc-tpl="93" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px 0px 1rem; text-wrap: pretty;">This path's made me a strong generalist. I can work at the level of a single interaction, or zoom out to where the product's headed, and I'm comfortable moving between the two. I'm often the person you throw at an ambiguous problem to turn it into something teams can actually build.</p>
+
+          <p data-dc-tpl="94" style="font-size: 1.09375rem; line-height: 1.6; margin: 0px; text-wrap: pretty;">Outside of work, I dig for records, make left-field electronic music, and nerd out on whatever my kid's currently obsessed with.</p>
         </div>
-      </div>
+
+        <div data-dc-tpl="95">
+          <div data-dc-tpl="96" style="border-top: 1px solid rgb(215, 210, 199);">
+            <div data-dc-tpl="97" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="98" style="color: rgb(107, 104, 99);">Role</span><span data-dc-tpl="99" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Sr. Product Designer</span>
+            </div>
+            <div data-dc-tpl="100" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="101" style="color: rgb(107, 104, 99);">Based</span><span data-dc-tpl="102" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">SF → Philadelphia</span>
+            </div>
+            <div data-dc-tpl="103" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="104" style="color: rgb(107, 104, 99);">Est.</span><span data-dc-tpl="105" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">7 yrs</span>
+            </div>
+          </div>
+
+          <p data-dc-tpl="106" style="font-family: Mori, -apple-system, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(107, 104, 99); margin: 2.25rem 0px 0.75rem; font-size: 0.85rem;">Experience</p>
+          <div data-dc-tpl="107" style="border-top: 1px solid rgb(215, 210, 199);">
+            <div data-dc-tpl="108" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="109" style="color: rgb(154, 150, 143);">01</span><span data-dc-tpl="110" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">LinkedIn</span>
+            </div>
+            <div data-dc-tpl="111" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="112" style="color: rgb(154, 150, 143);">02</span><span data-dc-tpl="113" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Benchling</span>
+            </div>
+          </div>
+
+          <p data-dc-tpl="114" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(107, 104, 99); margin: 2.25rem 0px 0.75rem;">Education</p>
+          <div data-dc-tpl="115" style="border-top: 1px solid rgb(215, 210, 199);">
+            <div data-dc-tpl="116" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="117" style="color: rgb(107, 104, 99);">MHCI</span><span data-dc-tpl="118" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">Carnegie Mellon</span>
+            </div>
+            <div data-dc-tpl="119" style="display: flex; justify-content: space-between; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
+              <span data-dc-tpl="120" style="color: rgb(107, 104, 99);">BA</span><span data-dc-tpl="121" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif;">UC Berkeley</span>
+            </div>
+          </div>
         </div>
+
       </div>
 
     </div>
-  </section>
-  </div></div><div class="sc-host" data-sc-name="Footer" data-dc-tpl="119"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
+  </section></div><div class="sc-host" data-sc-name="Footer" data-dc-tpl="119"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
   <div data-dc-tpl="1" style="max-width: 1280px; margin: 0px auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <span data-dc-tpl="2" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; color: rgb(20, 19, 15);">
       <img data-dc-tpl="3" src="assets/img/logo-mark-solid.svg" alt="" style="width: 20px; height: 20px; display: block; flex-shrink: 0;">
