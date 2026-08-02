@@ -45,12 +45,7 @@
 
     // ---- header hide on scroll down, show on scroll up -------------------
     var lastY = window.scrollY || 0;
-    // The pre-render bakes whatever transform the header had at capture time
-    // (e.g. mid-scroll, hidden) as a literal inline style. hidden must reflect
-    // that actual state on load, not assume visible, or a page captured
-    // scrolled-down loads with a permanently missing header until a scroll
-    // event happens to cross the hide/show threshold twice.
-    var hidden = header.style.transform === 'translateY(-100%)';
+    var hidden = false;
 
     function syncSpacer() {
       if (spacer) spacer.style.height = header.offsetHeight + 'px';
@@ -58,7 +53,16 @@
     syncSpacer();
     window.addEventListener('resize', syncSpacer);
 
-    function syncHeader(y) {
+    // The snapshot can bake in a mid-scroll transform, and the handler below only
+    // writes when the hidden/shown state CHANGES. A page captured while the header
+    // was scrolled away therefore loads with translateY(-100%) in the markup and
+    // `hidden` set to false, agreeing that nothing needs doing — so the header stays
+    // invisible until the visitor scrolls down past it and back up. Normalize the
+    // DOM to match the initial state on load.
+    header.style.transform = 'translateY(0)';
+
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY || window.pageYOffset;
       var h = header.offsetHeight;
       var next = hidden;
       if (y <= h) next = false;
@@ -69,10 +73,6 @@
         header.style.transform = hidden ? 'translateY(-100%)' : 'translateY(0)';
       }
       lastY = y;
-    }
-    syncHeader(window.scrollY || window.pageYOffset);
-    window.addEventListener('scroll', function () {
-      syncHeader(window.scrollY || window.pageYOffset);
     }, { passive: true });
 
     // ---- mobile nav ------------------------------------------------------
