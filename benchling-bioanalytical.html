@@ -51,7 +51,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Benchling Bioanalytical · Jia Liu</title>
 <meta name="description" content="Designing a plate-based workflow that replaced six systems with one and cut throughput time by 90%.">
-<meta name="theme-color" content="#fbfaf9">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:type" content="article">
@@ -78,7 +78,7 @@
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
     @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    body { margin: 0; background: #fbfaf9; color: #14130f; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.55; font-size: 1.078125rem; }
+    body { margin: 0; background: #ffffff; color: #0d0c09; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.55; font-size: 1.078125rem; }
     a { color: #0688f0; }
     a:hover { color: #0576d1; }
     strong, b { font-weight: 600; }
@@ -100,150 +100,14 @@
       .solution-row h3 { margin: 0 0 0.3rem !important; }
     }
   
-    /* Body copy sits a step back from full ink; headings hold #14130f so the
+    /* Body copy sits a step back from full ink; headings hold #0d0c09 so the
        hierarchy comes from weight AND contrast, not size alone. */
     body { color: #3a3833; }
-    h1, h2, h3, h4 { color: #14130f; }
+    h1, h2, h3, h4 { color: #0d0c09; }
   
     /* Case studies run much longer than the home page, so they get more leading
        and a looser paragraph rhythm to stay readable in long runs. */
     p { line-height: 1.55; }
-  </style><style data-dc-tpl="1">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
-    @media (max-width: 1100px) { .section-nav { display: none !important; } }
-  </style><style data-dc-tpl="1">
-    /* Floated rather than absolutely positioned, so two notes near the same
-       paragraph stack instead of overlapping. The negative margin pushes it
-       clear of the text column entirely, so nothing wraps around it. */
-    .margin-note {
-      float: right;
-      clear: right;
-      width: 220px;
-      margin: 0.5rem -292px 1.25rem 0;
-    }
-
-    /* No hover-to-card interaction: a note reads the same whether or not the
-       copy highlights a term, so its appearance never depends on a .term-ref
-       existing in the scope. Kept as an inert inline style in case older copy
-       still wraps a word. */
-    .term-ref {
-      font: inherit;
-      color: inherit;
-      background: none;
-      border: 0;
-      padding: 0;
-      margin: 0;
-      cursor: inherit;
-      text-decoration: none;
-    }
-    .margin-note-label {
-      color: #9a968f;
-      padding-bottom: 0.4rem;
-      border-bottom: 1px solid #e4e0d8;
-    }
-    .margin-note-body { color: #6b6863; }
-    /* One fixed treatment. The padding stays so the label's optical alignment
-       with the adjacent paragraph is unchanged from the card version. */
-    .margin-note {
-      padding: 0.85rem 0.9rem;
-      border-radius: 8px;
-    }
-
-    /* Scroll-driven fade, pure CSS — no JS, so it survives the pre-render and
-       needs nothing from site-behaviors.js. Desktop only: on mobile the note is
-       replaced entirely by the trigger link below. Browsers without
-       animation-timeline simply show it at full opacity. */
-    @keyframes marginNoteFade {
-      0%   { opacity: 0; }
-      18%  { opacity: 0; }
-      40%  { opacity: 1; }
-      60%  { opacity: 1; }
-      82%  { opacity: 0; }
-      100% { opacity: 0; }
-    }
-    @supports (animation-timeline: view()) {
-      @media (min-width: 1101px) and (prefers-reduced-motion: no-preference) {
-        .margin-note {
-          animation: marginNoteFade linear both;
-          animation-timeline: view();
-          animation-range: cover 0% cover 100%;
-        }
-      }
-    }
-
-    /* Below the breakpoint the floated note is replaced by a compact trigger
-       that expands into a modal — a full-width image or autoplaying video at
-       note scale reads as oversized inline on a phone, so it moves behind an
-       explicit tap instead of loading and floating in the flow. */
-    /* Both branches are always in the markup and CSS decides which one shows.
-       A JS-gated one-of-two render bakes whichever branch the viewport happened
-       to be in at capture time into the pre-render, so the other one is simply
-       missing on the deployed site. */
-    .margin-note-trigger {
-      display: none;
-      align-items: center;
-      gap: 0.5em;
-      width: 100%;
-      box-sizing: border-box;
-      margin: 0 0 1.5rem 0;
-      padding: 0.15rem 0 0.15rem 1rem;
-      border: 0;
-      border-left: 2px solid #d7d2c7;
-      background: none;
-      font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif;
-      font-size: 0.95rem;
-      color: #6b6863;
-      cursor: pointer;
-      text-align: left;
-    }
-    .margin-note-trigger-label { color: #0688f0; font-weight: 500; }
-
-    /* .note-scope wraps the note alongside the paragraph/image it annotates.
-       The note sits first in source order (desktop float needs that), so on
-       mobile a plain stack would put the trigger above the content it's about.
-       Reordering as a flex column instead puts it last, after everything it
-       annotates, without touching the host markup's DOM order. */
-    @media (max-width: 1100px) {
-      .margin-note { display: none; }
-      .margin-note-trigger { display: flex; }
-      .note-scope { display: flex; flex-direction: column; }
-      /* dc-import mounts each child in a wrapper div, so the actual flex
-         child of .note-scope is that wrapper, not the button inside it —
-         order has to be set there for it to take effect. */
-      .note-scope > div:has(.margin-note-trigger) { order: 1; margin-top: 1.25rem; }
-      /* When the trigger's only sibling is the paragraph it annotates (no
-         image), that paragraph's own bottom margin already gives clearance —
-         order doesn't change DOM adjacency, so this catches exactly that
-         shape without affecting the image-then-trigger cases. */
-      .note-scope > div:has(.margin-note-trigger):has(+ p:last-child) { margin-top: 0; }
-    }
-
-    .margin-note-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(20,19,15,0.45);
-      z-index: 1000;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .margin-note-modal {
-      background: #fbfaf9;
-      width: 100%;
-      max-width: 520px;
-      max-height: 80vh;
-      overflow-y: auto;
-      border-radius: 16px 16px 0 0;
-      padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
-      box-sizing: border-box;
-      box-shadow: 0 -12px 40px rgba(20,19,15,0.2);
-    }
-    @media (min-width: 560px) {
-      .margin-note-modal-backdrop { align-items: center; padding: 1.5rem; }
-      .margin-note-modal { border-radius: 14px; box-shadow: 0 24px 60px rgba(20,19,15,0.3); }
-    }
   </style><style data-dc-tpl="1">
     @keyframes ncsBlobA { 0% { transform: translate(-10%, -10%) scale(1); } 50% { transform: translate(15%, 10%) scale(1.15); } 100% { transform: translate(-10%, -10%) scale(1); } }
     @keyframes ncsBlobB { 0% { transform: translate(10%, 15%) scale(1); } 50% { transform: translate(-15%, -10%) scale(1.1); } 100% { transform: translate(10%, 15%) scale(1); } }
@@ -265,31 +129,37 @@
         transform: none !important;
       }
     }
-  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style>image-slot { display: none !important; }</style><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script>
+  </style><style data-dc-tpl="1">
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
+  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script>
 <noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+<style>image-slot { display: none !important; }</style>
 <script src="site-behaviors.js" defer></script>
 </head>
 <body>
-<div id="dc-root"><div class="sc-host" data-sc-name="benchling-bioanalytical"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(251, 250, 249, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
+<div id="dc-root"><div class="sc-host" data-sc-name="benchling-bioanalytical"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="8"></div><div data-dc-tpl="9" style="position: relative;"><header data-dc-tpl="10" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
   <div data-dc-tpl="11" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
-    <a data-dc-tpl="12" href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: rgb(20, 19, 15); text-decoration: none;">
+    <a data-dc-tpl="12" href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: rgb(13, 12, 9); text-decoration: none;">
       <img data-dc-tpl="13" src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
       Jia Liu
     </a>
     <div data-dc-tpl="14" style="display: flex; align-items: center; gap: 1.75rem;">
       <nav data-dc-tpl="15" class="nav-desktop" style="display: flex; gap: 1.5rem;">
-        <a data-dc-tpl="16" href="index.html#work" data-section-id="work" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); opacity: 0.75; text-decoration: none;">Work</a>
-        <a data-dc-tpl="17" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); opacity: 0.75; text-decoration: none;">Resume</a>
-        <a data-dc-tpl="18" href="index.html#about" data-section-id="about" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); opacity: 0.75; text-decoration: none;">Bio</a>
+        <a data-dc-tpl="16" href="index.html#work" data-section-id="work" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Work</a>
+        <a data-dc-tpl="17" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Resume</a>
+        <a data-dc-tpl="18" href="index.html#about" data-section-id="about" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Bio</a>
       </nav>
-      <button data-dc-tpl="19" class="nav-mobile-toggle" data-behavior="nav-toggle" aria-label="Menu" aria-expanded="false" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; color: rgb(20, 19, 15); padding: 0px; flex-shrink: 0;">
+      <button data-dc-tpl="19" class="nav-mobile-toggle" data-behavior="nav-toggle" aria-label="Menu" aria-expanded="false" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; color: rgb(13, 12, 9); padding: 0px; flex-shrink: 0;">
         
         
           <svg data-dc-tpl="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path data-dc-tpl="25" data-behavior="nav-toggle-icon" d="M4 7h16M4 12h16M4 17h16"></path></svg>
         
       </button>
       <div data-dc-tpl="26" class="contact-desktop-wrap" data-behavior="contact-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
-        <div data-dc-tpl="27" data-behavior="contact-shape" style="position: absolute; top: 0px; right: 0px; background: rgb(20, 19, 15); overflow: hidden; width: 128px; height: 42px; border-radius: 999px; box-shadow: none; transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s; z-index: 20;">
+        <div data-dc-tpl="27" data-behavior="contact-shape" style="position: absolute; top: 0px; right: 0px; background: rgb(13, 12, 9); overflow: hidden; width: 128px; height: 42px; border-radius: 999px; box-shadow: none; transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s; z-index: 20;">
           <button data-dc-tpl="28" class="contact-desktop" data-behavior="contact-button" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: 1; pointer-events: auto; transition: opacity 0.2s 0.25s;">
             <svg data-dc-tpl="29" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path data-dc-tpl="30" d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
             Contact
@@ -330,10 +200,10 @@
   <div data-dc-tpl="58" data-behavior="mobile-nav-panel" style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: 0px; border-top: 1px solid rgb(228, 224, 216); transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
    <div data-dc-tpl="59" style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
     <nav data-dc-tpl="60" style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
-      <a data-dc-tpl="61" href="index.html#work" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); text-decoration: none; padding: 0.6rem 0px;">Work</a>
-      <a data-dc-tpl="62" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); text-decoration: none; padding: 0.6rem 0px;">Resume</a>
-      <a data-dc-tpl="63" href="index.html#about" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); text-decoration: none; padding: 0.6rem 0px;">Bio</a>
-      <button data-dc-tpl="64" data-behavior="mobile-contact-toggle" aria-expanded="false" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: rgb(20, 19, 15); padding: 0.6rem 0px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+      <a data-dc-tpl="61" href="index.html#work" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Work</a>
+      <a data-dc-tpl="62" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Resume</a>
+      <a data-dc-tpl="63" href="index.html#about" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Bio</a>
+      <button data-dc-tpl="64" data-behavior="mobile-contact-toggle" aria-expanded="false" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); padding: 0.6rem 0px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
         Contact
         <svg data-dc-tpl="65" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-behavior="mobile-contact-chevron" style="width: 16px; height: 16px; transform: rotate(0deg); transition: transform 0.25s;"><path data-dc-tpl="66" d="M6 9l6 6 6-6"></path></svg>
       </button>
@@ -342,9 +212,9 @@
           <div data-dc-tpl="69" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
             <div data-dc-tpl="70">
               <div data-dc-tpl="71" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">Email</div>
-              <div data-dc-tpl="72" style="font-size: 0.95rem; font-weight: 500; color: rgb(20, 19, 15);">jia.eq.liu@gmail.com</div>
+              <div data-dc-tpl="72" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">jia.eq.liu@gmail.com</div>
             </div>
-            <button data-dc-tpl="73" data-behavior="copy-email" aria-label="Copy email" style="background: rgb(242, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(20, 19, 15); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <button data-dc-tpl="73" data-behavior="copy-email" aria-label="Copy email" style="background: rgb(242, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               
               
                 <svg data-dc-tpl="78" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect data-dc-tpl="79" x="9" y="9" width="11" height="11" rx="2"></rect><path data-dc-tpl="80" d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
@@ -354,9 +224,9 @@
           <div data-dc-tpl="81" style="display: flex; align-items: center; justify-content: space-between;">
             <div data-dc-tpl="82">
               <div data-dc-tpl="83" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">LinkedIn</div>
-              <div data-dc-tpl="84" style="font-size: 0.95rem; font-weight: 500; color: rgb(20, 19, 15);">@jia-eq-liu</div>
+              <div data-dc-tpl="84" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">@jia-eq-liu</div>
             </div>
-            <a data-dc-tpl="85" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgb(242, 241, 236); border-radius: 8px; width: 34px; height: 34px; color: rgb(20, 19, 15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+            <a data-dc-tpl="85" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgb(242, 241, 236); border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
               <svg data-dc-tpl="86" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="87" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path data-dc-tpl="88" d="M15 3h6v6"></path><path data-dc-tpl="89" d="M10 14L21 3"></path></svg>
             </a>
           </div>
@@ -366,33 +236,7 @@
    </div>
   </div></header><div data-dc-tpl="90" class="header-spacer-default" style="height: 76px; flex-shrink: 0;"></div><div data-dc-tpl="91" style="position: relative; max-width: 1280px; margin: 0px auto; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem);">
 
-  <div data-dc-tpl="92" style="position: absolute; inset: 0px; padding-left: clamp(1.25rem, 4vw, 3rem); padding-right: clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: none; grid-template-columns: repeat(12, 1fr); gap: 32px; z-index: 9999; pointer-events: none;">
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-      <div data-dc-tpl="94" style="background: rgba(6, 136, 240, 0.08); border-left: 1px dashed rgba(6, 136, 240, 0.4); border-right: 1px dashed rgba(6, 136, 240, 0.4); height: 100%;"></div>
-    
-  </div>
+  
 
   <div data-dc-tpl="95" class="bio-title-grid" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;">
     <div data-dc-tpl="96" class="bio-title-block" style="grid-column: 3 / 11; padding: 4rem 0px 1.5rem;">
@@ -403,7 +247,7 @@
     </div>
   </div>
 
-  <div data-dc-tpl="100" class="bio-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; --bio-grid-w: 1194px;">
+  <div data-dc-tpl="100" class="bio-shell" style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; align-items: start; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif; --bio-grid-w: 1179px;">
 
     <div data-dc-tpl="101" class="bio-overview-wrap" style="grid-area: 1 / 3 / auto / 11; padding-bottom: 1.5rem;">
 
@@ -425,7 +269,7 @@
         </div>
         <div data-dc-tpl="114" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
           <dt data-dc-tpl="115" style="color: rgb(107, 104, 99); margin: 0px;">Outcome</dt>
-          <dd data-dc-tpl="116" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">10x efficiency gain, 25% reduction manual tasks *</dd>
+          <dd data-dc-tpl="116" style="font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; margin: 0px; text-align: right;">10x efficiency gain, 25% reduction manual tasks*</dd>
         </div>
         <div data-dc-tpl="117" style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; padding: 0.55rem 0px; border-bottom: 1px dashed rgb(215, 210, 199); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem;">
           <dt data-dc-tpl="118" style="color: rgb(107, 104, 99); margin: 0px; flex-shrink: 0;">Skills</dt>
@@ -435,340 +279,288 @@
 
       <p data-dc-tpl="120" style="margin: 0.5rem 0px 0px; font-size: 0.95rem; color: rgb(107, 104, 99);">* Source: <a data-dc-tpl="121" href="https://axendia.com/blog/2025/07/23/reimagining-the-digital-discovery-development-continuum-in-biopharma/" target="_blank" rel="noopener" style="color: rgb(6, 136, 240);">axendia.com</a></p>
 
-      <p data-dc-tpl="122" style="margin: 1.5rem 0px 0px; padding: 0.75rem 1rem; background: rgb(242, 241, 236); border-radius: 6px; font-size: 0.95rem; line-height: 1.55; color: rgb(107, 104, 99);"><span data-dc-tpl="123" style="color: rgb(20, 19, 15);">Note on confidentiality</span><span data-dc-tpl="124" style="color: rgb(20, 19, 15);">:</span>&nbsp;Benchling's partnership with Merck is public and the figures shared here are what's publicly available. Other details have been scrubbed or generalized.</p>
+      <p data-dc-tpl="122" style="margin: 1.5rem 0px 0px; padding: 0.75rem 1rem; background: rgb(251, 250, 249); border: 1px solid rgb(228, 224, 216); border-radius: 6px; font-size: 0.95rem; line-height: 1.55; color: rgb(107, 104, 99);"><span data-dc-tpl="123" style="color: rgb(13, 12, 9);">Note on confidentiality:</span> Benchling's partnership with Merck is public and the figures shared here are what's publicly available. Other details have been scrubbed or generalized.</p>
+
+      <div data-dc-tpl="124" style="margin: 3.5rem 0px 0px;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="125"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; aspect-ratio: auto; padding: 0px; display: block;">
+  
+    <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; object-fit: fill; object-position: center center; display: block; cursor: zoom-in;"><source data-dc-tpl="8" src="assets/video/lab-automation-short.mp4" type="video/mp4"></video>
+  
+  
+  
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
+      </div>
 
     </section>
 
     </div>
 
-    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="125"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav" style="right: calc(50% + 426px); opacity: 1; pointer-events: none;">
+    <div class="sc-host" data-sc-name="SectionNav" data-dc-tpl="126"><nav data-dc-tpl="2" aria-label="Page sections" class="section-nav" data-behavior="section-nav" style="right: calc(50% + 426px); opacity: 1; pointer-events: none;">
   
     <div data-dc-tpl="4" style="position: relative; width: 40px; height: 260px; margin-left: -3px;">
       <button data-dc-tpl="5" aria-label="Jump to nearest section" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 100%; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
         <span data-dc-tpl="6" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 100%; border-radius: 1px; background: rgb(228, 224, 216);"></span>
-        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 72px; border-radius: 1px; background: rgb(20, 19, 15);"></span>
+        <span data-dc-tpl="7" style="position: absolute; left: 10px; top: 0px; width: 2px; height: 3px; border-radius: 1px; background: rgb(13, 12, 9);"></span>
       </button>
       
-        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 72px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">3 / 16</span></div>
+        <div data-dc-tpl="9" style="position: absolute; right: 38px; top: 3px; transform: translateY(-50%); font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-variant-numeric: tabular-nums; color: rgb(154, 150, 143); white-space: nowrap; text-align: right; pointer-events: none;"><span class="sc-interp">1 / 17</span></div>
       
     </div>
   
   </nav></div>
 
-    <div data-dc-tpl="126" style="grid-area: 2 / 3 / auto / 11;">
-  <section data-dc-tpl="127" id="problem" class="bio-col" style="max-width: 580px; margin: 1rem auto 4rem;">
-    <div data-dc-tpl="128">
-      <h3 data-dc-tpl="129" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Developing lab tests, running them at scale</h3>
-      <p data-dc-tpl="130" style="margin: 0px 0px 1.5rem;">During bioanalytical development, scientists develop lab tests that can detect and measure things.&nbsp;The level of precision and complexity goes way beyond what you might remember from biology lab. In many cases, these tests involve sensitive living organisms, complex lab robotics, and very expensive reagents.</p>
+    <div data-dc-tpl="127" style="grid-area: 2 / 3 / auto / 11;">
+  <section data-dc-tpl="128" id="problem" class="bio-col" style="max-width: 580px; margin: 1rem auto 4rem;">
+    <div data-dc-tpl="129">
+      <h3 data-dc-tpl="130" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Developing lab tests, running them at scale</h3>
+      <p data-dc-tpl="131" style="margin: 0px 0px 1rem;">During drug development scientists develop lab tests that can detect and measure things. They repeat the following process many times until they have everything completely understood, documented, and ready to execute.</p>
+      <p data-dc-tpl="132" style="margin: 0px 0px 1.5rem;">After they're developed, these tests run over thousands of samples. The workflow shifts towards importing, testing, and re-testing samples with specific business logic (e.g. if result &gt; x, re-test at dilution y).</p>
 
-      <div data-dc-tpl="131" class="note-scope">
-        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="132" style=""><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="3">Learn more:</span>
-    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Microtiter plates</span></span>
-  </button>
-
-  
-
-  <aside data-dc-tpl="18" class="margin-note">
-    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Microtiter plates</span></span>
-    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">A plastic grid with wells that automated instruments can handle. Used heavily in bioanalytical work to increase efficiency and throughput.</span></span>
-    
-      <img data-dc-tpl="22" src="assets/img/plate-96-well-photo.png" alt="A hand holding three microplates of different well densities side by side" loading="lazy" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);">
-    
-    
-  </aside></div>
-        
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="133"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+      <div data-dc-tpl="133" style="margin: 2rem 0px 3.5rem;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="134"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="9" style="border-radius: 10px; overflow: hidden; background: rgb(251, 250, 249); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 9 / 12 + 256px); max-width: none; max-height: none; aspect-ratio: auto; padding: 0px; display: block;">
   
   
-    <img data-dc-tpl="10" src="assets/img/bioanalytical-development-workflow.png" alt="Six-step flow: define procedure, design experiment and plates, run plates and generate data, analyze data, and review and sign off, each labeled with its responsible role" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+    <img data-dc-tpl="10" src="assets/img/bioanalytical-development-workflow.png" alt="Six-step flow: define procedure, design experiment and plates, run plates and generate data, analyze data, and review and sign off, each labeled with its responsible role" style="width: 100%; height: auto; object-fit: fill; object-position: center center; display: block; cursor: zoom-in;">
   
   
-  
-    
   
   <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
       </div>
     </div>
 
-    <div data-dc-tpl="134" class="note-scope" style="margin-top: 1.5rem;">
+    <div data-dc-tpl="135" style="margin-top: 3rem;">
+      <h3 data-dc-tpl="136" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Getting everyone in the room</h3>
+      <p data-dc-tpl="137" style="margin: 0px 0px 1rem;">We spent weeks on-site with Merck's scientists. I co-led discovery with a lead PM and eng, running user journey mapping and design sprints, bringing them back to our team to explore ideas, and then back to Merck to test it.</p>
       
-      <p data-dc-tpl="135" style="margin: 0px 0px 1rem;">After tests are developed, they need to be executed reliably&nbsp;for weeks or months on end.&nbsp;The most crucial tests are for human clinical trials because you can't go back and get more if something goes wrong. At this point, teams are trying to smoothly run a conveyer belt of samples and tests, not doing real investigative work.</p>
+      <p data-dc-tpl="138" style="margin: 0px;">I saw my role as a translator between Merck and Benchling, translating their dense scientific language for our teams back home, and later, keeping a stretched-thin team bought into a project that hadn't been on their roadmap.</p>
 
-      <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="136" style=""><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="3">Learn more:</span>
-    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Lab automation</span></span>
-  </button>
-
-  
-
-  <aside data-dc-tpl="18" class="margin-note">
-    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Lab automation</span></span>
-    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">The use of robotics to improve accuracy and efficiency. Human operators are kept in the loop, loading samples, troubleshooting errors, or switching to manual workflows when necessary.</span></span>
-    
-    
-      <video data-dc-tpl="24" src="assets/video/lab-automation-short.mp4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);"></video>
-    
-  </aside></div>
-
-      <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="137"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; padding: 0px; display: block;">
+      <div data-dc-tpl="139" style="margin: 2rem 0px 3.5rem;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="140"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 0px; transform: none; width: 100%; max-width: none; max-height: none; aspect-ratio: 4 / 3; padding: 0px; display: block;">
   
   
-    <img data-dc-tpl="10" src="assets/img/clinical-sample-testing-workflow.png" alt="Six-step flow: import samples, assign tests automatically, find samples, run plates and generate data, analyze data, and review and sign off, each labeled with its responsible role" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
+    <img data-dc-tpl="10" src="assets/img/benchling-tour-sm.jpg" alt="A Merck scientist walking the Benchling team through the lab during an on-site visit" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; cursor: zoom-in;">
   
   
-  
-    
   
   <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
-    </div>
-
-    <div data-dc-tpl="138" style="margin-top: 3rem;">
-      <h3 data-dc-tpl="139" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Complexity that erodes trust</span></h3>
-    <p data-dc-tpl="140" style="margin: 0px 0px 1rem;">The systems orchestrating the work are often patchworks of legacy software, custom tools and offline know-how. Scientists used up to <i data-dc-tpl="141">nine</i> systems to do their job. Each had slightly different sample ID format, materials were tracked in different ways, and notebook was so slow that scientists often waited until hours later to transcribe their work.</p><p data-dc-tpl="142" style="margin: 0px 0px 1rem;">This often left the people in charge one asking:</p>
-    <blockquote data-dc-tpl="143" style="margin: 1.5rem 0px; border-left: 3px solid rgb(6, 136, 240); padding-left: 1.5rem;">"Can we trust this data?"</blockquote>
-    <p data-dc-tpl="144" style="margin: 0px 0px 1rem;">Spending weeks with these scientists taught me something that I kept re-iterating with our teams back home. It was easy to look at their Windows 95-era software and focus on how outdated they felt, but that wasn't the real problem. The problem was that there were too many poorly-integrated systems, which led to scientifically useless work and weeks of waiting on data.</p>
-
-    <div data-dc-tpl="145" style="border-radius: 10px; overflow: hidden; background: rgb(242, 241, 236); border: 1px solid rgb(228, 224, 216); margin: 2rem 0px 1.5rem; aspect-ratio: 1100 / 684;">
-      <img data-dc-tpl="146" src="assets/img/legacy-tools-collage.png" alt="A cluttered desktop of legacy lab software: an electronic lab notebook, a printed instrument protocol, and a spreadsheet with custom curve-fitting macros" style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block;">
-    </div>
-    
-    
+      </div>
     </div>
 
   </section>
 
-  <section data-dc-tpl="147" id="approach" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
-    <div data-dc-tpl="148" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;">Approach</div>
-    <div data-dc-tpl="149">
-      <h3 data-dc-tpl="150" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Building on a shared foundation</h3>
-      <p data-dc-tpl="151" style="margin: 0px 0px 1rem; font-weight: 500;">Our approach was heavily shaped by an early technical decision before I'd jumped on the project.</p><p data-dc-tpl="152" style="margin: 0px 0px 1rem; font-weight: 500;">For years, we'd been exploring a solution&nbsp;for bioprocess development, i.e.&nbsp;how to design and optimize the drug production process. We'd started working on a product called Benchling Bioprocess and the big bet was that we could build Bioanalytical on the same foundation.</p><p data-dc-tpl="153" style="margin: 0px 0px 1rem; font-weight: 500;">On paper, this made a lot of sense. In both cases, scientists need to design and optimize processes through systematic experimentation, eventually locking them down for repeated execution. This gave us leverage, but also handed us constraints, which my PM and I were increasingly wary about.</p>
+  <section data-dc-tpl="141" id="approach" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+    
+    <div data-dc-tpl="142">
+      <h3 data-dc-tpl="143" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Complexity that erodes trust</span></h3>
+    <p data-dc-tpl="144" style="margin: 0px 0px 1rem;">The overarching problem what we needed to solve was one of the siloed systems that led to wasted work and expensive errors. Their existing systems were patchworks of legacy software, custom tools and offline know-how. Scientists used up to nine systems to do their job and their notebook was so slow that scientists often waited until hours later to transcribe their work.</p>
+    
+    <p data-dc-tpl="145" style="margin: 0px 0px 1rem;">It was tempting to look at their Windows 95-era software and conclude that Benchling would be vastly better, but the reality was that their systems or purpose-built for their business processes.&nbsp;Benchling often had the opposite problem where it's so flexible&nbsp;that configuration becomes a serious challenge, and the result isn't always the exact solution that a customer envisioned.</p>
+
+    
+
+    <div data-dc-tpl="146" style="position: relative; border-radius: 10px; overflow: hidden; background: rgb(251, 250, 249); border: 1px solid rgb(228, 224, 216); margin: 2rem 0px 1.5rem; aspect-ratio: 1100 / 684;">
+      <img data-dc-tpl="147" src="assets/img/legacy-tools-collage.png" alt="A cluttered desktop of legacy lab software: an electronic lab notebook, a printed instrument protocol, and a spreadsheet with custom curve-fitting macros" style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block;">
+      
+    </div>
+    
+    
+    </div>
+
+    <div data-dc-tpl="150" style="margin-top: 3.5rem;">
+      <h3 data-dc-tpl="151" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Designing with our data model in mind</h3>
+      <p data-dc-tpl="152" style="margin: 0px 0px 1rem; font-weight: 500;">Our thinking was heavily shaped by a technical decision to build Bioanalytical on a shared foundation with another new product, Benchling Bioprocess.</p><p data-dc-tpl="153" style="margin: 0px 0px 1rem; font-weight: 500;">On paper, the idea made sense. In both cases, scientists need to design processes through experimentation and then execute them under tight control. Bioprocess focuses on producing materials, Bioanalytical focuses on testing them.</p>
     </div>
 
     
-      <p data-dc-tpl="154" style="margin: 0px 0px 1rem;">Between Merck's requirements and the Bioprocess build-out, we needed clarity as soon as possible about where these two products might diverge. We kept our&nbsp;design sprints with Merck conceptual, focusing on understanding their needs without over-promising a&nbsp;final solution.</p>
-      <div data-dc-tpl="155" style="margin: 1.5rem 0px; padding: 1.25rem 1.5rem; background: rgb(242, 241, 236); border-radius: 8px;">
-      <p data-dc-tpl="156" style="margin: 0px 0px 0.85rem;">This revealed our largest gaps:</p>
+      <p data-dc-tpl="154" style="margin: 0px 0px 1rem;">This gave us leverage, but also&nbsp;handed us constraints. As we ran discovery, we realized that the core data model held,&nbsp;but there were gaps and parts of the products which might diverge.</p>
+      <blockquote data-dc-tpl="155" style="margin: 1.5rem 0px; border-left: 3px solid rgb(6, 136, 240); padding-left: 1.5rem;">
+      <p data-dc-tpl="156" style="margin: 0px 0px 0.85rem;">For the sake of brevity, I'll walk through two key questions that came up:</p>
       <ol data-dc-tpl="157" style="margin: 0px; padding: 0px; list-style: none; display: grid; gap: 0.75rem; counter-reset: gap-item 0;">
-        <li data-dc-tpl="158" style="counter-increment: gap-item 1; display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem; align-items: baseline;"><span data-dc-tpl="159" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; color: rgb(154, 150, 143);">01</span><span data-dc-tpl="160">How experiment planning and plate design interacted with each other</span></li>
-        <li data-dc-tpl="161" style="counter-increment: gap-item 1; display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem; align-items: baseline;"><span data-dc-tpl="162" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; font-weight: 600; color: rgb(154, 150, 143);">02</span><span data-dc-tpl="163">How samples, tests, and testing workflows would work</span></li>
+        <li data-dc-tpl="158" style="counter-increment: gap-item 1; display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem; align-items: baseline;"><span data-dc-tpl="159" style="font-weight: 600; color: rgb(154, 150, 143);">1.</span><span data-dc-tpl="160">How do plate designs work within experiments that were originally designed for Bioprocess?</span></li>
+        <li data-dc-tpl="161" style="counter-increment: gap-item 1; display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.5rem; align-items: baseline;"><span data-dc-tpl="162" style="font-weight: 600; color: rgb(154, 150, 143);">2.</span><span data-dc-tpl="163">How can we manage testing workflows when our system isn't set up to handle its complex business logic?</span></li>
       </ol>
-      </div>
+      </blockquote>
       
 
-      <div data-dc-tpl="164" id="three-tier-foundation-fullbleed" style="margin: 3.5rem 0px;">
+      <div data-dc-tpl="164" id="three-tier-foundation-fullbleed" style="margin: 2rem 0px 3.5rem;">
         <div data-dc-tpl="165" class="plain-figure" data-nav-fade="" style="position: relative; width: calc((var(--bio-grid-w, 100%) - 352px) * 10 / 12 + 288px); margin-left: 50%; transform: translateX(-50%);">
           <img data-dc-tpl="166" src="assets/img/three-tier-foundation.png" alt="Three-tier foundation: Bioanalytical and Bioprocess sharing a Core platform layer" style="display: block; width: 100%; height: auto;">
-          
-            
           
         </div>
       </div>
     
 
     <div data-dc-tpl="169" style="margin-top: 3.5rem;">
-      <h3 data-dc-tpl="170" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Experiment planning meets plate design</h3>
-      <div data-dc-tpl="171" class="note-scope">
-        <div class="sc-host" data-sc-name="MarginNote" data-dc-tpl="172" style=""><button data-dc-tpl="2" type="button" class="margin-note-trigger" data-behavior="margin-note-trigger" aria-haspopup="dialog">
-    <span data-dc-tpl="3">Learn more:</span>
-    <span data-dc-tpl="4" class="margin-note-trigger-label"><span class="sc-interp">Bioreactor</span></span>
-  </button>
+      <h3 data-dc-tpl="170" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Plates and experiments: a mismatched model</h3>
+      <p data-dc-tpl="171" style="margin: 0px 0px 1rem;">Plates are plastic blocks packed with tiny wells, letting scientists test dozens or hundreds of samples at once, whereas bioprocess relies on physical containers that each hold one batch.</p>
+      <p data-dc-tpl="172" style="margin: 0px 0px 1rem;">This had consequences for experiment planning and execution: Bioprocess had built a planning table, where a single column represents an experimental condition (e.g. incubate at 10°C for 30 minutes).</p>
+      <p data-dc-tpl="173" style="margin: 0px 0px 1rem;">Plates broke this model because they're much more flexible. You can load a single plate with a complex jigsaw of experimental conditions as long as it scientifically makes sense. Bioanalytical scientists might summarize a few high level details in a table, but they fundamentally plan, execute, and analyze in plates.</p>
 
-  
-
-  <aside data-dc-tpl="18" class="margin-note">
-    <span data-dc-tpl="19" class="margin-note-label" style="display: block; font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;"><span class="sc-interp">Bioreactor</span></span>
-    <span data-dc-tpl="20" class="margin-note-body" style="display: block; font-family: &quot;Neue Montreal&quot;, -apple-system, system-ui, sans-serif; font-size: 0.9rem; line-height: 1.45;"><span class="sc-interp">Vessel used to grows cells and living material, which drug products are harvested from.</span></span>
-    
-      <img data-dc-tpl="22" src="assets/img/bioreactor-lineup.png" alt="A lineup of four stainless steel bioreactors of increasing size" loading="lazy" style="width: 100%; height: auto; display: block; margin-top: 0.75rem; border: 1px solid rgb(228, 224, 216); border-radius: 6px; background: rgb(255, 255, 255);">
-    
-    
-  </aside></div>
-        <p data-dc-tpl="173" style="margin: 0px 0px 1rem;">Our data model mostly worked, except when it came to plates. In bioprocess, scientists grow cells and living matter in bioreactors, experimenting to find the optimal process for producing their product. Meanwhile, bioanalytical uses plates to run hundreds of chemical reactions to test samples.<br data-dc-tpl="174"></p>
-      </div>
-
-      <p data-dc-tpl="175" style="margin: 0px 0px 1rem;">What broke down was how scientists could plan experiments involving plates.</p>
-
-      <div data-dc-tpl="176">
-        <p data-dc-tpl="177" style="margin: 0px 0px 1rem;">In Bioprocess, each condition runs in a bioreactor, which maps cleanly to each column in a planning table UI. However, a single plate can hold many conditions at once and their work could be split up across multiple runs. Basically, users could design and run them however they wanted, as long as it scientifically made sense.</p>
-
-        <div data-dc-tpl="178" id="config-exploration-fullbleed" style="margin: 1.5rem 0px;">
-          <div data-dc-tpl="179" style="position: relative; padding: 0px 1.5rem; box-sizing: border-box;">
-            <img data-dc-tpl="180" src="assets/img/bioprocess-vs-bioanalytical-b5d6615e.png" alt="An experiment planning table with three condition columns branches to two outcomes: Bioprocess, where each condition maps to one vessel, and Bioanalytical, where a single plate holds many conditions across its wells" style="display: block; width: 100%; height: auto;">
-          
-            
+      <div data-dc-tpl="174" id="config-exploration-fullbleed" style="margin: 2rem 0px 3.5rem;">
+          <div data-dc-tpl="175" style="position: relative; padding: 0px 1.5rem; box-sizing: border-box;">
+            <img data-dc-tpl="176" src="assets/img/bioprocess-vs-bioanalytical-b5d6615e.png" alt="An experiment planning table with three condition columns branches to two outcomes: Bioprocess, where each condition maps to one vessel, and Bioanalytical, where a single plate holds many conditions across its wells" style="display: block; width: 100%; height: auto;">
           
         </div>
       </div>
 
     </div>
 
-    <div data-dc-tpl="183" style="margin-top: 1.5rem;">
+    <div data-dc-tpl="179" style="margin-top: 1.5rem;">
       
-      <p data-dc-tpl="184" style="margin: 0px 0px 1rem;">I explored a pretty obvious idea: just add design plates into the planning flow. Users could fill out the table if they needed, but finish up by designing their plates and assigning them to runs.&nbsp;</p><p data-dc-tpl="185" style="margin: 0px 0px 1rem;">The problem was landing this all in time. Plate-related work had been passed around between teams and their original plan was to only make them available in our documents UI, where all our users could benefit from them. Different UIs built on different systems meant significant integration work.</p>
+      <p data-dc-tpl="180" style="margin: 0px 0px 0.5rem;">So the key question was:</p>
+      <blockquote data-dc-tpl="181" style="margin: 0.5rem 0px 1.5rem; border-left: 3px solid rgb(6, 136, 240); padding-left: 1.5rem;">How can we let scientists run experiments with plates while&nbsp;shipping something feasible given our technical strategy?</blockquote>
+      <p data-dc-tpl="182" style="margin: 0px 0px 1rem;">I partnered with my teammate who'd picked up plates-related work. A previous colleague had archived some concepts which we could pretty easily polish to a shipped feature, but they didn't address this thorny question because they'd been designed as a simpler notebook feature.</p>
+      <p data-dc-tpl="183" style="margin: 0px 0px 1rem;">We couldn't simply swap out the table or even really rework it. The table was wired into everything downstream: how an experiment got created, how work gets executed, even how the raw analysis data is output. Forking the codebase and maintaining two separate versions was off the table. Plus, scientists <i data-dc-tpl="184">do</i> sometimes need the table.</p>
+      <p data-dc-tpl="185" style="margin: 0px 0px 1rem;">My teammate and I explored adding plate design to a third step in the flow. It was well-received by scientists, but the integration work would be significant. If we invested there, it could turn into a development quagmire and burn time that we could invest elsewhere.</p>
+      <p data-dc-tpl="186" style="margin: 0px 0px 1rem;">The one other alternative was what I called the "split path." The user could fill out the table, hop a few steps, and then design the plates in the experiment's worksheets.&nbsp;It was inelegant, but it functionally was like having a third step (just a couple steps later). The obsessive designer in me disliked it, but the pragmatic problem-solver in me agreed it was the only way forward.</p>
+
+      <div data-dc-tpl="187" style="margin: 1.5rem 0px;">
+        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="188"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="12" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 12 / 12 + 352px); max-width: none; max-height: none; aspect-ratio: auto; padding: 0px; display: block;">
+  
+  
+    <img data-dc-tpl="10" src="assets/img/plates-proposed-workaround.png" alt="Initial exploration vs. proposed workaround: passing plate design or param values between Design experiment, Study, and Worksheet screens" style="width: 100%; height: auto; object-fit: fill; object-position: center center; display: block; cursor: zoom-in;">
+  
+  
+  
+  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
+      </div>
+    </div>
+
+    <div data-dc-tpl="189" style="margin-top: 3.5rem;">
+      <h3 data-dc-tpl="190" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">The complexities of sample testing</h3><p data-dc-tpl="191" style="margin: 0px 0px 0.5rem;">Let's turn to another problem. For sample testing, it seemed like Benchling had all the building blocks to solve it. We had a robust, configurable schema system that includes samples and results. We'd recently launched a workflow engine that could route tasks between users.</p>
       
+      <p data-dc-tpl="192" style="margin: 0px 0px 1rem;">So, when my PM and I pitched the idea of building a Test object, it received some pushback. The problem was, if we just stitched these features together, it'd deliver an honestly terrible experience for our customer and users. If we literally applied our existing data model:</p>
 
-      <div data-dc-tpl="186" style="margin: 1.5rem 0px;">
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="187"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="8" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 8 / 12 + 224px); max-width: none; max-height: none; padding: 0px; display: block;">
-  
-    <video data-dc-tpl="4" autoplay="" playsinline="" preload="auto" loop="" style="width: 100%; height: auto; display: block; cursor: zoom-in;"><source data-dc-tpl="6" src="assets/video/plate-design-in-exp-planning-v2.webm" type="video/webm"><source data-dc-tpl="8" src="assets/video/plate-design-in-exp-planning-v2.mp4" type="video/mp4"></video>
+      <div data-dc-tpl="193" style="margin: 2rem 0px 3.5rem;">
+      <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="194"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="8" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 8 / 12 + 224px); max-width: none; max-height: none; aspect-ratio: auto; padding: 0px; display: block;">
   
   
+    <img data-dc-tpl="10" src="assets/img/workflows-vs-sample-centered.png" alt="What users would see in Benchling: a task list of 15 worksheet rows. What users expect: a Samples table with each test, status, dilution, and result under sample S100." style="width: 100%; height: auto; object-fit: fill; object-position: center center; display: block; cursor: zoom-in;">
   
   
-    
   
   <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
       </div>
 
-      <p data-dc-tpl="188" style="margin: 0px 0px 1rem;">The alternative was splitting up the work. Create the experiment, then navigate to individual documents and plates there. It wasn't elegant, but it gave scientists the flexibility they needed and it was shippable. By doing this, we also allowed our teams to move on to other critical work.<br data-dc-tpl="189"></p>
+      <p data-dc-tpl="195" style="margin: 0px 0px 1rem;">Yikes. Workflows were already hard to configure and the UI was dense. But the real problem was the relational shape between samples, results, and tasks. We couldn't provide the status life cycle and business logic out of the box that customers would expect. And it's hard to sell something when you have to keep configuring it forever and still can't get the result you want.</p>
+      <p data-dc-tpl="196" style="margin: 0px 0px 1rem;">Everyone understood the problem now, so my PM and I sketched out the general shape of a solution, with input from a lot of people. I pushed for a cross-object, hierarchical view of samples, tests and results, like in the above wireframe. It made sense and could extend to other use cases.</p>
+      <p data-dc-tpl="197" style="margin: 0px 0px 1rem;">Alas, Benchling's flexibility again became a design constraint. Customers can define their own objects and relationships in arbitrary ways, so we can't know in advance what to keep in sync, and combined search across linked fields becomes expensive. Everyone agreed it was a slick UI, but it wasn't doable by our go-live date.</p>
+      <p data-dc-tpl="198" style="margin: 0px 0px 1rem;">The feature we ultimately shipped largely left our search system unchanged, with the exception of some additional filters and a test-specific view.</p>
+    </div>
+  </section>
 
-      <div data-dc-tpl="190" style="margin: 1.5rem 0px;">
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="191"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="12" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 12 / 12 + 352px); max-width: none; max-height: none; padding: 0px; display: block;">
-  
-  
-    <img data-dc-tpl="10" src="assets/img/plates-proposed-workaround.png" alt="Initial exploration vs. proposed workaround: passing plate design or param values between Design experiment, Study, and Worksheet screens" style="width: 100%; height: auto; display: block; cursor: zoom-in;">
-  
-  
-  
-    
-  
-  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
+  <section data-dc-tpl="199" id="solution" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+    <div data-dc-tpl="200" class="solution-header" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;"><span class="sc-interp">Solution</span></div>
+
+    <div data-dc-tpl="201" class="bio-col" style="max-width: 580px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem;">
+      <h3 data-dc-tpl="202" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">What shipped</h3>
+      <p data-dc-tpl="203" style="margin: 0px;">Let's see where plates and tests landed, keeping in mind that these are just two feature areas of many in the final release. Happy to walk through other&nbsp;parts, if you're curious.</p>
+    </div>
+
+    <div data-dc-tpl="204" class="solution-first-row solution-row" style="padding-top: 1rem;">
+      <h3 data-dc-tpl="205" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;"><span data-dc-tpl="206" style="font-weight: normal;">Define testing procedures</span></h3>
+      <p data-dc-tpl="207" style="margin: 0px 0px 1.5rem;">Before, there wasn't one standard definition of a sample. It could exist in different formats across different systems, with no single source of truth, so scientists spent time reconciling versions instead of trusting the data. Now a testing procedure includes a standardized sample definition. It takes some setup, but once it exists, it means the same thing everywhere, and scientists can build experiments on it without re-establishing what a sample is each time.</p>
+      <div data-dc-tpl="208" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
+        <video data-dc-tpl="209" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="210" src="assets/video/flowchart-extended.webm" type="video/webm"><source data-dc-tpl="211" src="assets/video/flowchart-extended.mp4" type="video/mp4"></video>
       </div>
     </div>
 
-    <div data-dc-tpl="192" style="margin-top: 3.5rem;">
-      <h3 data-dc-tpl="193" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">Automated test ordering</h3><p data-dc-tpl="194" style="margin: 0px 0px 1rem;">After spending weeks on-site, my PM and I felt like we had good handle on how this worked at Merck, but back in the office, we kept getting asked:</p>
-      <blockquote data-dc-tpl="195" style="margin: 1.5rem 0px; border-left: 3px solid rgb(6, 136, 240); padding-left: 1.5rem;">What's a test and why do we need to build something new?</blockquote>
-      <div data-dc-tpl="196" style="margin: 0px 0px 1rem;"><div data-dc-tpl="197">It was a fair question. Scientists had been testing samples in Benchling for years and we seemed to have all the core capabilities, including a workflow engine that route tasks with samples linked to them.</div><div data-dc-tpl="198"><br data-dc-tpl="199"></div><div data-dc-tpl="200">The problem was delivering an experience that actually fit how our scientists think and work. My PM and I had to walk through this step by step for everyone to see how challenging it'd be. Workflows would need custom logic. Performance would need upgrades. Most importantly, the result just didn't match how scientists thought about their work.</div></div>
-
-      <div data-dc-tpl="201" style="margin: 1.5rem 0px;">
-        <div class="sc-host" data-sc-name="ExpandableImage" data-dc-tpl="202"><div data-dc-tpl="2" class="expandable-image-wrap" data-behavior="expandable" data-breakout="8" style="border-radius: 10px; overflow: hidden; background: transparent; border: 1px solid transparent; position: relative; box-sizing: border-box; margin-left: 50%; transform: translateX(-50%); width: calc((var(--bio-grid-w, 100%) - 352px) * 8 / 12 + 224px); max-width: none; max-height: none; padding: 0px; display: block;">
-  
-  
-    <img data-dc-tpl="10" src="assets/img/workflows-vs-sample-centered.png" alt="What users would see in Benchling: a task list of 15 worksheet rows. What users expect: a Samples table with each test, status, dilution, and result under sample S100." style="width: 100%; height: auto; display: block; cursor: zoom-in;">
-  
-  
-  
-    
-  
-  <button data-dc-tpl="15" style="position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; background: rgba(20, 19, 15, 0.45); color: rgb(255, 255, 255); border-radius: 6px; display: flex; align-items: center; justify-content: center; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: zoom-in; pointer-events: none;"><span data-dc-tpl="16" style="font-size: 0.85rem; line-height: 1;">⤢</span></button></div></div>
-      </div>
-
-      <div data-dc-tpl="203" style="margin: 0px 0px 1rem;"><div data-dc-tpl="204">Seeing it laid out end to end is what got everyone on the same page. From there, we sketched a solution built almost entirely from pieces we already had. One thing was new: Test Orders, an object with its own status lifecycle, built to match what scientists expected and doable in the time we had.</div></div><p data-dc-tpl="205" style="margin: 0px 0px 1rem;">These are two of several decisions behind Bioanalytical, the two that best show how we weighed the tradeoffs. What follows is what scientists actually got.</p><p data-dc-tpl="206" style="margin: 0px 0px 1rem;">Take the actual plate visualization, for example. Plates can have dense layers of metadata that help the scientist understand the design intent and double-check their work before executing. We'd previously hid this under a dropdown and I felt strongly that we should surface these more clearly and persistently. Beyond that, could we increase the size and visual density of plates, labeling values directly in the plate wells? It revealed an implicit design principle around plates that was being stress-tested by the complexity of the real work - scientists can handle complexity and they want it all there in front of them as long as it's useful. We don't need to simplify for the sake of keeping things light and airy as long as it's clear and useful.</p>
-    </div>
-  </div></section>
-
-  <section data-dc-tpl="207" id="solution" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
-    <div data-dc-tpl="208" class="solution-header" style="font-size: 0.85rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 0.5rem;"><span class="sc-interp">Solution</span></div>
-
-    <div data-dc-tpl="209" class="bio-col" style="max-width: 580px; margin-left: auto; margin-right: auto; margin-bottom: 2.5rem;">
-      <h3 data-dc-tpl="210" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;">The same six steps, now connected</h3>
-      <p data-dc-tpl="211" style="margin: 0px;">Here's the flow as it actually shipped. Each step below carries the decisions we made along the way, some ambitious, some scoped down out of necessity, but all aimed at the same goal: getting a scientist from defining a test to trusting the results, without losing confidence at every hand-off in between.</p>
-    </div>
-
-    <div data-dc-tpl="212" class="solution-first-row solution-row" style="padding-top: 1rem;">
-      <h3 data-dc-tpl="213" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Define testing procedures</h3>
-      <p data-dc-tpl="214" style="margin: 0px 0px 1.5rem;">Before, there wasn't one standard definition of a sample. It could exist in different formats across different systems, with no single source of truth, so scientists spent time reconciling versions instead of trusting the data. Now a testing procedure includes a standardized sample definition. It takes some setup, but once it exists, it means the same thing everywhere, and scientists can build experiments on it without re-establishing what a sample is each time.</p>
+    <div data-dc-tpl="212" class="solution-row" style="padding-top: 4rem;">
+      <h3 data-dc-tpl="213" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Design experiments</h3>
+      <p data-dc-tpl="214" style="margin: 0px 0px 1.5rem;">This one was a pragmatic call. Scientists set parameters in a dense table, including a column for whether a piece of data belongs at the document level or the plate level. It gets the job done, but we knew going in that a table wasn't the ideal interface for a decision this significant. Better options were on our minds, like describing an experiment in plain language and letting the system populate the table, but they were future work, not something we could build in v1.</p>
       <div data-dc-tpl="215" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
-        <video data-dc-tpl="216" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="217" src="assets/video/flowchart-extended.webm" type="video/webm"><source data-dc-tpl="218" src="assets/video/flowchart-extended.mp4" type="video/mp4"></video>
+        <video data-dc-tpl="216" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="217" src="assets/video/create-plate-map-extended.webm" type="video/webm"><source data-dc-tpl="218" src="assets/video/create-plate-map-extended.mp4" type="video/mp4"></video>
       </div>
     </div>
 
     <div data-dc-tpl="219" class="solution-row" style="padding-top: 4rem;">
-      <h3 data-dc-tpl="220" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Design experiments</h3>
-      <p data-dc-tpl="221" style="margin: 0px 0px 1.5rem;">This one was a pragmatic call. Scientists set parameters in a dense table, including a column for whether a piece of data belongs at the document level or the plate level. It gets the job done, but we knew going in that a table wasn't the ideal interface for a decision this significant. Better options were on our minds, like describing an experiment in plain language and letting the system populate the table, but they were future work, not something we could build in v1.</p>
+      <h3 data-dc-tpl="220" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Design plates</h3>
+      <p data-dc-tpl="221" style="margin: 0px 0px 1.5rem;">Plate design didn't have a real home in the product before. Scientists now create plates individually within documents, with copy-paste between documents to cut down repetition. We managed to ship improvements to the plate design experience itself: metadata shows in a navigator panel instead of a dropdown, which makes it clear you're paging through layers of data. The same plate view works in multiple places, and data flows cleanly in and out of analysis.</p>
       <div data-dc-tpl="222" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
         <video data-dc-tpl="223" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="224" src="assets/video/create-plate-map-extended.webm" type="video/webm"><source data-dc-tpl="225" src="assets/video/create-plate-map-extended.mp4" type="video/mp4"></video>
       </div>
     </div>
 
     <div data-dc-tpl="226" class="solution-row" style="padding-top: 4rem;">
-      <h3 data-dc-tpl="227" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Design plates</h3>
-      <p data-dc-tpl="228" style="margin: 0px 0px 1.5rem;">Plate design didn't have a real home in the product before. Scientists now create plates individually within documents, with copy-paste between documents to cut down repetition. We managed to ship improvements to the plate design experience itself: metadata shows in a navigator panel instead of a dropdown, which makes it clear you're paging through layers of data. The same plate view works in multiple places, and data flows cleanly in and out of analysis.</p>
+      <h3 data-dc-tpl="227" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Execute runs</h3>
+      <p data-dc-tpl="228" style="margin: 0px 0px 1.5rem;">Finally, scientists could see all of their work in one place, everything linked together correctly, and easily track progress, down to the step-by-step level within each document. We leaned on Bioprocess here, adapting their status tracking and step-by-step completion patterns for Bioanalytical rather than designing something new from scratch.</p>
       <div data-dc-tpl="229" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
-        <video data-dc-tpl="230" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="231" src="assets/video/create-plate-map-extended.webm" type="video/webm"><source data-dc-tpl="232" src="assets/video/create-plate-map-extended.mp4" type="video/mp4"></video>
+        <video data-dc-tpl="230" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="231" src="assets/video/lab-auto-run-clean.webm" type="video/webm"><source data-dc-tpl="232" src="assets/video/lab-auto-run-clean.mp4" type="video/mp4"></video>
       </div>
     </div>
 
     <div data-dc-tpl="233" class="solution-row" style="padding-top: 4rem;">
-      <h3 data-dc-tpl="234" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Execute runs</h3>
-      <p data-dc-tpl="235" style="margin: 0px 0px 1.5rem;">Finally, scientists could see all of their work in one place, everything linked together correctly, and easily track progress, down to the step-by-step level within each document. We leaned on Bioprocess here, adapting their status tracking and step-by-step completion patterns for Bioanalytical rather than designing something new from scratch.</p>
+      <h3 data-dc-tpl="234" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Analyze data</h3>
+      <p data-dc-tpl="235" style="margin: 0px 0px 1.5rem;">Datasets used to end up scattered in folders or embedded as CSVs in documents. Scientists exported to third-party tools or wrote custom scripts, both fragile and hard to trace when a result looked off. Now, data from a run is automatically linked to it. Scientists pull it into analysis with one click, run it through a template, and never leave the system. Nothing gets exported or reimported, so there are fewer errors and a clear line back to the source.</p>
       <div data-dc-tpl="236" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
         <video data-dc-tpl="237" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="238" src="assets/video/lab-auto-run-clean.webm" type="video/webm"><source data-dc-tpl="239" src="assets/video/lab-auto-run-clean.mp4" type="video/mp4"></video>
       </div>
     </div>
 
     <div data-dc-tpl="240" class="solution-row" style="padding-top: 4rem;">
-      <h3 data-dc-tpl="241" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Analyze data</h3>
-      <p data-dc-tpl="242" style="margin: 0px 0px 1.5rem;">Datasets used to end up scattered in folders or embedded as CSVs in documents. Scientists exported to third-party tools or wrote custom scripts, both fragile and hard to trace when a result looked off. Now, data from a run is automatically linked to it. Scientists pull it into analysis with one click, run it through a template, and never leave the system. Nothing gets exported or reimported, so there are fewer errors and a clear line back to the source.</p>
+      <h3 data-dc-tpl="241" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Review and approve</h3>
+      <p data-dc-tpl="242" style="margin: 0px 0px 1.5rem;">Lead scientists used to spend nights and weekends spot-checking spreadsheet formulas and clicking through notebook entries by hand. Now results are fully traceable: click on anything to see the sample, the notebook entry, the document behind it. If a result looks off, a scientist can check it in minutes instead of days.</p>
       <div data-dc-tpl="243" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
-        <video data-dc-tpl="244" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="245" src="assets/video/lab-auto-run-clean.webm" type="video/webm"><source data-dc-tpl="246" src="assets/video/lab-auto-run-clean.mp4" type="video/mp4"></video>
-      </div>
-    </div>
-
-    <div data-dc-tpl="247" class="solution-row" style="padding-top: 4rem;">
-      <h3 data-dc-tpl="248" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem); font-weight: 600; line-height: 1.35; margin: 0px 0px 0.5rem;">Review and approve</h3>
-      <p data-dc-tpl="249" style="margin: 0px 0px 1.5rem;">Lead scientists used to spend nights and weekends spot-checking spreadsheet formulas and clicking through notebook entries by hand. Now results are fully traceable: click on anything to see the sample, the notebook entry, the document behind it. If a result looks off, a scientist can check it in minutes instead of days.</p>
-      <div data-dc-tpl="250" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
-        <img data-dc-tpl="251" src="assets/img/worksheet-review.png" alt="Reviewing a lab worksheet" style="width: 100%; height: auto; display: block;">
+        <img data-dc-tpl="244" src="assets/img/worksheet-review.png" alt="Reviewing a lab worksheet" style="width: 100%; height: auto; display: block;">
       </div>
     </div>
 
   </section>
 
-  <section data-dc-tpl="252" id="outcomes" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
-    <h3 data-dc-tpl="253" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Shipped, validated, and expanded</span></h3>
-    <p data-dc-tpl="254" style="margin: 0px 0px 1rem;">After months of work and weeks of rigorous user acceptance testing, we saw Merck go live with a public announcement and 400 users onboarded.</p>
+  <section data-dc-tpl="245" id="outcomes" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+    <h3 data-dc-tpl="246" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Shipped, validated, and expanded</span></h3>
+    <p data-dc-tpl="247" style="margin: 0px 0px 1rem;">After months of work and weeks of rigorous user acceptance testing, we saw Merck go live with a public announcement and 400 users onboarded.</p>
     
-    <div data-dc-tpl="255" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 1rem 0px 2rem;">
-      <div data-dc-tpl="256">
-        <p data-dc-tpl="257" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">90%</p>
-        <p data-dc-tpl="258" style="color: rgb(107, 104, 99); margin: 0px;">reduction in data throughput time</p>
+    <div data-dc-tpl="248" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding: 1rem 0px 2rem;">
+      <div data-dc-tpl="249">
+        <p data-dc-tpl="250" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">90%</p>
+        <p data-dc-tpl="251" style="color: rgb(107, 104, 99); margin: 0px;">reduction in data throughput time</p>
       </div>
-      <div data-dc-tpl="259">
-        <p data-dc-tpl="260" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">25%</p>
-        <p data-dc-tpl="261" style="color: rgb(107, 104, 99); margin: 0px;">reduction in manual tasks</p>
+      <div data-dc-tpl="252">
+        <p data-dc-tpl="253" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">25%</p>
+        <p data-dc-tpl="254" style="color: rgb(107, 104, 99); margin: 0px;">reduction in manual tasks</p>
       </div>
-      <div data-dc-tpl="262">
-        <p data-dc-tpl="263" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">3</p>
-        <p data-dc-tpl="264" style="color: rgb(107, 104, 99); margin: 0px;">expansion or new customer opportunities</p>
+      <div data-dc-tpl="255">
+        <p data-dc-tpl="256" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">3</p>
+        <p data-dc-tpl="257" style="color: rgb(107, 104, 99); margin: 0px;">expansion or new customer opportunities</p>
       </div>
-      <div data-dc-tpl="265">
-        <p data-dc-tpl="266" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">1.1M samples</p>
-        <p data-dc-tpl="267" style="color: rgb(107, 104, 99); margin: 0px;">supported, with six legacy systems phased out</p>
+      <div data-dc-tpl="258">
+        <p data-dc-tpl="259" style="font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem); font-weight: 600; margin: 0px;">1.1M samples</p>
+        <p data-dc-tpl="260" style="color: rgb(107, 104, 99); margin: 0px;">supported, with six legacy systems phased out</p>
       </div>
     </div>
-    <p data-dc-tpl="268" style="margin: 0px 0px 1rem;">Word got around inside Merck. Other teams started asking about Benchling on their own, and even as we shifted focus back to bioprocessing, we picked up two more prospects purely through word-of-mouth. One deal got far enough along to validate the whole approach and was on track to close within a few months.</p>
+    <p data-dc-tpl="261" style="margin: 0px 0px 1rem;">Word got around inside Merck. Other teams started asking about Benchling on their own, and even as we shifted focus back to bioprocessing, we picked up two more prospects purely through word-of-mouth. One deal got far enough along to validate the whole approach and was on track to close within a few months.</p>
 
-    <div data-dc-tpl="269" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); margin: 1.5rem 0px;">
-      <img data-dc-tpl="270" src="assets/img/scaling-bioanalysis.jpeg" alt="Scaling bioanalysis across teams" style="width: 100%; height: auto; display: block;">
+    <div data-dc-tpl="262" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); margin: 1.5rem 0px;">
+      <img data-dc-tpl="263" src="assets/img/scaling-bioanalysis.jpeg" alt="Scaling bioanalysis across teams" style="width: 100%; height: auto; display: block;">
     </div>
 
-    <p data-dc-tpl="271" style="margin: 0px 0px 1rem;">Our dashboards showed more than just logins, too: scientists were running more experiments per user over time. We had no baseline to measure that against, but combined with what we were hearing directly, it added up to real adoption, Merck scientists actually working this into their day-to-day.</p>
+    <p data-dc-tpl="264" style="margin: 0px 0px 1rem;">Our dashboards showed more than just logins, too: scientists were running more experiments per user over time. We had no baseline to measure that against, but combined with what we were hearing directly, it added up to real adoption, Merck scientists actually working this into their day-to-day.</p>
 
     </section>
 
-  <section data-dc-tpl="272" id="reflections" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
-    <h3 data-dc-tpl="273" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Leading through trade-offs</span></h3>
-    <div data-dc-tpl="274" style="margin: 0px 0px 1rem;"><p data-dc-tpl="275" style="margin: 0px 0px 1rem;">I love building things that are genuinely great, and I've learned to hold that ambition alongside hard calls about what's actually buildable right now.</p></div>
-    <p data-dc-tpl="276" style="margin: 0px 0px 1rem;">Overall, it just created a lot of anxiety, last-minute meetings, and I think having some hard conversations up front could've at least prepared us better for the journey ahead.</p>
+  <section data-dc-tpl="265" id="reflections" class="bio-col" style="margin-top: 4rem; max-width: 580px; margin-left: auto; margin-right: auto;">
+    <h3 data-dc-tpl="266" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 0px 0px 0.5rem;"><span class="sc-interp">Leading through trade-offs</span></h3>
+    <p data-dc-tpl="267" style="margin: 0px 0px 1rem;">I love building things that are genuinely great, and I've learned to hold that ambition alongside hard calls about what's actually buildable right now.</p>
+    <p data-dc-tpl="268" style="margin: 0px 0px 1rem;">The hard part was delivering an experience that actually fit how our scientists think and work. My PM and I had to walk through this step by step for everyone to see how challenging it'd be. Workflows would need custom logic. Performance would need upgrades. Most importantly, the result just didn't match how scientists thought about their work.</p>
+    <p data-dc-tpl="269" style="margin: 0px 0px 1rem;">Overall, it just created a lot of anxiety, last-minute meetings, and I think having some hard conversations up front could've at least prepared us better for the journey ahead.</p>
 
-    <h3 data-dc-tpl="277" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 2.5rem 0px 0.5rem;">Keeping the team motivated through hard calls</h3>
-    <p data-dc-tpl="278" style="margin: 0px 0px 1rem;">This project was long and complicated, and a lot of organizational churn made it harder still. Early on, I got some tough feedback from the team: they felt like they didn't understand the approach and worried we'd end up shipping something that checked the requirements boxes but didn't feel good to actually use.</p>
-    <p data-dc-tpl="279" style="margin: 0px 0px 1rem;">I felt that worry too, if I'm honest, but I made a point of focusing on the bigger picture and what we could actually control. Go back to the core problem: scientists needed us to pull a pile of disparate systems into one place. Designers are good at picking apart a UI, but none of us had personally felt the pain of redoing weeks of lab work because some integration broke. We were building something big and complicated that hadn't existed before, and bets like that take time to pay off.</p>
+    <h3 data-dc-tpl="270" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 2.5rem 0px 0.5rem;">Keeping the team motivated through hard calls</h3>
+    <p data-dc-tpl="271" style="margin: 0px 0px 1rem;">This project was long and complicated, and a lot of organizational churn made it harder still. Early on, I got some tough feedback from the team: they felt like they didn't understand the approach and worried we'd end up shipping something that checked the requirements boxes but didn't feel good to actually use.</p>
+    <p data-dc-tpl="272" style="margin: 0px 0px 1rem;">I felt that worry too, if I'm honest, but I made a point of focusing on the bigger picture and what we could actually control. Go back to the core problem: scientists needed us to pull a pile of disparate systems into one place. Designers are good at picking apart a UI, but none of us had personally felt the pain of redoing weeks of lab work because some integration broke. We were building something big and complicated that hadn't existed before, and bets like that take time to pay off.</p>
 
-    <h3 data-dc-tpl="280" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 2.5rem 0px 0.5rem;">The growing role of AI</h3>
-    <p data-dc-tpl="281" style="margin: 0px 0px 1rem;">Watching data entry eat so much of scientists' time reinforced something I'd underestimated: the highest-leverage problems aren't always the ones inside your project's scope. When Benchling spun up a small AI team, I made a point of staying involved from the sidelines, contributing use cases and feedback on where the pain was worst, because I'd seen it firsthand in Bioanalytical.</p>
-    <p data-dc-tpl="282" style="margin: 0px;">That led me into an adjacent piece of the work myself: integrating with external ontologies so the LLM could reference a standard set of definitions per customer, making its output more accurate. The lesson for me was less about AI specifically and more about staying attached to the org's next bet instead of considering my job done once a project ships.</p>
+    <h3 data-dc-tpl="273" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 400; line-height: 1.3; margin: 2.5rem 0px 0.5rem;">The growing role of AI</h3>
+    <p data-dc-tpl="274" style="margin: 0px 0px 1rem;">Watching data entry eat so much of scientists' time reinforced something I'd underestimated: the highest-leverage problems aren't always the ones inside your project's scope. When Benchling spun up a small AI team, I made a point of staying involved from the sidelines, contributing use cases and feedback on where the pain was worst, because I'd seen it firsthand in Bioanalytical.</p>
+    <p data-dc-tpl="275" style="margin: 0px;">That led me into an adjacent piece of the work myself: integrating with external ontologies so the LLM could reference a standard set of definitions per customer, making its output more accurate. The lesson for me was less about AI specifically and more about staying attached to the org's next bet instead of considering my job done once a project ships.</p>
 
-    <div data-dc-tpl="283" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); margin: 1.5rem 0px;">
-      <video data-dc-tpl="284" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="285" src="assets/video/benchling-ai-demo.webm" type="video/webm"><source data-dc-tpl="286" src="assets/video/benchling-ai-demo.mp4" type="video/mp4"></video>
+    <div data-dc-tpl="276" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216); margin: 1.5rem 0px;">
+      <video data-dc-tpl="277" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="278" src="assets/video/benchling-ai-demo.webm" type="video/webm"><source data-dc-tpl="279" src="assets/video/benchling-ai-demo.mp4" type="video/mp4"></video>
     </div>
 
     </section>
 
-    <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="287"><section data-dc-tpl="2" class="cs-col" style="padding-top: 4rem; padding-bottom: 5rem; border-top: 1px solid rgb(228, 224, 216); max-width: 580px; margin-left: auto; margin-right: auto;">
+    <div class="sc-host" data-sc-name="NextCaseStudy" data-dc-tpl="280"><section data-dc-tpl="2" class="cs-col" style="padding-top: 4rem; padding-bottom: 5rem; border-top: 1px solid rgb(228, 224, 216); max-width: 580px; margin-left: auto; margin-right: auto;">
   <div data-dc-tpl="3" style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgb(107, 104, 99); margin-bottom: 1.5rem;">Next case study</div>
   <a data-dc-tpl="4" href="linkedin-recruiter-inbox.html" class="scp1" style="display: flex; align-items: stretch; box-sizing: border-box; text-decoration: none; color: inherit; min-height: 132px; overflow: hidden; border: 1px solid rgb(228, 224, 216); border-radius: 10px; background: rgb(255, 255, 255); --deepen: 0; transition: border-color 0.2s;">
     <div data-dc-tpl="5" class="ncs-thumb" style="position: relative; overflow: hidden; border-right: 1px solid rgb(228, 224, 216); background: rgb(235, 232, 226); box-sizing: border-box;">
@@ -780,7 +572,7 @@
     </div>
     <div data-dc-tpl="10" style="flex: 1 1 0%; min-width: 0px; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; justify-content: center;">
       <div data-dc-tpl="11" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.85rem; color: rgb(107, 104, 99); font-weight: 600; margin-bottom: 0.35em;"><span class="sc-interp">LinkedIn</span></div>
-      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; color: rgb(20, 19, 15); display: flex; align-items: center; gap: 0.5em;">
+      <div data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem); font-weight: 600; line-height: 1.3; color: rgb(13, 12, 9); display: flex; align-items: center; gap: 0.5em;">
         <span class="sc-interp">Redesigning Recruiter Inbox</span>
         <svg data-dc-tpl="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; flex-shrink: 0; transform: translateX(calc(var(--deepen, 0) * 4px)); transition: transform 0.3s;"><path data-dc-tpl="14" d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </div>
@@ -791,18 +583,18 @@
 
   </div>
 
-  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="288"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
+  <div class="sc-host" data-sc-name="Footer" data-dc-tpl="281"><footer data-dc-tpl="0" style="border-top: 1px solid rgb(228, 224, 216);">
   <div data-dc-tpl="1" style="max-width: 1280px; margin: 0px auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
-    <span data-dc-tpl="2" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; color: rgb(20, 19, 15);">
+    <span data-dc-tpl="2" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; color: rgb(13, 12, 9);">
       <img data-dc-tpl="3" src="assets/img/logo-mark-solid.svg" alt="" style="width: 20px; height: 20px; display: block; flex-shrink: 0;">
       Jia Liu
     </span>
     <div data-dc-tpl="4" style="display: flex; gap: 1rem;">
-      <a data-dc-tpl="5" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="LinkedIn" style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgb(228, 224, 216); opacity: 0.8; text-decoration: none; color: rgb(20, 19, 15);">
-        <svg data-dc-tpl="6" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path data-dc-tpl="7" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"></path></svg>
+      <a data-dc-tpl="5" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="LinkedIn" style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgb(228, 224, 216); opacity: 0.8; text-decoration: none; color: rgb(13, 12, 9);">
+        <svg data-dc-tpl="6" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path data-dc-tpl="7" d="M19.25 3C20.2165 3 21 3.7835 21 4.75V19.25C21 20.2165 20.2165 21 19.25 21H4.75C3.7835 21 3 20.2165 3 19.25V4.75C3 3.7835 3.7835 3 4.75 3H19.25ZM4.75 4.5C4.61193 4.5 4.5 4.61193 4.5 4.75V19.25C4.5 19.3881 4.61193 19.5 4.75 19.5H19.25C19.3881 19.5 19.5 19.3881 19.5 19.25V4.75C19.5 4.61193 19.3881 4.5 19.25 4.5H4.75ZM8 18H6.5V10H8V18ZM11.5 11C12.2964 10.4116 13.3576 10 14.5 10C15.2708 10 16.0292 10.2325 16.6025 10.7617C17.1856 11.3 17.5 12.0744 17.5 13V18H16V13C16 12.4257 15.8143 12.075 15.585 11.8633C15.3457 11.6426 14.9791 11.5 14.5 11.5C13.6828 11.5 12.9041 11.8095 12.334 12.25C11.7369 12.7114 11.5 13.2041 11.5 13.5V18H10V10H11.5V11ZM7.25 6.5C7.80228 6.5 8.25 6.94772 8.25 7.5C8.25 8.05228 7.80228 8.5 7.25 8.5C6.69772 8.5 6.25 8.05228 6.25 7.5C6.25 6.94772 6.69772 6.5 7.25 6.5Z"></path></svg>
       </a>
-      <a data-dc-tpl="8" href="mailto:jia.eq.liu@gmail.com" aria-label="Email" style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgb(228, 224, 216); opacity: 0.8; text-decoration: none; color: rgb(20, 19, 15);">
-        <svg data-dc-tpl="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="10" d="M3 6h18v12H3z"></path><path data-dc-tpl="11" d="M3 6l9 7 9-7"></path></svg>
+      <a data-dc-tpl="8" href="mailto:jia.eq.liu@gmail.com" target="_blank" rel="noopener" aria-label="Email" style="width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgb(228, 224, 216); opacity: 0.8; text-decoration: none; color: rgb(13, 12, 9);">
+        <svg data-dc-tpl="9" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path data-dc-tpl="10" d="M19.25 4H4.75A2.755 2.755 0 0 0 2 6.75v10.5A2.755 2.755 0 0 0 4.75 20h14.5A2.755 2.755 0 0 0 22 17.25V6.75A2.755 2.755 0 0 0 19.25 4ZM4.75 5.5h14.5c.69 0 1.25.56 1.25 1.25v.975l-8.5 4.91-8.5-4.91V6.75c0-.69.56-1.25 1.25-1.25Zm14.5 13H4.75c-.69 0-1.25-.56-1.25-1.25V9.46l8.5 4.91 8.5-4.91v7.79c0 .69-.56 1.25-1.25 1.25Z"></path></svg>
       </a>
     </div>
   </div></footer></div></div></div></div></div>

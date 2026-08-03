@@ -261,7 +261,7 @@
 
     var btns = $$('button[data-id]', nav);
     if (btns.length) {
-      var ACTIVE = '#14130f', IDLE = '#6b6863', NUM_ACTIVE = '#14130f', NUM_IDLE = '#9a968f';
+      var ACTIVE = '#0d0c09', IDLE = '#6b6863', NUM_ACTIVE = '#0d0c09', NUM_IDLE = '#9a968f';
 
       function paint(activeId) {
         btns.forEach(function (b) {
@@ -396,7 +396,7 @@
         img.setAttribute('alt', t.alt || '');
         btns.forEach(function (b, j) {
           var on = j === i;
-          b.style.color = on ? '#14130f' : '#6b6863';
+          b.style.color = on ? '#0d0c09' : '#6b6863';
           b.style.borderBottomColor = on ? '#0688f0' : 'transparent';
           b.style.fontWeight = on ? '600' : '500';
           b.setAttribute('data-active', String(on));
