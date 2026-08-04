@@ -37,7 +37,14 @@ files against these known fixes and reapply any that got clobbered:
    aside and the `.margin-note-trigger` button, and that `site-behaviors.js`
    still has `initMarginNotes()` wired up for the mobile modal.
 
-If a new export reintroduces either issue, or you find another instance of
+3. **Next case study hover captions** (`benchling-bioanalytical.html`,
+   `linkedin-quick-reply.html`, `linkedin-recruiter-inbox.html`): same root
+   cause as #1, different class. `.scp1:hover, .scp1:focus-visible
+   { --deepen: 1; }` must exist in the `<style>` block, AND the `.scp1`
+   anchor wrapping the "Next case study" card must not carry an inline
+   `--deepen: 0` in its `style` attribute.
+
+If a new export reintroduces any of these, or you find another instance of
 this pattern (a code-only fix silently reverted by re-export), fix it the
 same way — diff against the last-known-good version of the file to see
 exactly what the export changed — and add it to this list.
