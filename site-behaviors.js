@@ -195,16 +195,17 @@
 
   // ── section nav (case study pages) ───────────────────────────────────────
   // Two variants, told apart by what the pre-render left behind: the tabs
-  // variant ships a button[data-id] per section, the ticks variant ships one
-  // full-height rail button with a track span and a fill span. Both get the
-  // ambient fade (recede when idle, hide behind full-bleed imagery); the ticks
-  // variant additionally needs its fill, counter and click math rebuilt here,
-  // since in the DC source all three come from React state and the snapshot
-  // freezes them at whatever the capture scroll position happened to be.
+  // variant ships a button[data-id] per section, the marks variant ships one
+  // button[data-index] per heading. Everything the marks variant does past
+  // painting the first frame comes from React state in the DC source, so the
+  // active mark, the hover wave, the hovercard and the column-1 offset all have
+  // to be rebuilt here — the snapshot freezes them at capture time.
   function initSectionNav() {
     var nav = by('section-nav');
     if (!nav) return;
     var REF_LINE = 160, SCROLL_OFFSET = 96, IDLE_MS = 1400;
+    var markBtns = $$('button[data-index]', nav);
+    var isMarks = markBtns.length > 0;
 
     var hovering = false, idleFaded = false, breakoutFaded = false, idleTimer = null;
     function applyFade() {
@@ -215,7 +216,8 @@
     function resetIdle() {
       clearTimeout(idleTimer);
       if (idleFaded) { idleFaded = false; applyFade(); }
-      if (hovering) return;
+      // Marks double as a scroll indicator, so they never recede on their own.
+      if (hovering || isMarks) return;
       idleTimer = setTimeout(function () { idleFaded = true; applyFade(); }, IDLE_MS);
     }
     nav.addEventListener('mouseenter', function () { hovering = true; clearTimeout(idleTimer); });
@@ -224,7 +226,11 @@
     // Wide breakout images reach the nav's column, so it steps out of their way.
     // Re-scanned on DOM changes because a lightbox clone or late image can add
     // targets after this runs.
-    var FADE_SEL = '[data-nav-fade], [data-breakout="10"], [data-breakout="11"], [data-breakout="12"]';
+    // Marks sit in column 1, which a 10- or 11-col breakout (cols 2-11) never
+    // reaches — only genuinely full-bleed content does.
+    var FADE_SEL = isMarks
+      ? '[data-breakout="12"], [data-nav-fade="full"]'
+      : '[data-nav-fade], [data-breakout="10"], [data-breakout="11"], [data-breakout="12"]';
     if ('IntersectionObserver' in window) {
       var intersecting = [], observed = [];
       var fadeObs = new IntersectionObserver(function (entries) {
@@ -306,73 +312,119 @@
       return;
     }
 
-    var rail = $('button', nav);
-    if (!rail) return;
-    var track = $$('span', rail);
-    var fill = track[1];
-    var wrap = rail.parentNode;
-    var counter = $('div', wrap);
-    if (!fill) return;
+    if (!isMarks) return;
 
-    // Every h3 outside the nav is a section. Position is the heading's share of
-    // total document height, the same space the fill is drawn in, so the line
-    // glides past each heading instead of snapping between them.
+    var MARK_ROW = 16, MARK_BASE = 14, MARK_LIFT = 12, MARK_HOVER_BONUS = 5, REACH = 3;
+    var INK = '#0d0c09', GRAY = '#d5d0c8';
+    var wrap = markBtns[0].parentNode;
+
+    // Column 1 of the page grid, measured rather than computed: a fixed element's
+    // percentages resolve against the viewport including the scrollbar, and the
+    // capture bakes whatever the editor canvas happened to measure.
+    function placeNav() {
+      var shell = $('.bio-shell, .cs-shell');
+      if (!shell) return;
+      nav.style.left = Math.round(shell.getBoundingClientRect().left) + 'px';
+      nav.style.right = 'auto';
+    }
+
+    var card = document.createElement('div');
+    card.style.cssText = 'position: absolute; left: 46px; box-sizing: border-box; width: 320px; background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px; box-shadow: 0 1px 2px rgba(13,12,9,0.04), 0 12px 32px rgba(13,12,9,0.10); padding: 1rem 1.125rem; pointer-events: none; display: none;';
+    var cardTitle = document.createElement('p');
+    cardTitle.style.cssText = "font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; line-height: 1.35; color: #0d0c09; margin: 0 0 0.375rem;";
+    var cardBody = document.createElement('p');
+    cardBody.style.cssText = "font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 0.875rem; line-height: 1.5; color: #6b6863; margin: 0;";
+    card.appendChild(cardTitle);
+    card.appendChild(cardBody);
+    wrap.appendChild(card);
+
+    // The paragraph that follows a heading becomes its preview. The page h1 has no
+    // paragraph as a direct sibling, so widen out through the ancestors.
+    function snippetFor(el) {
+      var node = el;
+      for (var i = 0; i < 6 && node; i++) {
+        node = node.nextElementSibling;
+        if (node && node.tagName === 'P' && node.textContent.trim().length > 20) return node.textContent.trim();
+      }
+      var scope = el.closest('section'), up = el.parentElement;
+      for (var k = 0; k < 4 && !scope && up; k++) {
+        if (up.querySelector('p')) { scope = up; break; }
+        up = up.parentElement;
+      }
+      if (!scope) return '';
+      var ps = $$('p', scope);
+      for (var j = 0; j < ps.length; j++) {
+        var t = ps[j].textContent.trim();
+        if (t.length > 20 && (el.compareDocumentPosition(ps[j]) & Node.DOCUMENT_POSITION_FOLLOWING)) return t;
+      }
+      return '';
+    }
+
+    // The intro's title is the page h1, not an h3, so it leads the list — without
+    // it the first tick is the first h3 and the opening section is unreachable.
     var headings = [];
     function scanHeadings() {
-      var docHeight = document.documentElement.scrollHeight || 1;
-      headings = $$('h3').filter(function (el) {
-        return !el.closest('[data-behavior="section-nav"]');
-      }).map(function (el) {
-        var absTop = el.getBoundingClientRect().top + window.scrollY;
-        return { el: el, frac: Math.max(0, Math.min(1, absTop / docHeight)) };
+      var els = $$('h3').filter(function (el) { return !el.closest('[data-behavior="section-nav"]'); });
+      var lead = $('h1');
+      if (lead && els.indexOf(lead) === -1) els.unshift(lead);
+      headings = els.slice(0, markBtns.length).map(function (el) {
+        return { el: el, text: el.textContent.trim(), snippet: snippetFor(el) };
       });
     }
 
-    var lastFill = -1, lastLabel = null;
-    function sync() {
-      resetIdle();
-      var railHeight = wrap.clientHeight || rail.offsetHeight || 260;
-      var docHeight = document.documentElement.scrollHeight || 1;
-      var frac = Math.max(0, Math.min(1, (window.scrollY + REF_LINE) / docHeight));
-      var px = Math.round(frac * railHeight);
-      if (px !== lastFill) {
-        lastFill = px;
-        fill.style.height = px + 'px';
-        if (counter) counter.style.top = px + 'px';
-      }
-      if (counter && headings.length) {
-        var activeIndex = 0;
-        for (var i = 0; i < headings.length; i++) {
-          if (headings[i].el.getBoundingClientRect().top <= REF_LINE) activeIndex = i;
-        }
-        var label = (activeIndex + 1) + ' / ' + headings.length;
-        if (label !== lastLabel) { lastLabel = label; counter.textContent = label; }
-      }
+    function clip(t, n) { return t.length > n ? t.slice(0, n).trim() + '\u2026' : t; }
+
+    var hoverIndex = -1, activeIndex = -1;
+    function paint() {
+      markBtns.forEach(function (b, i) {
+        var span = $('span', b);
+        if (!span) return;
+        var dist = hoverIndex < 0 ? Infinity : Math.abs(i - hoverIndex);
+        var lift = dist > REACH ? 0 : Math.pow(Math.cos((dist / (REACH + 1)) * (Math.PI / 2)), 2);
+        var w = Math.round(MARK_BASE + lift * MARK_LIFT + (i === hoverIndex ? MARK_HOVER_BONUS : 0));
+        span.style.width = w + 'px';
+        // While the cursor is on the stack, ink means "the one you're pointing at".
+        span.style.background = (i === hoverIndex || (i === activeIndex && hoverIndex < 0)) ? INK : GRAY;
+      });
+      var h = hoverIndex >= 0 ? headings[hoverIndex] : null;
+      if (!h) { card.style.display = 'none'; return; }
+      cardTitle.textContent = clip(h.text, 64);
+      cardBody.textContent = h.snippet ? clip(h.snippet, 150) : '';
+      card.style.top = (hoverIndex * MARK_ROW - 12) + 'px';
+      card.style.display = 'block';
     }
 
-    // The bare line is the control: click anywhere along it and land on whichever
-    // heading sits nearest that point.
-    rail.addEventListener('click', function (e) {
-      if (!headings.length) return;
-      var rect = rail.getBoundingClientRect();
-      var clickFrac = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-      var nearest = 0, best = Infinity;
-      for (var i = 0; i < headings.length; i++) {
-        var d = Math.abs(headings[i].frac - clickFrac);
-        if (d < best) { best = d; nearest = i; }
-      }
-      var el = headings[nearest].el;
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+    markBtns.forEach(function (b, i) {
+      b.addEventListener('mouseenter', function () { hoverIndex = i; paint(); });
+      b.addEventListener('mouseleave', function () { if (hoverIndex === i) { hoverIndex = -1; paint(); } });
+      b.addEventListener('click', function () {
+        var h = headings[i];
+        if (!h) return;
+        window.scrollTo({ top: h.el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+      });
     });
+    nav.addEventListener('mouseleave', function () { hoverIndex = -1; paint(); });
 
+    function sync() {
+      resetIdle();
+      if (!headings.length) return;
+      var next = 0;
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].el.getBoundingClientRect().top <= REF_LINE) next = i;
+      }
+      if (next !== activeIndex) { activeIndex = next; paint(); }
+    }
+
+    placeNav();
     scanHeadings();
     sync();
+    paint();
     window.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', function () { scanHeadings(); sync(); });
+    window.addEventListener('resize', function () { placeNav(); scanHeadings(); sync(); });
     // Heading positions move once webfonts swap in, so the first measurement is
     // provisional.
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { scanHeadings(); sync(); });
+      document.fonts.ready.then(function () { placeNav(); scanHeadings(); sync(); });
     }
     requestAnimationFrame(sync);
   }
@@ -521,35 +573,64 @@
   function initVideos() {
     var vids = $$('video');
     if (!vids.length) return;
+    // A [data-player] video is a longer walkthrough, not a loop: it gets native
+    // controls so the visitor can scrub and pause. Boolean attrs are set as DOM
+    // properties here because React drops empty-string boolean props at capture.
     vids.forEach(function (v) {
+      var isPlayer = v.hasAttribute('data-player');
       v.muted = true;
-      v.loop = true;
+      v.loop = !isPlayer;
+      v.controls = isPlayer;
       v.setAttribute('playsinline', '');
-      // [data-blob-src] marks a clip whose moov atom sits at the end of the file.
-      // The host ignores Range requests, so the browser can't seek to the metadata
-      // and fails with MEDIA_ERR_SRC_NOT_SUPPORTED. Fetching the whole file as a
-      // blob removes the need to seek at all.
-      var blobSrc = v.getAttribute('data-blob-src');
-      if (blobSrc && !v.src) {
-        fetch(blobSrc)
-          .then(function (res) { return res.blob(); })
-          .then(function (blob) {
-            v.src = URL.createObjectURL(blob);
-            v.play().catch(function () {});
-          })
-          .catch(function () {});
-      }
     });
+
+    // The host ignores Range headers, so a non-faststart .mp4 (moov after mdat)
+    // can never be parsed from a normal <source>. Those elements ship with
+    // data-blob-src instead and no src at all: fetch the whole file once and
+    // hand the element an object URL, which needs no range requests.
+    // Lives here, not in the built HTML — a fix that exists only in deploy/ is
+    // reverted by the next capture.
+    vids.forEach(function (v) {
+      var blobSrc = v.getAttribute('data-blob-src');
+      if (!blobSrc || v.getAttribute('src')) return;
+      fetch(blobSrc)
+        .then(function (r) { return r.ok ? r.blob() : null; })
+        .then(function (b) {
+          if (!b) return;
+          v.src = URL.createObjectURL(b);
+          v.load();
+          v.play().catch(function () {});
+        })
+        .catch(function () {});
+    });
+
     if (!('IntersectionObserver' in window)) {
       vids.forEach(function (v) { v.play().catch(function () {}); });
       return;
     }
+    // A visitor who pauses a [data-player] video should stay paused: without the
+    // autoPause flag the observer's own pause reads as a user pause, and without
+    // userPaused a scroll away and back restarts playback.
+    vids.forEach(function (v) {
+      if (!v.controls) return;
+      v.addEventListener('pause', function () {
+        if (!v.hasAttribute('data-auto-pause')) v.setAttribute('data-user-paused', '');
+      });
+      v.addEventListener('play', function () { v.removeAttribute('data-user-paused'); });
+    });
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) entry.target.play().catch(function () {});
-        else entry.target.pause();
+        var v = entry.target;
+        if (entry.isIntersecting) {
+          if (!v.hasAttribute('data-user-paused')) v.play().catch(function () {});
+        } else {
+          v.setAttribute('data-auto-pause', '');
+          v.pause();
+          v.removeAttribute('data-auto-pause');
+        }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.35 });
     vids.forEach(function (v) { io.observe(v); });
   }
 
