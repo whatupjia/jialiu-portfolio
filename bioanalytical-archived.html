@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" style="--deploy-banner-h: 34px; color-scheme: light;"><head><style>
+<!-- deploy: include -->
+<html lang="en"><head><style>
     .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
       border:1px solid color-mix(in srgb,currentColor 50%,transparent);
       border-radius:2px;box-sizing:border-box;overflow:hidden}
@@ -45,7 +46,7 @@
       }
     }
   </style>
-<style data-omelette-injected="">html,body{background:transparent}</style>
+
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,16 +65,17 @@
 <meta name="twitter:card" content="summary">
 <style>x-dc{display:none!important}</style>
 <style>html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}</style><style data-dc-tpl="2">
+    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-buch.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-kraftig.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-dreiviertelfett.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'FreightText'; src: url('assets/fonts/FreightTextBook.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
     .site-header-reserve { min-height: 76px; }
     @media (max-width: 768px) { .site-header-reserve { min-height: 60px; } }
   </style><style data-dc-tpl="3">
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Mori'; src: url('assets/fonts/PPMori-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Neue Montreal'; src: url('assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    body { margin: 0; background: #ffffff; color: #0d0c09; font-family: 'Neue Montreal', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.7; font-size: 1.09375rem; }
+    body { margin: 0; background: #ffffff; color: #0d0c09; font-family: 'Sohne', -apple-system, system-ui, 'Segoe UI', sans-serif; line-height: 1.6; font-size: 1.09375rem; }
     a { color: #0688f0; }
     a:hover { color: #0576d1; }
-    strong, b { font-weight: 600; }
+    strong, b { font-weight: 500; }
   
     /* Body copy sits a step back from full ink; headings hold #0d0c09 so the
        hierarchy comes from weight AND contrast, not size alone. */
@@ -82,68 +84,69 @@
   
     /* Case studies run much longer than the home page, so they get more leading
        and a looser paragraph rhythm to stay readable in long runs. */
-    p { line-height: 1.7; }
+    p { line-height: 1.7;  font-family: 'FreightText', Georgia, serif; }
   </style><style data-dc-tpl="1">
     .nav-desktop, .contact-desktop { display: flex; }
     .nav-mobile-toggle { display: none; }
     @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
-    .header-spacer-default { height: 76px; }
-  </style><meta name="x-build-id" content="72d1466373444c47856c393d5f313affe904a896"><style data-dc-editor-style="">body:not([data-dc-editor-overlay-hidden]) [data-dc-editor-hover][data-dc-editor-hover-stroke]:not([data-dc-editor-selected]){filter:drop-shadow(0 0 1px rgba(59,130,246,0.9)) drop-shadow(0 0 2px rgba(59,130,246,0.55))!important;}[data-dc-editor-linked]{outline:1.5px dashed #3b82f6!important;outline-offset:1px!important;}body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px solid #3b82f6!important;outline-offset:-0.75px!important;opacity:0.55!important;}body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-editor-on][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-editor-dragging],body[data-dc-floor-gestures][data-dc-editor-drag-parked]:not([data-dc-editor-overlay-hidden]) [data-dc-dragging]{outline:1.5px dashed #3b82f6!important;opacity:0.3!important;}body[data-dc-editor-on] [data-dc-editor-editing]::selection,body[data-dc-editor-on] [data-dc-editor-editing] ::selection{background-color:#3b82f6!important;color:#fff!important;}body[data-dc-editor-on] [data-dc-editor-editing]{outline:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) *{cursor:default!important;user-select:none!important;}body[data-dc-editor-on]:not([data-dc-editor-tool="interact"]) :not([data-dc-editor-overlay-root]):not([data-dc-editor-overlay-root] *){pointer-events:auto!important;transition:none!important;animation:none!important;}body[data-dc-editor-on][data-dc-editor-tool="rect"] *,body[data-dc-editor-on][data-dc-editor-tool="frame"] *,body[data-dc-editor-on][data-dc-editor-tool="oval"] *{cursor:crosshair!important;}body[data-dc-editor-on][data-dc-editor-tool="text"] *{cursor:text!important;}body[data-dc-editor-on][data-dc-editor-tool="draw"] *{cursor:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M2 14l1-4 8-8a2.1 2.1 0 0 1 3 3l-8 8-4 1z%22 fill=%22%23333%22 stroke=%22%23fff%22 stroke-width=%221%22/%3E%3C/svg%3E') 1 15, crosshair!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent],body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent] *{cursor:grab!important;}body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active,body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-drags-parent]:active *{cursor:grabbing!important;}html:not([data-dc-canvas]):has(body[data-dc-editor-on] .sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on]:has(.sc-host){background:var(--dc-editor-backdrop,#e9e7e4);}html:not([data-dc-canvas]) body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host){min-height:100vh;background:var(--dc-editor-host-bg,#fff);}html[data-dc-canvas]{overflow:hidden;}html[data-dc-canvas] body[data-dc-editor-on] .sc-host:not(.sc-host .sc-host)::before{content:"";position:absolute;left:-100000px;top:-100000px;width:200000px;height:200000px;pointer-events:none;background:repeating-linear-gradient(45deg,var(--dc-editor-hatch-ink,rgba(0,0,0,.05)) 0 8px,transparent 8px 16px);clip-path:polygon(0 0,100% 0,100% 50%,50% 50%,50% 100%,0 100%);}html[data-dc-pan-cursor="grab"],html[data-dc-pan-cursor="grab"] *,html[data-dc-pan-cursor="grab"] body[data-dc-editor-on] *{cursor:grab!important;}html[data-dc-pan-cursor="grabbing"],html[data-dc-pan-cursor="grabbing"] *,html[data-dc-pan-cursor="grabbing"] body[data-dc-editor-on] *{cursor:grabbing!important;}html[data-dc-drag-cursor="grabbing"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="grabbing"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grabbing!important;}html[data-dc-drag-cursor="not-allowed"]:not(#sc-chrome-boost):not(#sc-chrome-boost),html[data-dc-drag-cursor="not-allowed"] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:not-allowed!important;}html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab]:not(#sc-chrome-boost):not(#sc-chrome-boost),html:not([data-dc-pan-cursor]):not([data-dc-drag-cursor]) body[data-dc-editor-on]:not([data-dc-editor-tool]) [data-dc-editor-grab] *:not(#sc-chrome-boost):not(#sc-chrome-boost){cursor:grab!important;}body[data-dc-floor-gestures] [data-dc-editor-selected],body[data-dc-floor-gestures] [data-dc-editor-selected] *{cursor:grab!important;user-select:none!important;}body[data-dc-floor-gestures] [data-dc-editor-selected]:active,body[data-dc-floor-gestures] [data-dc-editor-selected]:active *{cursor:grabbing!important;}</style><style>image-slot { display: none !important; }</style><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+    .header-spacer-default { height: 66px; }
+  </style><meta name="x-build-id" content="5b56aae979603ab7aebc06a1f954b89bebd97b82"><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script>
+<noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+<style>image-slot { display: none !important; }</style>
 <script src="site-behaviors.js" defer></script>
 </head>
 <body>
 <div id="dc-root"><div class="sc-host" data-sc-name="Bioanalytical Archived"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="4">
   
-  </div><div data-dc-tpl="5" class="site-header-reserve"><div class="sc-host" data-sc-name="SiteHeader" data-dc-tpl="6"><header data-dc-tpl="2" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(249, 248, 247, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
-  <div data-dc-tpl="3" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 1rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
+  </div><div data-dc-tpl="5" class="site-header-reserve"><div class="sc-host" data-sc-name="SiteHeader" data-dc-tpl="6"><header data-dc-tpl="2" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
+  <div data-dc-tpl="3" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 0.7rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
     <a data-dc-tpl="4" href="index.html" class="site-header-logo" style="display: flex; align-items: center; gap: 0.55rem; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.02em; color: rgb(13, 12, 9); text-decoration: none;">
-      <img data-dc-tpl="5" src="assets/img/logo-mark-solid.svg" alt="" style="width: 22px; height: 22px; display: block; flex-shrink: 0;">
       Jia Liu
     </a>
-    <div data-dc-tpl="6" style="display: flex; align-items: center; gap: 1.75rem;">
-      <nav data-dc-tpl="7" class="nav-desktop" style="display: flex; gap: 1.5rem;">
-        <a data-dc-tpl="8" href="index.html#work" data-section-id="work" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Work</a>
-        <a data-dc-tpl="9" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Resume</a>
-        <a data-dc-tpl="10" href="index.html#about" data-section-id="about" class="scp0" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Bio</a>
+    <div data-dc-tpl="5" style="display: flex; align-items: center; gap: 1.75rem;">
+      <nav data-dc-tpl="6" class="nav-desktop" style="display: flex; gap: 1.5rem;">
+        <a data-dc-tpl="7" href="index.html#work" data-section-id="work" class="scp0" style="font-size: 1.05rem; font-weight: 400; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Work</a>
+        <a data-dc-tpl="8" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" class="scp0" style="font-size: 1.05rem; font-weight: 400; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Resume</a>
+        <a data-dc-tpl="9" href="index.html#about" data-section-id="about" class="scp0" style="font-size: 1.05rem; font-weight: 400; color: rgb(13, 12, 9); opacity: 0.75; text-decoration: none;">Bio</a>
       </nav>
-      <button data-dc-tpl="11" class="nav-mobile-toggle" data-behavior="nav-toggle" aria-label="Menu" aria-expanded="false" style="display: none; align-items: center; justify-content: center; width: 34px; height: 34px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; color: rgb(13, 12, 9); padding: 0px; flex-shrink: 0;">
+      <button data-dc-tpl="10" class="nav-mobile-toggle" data-behavior="nav-toggle" aria-label="Menu" aria-expanded="false" style="display: none; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0px -5px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; color: rgb(13, 12, 9); padding: 0px; flex-shrink: 0;">
         
         
-          <svg data-dc-tpl="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path data-dc-tpl="17" data-behavior="nav-toggle-icon" d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          <svg data-dc-tpl="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width: 22px; height: 22px;"><path data-dc-tpl="16" data-behavior="nav-toggle-icon" d="M4 7h16M4 12h16M4 17h16"></path></svg>
         
       </button>
-      <div data-dc-tpl="18" class="contact-desktop-wrap" data-behavior="contact-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
-        <div data-dc-tpl="19" data-behavior="contact-shape" style="position: absolute; top: 0px; right: 0px; background: rgb(13, 12, 9); overflow: hidden; width: 128px; height: 42px; border-radius: 999px; box-shadow: none; transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s; z-index: 20;">
-          <button data-dc-tpl="20" class="contact-desktop" data-behavior="contact-button" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: 1; pointer-events: auto; transition: opacity 0.2s 0.25s;">
-            <svg data-dc-tpl="21" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path data-dc-tpl="22" d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
+      <div data-dc-tpl="17" class="contact-desktop-wrap" data-behavior="contact-wrap" style="position: relative; width: 128px; height: 42px; flex-shrink: 0;">
+        <div data-dc-tpl="18" data-behavior="contact-shape" style="position: absolute; top: 0px; right: 0px; background: rgb(13, 12, 9); overflow: hidden; width: 128px; height: 42px; border-radius: 999px; box-shadow: none; transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), height 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s; z-index: 20;">
+          <button data-dc-tpl="19" class="contact-desktop" data-behavior="contact-button" style="position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; gap: 0.5em; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; opacity: 1; pointer-events: auto; transition: opacity 0.2s 0.25s;">
+            <svg data-dc-tpl="20" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; transform: rotate(-45deg); flex-shrink: 0;"><path data-dc-tpl="21" d="M2 21l21-9L2 3v7l15 2-15 2z"></path></svg>
             Contact
           </button>
-          <div data-dc-tpl="23" data-behavior="contact-card" style="position: absolute; inset: 0px; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.25s;">
-            <div data-dc-tpl="24" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
-              <span data-dc-tpl="25" style="font-size: 0.95rem; color: rgb(154, 150, 143);">Get in touch</span>
-              <button data-dc-tpl="26" data-behavior="contact-close" aria-label="Close" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(154, 150, 143); cursor: pointer; padding: 0px; display: flex;">
-                <svg data-dc-tpl="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path data-dc-tpl="28" d="M18 6L6 18M6 6l12 12"></path></svg>
+          <div data-dc-tpl="22" data-behavior="contact-card" style="position: absolute; inset: 0px; padding: 1.4rem 1.5rem; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.25s;">
+            <div data-dc-tpl="23" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem;">
+              <span data-dc-tpl="24" style="font-size: 0.95rem; color: rgb(154, 150, 143);">Get in touch</span>
+              <button data-dc-tpl="25" data-behavior="contact-close" aria-label="Close" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(154, 150, 143); cursor: pointer; padding: 0px; display: flex;">
+                <svg data-dc-tpl="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path data-dc-tpl="27" d="M18 6L6 18M6 6l12 12"></path></svg>
               </button>
             </div>
-            <div data-dc-tpl="29" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-              <div data-dc-tpl="30">
-                <div data-dc-tpl="31" style="font-size: 0.82rem; color: rgb(154, 150, 143); margin-bottom: 0.2em;">Email</div>
-                <div data-dc-tpl="32" style="font-size: 1rem; font-weight: 400; color: rgb(255, 255, 255);">jia.eq.liu@gmail.com</div>
+            <div data-dc-tpl="28" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <div data-dc-tpl="29">
+                <div data-dc-tpl="30" style="font-size: 0.82rem; color: rgb(154, 150, 143); margin-bottom: 0.2em;">Email</div>
+                <div data-dc-tpl="31" style="font-size: 1rem; font-weight: 400; color: rgb(255, 255, 255);">jia.eq.liu@gmail.com</div>
               </div>
-              <button data-dc-tpl="33" data-behavior="copy-email" aria-label="Copy email" style="background: rgba(255, 255, 255, 0.1); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(255, 255, 255); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <button data-dc-tpl="32" data-behavior="copy-email" aria-label="Copy email" style="background: rgba(255, 255, 255, 0.1); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(255, 255, 255); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 
                 
-                  <svg data-dc-tpl="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect data-dc-tpl="39" x="9" y="9" width="11" height="11" rx="2"></rect><path data-dc-tpl="40" d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                  <svg data-dc-tpl="37" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect data-dc-tpl="38" x="9" y="9" width="11" height="11" rx="2"></rect><path data-dc-tpl="39" d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
                 
               </button>
             </div>
-            <div data-dc-tpl="41" style="display: flex; align-items: center; justify-content: space-between;">
-              <div data-dc-tpl="42">
-                <div data-dc-tpl="43" style="font-size: 0.82rem; color: rgb(154, 150, 143); margin-bottom: 0.2em;">LinkedIn</div>
-                <div data-dc-tpl="44" style="font-size: 1rem; font-weight: 400; color: rgb(255, 255, 255);">@jia-eq-liu</div>
+            <div data-dc-tpl="40" style="display: flex; align-items: center; justify-content: space-between;">
+              <div data-dc-tpl="41">
+                <div data-dc-tpl="42" style="font-size: 0.82rem; color: rgb(154, 150, 143); margin-bottom: 0.2em;">LinkedIn</div>
+                <div data-dc-tpl="43" style="font-size: 1rem; font-weight: 400; color: rgb(255, 255, 255);">@jia-eq-liu</div>
               </div>
-              <a data-dc-tpl="45" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; width: 34px; height: 34px; color: rgb(255, 255, 255); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
-                <svg data-dc-tpl="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="47" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path data-dc-tpl="48" d="M15 3h6v6"></path><path data-dc-tpl="49" d="M10 14L21 3"></path></svg>
+              <a data-dc-tpl="44" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; width: 34px; height: 34px; color: rgb(255, 255, 255); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+                <svg data-dc-tpl="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="46" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path data-dc-tpl="47" d="M15 3h6v6"></path><path data-dc-tpl="48" d="M10 14L21 3"></path></svg>
               </a>
             </div>
           </div>
@@ -151,73 +154,73 @@
       </div>
     </div>
   </div>
-  <div data-dc-tpl="50" data-behavior="mobile-nav-panel" style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: 0px; border-top: 1px solid rgb(228, 224, 216); transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-   <div data-dc-tpl="51" style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
-    <nav data-dc-tpl="52" style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
-      <a data-dc-tpl="53" href="index.html#work" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Work</a>
-      <a data-dc-tpl="54" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Resume</a>
-      <a data-dc-tpl="55" href="index.html#about" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Bio</a>
-      <button data-dc-tpl="56" data-behavior="mobile-contact-toggle" aria-expanded="false" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); padding: 0.6rem 0px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+  <div data-dc-tpl="49" data-behavior="mobile-nav-panel" style="width: 100%; box-sizing: border-box; overflow: hidden; max-height: 0px; border-top: 1px solid rgb(228, 224, 216); transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+   <div data-dc-tpl="50" style="max-width: 1280px; margin: 0px auto; padding: 0px clamp(1.25rem, 4vw, 3rem); box-sizing: border-box;">
+    <nav data-dc-tpl="51" style="display: flex; flex-direction: column; padding-bottom: 1rem; padding-top: 0.75rem;">
+      <a data-dc-tpl="52" href="index.html#work" data-section-id="work" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Work</a>
+      <a data-dc-tpl="53" href="assets/Jia-Liu-Resume.pdf" target="_blank" rel="noopener" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Resume</a>
+      <a data-dc-tpl="54" href="index.html#about" data-section-id="about" style="font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); text-decoration: none; padding: 0.6rem 0px;">Bio</a>
+      <button data-dc-tpl="55" data-behavior="mobile-contact-toggle" aria-expanded="false" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-align: left; font-family: inherit; font-size: 1.05rem; font-weight: 500; color: rgb(13, 12, 9); padding: 0.6rem 0px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
         Contact
-        <svg data-dc-tpl="57" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-behavior="mobile-contact-chevron" style="width: 16px; height: 16px; transform: rotate(0deg); transition: transform 0.25s;"><path data-dc-tpl="58" d="M6 9l6 6 6-6"></path></svg>
+        <svg data-dc-tpl="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-behavior="mobile-contact-chevron" style="width: 16px; height: 16px; transform: rotate(0deg); transition: transform 0.25s;"><path data-dc-tpl="57" d="M6 9l6 6 6-6"></path></svg>
       </button>
-      <div data-dc-tpl="59" data-behavior="mobile-contact-panel" style="overflow: hidden; max-height: 0px; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div data-dc-tpl="60" style="padding: 0.25rem 0px 1rem;">
-          <div data-dc-tpl="61" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-            <div data-dc-tpl="62">
-              <div data-dc-tpl="63" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">Email</div>
-              <div data-dc-tpl="64" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">jia.eq.liu@gmail.com</div>
+      <div data-dc-tpl="58" data-behavior="mobile-contact-panel" style="overflow: hidden; max-height: 0px; transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div data-dc-tpl="59" style="padding: 0.25rem 0px 1rem;">
+          <div data-dc-tpl="60" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <div data-dc-tpl="61">
+              <div data-dc-tpl="62" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">Email</div>
+              <div data-dc-tpl="63" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">jia.eq.liu@gmail.com</div>
             </div>
-            <button data-dc-tpl="65" data-behavior="copy-email" aria-label="Copy email" style="background: rgb(242, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <button data-dc-tpl="64" data-behavior="copy-email" aria-label="Copy email" style="background: rgb(242, 241, 236); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               
               
-                <svg data-dc-tpl="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect data-dc-tpl="71" x="9" y="9" width="11" height="11" rx="2"></rect><path data-dc-tpl="72" d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+                <svg data-dc-tpl="69" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><rect data-dc-tpl="70" x="9" y="9" width="11" height="11" rx="2"></rect><path data-dc-tpl="71" d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
               
             </button>
           </div>
-          <div data-dc-tpl="73" style="display: flex; align-items: center; justify-content: space-between;">
-            <div data-dc-tpl="74">
-              <div data-dc-tpl="75" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">LinkedIn</div>
-              <div data-dc-tpl="76" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">@jia-eq-liu</div>
+          <div data-dc-tpl="72" style="display: flex; align-items: center; justify-content: space-between;">
+            <div data-dc-tpl="73">
+              <div data-dc-tpl="74" style="font-size: 0.78rem; color: rgb(107, 104, 99); margin-bottom: 0.2em;">LinkedIn</div>
+              <div data-dc-tpl="75" style="font-size: 0.95rem; font-weight: 500; color: rgb(13, 12, 9);">@jia-eq-liu</div>
             </div>
-            <a data-dc-tpl="77" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgb(242, 241, 236); border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
-              <svg data-dc-tpl="78" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="79" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path data-dc-tpl="80" d="M15 3h6v6"></path><path data-dc-tpl="81" d="M10 14L21 3"></path></svg>
+            <a data-dc-tpl="76" href="https://www.linkedin.com/in/jia-eq-liu/" target="_blank" rel="noopener" aria-label="Open LinkedIn" style="background: rgb(242, 241, 236); border-radius: 8px; width: 34px; height: 34px; color: rgb(13, 12, 9); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none;">
+              <svg data-dc-tpl="77" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path data-dc-tpl="78" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path data-dc-tpl="79" d="M15 3h6v6"></path><path data-dc-tpl="80" d="M10 14L21 3"></path></svg>
             </a>
           </div>
         </div>
       </div>
     </nav>
    </div>
-  </div></header><div data-dc-tpl="82" class="header-spacer-default" style="height: 60px; flex-shrink: 0;"></div></div></div><div data-dc-tpl="7" style="max-width: 760px; margin: 0px auto; padding: 3rem clamp(1.25rem, 4vw, 3rem) 6rem;">
-  <a data-dc-tpl="8" href="benchling-bioanalytical.html" style="display: inline-flex; align-items: center; gap: 0.4em; color: rgb(107, 104, 99); text-decoration: none; font-size: 0.92rem; font-weight: 600; margin-bottom: 2rem;">
+  </div></header><div data-dc-tpl="81" class="header-spacer-default" style="height: 66px; flex-shrink: 0;"></div></div></div><div data-dc-tpl="7" style="max-width: 760px; margin: 0px auto; padding: 3rem clamp(1.25rem, 4vw, 3rem) 6rem;">
+  <a data-dc-tpl="8" href="benchling-bioanalytical.html" style="display: inline-flex; align-items: center; gap: 0.4em; color: rgb(107, 104, 99); text-decoration: none; font-size: 0.92rem; font-weight: 500; margin-bottom: 2rem;">
     <svg data-dc-tpl="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><path data-dc-tpl="10" d="M19 12H5M12 19l-7-7 7-7"></path></svg>
     Back to Bioanalytical case study
   </a>
 
-  <p data-dc-tpl="11" style="font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(107, 104, 99); margin: 0px 0px 0.5rem;">Archived</p>
-  <h1 data-dc-tpl="12" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 2.5rem;">Bioanalytical: cut content</h1>
+  <p data-dc-tpl="11" style="font-size: 0.78rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: rgb(107, 104, 99); margin: 0px 0px 0.5rem;">Archived</p>
+  <h1 data-dc-tpl="12" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 500; line-height: 1.3; margin: 0px 0px 2.5rem;">Bioanalytical: cut content</h1>
 
-  <h3 data-dc-tpl="13" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">What guided our work</h3>
+  <h3 data-dc-tpl="13" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 500; line-height: 1.3; margin: 0px 0px 0.5rem;">What guided our work</h3>
 
   <div data-dc-tpl="14" style="margin-bottom: 1.5rem;">
-    <h4 data-dc-tpl="15" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="16" src="assets/img/tree-structure-icon.svg" alt="" style="width: 18px; height: 18px;">End-to-end data flow</h4>
+    <h4 data-dc-tpl="15" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 500; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="16" src="assets/img/tree-structure-icon.svg" alt="" style="width: 18px; height: 18px;">End-to-end data flow</h4>
     <p data-dc-tpl="17" style="margin: 0px;">Data needs to move seamlessly from one step to the next without anyone having to double-check it survived the hand-off. This was the core job we had to get right and it requires us to think rigorously about how our individual features fit into the big picture.</p>
   </div>
   <div data-dc-tpl="18" style="margin-bottom: 1.5rem;">
-    <h4 data-dc-tpl="19" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="20" src="assets/img/swap-icon.svg" alt="" style="width: 18px; height: 18px;">Flexibility where it matters</h4>
+    <h4 data-dc-tpl="19" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 500; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="20" src="assets/img/swap-icon.svg" alt="" style="width: 18px; height: 18px;">Flexibility where it matters</h4>
     <p data-dc-tpl="21" style="margin: 0px;">We need to consistently ask, "What does this look like in early development vs. later when it's locked down?" We need to articulate the difference and establish patterns and language that help scientists distinguish the two.</p>
   </div>
   <div data-dc-tpl="22" style="margin-bottom: 1.5rem;">
-    <h4 data-dc-tpl="23" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="24" src="assets/img/sketch-logo-icon.svg" alt="" style="width: 18px; height: 18px;">Consistency and clarity</h4>
+    <h4 data-dc-tpl="23" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 500; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="24" src="assets/img/sketch-logo-icon.svg" alt="" style="width: 18px; height: 18px;">Consistency and clarity</h4>
     <p data-dc-tpl="25" style="margin: 0px;">We should always care about this, but remember the stakes are higher in drug development. We're introducing a lot of new concepts and UIs, and we need to be thoughtful what they mean and how they sync together. Ultimately, consistency builds trust in our system.</p>
   </div>
   <div data-dc-tpl="26" style="margin-bottom: 1.5rem;">
-    <h4 data-dc-tpl="27" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 600; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="28" src="assets/img/lego-icon.svg" alt="" style="width: 18px; height: 18px;">Build with leverage</h4>
+    <h4 data-dc-tpl="27" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.09375rem; font-weight: 500; line-height: 1.4; margin: 0px 0px 0.4rem; display: flex; align-items: center; gap: 0.5em;"><img data-dc-tpl="28" src="assets/img/lego-icon.svg" alt="" style="width: 18px; height: 18px;">Build with leverage</h4>
     <p data-dc-tpl="29" style="margin: 0px;">We must think about how to build on shared components and extending before re-inventing the wheel. This means getting out of team siloes and actually looking for points of leverage, whether it's a backend system or a UI component.</p>
   </div>
 
   <div data-dc-tpl="30" style="margin-top: 3rem;">
-    <h3 data-dc-tpl="31" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Store and track lab materials</h3>
+    <h3 data-dc-tpl="31" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 500; line-height: 1.3; margin: 0px 0px 0.5rem;">Store and track lab materials</h3>
     <p data-dc-tpl="32" style="margin: 0px 0px 1rem;">Lab managers intake materials and make sure they're safely stored in the right place, with full traceability when they're used in experiments.</p>
     <div data-dc-tpl="33" style="border-radius: 10px; overflow: hidden; background: rgb(255, 255, 255); border: 1px solid rgb(228, 224, 216);">
       <video data-dc-tpl="34" playsinline="" preload="auto" style="width: 100%; height: auto; display: block;"><source data-dc-tpl="35" src="assets/video/sample-import-tabs.webm" type="video/webm"><source data-dc-tpl="36" src="assets/video/sample-import-tabs.mp4" type="video/mp4"></video>
@@ -225,7 +228,7 @@
   </div>
 
   <div data-dc-tpl="37" style="margin-top: 3rem;">
-    <h3 data-dc-tpl="38" style="font-family: Mori, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 600; line-height: 1.3; margin: 0px 0px 0.5rem;">Leading the design work</h3>
+    <h3 data-dc-tpl="38" style="font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem); font-weight: 500; line-height: 1.3; margin: 0px 0px 0.5rem;">Leading the design work</h3>
     <p data-dc-tpl="39" style="margin: 0px 0px 1rem;">My approach to leading design work was to give people real ownership, and step in deliberately when they needed it, whether that meant pairing on design explorations or troubleshooting team dynamics.</p>
     <p data-dc-tpl="40" style="margin: 0px 0px 1rem;">I led a design kickoff to walk through our insights and conceptual flows, then worked to balance that ownership with speed. Sometimes that meant helping a designer sift through explorations to focus on one core idea. Other times, it meant genuinely listening when someone was struggling and helping them find their footing.</p>
     <p data-dc-tpl="41" style="margin: 0px;">Underneath it all, I just wanted to be a steady presence for the team. Things got overwhelming at times, and I tried to be someone people could count on to listen without judgment and keep them moving forward.</p>
