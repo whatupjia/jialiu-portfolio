@@ -57,6 +57,25 @@ instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
 to see exactly what the export changed — and add it to this list.
 
+### Resolved durably in the canvas (verify, don't reapply)
+
+- **Case-study section-nav left offset.** The tick-mark nav on the case
+  study pages (`benchling-bioanalytical.html`, `linkedin-quick-reply.html`,
+  `linkedin-recruiter-inbox.html`) must sit in the left margin, clear of the
+  reading column. In the editor this is a `left-offset` React prop (case
+  studies use `-104`) consumed by `navLeft()` at render; a plain capture
+  dropped it, so `placeNav()` fell back to the shell's left edge and the
+  marks overlapped the body. Fixed at the source: the canvas now serializes
+  the offset and target onto the nav element as `data-left-offset="-104"`
+  and `data-align-to=".bio-shell, .cs-shell"`, and `placeNav()` in
+  `site-behaviors.js` reads both (`Math.max(12, shellLeft + offset)` — the
+  clamp keeps marks on-screen just above the 1100px breakpoint). This is
+  now export-durable, but it lives in `site-behaviors.js` and the nav
+  markup, so still confirm after an export: `grep -o 'data-left-offset="[^"]*"
+  data-align-to="[^"]*"'` on each case study page returns the pair, and
+  `placeNav()` still reads them. Expected geometry at ≥1168px: marks ~48px
+  clear of the reading column.
+
 ## Verifying changes
 
 There's a static file server preconfigured in `.claude/launch.json`

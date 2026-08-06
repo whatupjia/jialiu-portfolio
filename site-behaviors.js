@@ -322,9 +322,14 @@
     // percentages resolve against the viewport including the scrollbar, and the
     // capture bakes whatever the editor canvas happened to measure.
     function placeNav() {
-      var shell = $('.bio-shell, .cs-shell');
+      var sel = nav.getAttribute('data-align-to') || '.bio-shell, .cs-shell';
+      var shell = $(sel);
       if (!shell) return;
-      nav.style.left = Math.round(shell.getBoundingClientRect().left) + 'px';
+      // leftOffset pulls the marks OUT of the content box (case studies ship
+      // -104). The DC applies it in navLeft(); mirror the same clamp here or the
+      // marks land on the content edge and overlap the body.
+      var off = parseInt(nav.getAttribute('data-left-offset') || '0', 10) || 0;
+      nav.style.left = Math.max(12, Math.round(shell.getBoundingClientRect().left) + off) + 'px';
       nav.style.right = 'auto';
     }
 

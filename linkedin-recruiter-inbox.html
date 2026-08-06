@@ -105,11 +105,6 @@
        and a looser paragraph rhythm to stay readable in long runs. */
     p { line-height: 1.55; }
   </style><meta name="x-build-id" content="4458150b1e83132b4847091c8e5995225fed4e1f"><style>
-    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-buch.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-kraftig.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
-    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
-    @media (max-width: 1100px) { .section-nav { display: none !important; } }
-  </style><style>
     @media (max-width: 900px) {
       .expandable-image-wrap { width: 100% !important; margin-left: 0 !important; }
     }
@@ -125,6 +120,11 @@
         transform: none !important;
       }
     }
+  </style><style>
+    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-buch.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Sohne'; src: url('assets/fonts/soehne-kraftig.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+    .section-nav { position: fixed; top: 220px; z-index: 3; transition: opacity 0.3s ease; }
+    @media (max-width: 1100px) { .section-nav { display: none !important; } }
   </style><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript></head>
 <body>
 <div id="dc-root"><div class="sc-host"><div class="sc-host"></div><div style="position: relative;"><header data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
@@ -264,7 +264,7 @@
     </section>
     </div>
 
-    <div class="sc-host"><nav aria-label="Page sections" class="section-nav" data-behavior="section-nav" style="left: 118px; right: auto; top: 50%; transform: translateY(-50%); opacity: 1; pointer-events: auto;">
+    <div class="sc-host"><nav aria-label="Page sections" class="section-nav" data-behavior="section-nav" data-left-offset="-104" data-align-to=".bio-shell, .cs-shell" style="left: 126px; right: auto; top: 50%; transform: translateY(-50%); opacity: 1; pointer-events: auto;">
   
     <div style="position: relative; width: 56px;">
       
