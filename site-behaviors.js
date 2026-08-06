@@ -590,9 +590,14 @@
     // hand the element an object URL, which needs no range requests.
     // Lives here, not in the built HTML — a fix that exists only in deploy/ is
     // reverted by the next capture.
-    vids.forEach(function (v) {
+    //
+    // Deferred until the clip is near the viewport: these files run to several
+    // MB, and fetching them all on load competes with the work-row animation
+    // iframes for the main thread long enough to stall first paint.
+    var hydrateBlob = function (v) {
       var blobSrc = v.getAttribute('data-blob-src');
-      if (!blobSrc || v.getAttribute('src')) return;
+      if (!blobSrc || v.getAttribute('src') || v.hasAttribute('data-blob-pending')) return;
+      v.setAttribute('data-blob-pending', '');
       fetch(blobSrc)
         .then(function (r) { return r.ok ? r.blob() : null; })
         .then(function (b) {
@@ -601,8 +606,24 @@
           v.load();
           v.play().catch(function () {});
         })
-        .catch(function () {});
-    });
+        .catch(function () {})
+        .then(function () { v.removeAttribute('data-blob-pending'); });
+    };
+    var blobVids = vids.filter(function (v) { return v.getAttribute('data-blob-src') && !v.getAttribute('src'); });
+    if (blobVids.length) {
+      if (!('IntersectionObserver' in window)) {
+        blobVids.forEach(hydrateBlob);
+      } else {
+        var blobIo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            blobIo.unobserve(entry.target);
+            hydrateBlob(entry.target);
+          });
+        }, { rootMargin: '0px', threshold: 0.2 });
+        blobVids.forEach(function (v) { blobIo.observe(v); });
+      }
+    }
 
     if (!('IntersectionObserver' in window)) {
       vids.forEach(function (v) { v.play().catch(function () {}); });

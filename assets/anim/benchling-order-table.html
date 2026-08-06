@@ -1,0 +1,249 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Benchling Study — HTML Motion Study</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:transparent;font-family:'Proxima Nova','Helvetica Neue',Helvetica,Arial,sans-serif;color:rgb(27,27,31);-webkit-font-smoothing:antialiased;overflow:hidden}
+.wrap{position:relative;width:100%;height:100%;overflow:hidden}
+.stage{position:absolute;top:0;left:0;width:1280px;height:800px;transform:scale(var(--fitx,0.41),var(--fity,0.41));transform-origin:0 0;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff}
+.chrome{flex:none;height:40px;display:flex;align-items:center;gap:8px;padding:0 16px;background:rgb(241,242,244)}
+.chrome i{width:12px;height:12px;border-radius:50%;flex:none;display:block}
+.body{flex:1;min-height:0;display:flex}
+.side{width:48px;flex:none;background:#000DB6;position:relative;z-index:2}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+.head{flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:28px 40px 0}
+.title{font-size:26px;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px}
+.subtitle{font-size:15px;color:rgb(90,94,106)}
+.complete-btn{flex:none;height:40px;padding:0 18px;border-radius:6px;background:#E2E3E5;color:#49494D;font-size:14px;font-weight:600;display:flex;align-items:center}
+.tabs{flex:none;position:relative;display:flex;gap:34px;border-bottom:1px solid rgb(226,228,234);margin-top:22px;padding:0 40px;font-size:13px;font-weight:600;color:rgb(110,114,126);text-transform:uppercase;letter-spacing:0.04em}
+.tab{padding:0 0 12px;transition:color 320ms ease;white-space:nowrap}
+.tab.on{color:rgb(45,114,231)}
+.underline{position:absolute;bottom:-1px;height:2px;background:rgb(45,114,231);transition:left 520ms cubic-bezier(0.5,0,0.2,1),width 520ms cubic-bezier(0.5,0,0.2,1)}
+.panes{position:relative;flex:1;min-height:0;background:rgb(245,246,247);padding:20px 24px}
+.pane{position:absolute;inset:20px 24px;transition:opacity 340ms ease,transform 460ms cubic-bezier(0.5,0,0.2,1)}
+.pane.out{opacity:0;pointer-events:none}
+.pane.out.left{transform:translateX(-5%)}
+.pane.out.right{transform:translateX(5%)}
+.card{height:100%;background:#fff;border:1px solid rgb(226,228,234);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.card-head{flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:16px;font-weight:600}
+.chev{width:14px;height:14px;border-left:1.6px solid rgb(130,134,146);border-top:1.6px solid rgb(130,134,146);transform:rotate(45deg);margin-top:5px}
+.ov-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) minmax(0,0.9fr) minmax(0,1fr)}
+.ov-head{flex:none;height:38px;border-top:1px solid rgb(226,228,234);border-bottom:1px solid rgb(226,228,234);background:rgb(247,248,250);font-size:13px;font-weight:600;color:#49494D;align-items:center}
+.ov-head>div{padding:0 20px}
+.ov-body{flex:1;min-height:0}
+.ov-row{height:38px;align-items:center;border-bottom:1px solid rgb(237,239,243);font-size:13px}
+.ov-row:last-child{border-bottom:none}
+.ov-row>div{padding:0 20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.recv{display:inline-flex;align-items:center;gap:8px;height:26px;padding:0 10px;border:1px solid rgb(220,223,230);border-radius:6px;font-size:13px}
+.assay{display:inline-flex;align-items:center;gap:8px;height:24px;padding:0 10px;border-radius:4px;background:rgb(232,240,254);color:rgb(29,86,190);font-size:13px;font-weight:500}
+.muted{color:rgb(110,114,126)}
+.bar{display:block;width:78%;max-width:230px;height:8px;border-radius:999px;background:rgb(232,234,239);overflow:hidden}
+.fill{display:block;height:100%;width:var(--to,60%);border-radius:999px;background:rgb(45,114,231);transform:scaleX(0);transform-origin:left center}
+@keyframes fillBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.play .fill{animation:fillBar 1500ms cubic-bezier(0.4,0,0.2,1) both}
+.filters{flex:none;display:flex;align-items:center;gap:10px;padding:14px 20px}
+.search{flex:none;width:260px;height:32px;border:1px solid rgb(220,223,230);border-radius:6px;background:#fff;display:flex;align-items:center;padding:0 10px;font-size:13px;color:rgb(160,164,176)}
+.search .dot{width:11px;height:11px;border-radius:50%;border:1.3px solid rgb(170,174,184);margin-right:8px;flex:none}
+.chip{height:32px;padding:0 12px;border-radius:6px;background:rgb(232,240,254);font-size:13px;color:rgb(29,86,190);font-weight:600;display:flex;align-items:center}
+.chip.gray{background:#E2E3E5;color:#49494D}
+.si-cols{display:grid;grid-template-columns:44px minmax(0,0.75fr) minmax(0,0.85fr) minmax(0,0.85fr) minmax(0,0.85fr) minmax(0,0.6fr) minmax(0,0.7fr) minmax(0,1fr) minmax(0,1fr);align-items:center}
+.si-head{height:38px;background:rgb(247,248,250);border-top:1px solid rgb(226,228,234);border-bottom:1px solid rgb(226,228,234);font-size:13px;font-weight:600;color:#49494D}
+.si-head>div{padding:0 12px 0 0}
+.si-row{height:34px;font-size:13px;border-bottom:1px solid rgb(237,239,243)}
+.si-row:last-child{border-bottom:none}
+.cbwrap{display:flex;align-items:center;justify-content:center}
+.cb{width:14px;height:14px;border:1px solid rgb(196,200,210);border-radius:3px;background:#fff;box-sizing:border-box}
+.cell{padding:0 12px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.status-pill{display:inline-flex;align-items:center;gap:6px;height:20px;padding:0 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap}
+.status-cell{transition:opacity 220ms linear}
+.ic{width:10px;height:10px;border-radius:50%;box-sizing:border-box;position:relative;flex:none;display:flex;align-items:center;justify-content:center}
+.ic span{color:#fff;font-size:8px;line-height:1}
+.contents-badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:4px;background:#EDEEF0;color:#3C65FB;font-size:12px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.creator{display:flex;align-items:center;gap:8px;overflow:hidden;padding:0 14px 0 0}
+.avatar{width:20px;height:20px;border-radius:50%;background:rgb(228,244,235);color:rgb(19,109,66);font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}
+.creator span{overflow:hidden;text-overflow:ellipsis;color:#1B1B1F}
+@keyframes rowIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.first-in{animation:rowIn 500ms ease-out both}
+@media (prefers-reduced-motion: reduce){.first-in{animation:none}.underline,.pane,.tab{transition:none}.play .fill{animation:none}.fill{transform:scaleX(1)}}
+</style></head><body>
+<div class="wrap"><div class="stage">
+  <div class="chrome" aria-hidden="true"><i style="background:#F4645C"></i><i style="background:#F5BD4F"></i><i style="background:#61C554"></i></div>
+  <div class="body">
+    <div class="side"></div>
+    <div class="main">
+      <div class="head">
+        <div><div class="title">MD-201-0089</div><div class="subtitle">Phase II Trial of Drug X in Biomarker-Positive Non-Small Cell Lung Cancer</div></div>
+        <div class="complete-btn">Complete study</div>
+      </div>
+      <div class="tabs">
+        <div class="tab on" data-tab="0">Overview</div>
+        <div class="tab" data-tab="1">Design</div>
+        <div class="tab" data-tab="2">Study items</div>
+        <div class="tab" data-tab="3">Metadata</div>
+        <div class="underline" id="underline"></div>
+      </div>
+      <div class="panes">
+        <div class="pane" id="pane-overview">
+          <div class="card">
+            <div class="card-head"><span>Samples</span><span class="chev"></span></div>
+            <div class="ov-cols ov-head"><div>Sample definition</div><div>Sample receiving</div><div>Assay</div><div>Sample testing progress</div></div>
+            <div class="ov-body" id="ov-rows"></div>
+          </div>
+        </div>
+        <div class="pane out right" id="pane-study">
+          <div class="card">
+            <div class="filters">
+              <div class="search"><span class="dot"></span>Search</div>
+              <div class="chip">Type: Test order</div>
+              <div class="chip">4 filters</div>
+              <div class="chip gray">Group by</div>
+            </div>
+            <div class="si-cols si-head">
+              <div class="cbwrap"><div class="cb"></div></div>
+              <div>Test order</div><div>Container</div><div>Assay template</div><div>Test status</div><div>Dilution</div><div>Quantity</div><div>Contents</div><div style="padding:0 14px 0 0">Creator</div>
+            </div>
+            <div id="si-rows"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+(function(){
+  var d=document.documentElement.style;
+  var fit=function(){ d.setProperty('--fitx',(window.innerWidth/1280).toFixed(5)); d.setProperty('--fity',(window.innerHeight/800).toFixed(5)); };
+  fit(); window.addEventListener('resize',fit);
+
+  var CAL='<svg viewBox="0 0 16 16" width="14" height="14" fill="none" style="flex:none"><rect x="1.8" y="3" width="12.4" height="11" rx="1.6" stroke="rgb(110,114,126)" stroke-width="1.4"/><path d="M1.8 6.4h12.4" stroke="rgb(110,114,126)" stroke-width="1.4"/><path d="M5.2 1.6v2.6M10.8 1.6v2.6" stroke="rgb(110,114,126)" stroke-width="1.4" stroke-linecap="round"/></svg>';
+  var GRID='<svg viewBox="0 0 16 16" width="13" height="13" fill="none" style="flex:none"><rect x="1.6" y="2.6" width="12.8" height="10.8" rx="1.4" fill="rgb(45,86,190)"/><path d="M1.6 6.2h12.8M6 6.2v7.2" stroke="#fff" stroke-width="1.2"/></svg>';
+
+  var SAMPLES=[
+    ['PRE_SER_TG1','100 targeted',64],['PRE_SER_TG2','200 targeted',88],
+    ['D1_PLASMA_TG1','100 targeted',42],['D1_PLASMA_TG2','200 targeted',73],
+    ['D1_SAL_TG1','100 targeted',95],['D1_SAL_TG2','200 targeted',58],
+    ['D1_UR_TG1','100 targeted',80],['D1_UR_TG2','200 targeted',36],
+    ['D2_PLASMA_TG1','100 targeted',69],['D2_PLASMA_TG2','200 targeted',90],
+    ['D2_SAL_TG1','100 targeted',52],['D2_SAL_TG2','200 targeted',77],
+    ['D2_UR_TG1','100 targeted',61]
+  ];
+  var ovRows=document.getElementById('ov-rows');
+  SAMPLES.forEach(function(s,i){
+    var el=document.createElement('div');
+    el.className='ov-cols ov-row first-in';
+    el.style.animationDelay=(i*45)+'ms';
+    el.innerHTML='<div>'+s[0]+'</div>'+
+      '<div><span class="recv">'+CAL+s[1]+'</span></div>'+
+      '<div><span class="assay">'+GRID+'HI 8-Plex</span></div>'+
+      '<div><span class="bar"><span class="fill" style="animation-delay:'+(340+i*70)+'ms"></span></span></div>';
+    ovRows.appendChild(el);
+  });
+
+  var STATUSES=[
+    {label:'Pending',bg:'rgb(240,241,244)',fg:'rgb(90,94,106)',kind:'pending'},
+    {label:'In progress',bg:'rgb(232,240,254)',fg:'rgb(29,86,190)',kind:'progress'},
+    {label:'Completed',bg:'rgb(228,244,235)',fg:'rgb(19,109,66)',kind:'completed'},
+    {label:'Failed',bg:'rgb(253,234,234)',fg:'rgb(175,39,39)',kind:'failed'}
+  ];
+  var ORDERS=['Ab 1','Ab 2','Ab 3','Ab 4','Ab 5'];
+  var DILUTIONS=['10','100','1000'];
+  var QTYS=['200 µL','500 µL'];
+  var CREATORS=['Maya Chen','Jonah Kessler','Priya Nair','Diego Alvarez'];
+  // Every row opens Pending, then settles into this mix once the pane arrives.
+  var FINAL=[1,2,1,3,2,1,2,3,1,2,3,2,1,3];
+
+  function pad3(n){ n=''+n; while(n.length<3) n='0'+n; return n; }
+  function initials(n){ return n.split(' ').map(function(w){return w[0];}).join(''); }
+  function pill(s){
+    var icon;
+    if(s.kind==='pending') icon='<div class="ic" style="border:1.4px solid '+s.fg+'"><div style="width:5px;height:1.4px;background:'+s.fg+'"></div></div>';
+    else if(s.kind==='progress') icon='<div class="ic" style="border:1.4px solid '+s.fg+'"><div style="position:absolute;top:1.5px;left:50%;width:1.2px;height:3.5px;background:'+s.fg+';transform:translateX(-50%)"></div></div>';
+    else if(s.kind==='completed') icon='<div class="ic" style="background:'+s.fg+'"><span>\u2713</span></div>';
+    else icon='<div class="ic" style="background:'+s.fg+'"><span>!</span></div>';
+    return '<span class="status-pill" style="background:'+s.bg+';color:'+s.fg+'">'+icon+s.label+'</span>';
+  }
+  var siRows=document.getElementById('si-rows');
+  for(var i=0;i<14;i++){
+    var el=document.createElement('div');
+    el.className='si-cols si-row';
+    el.innerHTML='<div class="cbwrap"><div class="cb"></div></div>'+
+      '<div class="cell">'+ORDERS[i%ORDERS.length]+'</div>'+
+      '<div class="cell">VIAL-'+pad3(i+27)+'</div>'+
+      '<div class="cell">HI 8-Plex</div>'+
+      '<div class="cell status-cell">'+pill(STATUSES[0])+'</div>'+
+      '<div class="cell">'+DILUTIONS[i%DILUTIONS.length]+'</div>'+
+      '<div class="cell">'+QTYS[i%QTYS.length]+'</div>'+
+      '<div class="cell"><span class="contents-badge">DAY_'+((i%3)+1)+' SER-'+(100+(i%5))+'</span></div>'+
+      '<div class="creator"><div class="avatar">'+initials(CREATORS[i%CREATORS.length])+'</div><span>'+CREATORS[i%CREATORS.length]+'</span></div>';
+    siRows.appendChild(el);
+  }
+
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var underline=document.getElementById('underline');
+  var panes={0:document.getElementById('pane-overview'),2:document.getElementById('pane-study')};
+
+  function place(i){
+    // offsetLeft/offsetWidth are layout values; getBoundingClientRect would
+    // return post-transform pixels and land the underline short of the tab.
+    var t=tabs[i];
+    underline.style.left=t.offsetLeft+'px';
+    underline.style.width=t.offsetWidth+'px';
+  }
+  function select(i){
+    tabs.forEach(function(t,n){ t.classList.toggle('on',n===i); });
+    place(i);
+    // Panes travel the same way the underline does: the one whose tab sits to
+    // the left of the active tab parks off the left edge, and vice versa.
+    Object.keys(panes).forEach(function(k){
+      var p=panes[k], n=+k;
+      p.classList.toggle('out',n!==i);
+      p.classList.toggle('left',n<i);
+      p.classList.toggle('right',n>i);
+    });
+    if(i===0) replayBars();
+    if(i===2) replayStatuses();
+  }
+
+  var statusTimers=[];
+  function replayStatuses(){
+    statusTimers.forEach(clearTimeout);
+    statusTimers=[];
+    var cells=[].slice.call(siRows.querySelectorAll('.status-cell'));
+    cells.forEach(function(c){ c.style.opacity=1; c.innerHTML=pill(STATUSES[0]); });
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+      cells.forEach(function(c,n){ c.innerHTML=pill(STATUSES[FINAL[n]]); });
+      return;
+    }
+    cells.forEach(function(c,n){
+      statusTimers.push(setTimeout(function(){
+        c.style.opacity=0;
+        statusTimers.push(setTimeout(function(){
+          c.innerHTML=pill(STATUSES[FINAL[n]]);
+          c.style.opacity=1;
+        },200));
+      },620+n*150));
+    });
+  }
+
+  // Re-running the fill needs the animation removed and the element reflowed
+  // before it is re-added, or the browser keeps the finished run.
+  function replayBars(){
+    var p=panes[0];
+    p.querySelectorAll('.fill').forEach(function(f){
+      f.style.setProperty('--to',(28+Math.round(Math.random()*70))+'%');
+    });
+    p.classList.remove('play');
+    void p.offsetWidth;
+    p.classList.add('play');
+  }
+
+  // The underline is measured from laid-out geometry, so it has to be placed
+  // after first layout — and re-placed if the stage is rescaled.
+  requestAnimationFrame(function(){ place(0); replayBars(); });
+  window.addEventListener('resize',function(){ place(tabs.findIndex(function(t){return t.classList.contains('on');})); });
+
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var on=0;
+    setInterval(function(){ on = on===0 ? 2 : 0; select(on); },3600);
+  }
+})();
+</script>
+</body></html>

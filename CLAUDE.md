@@ -19,8 +19,8 @@ fix applied by editing the exported HTML/JS directly (not in the Design
 canvas itself) is invisible to Claude Design and **will silently regress**
 the next time that page or `site-behaviors.js` is re-exported — the export
 just overwrites the fix with the canvas's stale version. This has already
-happened twice. Before treating a fresh export as done, diff the incoming
-files against these known fixes and reapply any that got clobbered:
+happened three times. Before treating a fresh export as done, diff the
+incoming files against these known fixes and reapply any that got clobbered:
 
 1. **Homepage hover captions** (`index.html`): `.scp0:hover, .scp0:focus-visible
    { --deepen: 1; }` must exist in the `<style>` block, AND no `.scp0` anchor
@@ -37,10 +37,25 @@ files against these known fixes and reapply any that got clobbered:
    aside and the `.margin-note-trigger` button, and that `site-behaviors.js`
    still has `initMarginNotes()` wired up for the mobile modal.
 
-If a new export reintroduces either issue, or you find another instance of
-this pattern (a code-only fix silently reverted by re-export), fix it the
-same way — diff against the last-known-good version of the file to see
-exactly what the export changed — and add it to this list.
+3. **Blob-hydrated video** (`index.html`, the RB Tagger side-project tile):
+   the deploy host ignores Range headers, so a non-faststart `.mp4` (moov atom
+   after mdat) can't be parsed from a plain `<video src>` — `site-behaviors.js`
+   has a `data-blob-src` fetch-and-hydrate workaround for exactly this file
+   (see the comment above `hydrateBlob` in `initVideoAutoplay`). The export
+   bakes the video tag back to a plain `src="assets/video/rb-tagger-4-3.mp4"
+   autoplay`, dropping `data-blob-src` and disabling the workaround. Check
+   `grep -n 'rb-tagger-4-3.mp4' index.html` — the tag must read
+   `<video data-blob-src="assets/video/rb-tagger-4-3.mp4" playsinline=""
+   loop="" style="...">` with no `src` or `autoplay` attribute. If a future
+   export ships this file already faststart-encoded (moov before mdat — check
+   with `python3 -c "import struct; ..."` reading the top-level box order),
+   the plain `src` may be safe again, but until the host's Range-header
+   behavior is confirmed, keep reapplying `data-blob-src`.
+
+If a new export reintroduces one of these issues, or you find another
+instance of this pattern (a code-only fix silently reverted by re-export),
+fix it the same way — diff against the last-known-good version of the file
+to see exactly what the export changed — and add it to this list.
 
 ## Verifying changes
 
