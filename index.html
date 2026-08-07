@@ -216,7 +216,12 @@
     .beyond-row:hover .beyond-title, .beyond-row:focus-visible .beyond-title { color: #0688f0; }
     .beyond-row:hover .beyond-arrow, .beyond-row:focus-visible .beyond-arrow { opacity: 1; transform: translate(0, 0); }
     @media (hover: none) { .beyond-arrow { display: none; } }
-    @media (max-width: 600px) { .beyond-row { grid-template-columns: 64px minmax(0, 1fr) !important; } }
+    @media (max-width: 600px) {
+      .beyond-row { grid-template-columns: 64px minmax(0, 1fr) !important; gap: 1rem !important; align-items: start !important; }
+      .beyond-row > div:first-child { width: 64px !important; }
+      .beyond-row > div:nth-child(2) { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; gap: 0.3rem !important; }
+      .beyond-meta { order: -1; gap: 0.5rem !important; }
+    }
   </style><noscript data-dc-tpl="7">
     .word-in, .work-reveal { opacity: 1 !important; animation: none !important; }
   </noscript><link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="9"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet" data-dc-tpl="10"><meta name="x-build-id" content="4458150b1e83132b4847091c8e5995225fed4e1f"><style data-dc-tpl="1">
