@@ -67,14 +67,30 @@ to see exactly what the export changed — and add it to this list.
   dropped it, so `placeNav()` fell back to the shell's left edge and the
   marks overlapped the body. Fixed at the source: the canvas now serializes
   the offset and target onto the nav element as `data-left-offset="-104"`
-  and `data-align-to=".bio-shell, .cs-shell"`, and `placeNav()` in
-  `site-behaviors.js` reads both (`Math.max(12, shellLeft + offset)` — the
-  clamp keeps marks on-screen just above the 1100px breakpoint). This is
-  now export-durable, but it lives in `site-behaviors.js` and the nav
-  markup, so still confirm after an export: `grep -o 'data-left-offset="[^"]*"
-  data-align-to="[^"]*"'` on each case study page returns the pair, and
-  `placeNav()` still reads them. Expected geometry at ≥1168px: marks ~48px
-  clear of the reading column.
+  and `data-align-to=".bio-shell, .cs-shell"` — that HTML serialization has
+  proven durable. But the *consuming* half — `placeNav()` in
+  `site-behaviors.js` reading both (`Math.max(12, shellLeft + offset)`, whose
+  clamp keeps marks on-screen just above the 1100px breakpoint) — is code-only
+  and has already been silently reverted by a later export back to a bare
+  `$('.bio-shell, .cs-shell')` / `left = shellLeft` with no offset. So this is
+  really half-durable: after every export confirm BOTH sides — `grep -o
+  'data-left-offset="[^"]*" data-align-to="[^"]*"'` on each case study page
+  returns the pair (HTML side), AND `placeNav()` still reads them with the
+  clamp (JS side, reapply from the last-known-good `site-behaviors.js` if the
+  export flattened it). Expected geometry at ≥1168px: marks ~48px clear of the
+  reading column.
+
+- **Hero availability chip.** The "Available for consulting…" chip in the
+  hero (`index.html`) opens a "Get in touch" popover; in the editor that's a
+  React `onClick`, dropped by the static capture, so early exports shipped a
+  dead chip. Fixed at the source: the canvas now serializes
+  `data-behavior="avail-wrap"` / `avail-toggle` / `avail-card` /
+  `avail-chevron` / `avail-close` onto the block and `data-behavior="copy-email"`
+  onto the popover's copy button, and `initAvailChip()` in `site-behaviors.js`
+  binds off those (copy reuses the shared `copy-email` handler). Durable so
+  far, but both halves are needed, so confirm after an export: `index.html`
+  contains `data-behavior="avail-toggle"` and `site-behaviors.js` contains
+  `initAvailChip` (registered in `initAll`).
 
 ## Verifying changes
 

@@ -837,6 +837,38 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   }
 
+  // ── hero availability chip (home page) ───────────────────────────────────
+  // The chip toggles a contact popover; in the editor that's a React onClick,
+  // dropped by the static capture. The canvas serializes the hooks
+  // (data-behavior="avail-*") so this binds like every other behavior. Copy is
+  // handled by the shared copy-email handler in initHeader (the card's copy
+  // button carries data-behavior="copy-email"). set(false) asserts the baked
+  // closed state on load.
+  function initAvailChip() {
+    var wrap = by('avail-wrap');
+    if (!wrap) return;
+    var btn = $('[data-behavior="avail-toggle"]', wrap);
+    var card = $('[data-behavior="avail-card"]', wrap);
+    var chevron = $('[data-behavior="avail-chevron"]', wrap);
+    var closeBtn = $('[data-behavior="avail-close"]', wrap);
+    if (!btn || !card) return;
+    var open = false;
+    function set(o) {
+      open = o;
+      card.style.opacity = o ? '1' : '0';
+      card.style.transform = o ? 'translateY(0)' : 'translateY(-6px)';
+      card.style.pointerEvents = o ? 'auto' : 'none';
+      if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : 'rotate(0deg)';
+      btn.style.borderColor = o ? '#b8b2a6' : '#d7d2c7';
+      btn.setAttribute('aria-expanded', o ? 'true' : 'false');
+    }
+    set(false);
+    btn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); set(!open); });
+    if (closeBtn) closeBtn.addEventListener('click', function (e) { e.preventDefault(); set(false); });
+    document.addEventListener('click', function (e) { if (open && !wrap.contains(e.target)) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) set(false); });
+  }
+
   // The 12-col grid publishes its own width so breakout images can size off it
   // in pure CSS. In the DC source a ResizeObserver in the page's logic class does
   // this; deployed, the capture leaves behind whatever pixel value the editor
@@ -864,6 +896,7 @@
     initCarousels();
     initLightbox();
     initMarginNotes();
+    initAvailChip();
   }
 
   if (document.readyState === 'loading') {
