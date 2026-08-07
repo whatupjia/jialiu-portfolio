@@ -104,7 +104,11 @@
       .problem-split > div:last-child { min-height: 220px !important; }
 
     }
-    @media (max-width: 600px) {
+    /* The diagram's inline margin-top:-1.5rem is a desktop-only tuck for the
+       two-column grid. Once #approach stacks to one column (<=1100px) that
+       negative margin overlaps the paragraph above it, so neutralize it across
+       the whole stacked range, not just mobile. */
+    @media (max-width: 1100px) {
       #three-tier-foundation-fullbleed { margin-top: 2rem !important; }
     }
     /* Body copy sits a step back from full ink; headings hold #0d0c09 so the

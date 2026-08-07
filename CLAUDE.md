@@ -52,6 +52,19 @@ incoming files against these known fixes and reapply any that got clobbered:
    the plain `src` may be safe again, but until the host's Range-header
    behavior is confirmed, keep reapplying `data-blob-src`.
 
+4. **Three-tier diagram tablet spacing** (`benchling-bioanalytical.html`):
+   the `#three-tier-foundation-fullbleed` block carries an inline
+   `margin-top: -1.5rem` — a deliberate "tuck" that only works in the desktop
+   two-column `#approach` grid. At ≤1100px `#approach` stacks to one column,
+   and that negative margin then overlaps (cuts off) the paragraph above it
+   ("I'll focus on two key areas…"). The neutralizing rule must span the whole
+   stacked range: `@media (max-width: 1100px) { #three-tier-foundation-fullbleed
+   { margin-top: 2rem !important; } }`. The export ships this override scoped to
+   `max-width: 600px` only, leaving the 601–1100px tablet range broken —
+   widen it back to `1100px`. Check: `grep -n 'three-tier-foundation-fullbleed'
+   benchling-bioanalytical.html` — the `@media` guarding the `margin-top: 2rem`
+   rule must read `max-width: 1100px`, not `600px`.
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
