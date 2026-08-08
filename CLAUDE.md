@@ -82,6 +82,22 @@ incoming files against these known fixes and reapply any that got clobbered:
    Check: `grep -n 'repeat(12, 1fr)' index.html` — the hero grid's inline
    style must read `z-index: 2`.
 
+   The z-index bump alone fixes desktop but NOT mobile: the case-study
+   previews below are `<iframe>`/`<video>` replaced elements, which mobile
+   browsers (iOS Safari, Chrome Android) composite into their own GPU layers.
+   A plain 2D `transform` promotes the popover to a compositing layer only
+   *during* its open transition; once it settles the browser demotes it and
+   it drops back under the always-composited iframe/video layers — so the
+   popover paints correctly for a frame, then slides under. The second half
+   of the fix keeps the popover permanently on its own layer: the avail-card's
+   inline style must carry `will-change: transform` and use a 3D transform
+   (`transform: translate3d(0px, -6px, 0px)`, not `translateY(-6px)`), AND
+   `initAvailChip()` in `site-behaviors.js` must toggle the open/closed state
+   with `translate3d(...)` too (not `translateY(...)`). Both halves are
+   code-only and will be clobbered by a re-export. Check: `grep -n
+   'avail-card' index.html` shows `will-change: transform` + `translate3d`,
+   and `grep -n 'translate3d' site-behaviors.js` finds the `set()` toggle.
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file

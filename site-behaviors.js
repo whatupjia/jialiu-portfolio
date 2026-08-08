@@ -856,7 +856,11 @@
     function set(o) {
       open = o;
       card.style.opacity = o ? '1' : '0';
-      card.style.transform = o ? 'translateY(0)' : 'translateY(-6px)';
+      // translate3d (not translateY) keeps the popover on its own GPU
+      // compositing layer so it sorts above the work section's iframe/video
+      // layers on mobile; a 2D transform only promotes it mid-transition,
+      // after which mobile browsers demote it and it drops under those layers.
+      card.style.transform = o ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, -6px, 0px)';
       card.style.pointerEvents = o ? 'auto' : 'none';
       if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : 'rotate(0deg)';
       btn.style.borderColor = o ? '#b8b2a6' : '#d7d2c7';
