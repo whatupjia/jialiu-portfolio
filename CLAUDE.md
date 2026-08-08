@@ -65,6 +65,23 @@ incoming files against these known fixes and reapply any that got clobbered:
    benchling-bioanalytical.html` — the `@media` guarding the `margin-top: 2rem`
    rule must read `max-width: 1100px`, not `600px`.
 
+5. **Hero availability-chip popover stacking** (`index.html`): the hero
+   content grid (the `data-dc-tpl="57"` div — the one with
+   `display: grid; grid-template-columns: repeat(12, 1fr)`) must carry
+   `z-index: 2`, not `z-index: 1`. That grid is a stacking context, and it
+   traps the avail-chip popover (`data-behavior="avail-card"`, `z-index: 30`
+   internally) inside itself. The next sibling after the hero `<section>` is
+   `.work-reveal` (`position: relative; z-index: 1`), which holds the work
+   cards / case-study images. At `z-index: 1` the hero grid ties with
+   `.work-reveal` and, being earlier in the DOM, loses — so the open popover
+   paints *under* the first case-study image (most visible on mobile, where
+   the hero's bottom padding shrinks and the card reaches down into the work
+   section). Bumping the grid to `z-index: 2` lifts the whole hero subtree —
+   popover included — above `.work-reveal`, while staying below the sticky
+   header (`z-index: 5`). The export ships this grid back at `z-index: 1`.
+   Check: `grep -n 'repeat(12, 1fr)' index.html` — the hero grid's inline
+   style must read `z-index: 2`.
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
