@@ -217,19 +217,23 @@
     .beyond-row:hover .beyond-arrow, .beyond-row:focus-visible .beyond-arrow { opacity: 1; transform: translate(0, 0); }
     @media (hover: none) { .beyond-arrow { display: none; } }
     @media (max-width: 600px) {
-      .beyond-row { grid-template-columns: 64px minmax(0, 1fr) !important; gap: 1.25rem !important; align-items: start !important; }
-      .beyond-row > div:first-child { width: 64px !important; }
-      .beyond-row > div:nth-child(2) { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; gap: 0.3rem !important; }
+      .beyond-row { grid-template-columns: 64px minmax(0, 1fr) !important; gap: 1.25rem !important; }
+      .beyond-thumb { width: 64px !important; }
+      .beyond-content { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; }
       .beyond-meta { display: none !important; }
     }
   </style><noscript data-dc-tpl="7">
     .word-in, .work-reveal { opacity: 1 !important; animation: none !important; }
-  </noscript><link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="9"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet" data-dc-tpl="10"><meta name="x-build-id" content="4458150b1e83132b4847091c8e5995225fed4e1f"><style data-dc-tpl="1">
+  </noscript><link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="9"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet" data-dc-tpl="10"><style data-dc-tpl="1">
     .nav-desktop, .contact-desktop { display: flex; }
     .nav-mobile-toggle { display: none; }
     @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-toggle { display: flex !important; } .contact-desktop-wrap { display: none !important; } .site-header-row { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; } }
     .header-spacer-default { height: 66px; }
-  </style><style>image-slot { display: none !important; }</style><script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script><script src="site-behaviors.js" defer></script><noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript></head>
+  </style><meta name="x-build-id" content="e33e9d628132ba5e2120d119d1160084dd38d9af"><style>image-slot { display: none !important; }</style>
+<script>(function(){var r=document.documentElement;try{var s=sessionStorage.getItem('portfolio-intro-seen');if(location.hash==='#work'||s){r.classList.add('skip-intro');}else{r.classList.add('intro-ready');sessionStorage.setItem('portfolio-intro-seen','1');}}catch(e){r.classList.add('intro-ready');}})();</script>
+<noscript><style>.word-in, .work-reveal { opacity: 1 !important; animation: none !important; }</style></noscript>
+<script src="site-behaviors.js" defer></script>
+</head>
 <body>
 <div id="dc-root"><div class="sc-host" data-sc-name="index"><div class="sc-host" data-sc-name="DeployStatus" data-dc-tpl="12"></div><div class="sc-host" data-sc-name="SiteHeader" data-dc-tpl="13"><header data-dc-tpl="2" data-behavior="site-header" style="position: fixed; top: var(--deploy-banner-h, 0px); left: 0px; right: 0px; z-index: 5; width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(14px) saturate(1.6); border-bottom: 1px solid rgb(228, 224, 216); margin-bottom: -1px; transform: translateY(0px); transition: transform 0.3s;">
   <div data-dc-tpl="3" class="site-header-row" style="max-width: 1280px; margin: 0px auto; padding: 0.7rem clamp(1.25rem, 4vw, 3rem); box-sizing: border-box; display: flex; align-items: center; justify-content: space-between;">
@@ -597,12 +601,12 @@
       <div data-dc-tpl="187" style="border-top: 1px solid rgb(228, 224, 216);">
         
           <a data-dc-tpl="189" class="beyond-row" href="https://github.com/whatupjia/rbtagger-releases" target="_blank" rel="noopener" style="display: grid; grid-template-columns: 84px minmax(0px, 1fr); gap: 1.25rem; align-items: center; padding: 1rem 0px; border-bottom: 1px solid rgb(228, 224, 216); text-decoration: none; color: rgb(13, 12, 9);">
-            <div data-dc-tpl="190" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(24, 24, 24);">
+            <div data-dc-tpl="190" class="beyond-thumb" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(24, 24, 24);">
               
               <img data-dc-tpl="194" src="assets/img/rb-tagger-logo.png" alt="RB Tagger" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               
             </div>
-            <div data-dc-tpl="197" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
+            <div data-dc-tpl="197" class="beyond-content" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
               <div data-dc-tpl="198" style="min-width: 0px;">
                 <h4 data-dc-tpl="199" class="beyond-title" style="margin: 0px 0px 0.25rem; font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; color: rgb(13, 12, 9);"><span class="sc-interp">RB Tagger</span></h4>
                 <p data-dc-tpl="200" style="margin: 0px; font-family: var(--body-face, 'FreightText', Georgia, serif); font-size: 1rem; line-height: 1.5; color: rgb(107, 104, 99); text-wrap: pretty;"><span class="sc-interp">Created a faster, better way for DJs to organize their music.</span></p>
@@ -615,12 +619,12 @@
           </a>
         
           <a data-dc-tpl="189" class="beyond-row" href="https://www.nyc.gov/assets/cto/downloads/annual-reports/2021_impact_report.pdf" target="_blank" rel="noopener" style="display: grid; grid-template-columns: 84px minmax(0px, 1fr); gap: 1.25rem; align-items: center; padding: 1rem 0px; border-bottom: 1px solid rgb(228, 224, 216); text-decoration: none; color: rgb(13, 12, 9);">
-            <div data-dc-tpl="190" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(236, 232, 225);">
+            <div data-dc-tpl="190" class="beyond-thumb" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(236, 232, 225);">
               
               <img data-dc-tpl="194" src="assets/img/nyc-impact-report-cover.png" alt="USDR x NYC Fellowship" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               
             </div>
-            <div data-dc-tpl="197" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
+            <div data-dc-tpl="197" class="beyond-content" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
               <div data-dc-tpl="198" style="min-width: 0px;">
                 <h4 data-dc-tpl="199" class="beyond-title" style="margin: 0px 0px 0.25rem; font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; color: rgb(13, 12, 9);"><span class="sc-interp">USDR x NYC Fellowship</span></h4>
                 <p data-dc-tpl="200" style="margin: 0px; font-family: var(--body-face, 'FreightText', Georgia, serif); font-size: 1rem; line-height: 1.5; color: rgb(107, 104, 99); text-wrap: pretty;"><span class="sc-interp">Shipped an improved website for senior services during COVID-19.</span></p>
@@ -633,12 +637,12 @@
           </a>
         
           <a data-dc-tpl="189" class="beyond-row" href="https://elicitrecords.bandcamp.com/album/polarize" target="_blank" rel="noopener" style="display: grid; grid-template-columns: 84px minmax(0px, 1fr); gap: 1.25rem; align-items: center; padding: 1rem 0px; border-bottom: 1px solid rgb(228, 224, 216); text-decoration: none; color: rgb(13, 12, 9);">
-            <div data-dc-tpl="190" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(236, 232, 225);">
+            <div data-dc-tpl="190" class="beyond-thumb" style="width: 84px; aspect-ratio: 1 / 1; border-radius: 8px; overflow: hidden; border: 1px solid rgb(228, 224, 216); background: rgb(236, 232, 225);">
               
               <img data-dc-tpl="194" src="assets/img/polarize-cover.jpg" alt="Polarize EP" style="width: 100%; height: 100%; object-fit: cover; display: block;">
               
             </div>
-            <div data-dc-tpl="197" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
+            <div data-dc-tpl="197" class="beyond-content" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0px;">
               <div data-dc-tpl="198" style="min-width: 0px;">
                 <h4 data-dc-tpl="199" class="beyond-title" style="margin: 0px 0px 0.25rem; font-family: Sohne, -apple-system, system-ui, sans-serif; font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; color: rgb(13, 12, 9);"><span class="sc-interp">Polarize EP</span></h4>
                 <p data-dc-tpl="200" style="margin: 0px; font-family: var(--body-face, 'FreightText', Georgia, serif); font-size: 1rem; line-height: 1.5; color: rgb(107, 104, 99); text-wrap: pretty;"><span class="sc-interp">Latest EP with Elicit Records. Left-field bass and techno.</span></p>
