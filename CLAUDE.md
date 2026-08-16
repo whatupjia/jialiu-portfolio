@@ -52,18 +52,29 @@ incoming files against these known fixes and reapply any that got clobbered:
    the plain `src` may be safe again, but until the host's Range-header
    behavior is confirmed, keep reapplying `data-blob-src`.
 
-4. **Three-tier diagram tablet spacing** (`benchling-bioanalytical.html`):
-   the `#three-tier-foundation-fullbleed` block carries an inline
-   `margin-top: -1.5rem` — a deliberate "tuck" that only works in the desktop
-   two-column `#approach` grid. At ≤1100px `#approach` stacks to one column,
-   and that negative margin then overlaps (cuts off) the paragraph above it
-   ("I'll focus on two key areas…"). The neutralizing rule must span the whole
-   stacked range: `@media (max-width: 1100px) { #three-tier-foundation-fullbleed
-   { margin-top: 2rem !important; } }`. The export ships this override scoped to
-   `max-width: 600px` only, leaving the 601–1100px tablet range broken —
-   widen it back to `1100px`. Check: `grep -n 'three-tier-foundation-fullbleed'
-   benchling-bioanalytical.html` — the `@media` guarding the `margin-top: 2rem`
-   rule must read `max-width: 1100px`, not `600px`.
+4. **Three-tier diagram spacing** (`benchling-bioanalytical.html`): two
+   code-only pieces on `#three-tier-foundation-fullbleed`, both clobbered by
+   re-export.
+
+   a. *Desktop top margin.* The export ships an inline `margin-top: -1.5rem` —
+      a "tuck" that pulls the diagram up tight under the paragraph above it
+      ("I'll focus on two key areas…"). Jia found that too tight (2026-08-12);
+      the desktop value must be **`0`** so the diagram gets real breathing
+      room. Check: `grep -n 'three-tier-foundation-fullbleed'
+      benchling-bioanalytical.html` — the inline style must read
+      `margin: 0px 0px 0.5rem`, not `margin: -1.5rem 0px 0.5rem`.
+
+   b. *Tablet override.* At ≤1100px `#approach` stacks to one column; the old
+      negative margin used to overlap (cut off) that same paragraph, so a
+      neutralizing rule sets the stacked value explicitly. Keep it spanning the
+      whole stacked range: `@media (max-width: 1100px)
+      { #three-tier-foundation-fullbleed { margin-top: 2rem !important; } }`.
+      The export ships this override scoped to `max-width: 600px` only, leaving
+      the 601–1100px tablet range wrong — widen it back to `1100px`. (This rule
+      stays even now that the desktop tuck is gone: it keeps the stacked gap at
+      2rem rather than inheriting the desktop `0`.) Check: the `@media`
+      guarding the `margin-top: 2rem` rule must read `max-width: 1100px`, not
+      `600px`.
 
 5. **Hero availability-chip popover stacking** (`index.html`): the hero
    content grid (the `data-dc-tpl="57"` div — the one with
