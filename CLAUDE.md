@@ -76,7 +76,20 @@ incoming files against these known fixes and reapply any that got clobbered:
       guarding the `margin-top: 2rem` rule must read `max-width: 1100px`, not
       `600px`.
 
-5. **Hero availability-chip popover stacking** (`index.html`): the hero
+5. **Hero availability chip removed** (`index.html`): as of 2026-08-17 the
+   "Available for consulting & full-time roles" chip and its "Get in touch"
+   popover are deleted from the hero — the whole
+   `data-behavior="avail-wrap"` block after the hero sub-paragraph, plus the
+   `availPulse` keyframes / `.avail-dot` rules in the `<style>` block. This
+   deletion is code-only; the chip still exists in the Design canvas, so a
+   re-export will bring it back. Check: `grep -n 'avail' index.html` should
+   only match the unrelated "I'm available for consulting…" body copy in the
+   about section — if it matches `avail-wrap`/`avail-chip`, delete the block
+   again. (`initAvailChip()` in `site-behaviors.js` is left in place; it
+   no-ops when the wrap is absent, and it's needed again if the chip
+   returns.)
+
+   Historical, and still the fix if the chip ever comes back: the hero
    content grid (the `data-dc-tpl="57"` div — the one with
    `display: grid; grid-template-columns: repeat(12, 1fr)`) must carry
    `z-index: 2`, not `z-index: 1`. That grid is a stacking context, and it
