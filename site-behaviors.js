@@ -365,13 +365,16 @@
       return '';
     }
 
-    // The intro's title is the page h1, not an h3, so it leads the list — without
-    // it the first tick is the first h3 and the opening section is unreachable.
+    // One tick per section heading. Sections are titled with a mix of h1 (the
+    // intro), h2 (major parts), and h3 (sub-sections), so collect all three in
+    // document order — querySelectorAll returns them ordered, so the h1 leads
+    // naturally. Collecting only h3 (plus a prepended h1) drops every h2, leaving
+    // fewer headings than marks: the tail marks then map to nothing, so they
+    // hover with no preview and don't scroll. That's ~1/3 of the stack on these
+    // pages, since roughly a third of the headings are h2.
     var headings = [];
     function scanHeadings() {
-      var els = $$('h3').filter(function (el) { return !el.closest('[data-behavior="section-nav"]'); });
-      var lead = $('h1');
-      if (lead && els.indexOf(lead) === -1) els.unshift(lead);
+      var els = $$('h1, h2, h3').filter(function (el) { return !el.closest('[data-behavior="section-nav"]'); });
       headings = els.slice(0, markBtns.length).map(function (el) {
         return { el: el, text: el.textContent.trim(), snippet: snippetFor(el) };
       });

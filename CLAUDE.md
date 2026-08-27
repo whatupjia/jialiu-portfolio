@@ -122,6 +122,22 @@ incoming files against these known fixes and reapply any that got clobbered:
    'avail-card' index.html` shows `will-change: transform` + `translate3d`,
    and `grep -n 'translate3d' site-behaviors.js` finds the `set()` toggle.
 
+6. **Case-study section-nav ticks collect all heading levels**
+   (`site-behaviors.js`, `scanHeadings()` inside `initSectionNav()`): the
+   tick-mark stack has one mark per section heading, and the sections are
+   titled with a mix of `h1` (intro), `h2` (major parts), and `h3`
+   (sub-sections). `scanHeadings()` must gather **`$$('h1, h2, h3')`** in
+   document order (querySelectorAll returns them ordered, so the h1 leads
+   naturally). The export ships the canvas's version, which collects only
+   `h3` and prepends the `h1` — dropping every `h2`. That leaves ~⅓ fewer
+   headings than marks (roughly a third of the headings are h2), so the tail
+   marks map to nothing: they hover with no preview card and don't scroll on
+   click. Symptom: the ticks "stop working about 2/3 of the way down."
+   Check: `grep -n "scanHeadings" -A3 site-behaviors.js` — the collector line
+   must read `$$('h1, h2, h3')`, not `$$('h3')` with an `unshift` of the h1.
+   Quick per-page sanity check that mark count equals heading count:
+   `for f in benchling-bioanalytical linkedin-quick-reply linkedin-recruiter-inbox; do echo -n "$f "; echo "$(grep -oc 'data-index=' $f.html) marks / $(( $(grep -oc '<h1' $f.html) + $(grep -oc '<h2' $f.html) + $(grep -oc '<h3' $f.html) )) headings"; done`
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
