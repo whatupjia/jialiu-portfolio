@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /pages/design_landingpage.html
+Disallow: /bioanalytical-archived.html
+
+Sitemap: https://www.jialiudesign.com/sitemap.xml
