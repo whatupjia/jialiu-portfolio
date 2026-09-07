@@ -108,40 +108,30 @@ async function checkNavToggle(page, failures) {
   await page.waitForTimeout(150);
 }
 
-// ── section-nav: track thumb / counter / fade-in should respond to scroll,
-// and the "jump to nearest section" hit-target should actually scroll.
+// ── section-nav: one tick mark per heading — hovering a mark should reveal
+// its heading-preview card, and clicking one should scroll to that heading.
 // Only rendered above 1100px. ──────────────────────────────────────────────
 async function checkSectionNav(page, failures) {
-  const sectionNav = await page.$('[data-behavior="section-nav"]');
-  if (!sectionNav) return;
+  const nav = await page.$('[data-behavior="section-nav"]');
+  if (!nav) return;
 
-  const initialCounter = await page.$eval('[data-behavior="section-nav"] .sc-interp', (el) => el.textContent);
-  await page.evaluate(() => {
-    const sections = Array.from(document.querySelectorAll('section[id]'));
-    const first = sections[0].getBoundingClientRect();
-    const last = sections[sections.length - 1].getBoundingClientRect();
-    const top = first.top + window.scrollY;
-    const bottom = last.bottom + window.scrollY;
-    window.scrollTo(0, top + (bottom - top) / 2); // midpoint of tracked range — a reliable progress change regardless of page length
+  const markBtns = await page.$$('[data-behavior="section-nav"] button[data-index]');
+  if (!markBtns.length) return; // no tick-mark variant on this page
+
+  await markBtns[Math.min(1, markBtns.length - 1)].hover();
+  await page.waitForTimeout(200);
+  const preview = await page.evaluate(() => {
+    const wrap = document.querySelector('[data-behavior="section-nav"] button[data-index]').parentElement;
+    const card = wrap.lastElementChild;
+    return card && getComputedStyle(card).display !== 'none' ? card.textContent.trim() : '';
   });
-  await page.waitForTimeout(300);
-
-  const opacityAfterScroll = await sectionNav.evaluate((el) => getComputedStyle(el).opacity);
-  if (opacityAfterScroll === '0') failures.push('section-nav never becomes visible after scrolling into content');
-
-  const counterAfterScroll = await page.$eval('[data-behavior="section-nav"] .sc-interp', (el) => el.textContent);
-  if (counterAfterScroll === initialCounter) failures.push('section-nav counter ("' + initialCounter + '") did not update after scrolling');
+  if (!preview) failures.push('hovering a section-nav mark did not reveal a heading preview card');
 
   const scrollYBefore = await page.evaluate(() => window.scrollY);
-  const jumpBtn = await page.$('[data-behavior="section-nav"] button[aria-label="Jump to nearest section"]');
-  if (jumpBtn) {
-    await jumpBtn.click({ position: { x: 11, y: 5 } }); // near the top of the track — should jump toward the first section
-    await page.waitForTimeout(500);
-    const scrollYAfter = await page.evaluate(() => window.scrollY);
-    if (scrollYAfter === scrollYBefore) failures.push('clicking "Jump to nearest section" did not scroll the page');
-  } else {
-    failures.push('section-nav present but no "Jump to nearest section" button found');
-  }
+  await markBtns[markBtns.length - 1].click();
+  await page.waitForTimeout(500);
+  const scrollYAfter = await page.evaluate(() => window.scrollY);
+  if (scrollYAfter === scrollYBefore) failures.push('clicking a section-nav mark did not scroll the page');
 }
 
 // ── expandable image lightbox — the bug that started this whole thing ─────

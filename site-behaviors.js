@@ -500,6 +500,7 @@
     function open(sourceEl) {
       close();
       overlay = document.createElement('div');
+      overlay.setAttribute('data-lightbox-overlay', '');
       overlay.setAttribute('style', 'position: fixed; inset: 0; background: rgba(20,19,15,0.85); z-index: 100; overflow: auto; padding: 3rem; box-sizing: border-box;');
 
       var closeBtn = document.createElement('button');

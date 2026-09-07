@@ -138,6 +138,20 @@ incoming files against these known fixes and reapply any that got clobbered:
    Quick per-page sanity check that mark count equals heading count:
    `for f in benchling-bioanalytical linkedin-quick-reply linkedin-recruiter-inbox; do echo -n "$f "; echo "$(grep -oc 'data-index=' $f.html) marks / $(( $(grep -oc '<h1' $f.html) + $(grep -oc '<h2' $f.html) + $(grep -oc '<h3' $f.html) )) headings"; done`
 
+7. **Lightbox overlay's test hook** (`site-behaviors.js`, `initLightbox()`):
+   the overlay `<div>` built in `open()` must carry `data-lightbox-overlay`
+   (`overlay.setAttribute('data-lightbox-overlay', '')`, set right after the
+   div is created, before its inline style). Nothing on the page depends on
+   this attribute — only `scripts/smoke-test.js`'s `checkLightbox()` queries
+   `[data-lightbox-overlay]` to confirm a click actually opened the overlay.
+   Dropped once already by a wholesale `site-behaviors.js` re-export (the
+   commit fixing MarginNote sidenotes carried a fresh canvas capture of the
+   whole file), which silently turned every `npm run smoke-test` run red —
+   the lightbox itself still worked, only the test hook was gone, so this
+   is easy to miss without reading the failure closely. Check: `grep -n
+   'data-lightbox-overlay' site-behaviors.js` finds the `setAttribute` call
+   in `open()`.
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
