@@ -135,7 +135,9 @@ incoming files against these known fixes and reapply any that got clobbered:
    click. Symptom: the ticks "stop working about 2/3 of the way down."
    Check: `grep -n "scanHeadings" -A3 site-behaviors.js` — the collector line
    must read `$$('h1, h2, h3')`, not `$$('h3')` with an `unshift` of the h1.
-   Quick per-page sanity check that mark count equals heading count:
+   `npm run smoke-test` now covers this: it clicks the LAST tick mark on
+   every case study page and fails if the page doesn't scroll, which is
+   what a dead tail mark does. Quick manual check of the same thing:
    `for f in benchling-bioanalytical linkedin-quick-reply linkedin-recruiter-inbox; do echo -n "$f "; echo "$(grep -oc 'data-index=' $f.html) marks / $(( $(grep -oc '<h1' $f.html) + $(grep -oc '<h2' $f.html) + $(grep -oc '<h3' $f.html) )) headings"; done`
 
 7. **Favicon mark in the global nav header** (`index.html`,
@@ -152,6 +154,18 @@ incoming files against these known fixes and reapply any that got clobbered:
    benchling-bioanalytical.html linkedin-quick-reply.html
    linkedin-recruiter-inbox.html` returns 1 for each. (`404.html` has no
    site header and is intentionally left alone.)
+
+8. **Lightbox test hook** (`site-behaviors.js`, `open()` inside
+   `initLightbox()`): the overlay element must carry
+   `overlay.setAttribute('data-lightbox-overlay', '')` alongside its inline
+   `style`. Nothing on the page needs the attribute, so losing it breaks
+   nothing visible — the lightbox still opens, zooms and closes — but
+   `scripts/smoke-test.js` matches on it, so the suite reports "did not open
+   the lightbox overlay" for every case study page while the feature works
+   fine. That exact sequence already happened once: `3f76f21` added the hook
+   on 2026-08-01 and `499426e` re-exported `site-behaviors.js` over it the
+   same evening. Check: `grep -c 'data-lightbox-overlay' site-behaviors.js`
+   returns 1.
 
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),

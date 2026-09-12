@@ -108,39 +108,81 @@ async function checkNavToggle(page, failures) {
   await page.waitForTimeout(150);
 }
 
-// ── section-nav: track thumb / counter / fade-in should respond to scroll,
-// and the "jump to nearest section" hit-target should actually scroll.
-// Only rendered above 1100px. ──────────────────────────────────────────────
+// ── section-nav: a stack of tick marks down the left margin, one per section
+// heading, inking as you scroll past it and scrolling to it on click.
+// Only rendered above 1100px.
+//
+// The marks ship baked into the export; the headings they point at are scanned
+// at runtime and paired by index. So when an export drops a heading level, the
+// tail marks pair with nothing and go quietly dead — no preview on hover, no
+// scroll on click — which is why the counts are checked here and not just the
+// behavior. ────────────────────────────────────────────────────────────────
 async function checkSectionNav(page, failures) {
   const sectionNav = await page.$('[data-behavior="section-nav"]');
   if (!sectionNav) return;
 
-  const initialCounter = await page.$eval('[data-behavior="section-nav"] .sc-interp', (el) => el.textContent);
-  await page.evaluate(() => {
-    const sections = Array.from(document.querySelectorAll('section[id]'));
-    const first = sections[0].getBoundingClientRect();
-    const last = sections[sections.length - 1].getBoundingClientRect();
-    const top = first.top + window.scrollY;
-    const bottom = last.bottom + window.scrollY;
-    window.scrollTo(0, top + (bottom - top) / 2); // midpoint of tracked range — a reliable progress change regardless of page length
-  });
-  await page.waitForTimeout(300);
+  const marks = await sectionNav.$$('button[data-index]');
+  if (!marks.length) {
+    failures.push('section-nav present but has no button[data-index] tick marks');
+    return;
+  }
 
-  const opacityAfterScroll = await sectionNav.evaluate((el) => getComputedStyle(el).opacity);
-  if (opacityAfterScroll === '0') failures.push('section-nav never becomes visible after scrolling into content');
+  // Same collection site-behaviors.js does, so a mismatch here is a real one.
+  const headingCount = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('h1, h2, h3'))
+      .filter((el) => !el.closest('[data-behavior="section-nav"]')).length);
+  if (headingCount < marks.length) {
+    failures.push(marks.length + ' tick marks but only ' + headingCount + ' headings to pair with — the last ' +
+      (marks.length - headingCount) + ' mark(s) will not preview or scroll');
+  }
 
-  const counterAfterScroll = await page.$eval('[data-behavior="section-nav"] .sc-interp', (el) => el.textContent);
-  if (counterAfterScroll === initialCounter) failures.push('section-nav counter ("' + initialCounter + '") did not update after scrolling');
+  // The active mark is the inked one (#0d0c09); the rest sit at #d5d0c8.
+  const inkedIndex = () => page.evaluate(() =>
+    Array.from(document.querySelectorAll('[data-behavior="section-nav"] button[data-index]'))
+      .findIndex((b) => {
+        const span = b.querySelector('span');
+        return span && getComputedStyle(span).backgroundColor === 'rgb(13, 12, 9)';
+      }));
 
+  const inkedAtTop = await inkedIndex();
+  if (inkedAtTop === -1) failures.push('no tick mark is inked as active at the top of the page');
+
+  // Click the LAST mark specifically: when the runtime heading scan drops a
+  // level, it's the tail of the stack that pairs with nothing, so a middle
+  // mark can still scroll while the bottom third is dead. Clicking a mark is
+  // also a way to land on a known heading rather than a blind midpoint, which
+  // may sit under a full-bleed image where the nav is *supposed* to fade.
+  const target = marks.length - 1;
   const scrollYBefore = await page.evaluate(() => window.scrollY);
-  const jumpBtn = await page.$('[data-behavior="section-nav"] button[aria-label="Jump to nearest section"]');
-  if (jumpBtn) {
-    await jumpBtn.click({ position: { x: 11, y: 5 } }); // near the top of the track — should jump toward the first section
-    await page.waitForTimeout(500);
-    const scrollYAfter = await page.evaluate(() => window.scrollY);
-    if (scrollYAfter === scrollYBefore) failures.push('clicking "Jump to nearest section" did not scroll the page');
-  } else {
-    failures.push('section-nav present but no "Jump to nearest section" button found');
+  await marks[target].click();
+
+  // Smooth scrolling, so settle rather than guess at a duration.
+  let scrollYAfter = scrollYBefore;
+  for (let i = 0; i < 20; i++) {
+    await page.waitForTimeout(100);
+    const y = await page.evaluate(() => window.scrollY);
+    if (y === scrollYAfter && y !== scrollYBefore) break;
+    scrollYAfter = y;
+  }
+  if (scrollYAfter === scrollYBefore) {
+    failures.push('clicking the last tick mark (index ' + target + ') did not scroll the page — it likely pairs with no heading');
+    return;
+  }
+
+  const opacity = await sectionNav.evaluate((el) => getComputedStyle(el).opacity);
+  const overBreakout = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('[data-breakout="12"], [data-nav-fade="full"]'))
+      .some((el) => {
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom > 0;
+      }));
+  if (opacity === '0' && !overBreakout) {
+    failures.push('section-nav faded out after scrolling with no full-bleed content in view');
+  }
+
+  const inkedAfterScroll = await inkedIndex();
+  if (inkedAfterScroll === inkedAtTop) {
+    failures.push('active tick mark (index ' + inkedAtTop + ') did not move after scrolling to section ' + target);
   }
 }
 
@@ -158,7 +200,7 @@ async function checkLightbox(page, failures) {
   await page.waitForTimeout(300);
   const overlay = await page.$('[data-lightbox-overlay]');
   if (!overlay) {
-    failures.push('clicking an expandable image did not open the lightbox overlay');
+    failures.push('clicking an expandable image did not open the lightbox overlay — no [data-lightbox-overlay]. Check whether the overlay is opening without its hook attribute (a re-export drops it) before assuming the lightbox itself broke');
     return;
   }
   await page.keyboard.press('Escape');
