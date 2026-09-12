@@ -138,6 +138,21 @@ incoming files against these known fixes and reapply any that got clobbered:
    Quick per-page sanity check that mark count equals heading count:
    `for f in benchling-bioanalytical linkedin-quick-reply linkedin-recruiter-inbox; do echo -n "$f "; echo "$(grep -oc 'data-index=' $f.html) marks / $(( $(grep -oc '<h1' $f.html) + $(grep -oc '<h2' $f.html) + $(grep -oc '<h3' $f.html) )) headings"; done`
 
+7. **Favicon mark in the global nav header** (`index.html`,
+   `benchling-bioanalytical.html`, `linkedin-quick-reply.html`,
+   `linkedin-recruiter-inbox.html`): the header logo link
+   (`a.site-header-logo`) leads with an inline `svg.site-header-mark` — the
+   rounded-square J from `assets/img/favicon.svg`, at 22px, `aria-hidden`
+   since the anchor already reads "Jia Liu". It's inlined rather than an
+   `<img src="assets/img/favicon.svg">` so it costs no extra request and the
+   `rx="112"` rounding survives without relying on `border-radius` clipping
+   the SVG box. The canvas ships the anchor as bare "Jia Liu" text (the
+   `gap: 0.55rem` on the flex anchor is the only trace of a mark), so a
+   re-export drops the svg. Check: `grep -c 'site-header-mark' index.html
+   benchling-bioanalytical.html linkedin-quick-reply.html
+   linkedin-recruiter-inbox.html` returns 1 for each. (`404.html` has no
+   site header and is intentionally left alone.)
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
