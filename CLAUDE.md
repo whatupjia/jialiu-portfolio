@@ -167,6 +167,13 @@ incoming files against these known fixes and reapply any that got clobbered:
    same evening. Check: `grep -c 'data-lightbox-overlay' site-behaviors.js`
    returns 1.
 
+9. **Homepage title includes "portfolio"** (`index.html`): the `<title>` and
+   `og:title` must read `Jia Liu - Product Design Portfolio`. The canvas ships
+   `Jia Liu - Product Designer`, and with no other visible "portfolio" on the
+   page Google showed "Missing: portfolio" for searches like "jia liu design
+   portfolio" (the meta description doesn't count for ranking). Added
+   2026-09-26. Check: `grep -c 'Product Design Portfolio' index.html` returns 2.
+
 If a new export reintroduces one of these issues, or you find another
 instance of this pattern (a code-only fix silently reverted by re-export),
 fix it the same way — diff against the last-known-good version of the file
