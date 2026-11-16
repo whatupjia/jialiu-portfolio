@@ -1,0 +1,652 @@
+/* Bioanalysis case study: page-specific layout (diagrams, bands, feature scroll). Shared foundations live in case.css. Loaded after variant.css, which supplies the
+   shared tokens (paper, ink, panels, single sans). */
+
+/* Named base styles (from the old export). Zero specificity, so every rule below can override them. */
+:where(.problem-media) { grid-column: 1 / -1 !important; margin: 0.5rem 0px 1rem !important; }
+:where(.concept-split) { grid-column: 1 / -1 !important; display: grid !important; grid-template-columns: minmax(0px, 0.85fr) minmax(0px, 1fr) !important; gap: 56px !important; align-items: center !important; margin: 0.5rem 0px 0px !important; }
+:where(.p-gap-top) { margin: 0.7rem 0px 0px !important; }
+:where(.outcomes-photo) { border-radius: 10px !important; overflow: hidden !important; background: rgb(255, 255, 255) !important; border: 1px solid rgb(228, 224, 216) !important; margin: 2rem 0px 3.5rem !important; }
+
+/* Title block */
+.bio-title-block .v-case-eyebrow {
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--ink-2) !important;
+}
+.bio-title-block h1 {
+  font-size: clamp(44px, 5vw, 68px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.04 !important;
+}
+
+/* Section headings: big and light, like the homepage */h3 { letter-spacing: -0.02em !important; }
+
+/* Sections are separated by space, not rules; labels lose their numbers */
+.v-sec {
+  border-top: 0 !important;
+  padding-top: clamp(96px, 11vw, 152px) !important;
+  padding-bottom: 0 !important;
+}
+
+/* Outcomes: the Benchling panel color, light type */
+.v-outcomes {
+  background: var(--panel-1) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 56px) !important;
+  color: #f2efe8 !important;
+}
+.v-outcomes * { color: rgba(242, 239, 232, 0.68) !important; }
+.v-outcomes .outcomes-label {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  margin-bottom: 1.75rem !important;
+}
+.v-outcomes :is([style*="clamp(1.75rem"], .i77, .i120, .stat) {
+  color: #f7f5f2 !important;
+  font-weight: 400 !important;
+  font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem) !important;
+  letter-spacing: -0.04em !important;
+}
+.v-outcomes a { color: #f7f5f2 !important; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Neutral rules and borders pick up the warm ink */
+
+/* Images */
+
+/* Inline blue links become the site accent */
+
+/* Stat figures elsewhere in the page match the lighter headings */
+p:is([style*="letter-spacing: -0.03em"], .i63, .i77, .i120, .case-h1, .stat):is([style*="font-weight: 500"], .i9, .i10, .i17, .i20, .i21, .i40, .i47, .i50, .i62, .i63, .i75, .i77, .i85, .i89, .i92, .i94, .i97, .i99, .i113, .i114, .i120, .case-eyebrow, .case-h1, .outcomes-label, .stat, .case-section-label, .case-h3, .case-h3-first, .case-h3-next, .bio-shell h2) { font-weight: 400 !important; letter-spacing: -0.04em !important; }
+
+/* ---------- Condensed case study layout ---------- */
+.v-cs {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px 48px;
+  align-items: start;
+  padding-top: clamp(96px, 11vw, 152px);
+}
+.v-cs .v-body { grid-column: 2; max-width: 600px; min-width: 0; }
+.v-cs h2 { margin: 0 0 1.25rem; font-family: var(--body-face); color: var(--ink); }
+.v-cs p { margin: 0 0 1rem; }
+
+/* Product showcase: the homepage panel treatment, then supporting screens */
+
+.v-panel {
+  background: var(--panel-1);
+  padding: clamp(24px, 5vw, 64px) clamp(20px, 6vw, 88px) 0;
+  overflow: hidden;
+}
+.v-hero-frame {
+  aspect-ratio: 16 / 10;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  transform: translateY(clamp(16px, 2.6vw, 36px));
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+}
+.v-hero-frame iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; }
+
+/* Holding area for assets not yet placed */
+
+@media (max-width: 900px) {
+  .v-cs { grid-template-columns: minmax(0, 1fr); }
+  .v-cs .v-body { grid-column: 1; }
+  
+}
+
+.v-cs h2 { text-wrap: balance; }
+
+/* Outcomes, top: a slim row of figures instead of a card */
+.v-outcomes {
+  background: none !important;
+  padding: 0 !important;
+  margin-top: clamp(40px, 5vw, 64px) !important;
+  color: var(--ink) !important;
+}
+.v-outcomes * { color: var(--ink-2) !important; }
+.v-outcomes .stat-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(20px, 3vw, 40px) !important;
+}
+.v-outcomes :is([style*="clamp(1.75rem"], .i77, .i120, .stat) {
+  color: var(--ink) !important;
+  font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem) !important;
+  margin-bottom: 0.4rem !important;
+}
+.v-outcomes .stat-source { margin-top: 1.25rem !important; color: var(--ink-3) !important; }
+.v-outcomes a { color: var(--ink-2) !important; }
+@media (max-width: 760px) {
+  .v-outcomes .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+/* Outcomes section: before -> after */
+.v-ba { display: grid; gap: clamp(20px, 2.4vw, 28px); margin: 2rem 0 2.5rem; }
+.v-ba-row { display: grid; gap: 0.35rem; }
+.v-ba-label { font-size: 0.95rem; color: var(--ink-2); }
+.v-ba-vals {
+  display: flex; align-items: baseline; gap: 0.5em;
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem);
+  letter-spacing: -0.04em; line-height: 1.1;
+}
+.v-ba-before { color: var(--ink-3); }
+.v-ba-arrow { color: var(--ink-3); font-size: 0.7em; }
+.v-ba-after { color: var(--ink); }
+
+/* Tighter gap between the lab video and the Problem section */
+#overview { padding-bottom: 0 !important; }
+
+/* Problem: the side image moved up, so the text runs alone */
+.problem-split { grid-template-columns: minmax(0, 1fr) !important; max-width: 600px; margin-left: calc(150px + 48px) !important; }
+@media (max-width: 900px) { .problem-split { margin-left: 0 !important; } }
+
+/* Problem: three gaps, keyed to markers on the workflow diagram */
+
+.v-gaps-list { list-style: none; counter-reset: gap; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.v-gaps-list li { counter-increment: gap; position: relative; padding-left: 40px; }
+.v-gaps-list li::before{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #a0522d; color: #fff;
+  font-family: var(--body-face); font-size: 14px; font-weight: 500; line-height: 1;
+}
+.v-gaps-list li::before { content: counter(gap); position: absolute; left: 0; top: 0; }
+.v-gaps-list strong { font-weight: 500; color: var(--ink); }
+
+/* Section eyebrows (Problem, Approach…) removed; the column stays so text alignment holds */
+.v-gaps-list { margin: 0 0 1.5rem !important; }
+
+/* Problem: side-by-side on a full-bleed warm muted band (row 1 only).
+   The collage's own background is the same muted color, so it floats. */
+#problem.v-sec {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) !important;
+  column-gap: clamp(40px, 5vw, 72px) !important;
+  align-items: center !important;
+}
+#problem.v-sec::before {
+  content: "";
+  grid-row: 1; grid-column: 1 / -1;
+  align-self: stretch;
+  margin: calc(-1 * clamp(56px, 7vw, 96px)) 0;
+  background: var(--muted);
+  box-shadow: 0 0 0 100vmax var(--muted);
+  clip-path: inset(0 -100vmax);
+  z-index: -1;
+}
+#problem { position: relative; z-index: 0; }
+#problem > .problem-text { grid-column: 2; grid-row: 1; max-width: 480px !important; }
+#problem > .problem-media { grid-column: 1 !important; grid-row: 1; margin: 0 !important; }
+#problem > .problem-media .expandable-image-wrap {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+#problem > .problem-points { margin-top: clamp(112px, 12vw, 160px) !important; }
+@media (max-width: 900px) {
+  #problem.v-sec { grid-template-columns: minmax(0, 1fr) !important; }
+  #problem > .problem-text, #problem > .problem-media { grid-column: 1 !important; grid-row: auto; max-width: none !important; }
+}
+/* Collage reaches a little into the left margin so it carries more weight */
+@media (min-width: 1101px) {
+  #problem > .problem-media .sc-host { display: block; width: 118%; margin-left: -18%; }
+}
+
+/* Problem, row 2: the three gaps as columns on the same band */
+#problem.v-sec::before { grid-row: 1 / 3 !important; }
+#problem > .v-gaps-row {
+  grid-column: 1 / -1; grid-row: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3.5vw, 48px) !important;
+  margin: clamp(48px, 6vw, 80px) 0 0 !important;
+}
+#problem > .v-gaps-row li { padding: 0; }
+#problem > .v-gaps-row li::before { position: static; display: flex; margin-bottom: 1rem; }
+#problem > .v-gaps-row strong { display: block; margin-bottom: 0.35rem; }
+#problem > .problem-text p:last-of-type { margin-bottom: 0 !important; }
+@media (max-width: 900px) {
+  #problem > .v-gaps-row { grid-row: auto; grid-template-columns: minmax(0, 1fr); }
+  #problem.v-sec::before { grid-row: 1 / 4 !important; }
+}
+
+/* Problem collage, built from the three source images.
+   Layout A "desk" (default): loose, tilted, overlapping.
+   Layout B "cascade" (?collage=b): app windows stepped diagonally, each labeled. */
+.v-collage { position: relative; width: 100%; aspect-ratio: 5 / 4; }
+.vc-item {
+  position: absolute; overflow: hidden; background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(35, 34, 32, 0.08), 0 18px 40px -16px rgba(35, 34, 32, 0.28);
+  transition: transform 520ms cubic-bezier(0.33, 0.68, 0.35, 1);
+}
+.vc-item img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+.vc-bar { display: none; }
+
+/* A: desk */
+.v-collage[data-layout="desk"] .vc-protocol { left: 2%; top: 0; width: 44%; aspect-ratio: 1290 / 1660; transform: rotate(-5deg); }
+.v-collage[data-layout="desk"] .vc-notebook { left: 24%; top: 20%; width: 64%; aspect-ratio: 16 / 9; transform: rotate(1.5deg); z-index: 2; }
+.v-collage[data-layout="desk"] .vc-plate-spreadsheet { right: 0; bottom: 4%; width: 60%; aspect-ratio: 1400 / 613; transform: rotate(-2deg); z-index: 3; }
+.v-collage[data-layout="desk"]:hover .vc-protocol { transform: rotate(-7deg) translate(-3%, -2%); }
+.v-collage[data-layout="desk"]:hover .vc-notebook { transform: rotate(0.5deg) translateY(-3%); }
+.v-collage[data-layout="desk"]:hover .vc-plate-spreadsheet { transform: rotate(-1deg) translate(3%, 3%); }
+
+/* B: cascade of labeled windows */
+.v-collage[data-layout="cascade"] .vc-item { display: flex; flex-direction: column; border-radius: 8px; }
+.v-collage[data-layout="cascade"] .vc-bar {
+  display: flex; align-items: center; gap: 6px; flex: none;
+  height: 26px; padding: 0 10px;
+  background: #ecebe6; color: var(--ink-2);
+  font-family: var(--body-face); font-size: 11.5px; letter-spacing: 0;
+}
+.v-collage[data-layout="cascade"] .vc-bar::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(35, 34, 32, 0.22);
+  box-shadow: 11px 0 0 rgba(35, 34, 32, 0.22), 22px 0 0 rgba(35, 34, 32, 0.22);
+  margin-right: 26px;
+}
+.v-collage[data-layout="cascade"] .vc-item img { flex: 1; min-height: 0; }
+.v-collage[data-layout="cascade"] .vc-protocol { left: 0; top: 0; width: 58%; height: 62%; }
+.v-collage[data-layout="cascade"] .vc-notebook { left: 18%; top: 20%; width: 64%; height: 52%; z-index: 2; }
+.v-collage[data-layout="cascade"] .vc-plate-spreadsheet { left: 36%; top: 44%; width: 64%; height: 50%; z-index: 3; }
+.v-collage[data-layout="cascade"]:hover .vc-protocol { transform: translate(-2%, -2%); }
+.v-collage[data-layout="cascade"]:hover .vc-plate-spreadsheet { transform: translate(2%, 2%); }
+
+@media (prefers-reduced-motion: reduce) { .vc-item { transition: none; } }
+
+/* Solution preview: answers the three gaps, with the homepage product panel */
+
+/* Holding area for assets kept but not placed */
+
+/* The muted band overhangs the Problem section's bottom; clear it */
+#solution-preview { margin-top: clamp(56px, 7vw, 96px); }
+
+/* Solution features: sticky text on the left swaps as the product panels scroll by on the right */
+.v-scrolly {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  column-gap: clamp(40px, 5vw, 72px);
+  margin-top: clamp(16px, 2vw, 32px);
+}
+.v-scrolly-sticky {
+  position: sticky; top: 0;
+  height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.v-scrolly-steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.v-scrolly-steps li {
+  grid-area: 1 / 1;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 450ms ease, transform 600ms cubic-bezier(0.33, 0.68, 0.35, 1);
+  pointer-events: none;
+}
+.v-scrolly-steps li.is-past { transform: translateY(-20px); }
+.v-scrolly-steps li.is-active { opacity: 1; transform: none; pointer-events: auto; }
+.v-scrolly-steps strong {
+  display: block;
+  font-size: clamp(26px, 2.6vw, 34px); font-weight: 400; letter-spacing: -0.035em; line-height: 1.15;
+  color: var(--ink); margin: 1rem 0 0.75rem;
+}
+.v-scrolly-steps span:not(.v-step-num) { display: block; color: var(--ink-2); font-size: 1.05rem; line-height: 1.55; }
+.v-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--panel-1); color: #fff;
+  font-family: var(--body-face); font-size: 14px; font-weight: 500; line-height: 1;
+}
+.v-scrolly-dots { display: flex; gap: 6px; margin-top: 2rem; }
+.v-scrolly-dots span { width: 18px; height: 2px; border-radius: 1px; background: var(--rule); transition: background 300ms ease, width 300ms ease; }
+.v-scrolly-dots span.is-active { background: var(--ink); width: 32px; }
+
+.v-scrolly-panel { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; }
+.v-scrolly-panel .v-panel { transition: opacity 500ms ease, transform 700ms cubic-bezier(0.33, 0.68, 0.35, 1); opacity: 0.35; transform: scale(0.96); }
+.v-scrolly-panel.is-active .v-panel { opacity: 1; transform: none; }
+.v-scrolly-panel .v-hero-frame { background: #fff; }
+
+.v-scrolly-cap { display: none; }
+
+@media (max-width: 900px) {
+  .v-scrolly { grid-template-columns: minmax(0, 1fr); }
+  .v-scrolly-text { display: none; }
+  .v-scrolly-panel { min-height: 0; margin-bottom: 56px; }
+  .v-scrolly-panel .v-panel { opacity: 1; transform: none; }
+  .v-scrolly-cap { display: block; margin: 1.25rem 0 0; color: var(--ink-2); }
+  .v-scrolly-cap strong { display: block; color: var(--ink); margin: 0.75rem 0 0.25rem; font-weight: 500; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-scrolly-steps li, .v-scrolly-panel .v-panel { transition: none; }
+}
+
+/* All three feature frames share one 16:10 ratio (matches the 1280x800 order-table animation).
+   Placeholders are cropped from the top left until the Figma exports land. */
+.v-scrolly-panel .v-hero-frame { aspect-ratio: 16 / 10 !important; }
+.v-scrolly-panel .v-hero-frame img { width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+
+/* Tighter rhythm: panels sit a fixed gap apart instead of a screen apart,
+   and the text sticks near mid-screen without a full-height spacer */
+.v-scrolly-panel { min-height: 0 !important; display: block !important; }
+.v-scrolly-media { display: grid; gap: clamp(64px, 8vw, 112px); }
+.v-scrolly-text { align-self: stretch; }
+.v-scrolly-sticky {
+  height: auto !important;
+  top: calc(50vh - 130px) !important;
+  min-height: 260px;
+}
+@media (max-width: 900px) { .v-scrolly-media { gap: 0; } }
+
+/* Closer look at the feature animations: bigger media column that bleeds toward
+   the right edge, thinner panel padding around each frame */
+@media (min-width: 901px) {
+  .v-scrolly { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.6fr); column-gap: clamp(32px, 4vw, 56px); }
+  .v-scrolly-media { margin-right: calc(-1 * clamp(0px, (100vw - 960px) / 2 - 32px, 200px)); }
+  .v-scrolly-panel .v-panel { padding: clamp(20px, 2.4vw, 32px) clamp(20px, 2.4vw, 32px) 0; }
+}
+
+/* Feature frames float inside their panels: even padding, rounded on all sides, no sink */
+.v-scrolly-panel .v-panel { padding: clamp(18px, 2.2vw, 30px) !important; }
+.v-scrolly-panel .v-hero-frame {
+  transform: none !important;
+  border-radius: 10px !important;
+  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Markers: a short colored rule instead of numbered circles.
+   Rust for the problems, teal for the solutions. */
+.v-gaps-list li::before {
+  content: "" !important;
+  width: 24px !important; height: 2px !important; border-radius: 1px !important;
+  background: #a0522d !important; box-shadow: none !important;
+  margin-bottom: 1rem !important;
+}
+.v-step-num {
+  width: 24px !important; height: 2px !important; border-radius: 1px !important;
+  font-size: 0 !important; color: transparent !important; overflow: hidden;
+  background: var(--panel-1) !important;
+  display: block !important;
+}
+.v-scrolly-steps strong { margin-top: 1.1rem !important; }
+.v-scrolly-cap .v-step-num { margin-top: 0.25rem; }
+
+/* Mapping their science: a full-bleed dark band, text left and photo right */
+:root { --plum: #3b2329; }
+#approach .v-dark {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(40px, 5vw, 72px); align-items: center;
+  margin: 0 0 clamp(72px, 9vw, 120px);
+  padding: clamp(72px, 9vw, 128px) 0;
+  background: var(--plum);
+  box-shadow: 0 0 0 100vmax var(--plum);
+  clip-path: inset(0 -100vmax);
+  color: #f4efe9;
+}
+#approach .v-dark h2, #approach .v-dark h2 * { color: #f4efe9 !important; }
+#approach .v-dark p, #approach .v-dark p * { color: rgba(244, 239, 233, 0.72) !important; }
+#approach .v-dark-text > div { max-width: 520px; }
+#approach .v-dark-media .expandable-image-wrap { border: 0 !important; border-radius: 12px !important; background: transparent !important; transform: none !important; margin: 0 !important; width: 100% !important; }
+/* The band starts the section, so the section's top padding moves inside it */
+#approach.v-sec { padding-top: 0 !important; }
+@media (max-width: 900px) {
+  #approach .v-dark { grid-template-columns: minmax(0, 1fr); }
+}
+#approach.v-sec { margin-top: clamp(96px, 11vw, 152px); }
+#approach .v-map-frame { aspect-ratio: 1000 / 900; }
+#approach .v-map-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+#approach .v-map-frame { aspect-ratio: 1000 / 640 !important; }
+/* Give the model diagram more room than the text */
+@media (min-width: 901px) {
+  #approach .v-dark { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); }
+  #approach .v-dark-media { margin-right: calc(-1 * clamp(0px, (100vw - 960px) / 2 - 32px, 160px)); }
+}
+
+/* Mapping band, v2: slate, text on top, the model diagram full width beneath it */
+:root { --plum: #222a35; }
+@media (min-width: 901px) {
+  #approach .v-dark { grid-template-columns: minmax(0, 1fr) !important; gap: clamp(40px, 5vw, 64px) !important; }
+  #approach .v-dark-text { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); }
+  #approach .v-dark-text > div { max-width: none; display: contents; }
+  #approach .v-dark-media { margin-right: 0 !important; }
+}
+@media (min-width: 901px) {
+  #approach .v-dark-text { display: block !important; }
+  #approach .v-dark-text > div { display: grid !important; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+  #approach .v-dark h2 { margin: 0 !important; font-size: clamp(30px, 3vw, 40px) !important; }
+}
+.v-plates-frame { aspect-ratio: 1000 / 560; width: 100%; }
+.v-plates-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* Plates: text first, the diagram full width beneath it so it stays legible */
+.concept-split:has(.v-plates-frame) { grid-template-columns: minmax(0, 1fr) !important; }
+.concept-split:has(.v-plates-frame) > div:first-child { max-width: 600px; margin-left: calc(150px + 48px); }
+@media (max-width: 900px) { .concept-split:has(.v-plates-frame) > div:first-child { margin-left: 0; } }
+/* Phones: the plates diagram stacks its two panels */
+@media (max-width: 600px) { .v-plates-frame { aspect-ratio: 480 / 1144; } }
+
+/* Intro: facts live in the copy now, so the intro runs alone at reading width */
+.intro { grid-template-columns: minmax(0, 1fr) !important; }
+
+/* Plates decision: two options, then the rationale */
+.v-decision { margin-top: clamp(72px, 9vw, 112px); }
+.v-decision .body, .v-decision .why { max-width: 600px; margin-left: calc(150px + 48px); }
+/* Same size and weight as the other subsection headings (e.g. One column, many wells) */
+.v-decision h3 { font-size: clamp(20px, 1.7vw, 25px); font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; margin: 0 0 0.85rem; text-wrap: balance; }
+.v-decision .opts { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 32px); margin: 40px 0 40px; }
+.v-decision .opt { border: 1.5px solid var(--rule); border-radius: 16px; overflow: hidden; background: #fff; }
+.v-decision .media { aspect-ratio: 16 / 10; background: #f2f1ec; overflow: hidden; padding: 12px; }
+.v-decision .oc { padding: 22px 24px 26px; }
+.v-decision .lbl { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; color: var(--ink-2); margin-bottom: 8px; }
+.v-decision .pill { font-size: 0.8rem; font-weight: 500; color: #fff; background: var(--accent); border-radius: 999px; padding: 3px 11px; }
+.v-decision .opt-t { font-size: 1.45rem; letter-spacing: -0.025em; margin: 0 0 0.6rem; }
+.v-decision .idea { color: var(--ink-2); margin-bottom: 18px; }
+.v-decision dl { margin: 0; display: grid; gap: 12px; }
+.v-decision dt { font-size: 0.85rem; color: var(--ink-2); margin-bottom: 2px; }
+.v-decision dd { margin: 0; line-height: 1.5; }
+.v-decision dd ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.v-decision .why h4 { font-size: 1.15rem; font-weight: 500; margin: 0 0 0.6rem; letter-spacing: -0.01em; }
+@media (max-width: 900px) {
+  .v-decision .body, .v-decision .why { margin-left: 0; }
+  .v-decision .opts { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Heading scale, about 1.3x per step: h1 64 · h2 38 · h3 28 · card titles 22 · h4 18.
+   h3s take the h2 treatment (light, tight) so the levels read as one family. */
+section h3, .v-decision h3 {
+  font-size: clamp(23px, 2.2vw, 28px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.2 !important;
+}
+.v-decision .opt-t { font-size: 1.375rem; }
+.v-scrolly-steps strong { font-size: clamp(26px, 2.4vw, 30px) !important; }
+
+/* Full type scale: 64 · 50 · 38 · 28 · 22 · 18 · 15
+   (title · stats · h2 · h3 and step headlines · card titles · body · labels) */
+.v-scrolly-steps strong { font-size: clamp(23px, 2.2vw, 28px) !important; letter-spacing: -0.03em; }
+.v-scrolly-steps span:not(.v-step-num) { font-size: 18px !important; }
+.bio-title-block .v-case-eyebrow,
+.v-outcomes .stat-caption, .v-outcomes .stat-caption, .v-outcomes .stat-caption,
+.v-outcomes p:is([style*="font-size: 14px"], .i78, .i102, .stat-caption),
+.v-decision dt, .v-decision .lbl { font-size: 15px !important; }
+/* Balanced wrapping split this long headline into two half-width lines; let it fill the line */
+.v-decision h3 { text-wrap: pretty !important; }
+/* Rationale heading sits one step below h3 on the scale (22px), light like the other headings */
+.v-decision .why h4 { font-size: 22px !important; font-weight: 400 !important; letter-spacing: -0.025em !important; line-height: 1.25; margin: 0 0 0.75rem !important; }
+/* Rationale heading matches the decision heading (h3 size) */
+.v-decision .why h4 { font-size: clamp(23px, 2.2vw, 28px) !important; letter-spacing: -0.03em !important; line-height: 1.2; }
+
+/* Plate UI improvements: three equal cards under the rationale, breaking out to full width */
+.v-improve { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 32px); margin: 40px 0 0 calc(-1 * (150px + 48px)); width: calc(100% + 150px + 48px + 360px); max-width: 960px; }
+.v-improve .tile { aspect-ratio: 4 / 5; background: #f2f1ec; border-radius: 14px; overflow: hidden; display: flex; align-items: flex-start; justify-content: center; padding: 28px 28px 0; }
+.v-improve .tile img { width: 100%; height: auto; display: block; border-radius: 10px 10px 0 0; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 16px 36px -18px rgba(0,0,0,.28); }
+.v-improve .tile.wide { padding: 28px 0 0 28px; }
+.v-improve .tile.wide img { width: 150%; max-width: none; border-radius: 10px 0 0 0; }
+.v-improve h4 { font-size: 22px !important; font-weight: 400 !important; letter-spacing: -0.025em; margin: 18px 0 6px !important; }
+.v-improve .cap { font-size: 15px; line-height: 1.5; color: var(--ink-2); margin: 0; }
+@media (max-width: 900px) { .v-improve { margin-left: 0; width: auto; grid-template-columns: minmax(0, 1fr); } .v-improve .tile { aspect-ratio: 4 / 3; } }
+
+/* Body down a step: 18 → 17px. Scale is now 64 · 50 · 38 · 28 · 22 · 17 · 14 */
+.bio-shell { font-size: 1.0625rem !important; }
+.v-scrolly-steps span:not(.v-step-num) { font-size: 17px !important; }
+.bio-title-block .v-case-eyebrow,
+.v-outcomes .stat-caption, .v-outcomes .stat-caption, .v-outcomes .stat-caption,
+.v-outcomes p:is([style*="font-size: 14px"], .i78, .i102, .stat-caption),
+.v-decision dt, .v-decision .lbl, .v-improve .cap { font-size: 14px !important; }
+
+/* Improvements cards: their titles shouldn't pick up the rationale heading size, and tiles stay equal */
+.v-decision .v-improve h4 { font-size: 22px !important; font-weight: 400 !important; letter-spacing: -0.025em !important; line-height: 1.25 !important; margin: 18px 0 6px !important; }
+.v-improve figure, .v-improve .tile { min-width: 0; }
+/* Tiles take their height from the 4:5 ratio only; the screenshot is cropped inside */
+.v-improve .tile { position: relative; padding: 0 !important; }
+.v-improve .tile img { position: absolute; top: 28px; left: 28px; width: calc(100% - 56px) !important; }
+.v-improve .tile.wide img { width: 150% !important; }
+/* Scanning screenshot has a transparent ground; give it a white card like the others */
+.v-improve .tile img[src*="scanning.png"] { background: #fff; padding: 16px 16px 0; box-sizing: border-box; }
+/* Layers screenshot cropped to end where the scanning card ends, both fully rounded */
+.v-improve .tile img[src*="layers.png"] { height: calc(100% - 28px - 13px) !important; object-fit: cover; object-position: top; }
+.v-improve .tile img[src*="layers.png"], .v-improve .tile img[src*="scanning.png"] { border-radius: 10px !important; }
+
+/* Short colored marker lines above the problem points and feature steps: removed */
+.v-gaps-list li::before { content: none !important; display: none !important; }
+.v-step-num { display: none !important; }
+.v-scrolly-steps strong { margin-top: 0 !important; }
+/* Plate feature titles one step down the scale: 22 → 17px, medium weight so they still read as titles */
+.v-decision .v-improve h4 { font-size: 17px !important; font-weight: 500 !important; letter-spacing: -0.01em !important; margin: 16px 0 4px !important; }
+
+/* Tests: before/after diagram on a full-bleed slate band, like the mapping section */
+.v-tests-band {
+  grid-column: 1 / -1;
+  margin: clamp(32px, 4vw, 48px) 0 clamp(40px, 5vw, 64px);
+  padding: clamp(48px, 6vw, 88px) 0;
+  background: #222a35;
+  box-shadow: 0 0 0 100vmax #222a35;
+  clip-path: inset(0 -100vmax);
+}
+.v-tests-frame { aspect-ratio: 1000 / 680; width: 100%; max-width: 960px; margin: 0 auto; }
+.v-tests-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Tests: reasons the workflow engine didn't fit, then the two views side by side in time */
+.v-reasons { margin: 0 0 1rem; padding-left: 1.2em; display: grid; gap: 10px; }
+.v-reasons li { line-height: 1.6; }
+.v-reasons strong { font-weight: 500; }
+.v-wfpair { display: grid; gap: clamp(32px, 4vw, 48px); margin: clamp(24px, 3vw, 40px) 0; }
+.v-wfpair figure { margin: 0; min-width: 0; }
+.v-wfpair .tile { background: #f2f1ec; border-radius: 14px; overflow: hidden; padding: clamp(16px, 3vw, 32px); display: block; }
+.v-wfpair .tile.bleed { padding-bottom: 0; }
+.v-wfpair .tile img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 16px 36px -18px rgba(0,0,0,.28); }
+.v-wfpair .tile.bleed img { border-radius: 10px 10px 0 0; }
+.v-wfpair .ct { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; margin: 16px 0 4px; }
+.v-wfpair figcaption p { font-size: 14px !important; line-height: 1.5; color: var(--ink-2); margin: 0 !important; max-width: 60ch; }
+
+/* Side by side: same-shaped crops, both bleeding off the bottom; wider than the text column on desktop */
+@media (min-width: 901px) {
+  .v-wfpair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); }
+}
+@media (min-width: 1100px) { .v-wfpair { margin-left: -60px; margin-right: -60px; } }
+.v-wfpair .tile { padding: clamp(16px, 2.4vw, 24px) clamp(16px, 2.4vw, 24px) 0 !important; }
+.v-wfpair .tile img { border-radius: 10px 10px 0 0 !important; }
+.v-wfpair .ct { margin-top: 14px; }
+
+/* Data flow section: three decisions, each with its screenshot. Uses the page's own scale:
+   card titles 22px, body inherits 17px, frames match the other tiles. */
+.v-flow { margin-top: clamp(8px, 2vw, 24px); }
+.v-flow .entry { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: clamp(28px, 4vw, 48px); align-items: start; margin-top: clamp(48px, 6vw, 72px); }
+.v-flow .entry h4 { font-size: 22px !important; font-weight: 400 !important; letter-spacing: -0.025em !important; line-height: 1.25 !important; margin: 0 0 0.6rem !important; color: var(--ink); }
+.v-flow .entry p { margin: 0 !important; line-height: inherit; }
+.v-flow .tile { background: #f2f1ec; border-radius: 14px; padding: clamp(16px, 2.6vw, 28px); }
+.v-flow .tile img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 16px 36px -18px rgba(0,0,0,.28); }
+@media (max-width: 900px) { .v-flow .entry { grid-template-columns: minmax(0, 1fr); } }
+/* Entry titles use the same near-black as the page's other headings */
+.v-flow .entry h4 { color: rgb(13, 12, 9) !important; }
+
+/* Proposing a test object: text first, the data model diagram full width beneath it */
+.object-split:has(.v-model-tile) { grid-template-columns: minmax(0, 1fr) !important; }
+.object-split:has(.v-model-tile) > div:first-child { max-width: 600px; margin-left: calc(150px + 48px); }
+.v-model-tile { background: #f2f1ec; border-radius: 14px; padding: clamp(20px, 4vw, 48px); }
+.v-model-frame { aspect-ratio: 1000 / 530; width: 100%; }
+.v-model-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+@media (max-width: 900px) { .object-split:has(.v-model-tile) > div:first-child { margin-left: 0; } }
+/* Window bars carry the three dots only; the windows are named by the diagram's aria-label */
+.v-collage[data-layout="cascade"] .vc-bar { height: 24px; }
+/* Data model diagram opens the data flow section */
+.v-flow-model { margin-top: clamp(8px, 2vw, 24px); }
+
+/* Plates diagram sized closer to the UI screenshots: starts at the text column and ends at the content edge */
+@media (min-width: 901px) { .v-plates-frame { width: calc(100% - 198px) !important; margin-left: 198px; } }
+/* Centered in the content column */
+@media (min-width: 901px) { .v-plates-frame { margin-left: auto !important; margin-right: auto !important; } }
+
+/* ============ Vertical rhythm ============
+   Scale: 12 heading→text · 16 paragraph · 40 text↔figure · 72 repeated blocks · 96 new subsection / band outer ·
+   144 new section. Bands pad 80 inside. Values shrink on smaller screens. */
+/* text */
+section h2, section h3 { margin-bottom: var(--r-h) !important; }
+section p:not(.cap):not(.v-hero-cap):not(.v-gaps-note) { margin-bottom: var(--r-p) !important; }
+section p:last-child:not(.cap):not(.v-hero-cap):not(.v-gaps-note), section ul:last-child { margin-bottom: 0 !important; }
+/* section breaks */
+.v-sec, .v-cs, section[id="solution"], section[id="outcomes"], section[id="reflections"]{ padding-top: var(--r-sec) !important; }
+
+/* intro: stats and photo */
+.v-outcomes { margin-top: calc(var(--r-rep) - 20px) !important; }
+.hero-media { margin-top: calc(var(--r-fig) - 20px) !important; }
+/* problem band: 96 above and below it, 80 inside */
+#problem.v-sec { padding-top: calc(var(--band-out) + var(--band-pad)) !important; }
+#problem.v-sec::before { margin: calc(-1 * var(--band-pad)) 0 !important; }
+#problem > .v-gaps-row { margin-top: calc(var(--r-rep) - 20px) !important; }
+#solution-preview { margin-top: 0 !important; padding-top: calc(var(--band-pad) + var(--band-out)) !important; }
+.v-scrolly { margin-top: calc(var(--r-fig) - 20px) !important; }
+/* mapping band */
+#approach.v-sec { margin-top: var(--band-out) !important; }
+#approach .v-dark { padding-top: var(--band-pad) !important; padding-bottom: var(--band-pad) !important; margin-bottom: calc(var(--band-out) - 28px) !important; }
+/* plates */
+.concept-split:has(.v-plates-frame) { row-gap: var(--r-fig) !important; }
+.v-decision { margin-top: calc(var(--r-sub) - 20px) !important; }
+/* tests */
+.v-tests-band { margin-top: calc(var(--band-out) - 20px) !important; margin-bottom: calc(var(--band-out) - 20px) !important; padding-top: var(--band-pad) !important; padding-bottom: var(--band-pad) !important; }
+.v-wfpair { margin-top: calc(var(--r-fig) - 20px) !important; margin-bottom: 0 !important; }
+/* data flow */
+.v-flow-model { margin-top: calc(var(--r-fig) - 20px) !important; }
+.v-flow { margin-top: 0 !important; }
+.v-flow .entry { margin-top: var(--r-rep) !important; }
+.v-flow .entry:first-child { margin-top: calc(var(--r-rep) - 20px) !important; }
+/* outcomes */
+.v-ba { margin-top: var(--r-fig) !important; margin-bottom: var(--r-fig) !important; }
+/* the page's own wrappers add 56px above these subsections and 56px between the overview and the Problem band; absorb them */
+#problem.v-sec { padding-top: calc(var(--band-out) + var(--band-pad) - 56px) !important; }
+.sub-wrap { margin-top: calc(var(--r-sub) - 20px) !important; }
+.sub-wrap-flush { margin-top: 0 !important; }
+.outcomes-photo { margin-top: var(--r-fig) !important; margin-bottom: 0 !important; }
+.v-decision .body p, .v-decision p { margin-bottom: var(--r-p) !important; }
+.v-decision p:last-child { margin-bottom: 0 !important; }
+
+/* Intro: text left, metrics in a right column, top-aligned with the first paragraph */
+@media (min-width: 901px) {
+  #overview.intro { grid-template-columns: minmax(0, 600px) minmax(0, 1fr) !important; column-gap: clamp(40px, 4vw, 56px) !important; }
+  #overview .v-outcomes { grid-column: 2 !important; grid-row: 1 !important; margin-top: 0 !important; align-self: start; }
+  #overview .v-outcomes .stat-row { grid-template-columns: minmax(0, 1fr) !important; gap: 22px !important; }
+  #overview .v-outcomes .stat-source { margin-top: 20px !important; }
+  #overview .intro-text { grid-column: 1; grid-row: 1; }
+}
+
+/* Intro, v2: one centered-feeling column (starts where the section text starts), metrics beneath the paragraphs, photo full width */
+@media (min-width: 901px) {
+  #overview.intro { grid-template-columns: calc(150px + 48px) minmax(0, 1fr) !important; column-gap: 0 !important; }
+  #overview .intro-text { grid-column: 2 !important; grid-row: 1 !important; }
+  #overview .v-role { grid-column: 2 !important; grid-row: 2 !important; }
+  #overview .v-outcomes { grid-column: 2 !important; grid-row: 3 !important; margin-top: calc(var(--r-rep) - 20px) !important; max-width: 600px; }
+  #overview .v-outcomes .stat-row { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 24px !important; }
+  #overview .v-outcomes .stat-source { margin-top: 20px !important; }
+  #overview .hero-media { grid-row: 4 !important; }
+  .bio-title-block { margin-left: calc(150px + 48px) !important; }
+}
+
+/* Phones: the stacked Problem band is drawn behind the whole section instead of as a grid row,
+   so it doesn't claim the first rows and push the text below it */
+@media (max-width: 900px) {
+  #problem.v-sec::before { position: absolute; inset: 0; grid-row: auto !important; margin: calc(-1 * var(--band-pad)) 0 !important; }
+}

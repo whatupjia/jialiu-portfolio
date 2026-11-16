@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Structured from the start</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+:root { --deep: rgb(10, 24, 196); --canvas: rgb(245, 246, 248); --cell: rgb(246, 247, 248); --head: rgb(240, 241, 243); }
+.stage { background: var(--canvas); }
+
+/* Layer 1: flowchart */
+.flow, .defs { position: absolute; inset: 0; transition: opacity 500ms ease, transform 700ms var(--ease); }
+.flow.out { opacity: 0; transform: scale(1.12); transform-origin: 640px 420px; pointer-events: none; }
+.defs { opacity: 0; transform: scale(0.94); pointer-events: none; background: #fff; }
+.defs.on { opacity: 1; transform: none; }
+.flow::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 116px; background: #fff; border-bottom: 1.5px solid rgb(226, 228, 232); box-shadow: 0 2px 6px rgba(20, 22, 30, 0.04); }
+.crumb { position: absolute; z-index: 1; left: 56px; top: 44px; font-size: 28px; display: flex; align-items: center; gap: 14px; }
+.crumb b { font-weight: 600; }
+.crumb .sep { color: var(--muted); }
+.node {
+  position: absolute; top: 250px; width: 330px;
+  background: #fff; border: 1.5px solid rgb(214, 217, 223); border-radius: 6px;
+  box-shadow: 0 10px 30px -18px rgba(20, 22, 30, 0.35);
+}
+.node .top { display: flex; gap: 10px; padding: 12px; border-bottom: 1.5px solid rgb(226, 228, 232); }
+.node .title {
+  flex: 1; height: 50px; border: 1.5px solid rgb(206, 209, 216); border-radius: 4px;
+  display: flex; align-items: center; padding: 0 14px; font-size: 21px; color: rgb(27, 27, 31);
+}
+.node .title.focus { border-color: var(--deep); box-shadow: 0 0 0 1px var(--deep); }
+.node .title .ph { color: rgb(150, 154, 164); }
+.node .gear { width: 50px; height: 50px; border-radius: 4px; background: rgb(232, 234, 238); flex: none; display: flex; align-items: center; justify-content: center; color: #4A4B50; font-size: 24px; }
+.node .r { height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 21px; font-weight: 600; border-bottom: 1.5px solid rgb(226, 228, 232); transition: background 200ms ease, color 200ms ease; }
+.node .r:last-child { border-bottom: 0; }
+.node .r.hi { background: var(--blue-soft); color: var(--deep); }
+.node .r .ct { margin-left: auto; font-weight: 400; font-size: 17px; color: var(--muted); }
+.link { position: absolute; top: 284px; height: 2px; background: rgb(170, 174, 184); transition: width 360ms var(--ease); }
+.link.arrow::after { content: ""; position: absolute; right: -10px; top: -6px; border-left: 11px solid rgb(170, 174, 184); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.plus {
+  position: absolute; top: 266px; width: 38px; height: 38px; border-radius: 50%;
+  background: rgb(232, 234, 238); color: #2b2c30; font-size: 28px; line-height: 38px; text-align: center;
+  transition: transform 150ms ease, opacity 200ms ease;
+}
+.plus.pressed { transform: scale(0.88); }
+.zoom { position: absolute; left: 56px; bottom: 48px; width: 52px; border: 1.5px solid rgb(214, 217, 223); border-radius: 6px; background: #fff; overflow: hidden; }
+.zoom div { height: 50px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #2b2c30; border-bottom: 1.5px solid rgb(226, 228, 232); }
+.zoom div:last-child { border-bottom: 0; font-size: 20px; }
+
+/* Layer 2: definitions */
+.defs .crumb { top: 40px; }
+.defs .crumb .sel { border: 1.5px solid rgb(206, 209, 216); border-radius: 6px; padding: 6px 14px; background: #fff; font-size: 22px; }
+.tabs { position: absolute; left: 56px; top: 104px; display: flex; gap: 36px; font-size: 17px; font-weight: 600; letter-spacing: 0.02em; color: var(--muted); }
+.tabs .on { color: var(--blue); border-bottom: 3px solid var(--blue); padding-bottom: 10px; }
+.secs { position: absolute; left: 56px; top: 160px; width: 1168px; display: flex; flex-direction: column; gap: 22px; }
+.sec { position: relative; background: #fff; border: 1.5px solid rgb(226, 228, 232); border-radius: 6px; overflow: hidden; }
+.sec .sh { height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 20px; font-size: 22px; font-weight: 600; }
+.sec .sh i { width: 24px; height: 24px; border: 2.5px solid #2b2c30; border-radius: 4px; display: inline-block; }
+.grid { display: grid; font-size: 19px; }
+.grid > div { height: 48px; display: flex; align-items: center; padding: 0 16px; border-top: 1.5px solid rgb(232, 234, 238); white-space: nowrap; overflow: hidden; }
+.grid .hd { background: var(--head); font-weight: 600; }
+.grid .num { justify-content: center; font-weight: 600; background: #fff; }
+.grid .c { background: #fff; }
+.grid .c .ph { color: rgb(150, 154, 164); font-style: italic; }
+.grid .c.focus { box-shadow: inset 0 0 0 2px var(--deep); background: #fff; }
+.grid .type { color: #3a3b40; gap: 8px; }
+.grid .type em { font-style: normal; color: var(--muted); font-weight: 600; }
+.g-mat { grid-template-columns: 48px 1.3fr 1fr 1.2fr 0.7fr 0.7fr; }
+.g-par { grid-template-columns: 48px 1.3fr 1fr 0.9fr 0.8fr 0.7fr 0.7fr; }
+.g-eq { grid-template-columns: 48px 1.3fr 1fr 1.2fr 1.4fr; }
+.rowin { animation: in 420ms var(--ease) both; }
+.swipe { animation: swipe 520ms var(--ease) both; }
+@keyframes swipe { from { opacity: 0; transform: translateX(-28px); height: 0; } 40% { height: 48px; } to { opacity: 1; transform: none; height: 48px; } }
+.num.swipe { animation-name: grow; }
+@keyframes grow { from { opacity: 0; height: 0; } 40% { height: 48px; } to { opacity: 1; height: 48px; } }
+</style></head><body>
+<div class="stage"><div class="scene">
+
+  <div class="flow">
+    <div class="crumb"><b>VX-23 Serum IgG ELISA</b><span class="sep">›</span>Flowchart</div>
+  </div>
+
+  <div class="defs">
+    <div class="crumb"><b>VX-23 Serum IgG ELISA</b><span class="sep">›</span>Edit<span class="sel step-name">Coat plate ▾</span></div>
+    <div class="tabs"><span class="on">DEFINITIONS</span><span>STEP CONFIGURATION</span><span>METADATA</span></div>
+    <div class="secs">
+    <div class="sec">
+      <div class="sh"><i></i>Material inputs</div>
+      <div class="grid g-mat m-grid">
+        <div class="hd"></div><div class="hd">Name*</div><div class="hd">Data type*</div><div class="hd">Default material</div><div class="hd">Amount</div><div class="hd">Units</div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sh"><i></i>Parameters</div>
+      <div class="grid g-par p-grid">
+        <div class="hd"></div><div class="hd">Name*</div><div class="hd">Data type*</div><div class="hd">Setpoint</div><div class="hd">Units</div><div class="hd">Min</div><div class="hd">Max</div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sh"><i></i>Equipment</div>
+      <div class="grid g-eq e-grid">
+        <div class="hd"></div><div class="hd">Name*</div><div class="hd">Data type*</div><div class="hd">Model</div><div class="hd">Default equipment</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div></div>
+<script src="_base.js"></script>
+<script>
+(function () {
+  var A = Anim, $ = function (s) { return document.querySelector(s); };
+  var scene = $('.scene'), flow = $('.flow'), defs = $('.defs');
+  var NODES = [{ x: 270, t: 'Coat plate' }, { x: 680, t: 'Add samples' }];
+  var STEP = 'Coat plate';
+  var MAT = [['Coating antigen', 'Aa  Text', 'VX-23 Ag lot A1', '100', 'µL']];
+  var PAR = [['Incubation time', '#  Decimal', '60', 'min', '45', '90'], ['Temperature', '#  Decimal', '37', '°C', '35', '39']];
+  var EQ = [['Plate washer', 'Aa  Text', 'BioTek 405', 'Washer-02']];
+
+  function node(i, t) {
+    var n = document.createElement('div'); n.className = 'node pop'; n.style.left = NODES[i].x + 'px';
+    n.innerHTML = '<div class="top"><div class="title"><span class="ph">Enter a title</span></div><div class="gear">⚙</div></div>' +
+      '<div class="r rm">Material inputs<span class="ct"></span></div><div class="r rp">Parameters<span class="ct"></span></div><div class="r re">Equipment<span class="ct"></span></div>';
+    flow.appendChild(n); return n;
+  }
+  function plusAfter(i) {
+    var x = NODES[i].x + 330;
+    var l = document.createElement('div'); l.className = 'link'; l.style.left = x + 'px'; l.style.width = '44px'; flow.appendChild(l);
+    var p = document.createElement('div'); p.className = 'plus'; p.textContent = '+'; p.style.left = (x + 42) + 'px'; flow.appendChild(p); p.link = l;
+    return p;
+  }
+  async function title(n, t) {
+    var el = n.querySelector('.title'); el.classList.add('focus');
+    await A.sleep(200); await A.type(el, t, 55); await A.sleep(200); el.classList.remove('focus');
+  }
+  function row(grid, vals) {
+    grid.insertAdjacentHTML('beforeend', '<div class="num swipe">' + (grid.querySelectorAll('.num').length + 1) + '</div>');
+    var cells = vals.map(function (v, j) {
+      var c = document.createElement('div'); c.className = 'c rowin' + (j === 1 ? ' type' : '');
+      if (j === 1) c.innerHTML = '<em>' + v.split('  ')[0] + '</em>' + v.split('  ')[1];
+      grid.appendChild(c); return c;
+    });
+    return cells;
+  }
+  // Each row swipes in already filled; cells follow each other by a beat
+  async function fill(grid, vals) {
+    var cells = row(grid, vals);
+    cells.forEach(function (c, j) {
+      if (j !== 1) c.textContent = vals[j];
+      c.classList.remove('rowin'); c.classList.add('swipe'); c.style.animationDelay = (j * 45) + 'ms';
+    });
+    await A.sleep(520);
+  }
+  function reset() {
+    flow.querySelectorAll('.node, .link, .plus').forEach(function (e) { e.remove(); });
+    flow.classList.remove('out'); defs.classList.remove('on');
+    document.querySelectorAll('.grid').forEach(function (g) { g.querySelectorAll(':scope > div:not(.hd)').forEach(function (c) { c.remove(); }); });
+    A.move(700, 640, 0);
+  }
+  async function play() {
+    await A.sleep(300);
+    var nodes = [];
+    nodes.push(node(0)); await A.move(NODES[0].x + 130, 284, 700); await A.click(); await title(nodes[0], NODES[0].t);
+    for (var i = 1; i < NODES.length; i++) {
+      var p = plusAfter(i - 1);
+      await A.move(NODES[i - 1].x + 330 + 61, 285, 650); await A.click(p);
+      p.remove(); p.link.style.width = '68px'; p.link.classList.add('arrow');
+      await A.sleep(200); nodes.push(node(i)); await A.sleep(250);
+      await A.move(NODES[i].x + 130, 284, 500); await title(nodes[i], NODES[i].t);
+    }
+    plusAfter(NODES.length - 1);
+    // Open the first step's parameters
+    var r = nodes[0].querySelector('.rp');
+    await A.move(NODES[0].x + 140, 420, 800); r.classList.add('hi'); await A.sleep(250); await A.click();
+    flow.classList.add('out'); defs.classList.add('on');
+    await A.move(1180, 760, 600);
+    await fill($('.m-grid'), MAT[0]);
+    for (i = 0; i < PAR.length; i++) await fill($('.p-grid'), PAR[i]);
+    await fill($('.e-grid'), EQ[0]);
+  }
+  function finalState() {
+    flow.classList.add('out'); defs.classList.add('on');
+    [[$('.m-grid'), MAT], [$('.p-grid'), PAR], [$('.e-grid'), EQ]].forEach(function (pair) {
+      pair[1].forEach(function (v) { var cells = row(pair[0], v); cells.forEach(function (c, j) { if (j !== 1) c.textContent = v[j]; }); });
+    });
+  }
+  A.loop(scene, reset, play, finalState);
+})();
+</script>
+</body></html>

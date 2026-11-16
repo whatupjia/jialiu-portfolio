@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plates connected to results</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+:root {
+  --deep: rgb(10, 20, 200); --rule: rgb(222, 225, 230); --soft: rgb(245, 246, 248); --layer: rgb(242, 243, 255);
+  --s: rgb(140, 208, 200); --c: rgb(255, 200, 140);
+  --ab: rgb(12, 201, 178); --red: rgb(250, 74, 90); --ring: rgb(80, 130, 240);
+  --d1: rgb(214, 228, 252); --d2: rgb(140, 180, 245); --d3: rgb(60, 110, 225);
+}
+.stage { background: #fff; }
+.hdr { position: absolute; left: 0; right: 0; top: 0; height: 72px; border-bottom: 1.5px solid var(--rule); display: flex; align-items: center; padding: 0 28px; font-size: 28px; font-weight: 600; }
+
+/* Left: layers to view on the plate */
+.layers { position: absolute; left: 0; top: 72px; bottom: 0; width: 270px; border-right: 1.5px solid var(--rule); padding: 26px 16px; }
+.lh { font-size: 15px; font-weight: 600; letter-spacing: 0.02em; margin: 0 0 8px 6px; display: flex; align-items: center; }
+.lh .addl { margin-left: auto; color: var(--blue); font-weight: 600; letter-spacing: 0; font-size: 15px; }
+.ly { border-radius: 5px; padding: 10px 10px; margin-bottom: 18px; font-size: 18px; transition: background 250ms ease; }
+.ly .row { display: flex; align-items: center; gap: 10px; }
+.ly .tri { width: 0; height: 0; border-left: 7px solid rgb(140, 144, 154); border-top: 5px solid transparent; border-bottom: 5px solid transparent; transition: transform 250ms ease; }
+.ly .ic { font-size: 15px; font-weight: 700; color: #4a4b50; width: 22px; text-align: center; }
+.ly .ic.aa { font-size: 18px; font-weight: 400; letter-spacing: -0.02em; }
+.ly .ic { color: rgb(120, 124, 134) !important; transition: color 250ms ease; }
+.ly.on .ic { color: rgb(45, 90, 230) !important; }
+.ly.on { background: var(--layer); }
+.ly.on .tri { transform: rotate(90deg); }
+.ly.on .nm { font-weight: 600; }
+.ly .sub { display: none; margin: 8px 0 0 30px; font-size: 16px; }
+.ly.on .sub { display: block; }
+.ly .sub div { display: flex; justify-content: space-between; height: 28px; align-items: center; }
+.ly .sub span:last-child { color: var(--muted); }
+.ly .sub .new { animation: in 400ms var(--ease) both; }
+.ly.pressed { background: rgb(230, 233, 255); }
+
+/* Center: plate */
+.center { position: absolute; left: 270px; top: 72px; bottom: 0; width: 710px; }
+.box { position: absolute; left: 13px; top: 24px; width: 684px; height: 572px; background: var(--soft); border-radius: 4px; }
+.plate { position: absolute; left: 8px; top: 8px; display: grid; grid-template-columns: 28px repeat(12, 53px); grid-template-rows: 28px repeat(8, 66px); align-items: center; }
+.lab { font-size: 16px; color: #3a3b40; text-align: center; }
+.w {
+  width: 50px; height: 50px; margin: 0 auto; border-radius: 50%;
+  border: 1.5px solid rgb(205, 209, 216); background: #fff; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 600; color: #26353a;
+  transition: background 260ms ease, border-color 260ms ease, box-shadow 160ms ease;
+}
+/* Selection ring sits inside the well, so neighbors never overlap */
+.w.sel { border: 2.5px solid var(--ring) !important; box-shadow: inset 0 0 0 2.5px #fff; }
+/* Contents layer */
+.v-ct .w.ab { background: var(--ab); border-color: var(--ab); }
+.v-ct .w.ctl { background: var(--red); border-color: var(--red); }
+/* Well roles layer: fixed roles */
+.v-role .w.rs { background: var(--s); border-color: var(--s); }
+.v-role .w.rc { background: var(--c); border-color: var(--c); font-weight: 400; }
+.v-role .w.blank { border-color: #2b2c30; }
+.v-role .w.blank::after { content: ""; position: absolute; width: 140%; height: 1.5px; background: #2b2c30; transform: rotate(-45deg); }
+/* Dilution layer */
+.v-dil .w.rs { border-color: transparent; }
+.v-dil .w.rs.x10 { background: var(--d1); }
+.v-dil .w.rs.x100 { background: var(--d2); }
+.v-dil .w.rs.x1000 { background: var(--d3); }
+.w .t { display: none; }
+.v-role .w .t.role { display: inline; }
+
+.legend { position: absolute; left: 13px; top: 612px; width: 684px; height: 76px; border: 1.5px solid var(--rule); border-radius: 6px; display: flex; align-items: center; gap: 44px; padding: 0 22px; }
+.lg { display: none; align-items: center; gap: 12px; font-size: 18px; font-weight: 600; }
+.lg small { display: block; font-size: 15px; font-weight: 400; color: var(--muted); }
+.dot { width: 30px; height: 30px; border-radius: 50%; flex: none; }
+.v-ct ~ .legend .lg.ct, .v-role ~ .legend .lg.role, .v-dil ~ .legend .lg.dil { display: flex; }
+.lg.hide { display: none !important; }
+
+/* Right: materials to put into the plate */
+.mat { position: absolute; left: 980px; top: 72px; bottom: 0; right: 0; border-left: 1.5px solid var(--rule); padding: 26px 24px; }
+.mat .ttl { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+.mat .hint { font-size: 16px; max-width: 300px; color: var(--muted); line-height: 1.4; margin: 0 0 18px; }
+.sr { height: 50px; border: 1.5px solid rgb(206, 209, 216); border-radius: 6px; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 18px; }
+.sr.focus { border-color: var(--deep); }
+.sr .mag { width: 14px; height: 14px; border: 2px solid rgb(170, 174, 184); border-radius: 50%; flex: none; }
+.menu { margin-top: 6px; padding: 6px 0; display: none; position: relative; border-radius: 6px; }
+.menu.show { display: block; }
+.menu .mh { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; padding: 8px 14px; color: #4a4b50; }
+.menu .mo { height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 18px; transition: background 200ms ease; }
+.menu .mo.hi { background: var(--blue-soft); }
+.chp { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border-radius: 6px; background: rgb(232, 233, 237); color: rgb(20, 30, 200); font-size: 18px; }
+.chp svg { flex: none; display: block; }
+.chip { display: none; align-items: center; gap: 8px; height: 38px; padding: 0 12px; margin-top: 14px; border-left: 4px solid var(--ab); background: rgb(232, 234, 238); color: var(--deep); font-size: 18px; }
+.chip.show { display: inline-flex; }
+.addc { position: absolute; right: 24px; top: 470px; height: 50px; padding: 0 20px; border-radius: 6px; background: rgb(170, 175, 240); color: #fff; font-size: 18px; font-weight: 600; display: flex; align-items: center; transition: background 200ms ease, transform 140ms ease; }
+.addc.live { background: var(--deep); }
+.addc.pressed { transform: scale(0.95); }
+</style></head><body>
+<div class="stage"><div class="scene">
+  <div class="hdr">Create plate design</div>
+
+  <div class="layers">
+    <div class="lh">WELL ROLES</div>
+    <div class="ly l-role on"><div class="row"><span class="tri"></span><span class="ic aa">Aɑ</span><span class="nm">Well roles</span></div>
+      <div class="sub"><div><span>Samples</span><span>88 wells</span></div><div><span>Controls</span><span>4 wells</span></div><div><span>Blanks</span><span>4 wells</span></div></div></div>
+    <div class="lh">CONTENTS</div>
+    <div class="ly l-ct"><div class="row"><span class="tri"></span><span class="ic"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true" style="display:block;margin:0 auto"><path d="M6 1.5h6M7 1.5v6L1.8 16.6A1.6 1.6 0 0 0 3.2 19h11.6a1.6 1.6 0 0 0 1.4-2.4L11 7.5v-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M4.2 12.5h9.6l2.4 4.1a1.6 1.6 0 0 1-1.4 2.4H3.2a1.6 1.6 0 0 1-1.4-2.4z" fill="currentColor"/></svg></span><span class="nm">Contents</span></div>
+      <div class="sub ct-sub"></div></div>
+    <div class="lh">SCHEMA FIELDS (1)</div>
+    <div class="ly"><div class="row"><span class="tri"></span><span class="ic aa">Aɑ</span><span class="nm">QNS</span></div></div>
+    <div class="lh">PARAMETERS (1/10)<span class="addl">+ Add layers</span></div>
+    <div class="ly l-dil"><div class="row"><span class="tri"></span><span class="ic"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" style="display:block;margin:0 auto"><rect x="1" y="1" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 6.5h8M5 4.8v3.4M5 11.5h8M13 9.8v3.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="nm">Sample final dilution</span></div>
+      <div class="sub"><div><span>10×</span><span>32 wells</span></div><div><span>100×</span><span>32 wells</span></div><div><span>1000×</span><span>24 wells</span></div></div></div>
+  </div>
+
+  <div class="center">
+    <div class="box v-role"><div class="plate"></div></div>
+    <div class="legend">
+      <div class="lg ct ab-lg hide"><span class="dot" style="background:var(--ab)"></span><span>Serum HS-0418<small>88 wells</small></span></div>
+      <div class="lg ct ctl-lg hide"><span class="dot" style="background:var(--red)"></span><span>Ref serum 01<small>4 wells</small></span></div>
+      <div class="lg role"><span class="dot" style="background:var(--s)"></span><span>Samples<small>44 groups</small></span></div>
+      <div class="lg role"><span class="dot" style="background:var(--c)"></span><span>Controls<small>1 group</small></span></div>
+      <div class="lg dil"><span class="dot" style="background:var(--d1)"></span><span>10×</span></div>
+      <div class="lg dil"><span class="dot" style="background:var(--d2)"></span><span>100×</span></div>
+      <div class="lg dil"><span class="dot" style="background:var(--d3)"></span><span>1000×</span></div>
+    </div>
+  </div>
+
+  <div class="mat">
+    <div class="ttl">Add contents</div>
+    <p class="hint">Select wells, then choose what goes in them.</p>
+    <div class="sr"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" style="flex:none"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="rgb(160,164,176)" stroke-width="1.8"/><path d="M11.6 11.6L16 16" stroke="rgb(160,164,176)" stroke-width="1.8" stroke-linecap="round"/></svg><span class="q"></span></div>
+    <div class="card menu"><div class="mh">MATERIAL INPUTS</div><div class="mo o1"><span class="chp"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="0.5" y="0.5" width="17" height="17" rx="3" fill="currentColor"/><path d="M4.5 5.5h1.2M7.5 5.5h6M4.5 9h1.2M7.5 9h6M4.5 12.5h1.2M7.5 12.5h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg><span class="ot"></span></span></div><div class="mo"><span class="chp"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="0.5" y="0.5" width="17" height="17" rx="3" fill="currentColor"/><path d="M4.5 5.5h1.2M7.5 5.5h6M4.5 9h1.2M7.5 9h6M4.5 12.5h1.2M7.5 12.5h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg><span class="ot2"></span></span></div></div>
+    <div><span class="chip"></span></div>
+    <div class="addc">Add contents</div>
+  </div>
+
+</div></div>
+<script src="_base.js"></script>
+<script>
+(function () {
+  var A = Anim, $ = function (s) { return document.querySelector(s); };
+  var scene = $('.scene'), box = $('.box'), plate = $('.plate'), ROWS = 'ABCDEFGH', W = {};
+  // Each well's fixed role and dilution; contents get added on top
+  function base(r, c) {
+    var role = c <= 11 ? 'rs' : r < 4 ? 'blank' : 'rc';
+    return 'w ' + role + ' ' + (c <= 4 ? 'x10' : c <= 8 ? 'x100' : 'x1000');
+  }
+  plate.insertAdjacentHTML('beforeend', '<div></div>');
+  for (var c = 1; c <= 12; c++) plate.insertAdjacentHTML('beforeend', '<div class="lab">' + c + '</div>');
+  for (var r = 0; r < 8; r++) {
+    plate.insertAdjacentHTML('beforeend', '<div class="lab">' + ROWS[r] + '</div>');
+    for (c = 1; c <= 12; c++) {
+      var w = document.createElement('div'); w.className = 'w'; w.dataset.r = r; w.dataset.c = c;
+      var role = c <= 11 ? Math.floor(r / 2) * 11 + c : (r < 4 ? '' : (r < 6 ? '–' : '+'));
+      var dil = c <= 4 ? '10×' : c <= 8 ? '100×' : '1000×'; w.className = base(r, c);
+      w.innerHTML = '<span class="t role">' + role + '</span><span class="t dil">' + (c <= 11 ? dil : '') + '</span>';
+      plate.appendChild(w); W[ROWS[r] + c] = w;
+    }
+  }
+  function each(a, b, fn) {
+    for (var r = ROWS.indexOf(a[0]); r <= ROWS.indexOf(b[0]); r++)
+      for (var c = +a.slice(1); c <= +b.slice(1); c++) fn(W[ROWS[r] + c], r, c);
+  }
+  function pos(el, dx, dy) {
+    var s = document.querySelector('.stage').getBoundingClientRect(), k = s.width / 1280, b = el.getBoundingClientRect();
+    return [(b.left - s.left) / k + (dx == null ? b.width / k / 2 : dx), (b.top - s.top) / k + (dy == null ? b.height / k / 2 : dy)];
+  }
+  async function go(el, ms, dx, dy) { var p = pos(el, dx, dy); await A.move(p[0], p[1], ms); }
+  async function drag(a, b) {
+    await go(W[a], 600); await A.click();
+    var r0 = ROWS.indexOf(a[0]), c0 = +a.slice(1), r1 = ROWS.indexOf(b[0]), c1 = +b.slice(1), n = 8;
+    for (var i = 1; i <= n; i++) {
+      var rr = Math.round(r0 + (r1 - r0) * i / n), cc = Math.round(c0 + (c1 - c0) * i / n);
+      each(a, ROWS[rr] + cc, function (w) { w.classList.add('sel'); });
+      var p = pos(W[ROWS[rr] + cc]); A.move(p[0], p[1], 60); await A.sleep(60);
+    }
+  }
+  function stagger(w) { w.style.transitionDelay = ((+w.dataset.c - 1) * 18 + +w.dataset.r * 6) + 'ms'; }
+  function unstagger() { setTimeout(function () { Object.keys(W).forEach(function (k) { W[k].style.transitionDelay = ''; }); }, 600); }
+  function ripple() { Object.keys(W).forEach(function (k) { stagger(W[k]); }); unstagger(); }
+  // Pick a material on the right and drop it into the selected wells
+  async function addContents(term, name, other, cls, countLabel, count, legend) {
+    var sr = $('.sr'), q = $('.q');
+    await go(sr, 600, 110); await A.click(); sr.classList.add('focus');
+    await A.type(q, term, 55);
+    $('.ot').textContent = name; $('.ot2').textContent = other; $('.menu').classList.add('show', 'pop');
+    await go($('.o1'), 450, 100); $('.o1').classList.add('hi'); await A.sleep(180); await A.click();
+    $('.menu').classList.remove('show', 'pop'); $('.o1').classList.remove('hi'); q.textContent = ''; sr.classList.remove('focus');
+    var chip = $('.chip'); chip.textContent = name + ' ✕'; chip.style.borderLeftColor = cls === 'ctl' ? 'var(--red)' : 'var(--ab)'; chip.classList.add('show', 'in');
+    $('.addc').classList.add('live');
+    await go($('.addc'), 550); await A.click($('.addc'));
+    document.querySelectorAll('.w.sel').forEach(function (w) {
+      stagger(w); w.classList.remove('sel'); w.classList.add(cls);
+    });
+    unstagger();
+    chip.classList.remove('show'); $('.addc').classList.remove('live');
+    $('.ct-sub').insertAdjacentHTML('beforeend', '<div class="new"><span>' + countLabel + '</span><span>' + count + '</span></div>');
+    $(legend).classList.remove('hide');
+    await A.sleep(500);
+  }
+  async function layer(sel, view) {
+    var el = $(sel); await go(el, 650, 70); el.classList.add('pressed'); await A.click(); el.classList.remove('pressed');
+    document.querySelectorAll('.ly').forEach(function (l) { l.classList.remove('on'); }); el.classList.add('on');
+    box.className = 'box ' + view; ripple();
+    await A.sleep(1300);
+  }
+  function reset() {
+    Object.keys(W).forEach(function (k) { var w = W[k]; w.style.transitionDelay = ''; w.className = base(+w.dataset.r, +w.dataset.c); });
+    box.className = 'box v-role';
+    document.querySelectorAll('.ly').forEach(function (l) { l.classList.remove('on'); }); $('.l-role').classList.add('on');
+    $('.ct-sub').innerHTML = ''; $('.ab-lg').classList.add('hide'); $('.ctl-lg').classList.add('hide');
+    $('.chip').classList.remove('show'); $('.addc').classList.remove('live'); $('.q').textContent = '';
+    A.move(760, 760, 0);
+  }
+  async function play() {
+    await A.sleep(1200);
+    // Contents layer: put materials into the plate from the right panel
+    await layer('.l-ct', 'v-ct');
+    await drag('A1', 'H11');
+    await addContents('Serum', 'Serum HS-0418', 'Serum HS-0419', 'ab', 'Samples', '88 wells', '.ab-lg');
+    await drag('E12', 'H12');
+    await addContents('Ref', 'Ref serum 01', 'Ref serum 02', 'ctl', 'Controls', '4 wells', '.ctl-lg');
+    await A.sleep(400);
+    // Another layer on the same plate
+    await layer('.l-dil', 'v-dil');
+  }
+  function finalState() {
+    each('A1', 'H11', function (w) { w.classList.add('ab'); });
+    each('E12', 'H12', function (w) { w.classList.add('ctl'); });
+    $('.ct-sub').innerHTML = '<div><span>Samples</span><span>88 wells</span></div><div><span>Controls</span><span>4 wells</span></div>';
+    $('.ab-lg').classList.remove('hide'); $('.ctl-lg').classList.remove('hide');
+  }
+  A.loop(scene, reset, play, finalState);
+})();
+</script>
+</body></html>

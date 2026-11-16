@@ -1,0 +1,80 @@
+/* Shared base for the Bioanalytical feature animations: a 1280x800 stage,
+   scaled to fit its frame, close-cropped Benchling-style UI. */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: rgb(245, 246, 247); }
+body {
+  font-family: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(27, 27, 31);
+  -webkit-font-smoothing: antialiased;
+}
+.stage {
+  position: absolute; top: 0; left: 0;
+  width: 1280px; height: 800px;
+  transform-origin: 0 0;
+  background: rgb(245, 246, 247);
+  overflow: hidden;
+}
+.scene { position: absolute; inset: 0; transition: opacity 500ms ease; }
+.scene.fade { opacity: 0; }
+
+:root {
+  --blue: rgb(45, 114, 231);
+  --blue-soft: rgb(232, 240, 254);
+  --blue-ink: rgb(29, 86, 190);
+  --line: rgb(226, 228, 234);
+  --line-soft: rgb(237, 239, 243);
+  --muted: rgb(110, 114, 126);
+  --green: rgb(19, 133, 80);
+  --green-soft: rgb(225, 244, 233);
+  --red: rgb(204, 51, 51);
+  --red-soft: rgb(253, 232, 232);
+  --amber-soft: rgb(255, 243, 214);
+  --ease: cubic-bezier(0.33, 0.68, 0.35, 1);
+}
+
+.card {
+  position: absolute; background: #fff;
+  border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 2px 4px rgba(20, 22, 30, 0.04), 0 24px 48px -24px rgba(20, 22, 30, 0.18);
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 34px; padding: 0 14px; border-radius: 17px;
+  font-size: 18px; font-weight: 600; white-space: nowrap;
+  transition: background 300ms ease, color 300ms ease;
+}
+.pill.gray { background: #ECEDEF; color: #4A4B50; }
+.pill.blue { background: var(--blue-soft); color: var(--blue-ink); }
+.pill.green { background: var(--green-soft); color: var(--green); }
+.pill.red { background: var(--red-soft); color: var(--red); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 52px; padding: 0 24px; border-radius: 10px;
+  background: var(--blue); color: #fff; font-size: 20px; font-weight: 600;
+  transition: transform 140ms ease, background 200ms ease;
+}
+.btn.pressed { transform: scale(0.96); background: rgb(30, 92, 200); }
+
+/* Cursor */
+.cursor {
+  position: absolute; left: 0; top: 0; z-index: 50;
+  width: 34px; height: 34px; pointer-events: none;
+  transition: transform 700ms var(--ease);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+.cursor svg { display: block; width: 100%; height: 100%; }
+.cursor .ring {
+  position: absolute; left: -14px; top: -14px; width: 36px; height: 36px;
+  border-radius: 50%; border: 3px solid var(--blue); opacity: 0; transform: scale(0.4);
+}
+.cursor.click .ring { animation: ring 480ms ease-out; }
+@keyframes ring { 0% { opacity: 0.9; transform: scale(0.4); } 100% { opacity: 0; transform: scale(1.4); } }
+
+.in { animation: in 520ms var(--ease) both; }
+@keyframes in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.pop { animation: pop 380ms var(--ease) both; }
+@keyframes pop { from { opacity: 0; transform: scale(0.94) translateY(-6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor, .scene, .in, .pop { transition: none !important; animation: none !important; }
+}

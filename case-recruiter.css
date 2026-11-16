@@ -1,0 +1,46 @@
+/* Recruiter Inbox variant: larger figures, with a few layout changes for the screens that matter most. */
+@media (min-width: 1240px) {
+  /* Figures break out of the 600px text column to the full content width (the label column on the left stays empty above them) */
+  .cs-shell section .expandable-image-wrap { margin-left: -198px !important; width: calc(100% + 360px) !important; max-width: none !important; }
+
+  .cs-shell section .expandable-image-wrap.v-narrow { margin-left: 0 !important; width: 100% !important; }
+
+  .cs-shell section .expandable-image-wrap.v-mid { margin-left: -80px !important; width: calc(100% + 160px) !important; }
+
+  .cs-shell section .expandable-image-wrap.v-small { margin-left: -60px !important; width: calc(100% + 120px) !important; }
+
+  /* Text beside a figure, alternating sides: used once or twice for key screens */
+  .v-split { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(40px, 4vw, 56px); align-items: center; margin-left: -198px; width: calc(100% + 360px); margin-top: var(--r-fig); margin-bottom: var(--r-fig); }
+  .v-split.rev { grid-template-columns: minmax(0, 1fr) minmax(0, 320px); }
+  .v-split.rev .v-split-text { order: 2; }
+  .cs-shell section .v-split .expandable-image-wrap { margin: 0 !important; width: 100% !important; }
+  .v-split-text p:last-child { margin-bottom: 0 !important; }
+}
+@media (max-width: 1239px) { .v-split { display: block; } }
+
+/* The final shipped inbox: a full-bleed warm band, so it reads as the destination */
+.v-figband { position: relative; z-index: 0; padding: var(--band-pad) 0; margin: var(--band-out) 0; }
+.v-figband::before { content: ""; position: absolute; inset: 0; background: var(--muted); box-shadow: 0 0 0 100vmax var(--muted); clip-path: inset(0 -100vmax); z-index: -1; }
+.v-figband .expandable-image-wrap { margin-top: 0; margin-bottom: 0; }
+
+/* No borders around figure cards (the Bioanalysis page doesn't use them either) */
+.cs-shell section .expandable-image-wrap { border: 0 !important; }
+
+/* Pull quote: regular weight */
+.cs-shell blockquote { font-weight: 400 !important; }
+
+/* Intro, as on Bioanalysis: one reading column, the facts woven into the copy, metrics as a plain row, hero image full width */
+@media (min-width: 901px) {
+  .cs-title-block { margin-left: calc(150px + 48px) !important; }
+  #overview { grid-template-columns: calc(150px + 48px) minmax(0, 1fr) !important; column-gap: 0 !important; }
+  #overview > .intro-text { grid-column: 2 !important; }
+  #overview > .intro-facts { display: none !important; }
+  #overview .v-outcomes { grid-column: 2 !important; max-width: 600px; margin-top: calc(var(--r-rep) - 20px) !important; background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }
+  #overview > .hero-media { grid-column: 1 / -1 !important; margin-top: calc(var(--r-fig) - 20px) !important; border: 0 !important; }
+}
+.v-outcomes .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: clamp(20px, 3vw, 40px) !important; }
+.v-outcomes :is([style*="clamp(1.75rem"], .i77, .i120, .stat) { font-weight: 400 !important; letter-spacing: -0.04em !important; font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem) !important; margin-bottom: 0.4rem !important; color: var(--ink) !important; }
+.v-outcomes .stat-note { display: none !important; }
+
+/* Approach follows the Problem band directly: the band's 96px is the gap */
+#approach.v-sec { padding-top: 0 !important; }

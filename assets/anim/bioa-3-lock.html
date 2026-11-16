@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Run the study</title>
+<link rel="stylesheet" href="_base.css">
+<style>
+:root { --deep: rgb(10, 20, 200); --rule: rgb(222, 225, 230); --soft: rgb(246, 247, 249); --head: rgb(240, 241, 243); --navy: rgb(10, 20, 170); }
+.stage { background: #fff; }
+.pane { position: absolute; inset: 0; opacity: 0; transform: translateY(14px); transition: opacity 450ms ease, transform 600ms var(--ease); pointer-events: none; }
+.pane.on { opacity: 1; transform: none; }
+.pane.gone { opacity: 0; transform: translateY(-14px); transition-duration: 320ms; }
+.title { position: absolute; left: 44px; top: 34px; font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.tabs { position: absolute; left: 0; right: 0; top: 96px; height: 52px; border-bottom: 1.5px solid var(--rule); display: flex; gap: 36px; padding: 0 44px; font-size: 16px; font-weight: 600; letter-spacing: 0.03em; color: #3a3b40; align-items: flex-end; }
+.tabs span { padding-bottom: 14px; }
+.tabs .on { color: var(--blue); box-shadow: inset 0 -3px 0 var(--blue); }
+.card { position: absolute; left: 44px; right: 44px; border: 1.5px solid var(--rule); border-radius: 6px; box-shadow: none; overflow: hidden; }
+.stack { position: absolute; left: 44px; right: 44px; top: 172px; display: flex; flex-direction: column; gap: 22px; }
+.stack .card { position: relative; left: auto; right: auto; }
+.ch { height: 52px; display: flex; align-items: center; gap: 14px; padding: 0 18px; font-size: 20px; font-weight: 600; }
+.grid { display: grid; }
+.grid > div { height: 48px; display: flex; align-items: center; padding: 0 16px; border-top: 1.5px solid rgb(232, 234, 238); font-size: 18px; white-space: nowrap; overflow: hidden; }
+.grid .hd { background: var(--head); font-weight: 600; height: 42px; }
+.swipe { animation: swipe 520ms var(--ease) both; }
+@keyframes swipe { from { opacity: 0; transform: translateX(-24px); height: 0; } 40% { height: 48px; } to { opacity: 1; transform: none; height: 48px; } }
+.chipx { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border: 1.5px solid rgb(214, 217, 223); border-radius: 5px; font-size: 16px; background: #fff; }
+.chipx i { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.chipx.tgt i { border-radius: 2px; background: rgb(110, 114, 126); }
+.chipx.ok i { background: rgb(36, 160, 90); }
+.ent { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border-radius: 5px; background: rgb(232, 233, 237); color: var(--deep); font-size: 16px; }
+.ent b { width: 14px; height: 14px; border-radius: 3px; background: var(--deep); display: inline-block; }
+.btn2 { height: 44px; padding: 0 18px; border-radius: 6px; font-size: 18px; font-weight: 600; display: inline-flex; align-items: center; transition: transform 140ms ease; }
+.btn2.blue { background: var(--deep); color: #fff; }
+.btn2.line { border: 1.5px solid var(--deep); color: var(--deep); }
+.btn2.pressed { transform: scale(0.95); }
+.bar { width: 160px; height: 10px; border-radius: 5px; background: rgb(225, 227, 232); overflow: hidden; margin: 0 12px 0 0; }
+.bar span { display: block; height: 100%; width: 0; background: var(--navy); border-radius: 5px; transition: width 900ms var(--ease); }
+.pct { width: 56px; font-weight: 600; }
+.muted2 { color: var(--muted); }
+.av { width: 30px; height: 30px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; }
+
+/* Dashboard */
+.dtitle { position: absolute; left: 44px; top: 34px; font-size: 28px; font-weight: 600; }
+.dash { position: absolute; left: 0; right: 0; top: 92px; bottom: 0; background: var(--soft); padding: 22px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.wd { background: #fff; border-radius: 8px; border: 1.5px solid var(--rule); padding: 22px 26px; position: relative; }
+.wd h4 { margin: 0 0 6px; font-size: 21px; font-weight: 600; }
+.wd .s { font-size: 15px; color: var(--muted); }
+.chart { position: absolute; left: 70px; right: 34px; top: 130px; bottom: 64px; border-left: 1.5px solid rgb(200, 203, 210); border-bottom: 1.5px solid rgb(200, 203, 210); }
+.gl { position: absolute; left: 0; right: 0; height: 1px; background: rgb(236, 238, 241); }
+.yl { position: absolute; left: -46px; width: 36px; width: 50px; text-align: right; font-size: 13px; color: var(--muted); transform: translateY(50%); }
+.grp { position: absolute; bottom: 0; display: flex; gap: 10px; align-items: flex-end; height: 100%; }
+.col { width: 48px; height: 0; border-radius: 3px 3px 0 0; transition: height 900ms var(--ease); }
+.xl { position: absolute; bottom: -34px; left: 0; width: 106px; text-align: center; font-size: 15px; color: #3a3b40; }
+.lgd { position: absolute; left: 26px; top: 88px; display: flex; gap: 16px; font-size: 14px; color: #3a3b40; }
+.lgd i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.dash-i { background: repeating-linear-gradient(90deg, rgb(150,154,164) 0 4px, transparent 4px 7px) !important; height: 3px !important; vertical-align: 3px !important; }
+.stk { position: absolute; bottom: 0; height: 100%; display: flex; flex-direction: column-reverse; }
+.seg { width: 100%; height: 0; transition: height 700ms var(--ease); }
+.stk .seg:last-child { border-radius: 3px 3px 0 0; }
+.ln { fill: none; stroke-width: 3.5; stroke-linejoin: round; stroke-linecap: round; transition: stroke-dashoffset 1700ms cubic-bezier(0.45, 0, 0.25, 1); }
+.ar { transition: opacity 600ms ease; opacity: 0; }
+.endl { position: absolute; font-size: 15px; font-weight: 600; white-space: nowrap; transform: translate(-100%, -150%); opacity: 0; transition: opacity 400ms ease; }
+.endl.on, .ar.on { opacity: 1; }
+.hbs { position: absolute; left: 26px; right: 26px; top: 130px; }
+.hb { display: grid; grid-template-columns: 140px 1fr 72px; align-items: center; gap: 14px; height: 64px; font-size: 16px; }
+.track { height: 22px; border-radius: 4px; background: rgb(236, 238, 241); display: flex; overflow: hidden; }
+.track span { height: 100%; width: 0; transition: width 900ms var(--ease); }
+.hb .n { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+</style></head><body>
+<div class="stage"><div class="scene">
+
+  <!-- 2. Samples and assay runs -->
+  <div class="pane p2">
+    <div class="title">VX-23 Serology Study</div>
+    <div class="tabs"><span class="on">OVERVIEW</span><span>DESIGN</span><span>STUDY ITEMS</span><span>METADATA</span></div>
+    <div class="stack s2">
+    <div class="card"><div class="ch">Samples</div>
+      <div class="grid g-ov" style="grid-template-columns:1fr 1.05fr 0.85fr 1.4fr"><div class="hd">Sample definition</div><div class="hd">Received</div><div class="hd">Assay</div><div class="hd">Testing progress</div></div></div>
+    <div class="card"><div class="ch">Assay runs <span class="btn2 line" style="height:36px;font-size:16px;margin-left:6px">+ Add run</span><span class="muted2" style="margin-left:auto;font-size:17px;font-weight:400">Total runs: <span class="tr">0</span></span></div>
+      <div class="grid g-run" style="grid-template-columns:1.6fr 0.5fr 1fr 1.1fr"><div class="hd">Run name</div><div class="hd">Samples</div><div class="hd">Assignee</div><div class="hd">Status</div></div>
+    </div></div>
+  </div>
+
+  <!-- 3. Dashboard -->
+  <div class="pane p3">
+    <div class="dtitle">VX-23 SEROLOGY DASHBOARD</div>
+    <div class="dash">
+      <div class="wd"><h4>Samples tested</h4><div class="s">Per week · 246 to date</div>
+        <div class="chart c1"></div></div>
+      <div class="wd"><h4>Samples received</h4><div class="s">Per week, by testing status · 360 to date</div>
+        <div class="lgd"><span><i style="background:var(--navy)"></i>Tested</span><span><i style="background:rgb(232,176,72)"></i>Awaiting testing</span></div>
+        <div class="chart c2"></div></div>
+    </div>
+  </div>
+
+</div></div>
+<script src="_base.js"></script>
+<script>
+(function () {
+  var A = Anim, $ = function (s) { return document.querySelector(s); };
+  var scene = $('.scene'), p2 = $('.p2'), p3 = $('.p3');
+  var OV = [['PRE_SER_TG1', 120, 100], ['PRE_SER_TG2', 60, 100], ['D29_SER_TG1', 120, 45], ['D29_SER_TG2', 60, 20]];
+  var RUNS = [['VX23IGG_0412_01', '40', 'SC', 'Sarah Chen', 'rgb(36,140,90)'], ['VX23IGG_0412_02', '40', 'MO', 'Marcus Ortiz', 'rgb(120,40,200)'], ['VX23IGG_0415_01', '40', 'SC', 'Sarah Chen', 'rgb(36,140,90)'], ['VX23IGG_0415_02', '40', 'PN', 'Priya Nair', 'rgb(200,90,30)']];
+  // Old screen leaves first, then the new one arrives, so they never overlap
+  async function show(p) {
+    var had = false;
+    [p2, p3].forEach(function (x) { if (x !== p && x.classList.contains('on')) { x.classList.remove('on'); x.classList.add('gone'); had = true; } });
+    if (had) await A.sleep(380);
+    p.classList.remove('gone'); p.classList.add('on');
+  }
+  function row(grid, cells, delay) {
+    return cells.map(function (html, j) { var d = document.createElement('div'); d.className = 'swipe'; d.style.animationDelay = ((delay || 0) + j * 40) + 'ms'; d.innerHTML = html; grid.appendChild(d); return d; });
+  }
+  function pos(el) { var s = document.querySelector('.stage').getBoundingClientRect(), k = s.width / 1280, b = el.getBoundingClientRect(); return [(b.left - s.left) / k + b.width / k / 2, (b.top - s.top) / k + b.height / k / 2]; }
+  function clear(sel) { $(sel).querySelectorAll(':scope > div:not(.hd)').forEach(function (d) { d.remove(); }); }
+  // Weekly bar charts: tested, and received stacked by testing status
+  var WEEKS = ['Apr', '', '', '', 'May', '', '', '', 'Jun', '', '', ''];
+  var TESTED = [6, 10, 14, 18, 22, 20, 24, 26, 22, 28, 30, 26];          // 246
+  var RECEIVED = [20, 24, 26, 30, 28, 32, 30, 30, 30, 30, 40, 40];       // 360
+  var DONE = [20, 24, 26, 30, 28, 32, 30, 24, 16, 10, 6, 0];             // of each week's receipts, tested so far (246)
+  function axes(el, ymax, ticks) {
+    el.innerHTML = '';
+    ticks.forEach(function (t) { var f = t / ymax; if (f > 0) el.insertAdjacentHTML('beforeend', '<div class="gl" style="bottom:' + f * 100 + '%"></div>'); el.insertAdjacentHTML('beforeend', '<div class="yl" style="bottom:' + f * 100 + '%">' + t + '</div>'); });
+    var n = WEEKS.length;
+    WEEKS.forEach(function (m, i) { if (m) el.insertAdjacentHTML('beforeend', '<div class="xl" style="left:' + ((i + 0.5) / n * 100) + '%;width:auto;transform:translateX(-50%)">' + m + '</div>'); });
+  }
+  function bars(el, stacks, ymax, colors) {
+    var n = stacks.length;
+    stacks.forEach(function (parts, i) {
+      var html = parts.map(function (v, k) { return '<div class="seg" data-h="' + (v / ymax) + '" style="background:' + colors[k] + '"></div>'; }).join('');
+      el.insertAdjacentHTML('beforeend', '<div class="stk" style="left:' + (i / n * 100 + 1.4) + '%;width:' + (100 / n - 2.8) + '%">' + html + '</div>');
+    });
+  }
+  function buildCharts() {
+    var NAVY = 'rgb(10,20,170)', AMBER = 'rgb(232,176,72)';
+    var e1 = $('.c1'); axes(e1, 40, [0, 10, 20, 30, 40]);
+    bars(e1, TESTED.map(function (v) { return [v]; }), 40, [NAVY]);
+    var e2 = $('.c2'); axes(e2, 40, [0, 10, 20, 30, 40]);
+    bars(e2, RECEIVED.map(function (v, i) { return [DONE[i], v - DONE[i]]; }), 40, [NAVY, AMBER]);
+  }
+  function drawCharts(instant) {
+    document.querySelectorAll('.stk').forEach(function (b, i) {
+      var go = function () { b.querySelectorAll('.seg').forEach(function (s) { s.style.height = (+s.dataset.h * 100) + '%'; }); };
+      if (instant) { b.querySelectorAll('.seg').forEach(function (s) { s.style.transition = 'none'; }); go(); }
+      else setTimeout(go, (i % 12) * 80 + (i >= 12 ? 200 : 0));
+    });
+  }
+  function reset() {
+    // Snap screens back without a fade, so the last loop never ghosts through
+    [p2, p3].forEach(function (p) { p.style.transition = 'none'; p.classList.remove('on', 'gone'); void p.offsetWidth; p.style.transition = ''; });
+    clear('.g-ov'); clear('.g-run'); $('.tr').textContent = '0';
+    buildCharts();
+    A.cursor.style.display = 'none';
+  }
+  async function play() {
+    // 2. Samples arrive and assay runs build up
+    await show(p2);
+    var ovRows = OV.map(function (o, i) {
+      return row($('.g-ov'), [o[0], '<span class="chipx tgt"><i></i>' + o[1] + ' targeted</span>', '<span class="ent"><b></b>VX23-IgG</span>', '<span class="pct">0%</span><span class="bar"><span></span></span>'], i * 120);
+    });
+    await A.sleep(1000);
+    for (var i = 0; i < ovRows.length; i++) {
+      var c = ovRows[i][1].querySelector('.chipx'); c.className = 'chipx ok'; c.innerHTML = '<i></i>' + OV[i][1] + ' received';
+      await A.sleep(180);
+    }
+    for (i = 0; i < RUNS.length; i++) {
+      var r = RUNS[i];
+      row($('.g-run'), [r[0], r[1], '<span class="av" style="background:' + r[4] + '">' + r[2] + '</span>' + r[3], '<span class="st muted2">Pending</span>']);
+      $('.tr').textContent = i + 1; await A.sleep(260);
+    }
+    ovRows.forEach(function (rw, i) { rw[3].querySelector('.bar span').style.width = OV[i][2] + '%'; rw[3].querySelector('.pct').textContent = OV[i][2] + '%'; });
+    document.querySelectorAll('.g-run .st').forEach(function (s, i) { setTimeout(function () { s.textContent = i < 3 ? 'Completed' : 'In progress'; s.className = 'st'; }, 300 + i * 220); });
+    await A.sleep(2000);
+    // 3. Results build up in the dashboard
+    await show(p3); await A.sleep(500);
+    drawCharts(false);
+    await A.sleep(2600);
+  }
+  function finalState() {
+    show(p3); buildCharts(); drawCharts(true);
+  }
+  A.loop(scene, reset, play, finalState);
+})();
+</script>
+</body></html>

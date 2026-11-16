@@ -1,11 +1,9 @@
 /*
- * site-behaviors.js — vanilla replacements for the interactive behavior that
- * the DC runtime provides in the authoring environment. The deployed pages are
- * pre-rendered static HTML, so nothing here is responsible for CONTENT: every
- * word is already in the markup. This only re-attaches interaction.
+ * site-behaviors.js — the site's interactive behavior. Pages are hand-maintained
+ * static HTML, so nothing here is responsible for CONTENT: every word is
+ * already in the markup. This only attaches interaction.
  *
- * Binds by data-behavior attributes declared in the .dc.html sources, so the
- * pre-render carries the hooks through untouched. If this file fails to load,
+ * Binds by data-behavior attributes in the markup. If this file fails to load,
  * pages stay fully readable — the header just stops hiding on scroll and the
  * contact popover stops opening.
  *
@@ -53,11 +51,9 @@
     syncSpacer();
     window.addEventListener('resize', syncSpacer);
 
-    // The snapshot can bake in a mid-scroll transform, and the handler below only
-    // writes when the hidden/shown state CHANGES. A page captured while the header
-    // was scrolled away therefore loads with translateY(-100%) in the markup and
-    // `hidden` set to false, agreeing that nothing needs doing — so the header stays
-    // invisible until the visitor scrolls down past it and back up. Normalize the
+    // The handler below only writes when the hidden/shown state CHANGES, so a header
+    // whose markup starts with a translateY(-100%) would stay invisible until the
+    // visitor scrolls down past it and back up. Normalize the
     // DOM to match the initial state on load.
     header.style.transform = 'translateY(0)';
 
@@ -109,8 +105,8 @@
     function setContact(open) {
       contactOpen = open;
       if (shape) {
-        shape.style.width = open ? '280px' : '128px';
-        shape.style.height = open ? '216px' : '42px';
+        shape.style.width = open ? '280px' : '104px';
+        shape.style.height = open ? '216px' : '36px';
         shape.style.borderRadius = open ? '20px' : '999px';
         shape.style.boxShadow = open ? '0 24px 48px rgba(20,19,15,0.28)' : 'none';
       }
@@ -194,12 +190,9 @@
   }
 
   // ── section nav (case study pages) ───────────────────────────────────────
-  // Two variants, told apart by what the pre-render left behind: the tabs
-  // variant ships a button[data-id] per section, the marks variant ships one
-  // button[data-index] per heading. Everything the marks variant does past
-  // painting the first frame comes from React state in the DC source, so the
-  // active mark, the hover wave, the hovercard and the column-1 offset all have
-  // to be rebuilt here — the snapshot freezes them at capture time.
+  // Two variants: the tabs variant has a button[data-id] per section, the marks
+  // variant has one button[data-index] per heading. This drives the active
+  // mark, the hover wave, the hovercard and the column-1 offset.
   function initSectionNav() {
     var nav = by('section-nav');
     if (!nav) return;
@@ -319,15 +312,13 @@
     var wrap = markBtns[0].parentNode;
 
     // Column 1 of the page grid, measured rather than computed: a fixed element's
-    // percentages resolve against the viewport including the scrollbar, and the
-    // capture bakes whatever the editor canvas happened to measure.
+    // percentages resolve against the viewport including the scrollbar.
     function placeNav() {
       var sel = nav.getAttribute('data-align-to') || '.bio-shell, .cs-shell';
       var shell = $(sel);
       if (!shell) return;
-      // leftOffset pulls the marks OUT of the content box (case studies ship
-      // -104). The DC applies it in navLeft(); mirror the same clamp here or the
-      // marks land on the content edge and overlap the body.
+      // leftOffset pulls the marks OUT of the content box (case studies use
+      // -104); clamped so the marks stay on screen and clear of the body.
       var off = parseInt(nav.getAttribute('data-left-offset') || '0', 10) || 0;
       nav.style.left = Math.max(12, Math.round(shell.getBoundingClientRect().left) + off) + 'px';
       nav.style.right = 'auto';
@@ -501,8 +492,7 @@
       close();
       overlay = document.createElement('div');
       // Stable hook for the smoke test (and any future styling) so neither has
-      // to match on inline styles. Code-only: a re-export drops it, which
-      // leaves the lightbox working but the test blind. See CLAUDE.md.
+      // to match on inline styles.
       overlay.setAttribute('data-lightbox-overlay', '');
       overlay.setAttribute('style', 'position: fixed; inset: 0; background: rgba(20,19,15,0.85); z-index: 100; overflow: auto; padding: 3rem; box-sizing: border-box;');
 
@@ -579,15 +569,13 @@
 
 
   // ── autoplaying loops ────────────────────────────────────────────────────
-  // The DC pages drive playback from an IntersectionObserver in their logic
-  // class, and no <video> carries an autoplay attribute — so without this the
-  // pre-rendered pages show every clip frozen on frame one.
+  // Clips play while on screen and pause when scrolled away.
   function initVideos() {
     var vids = $$('video');
     if (!vids.length) return;
     // A [data-player] video is a longer walkthrough, not a loop: it gets native
     // controls so the visitor can scrub and pause. Boolean attrs are set as DOM
-    // properties here because React drops empty-string boolean props at capture.
+    // properties here so they apply whether or not the markup carries them.
     vids.forEach(function (v) {
       var isPlayer = v.hasAttribute('data-player');
       v.muted = true;
@@ -600,9 +588,6 @@
     // can never be parsed from a normal <source>. Those elements ship with
     // data-blob-src instead and no src at all: fetch the whole file once and
     // hand the element an object URL, which needs no range requests.
-    // Lives here, not in the built HTML — a fix that exists only in deploy/ is
-    // reverted by the next capture.
-    //
     // Deferred until the clip is near the viewport: these files run to several
     // MB, and fetching them all on load competes with the work-row animation
     // iframes for the main thread long enough to stall first paint.
@@ -668,8 +653,7 @@
   }
 
   // ── hero dot grid (home page intro) ──────────────────────────────────────
-  // Draws the same converging dot grid as the authoring-time canvas: dots
-  // start scattered, ease into a regular grid, then the .hero-dots CSS fades
+  // Draws a converging dot grid: dots start scattered, ease into a regular grid, then the .hero-dots CSS fades
   // the whole canvas to opacity 0 — so this only needs to run once per load.
   function initHeroDots() {
     var canvas = $('.hero-dots');
@@ -768,123 +752,8 @@
     }
   }
 
-  // Margin notes ship both branches: a floated .margin-note sidenote (desktop)
-  // and a .margin-note-trigger button (mobile), with CSS choosing per breakpoint.
-  // The mobile modal is built here by cloning the sidenote's own content, so the
-  // copy exists once in the markup and the two can never drift.
-  function initMarginNotes() {
-    var triggers = byAll('margin-note-trigger');
-    if (!triggers.length) return;
-    var overlay = null;
-
-    function close() {
-      if (!overlay) return;
-      overlay.remove();
-      overlay = null;
-      document.body.style.overflow = '';
-    }
-
-    function open(note) {
-      close();
-      overlay = document.createElement('div');
-      overlay.className = 'margin-note-modal-backdrop';
-      overlay.setAttribute('role', 'dialog');
-      overlay.setAttribute('aria-modal', 'true');
-
-      var sheet = document.createElement('div');
-      sheet.className = 'margin-note-modal';
-
-      var label = $('.margin-note-label', note);
-      var head = document.createElement('div');
-      head.setAttribute('style', 'display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.85rem;');
-      var title = document.createElement('span');
-      title.setAttribute('style', "font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #9a968f;");
-      title.textContent = label ? label.textContent : '';
-      if (title.textContent) overlay.setAttribute('aria-label', title.textContent);
-      var closeBtn = document.createElement('button');
-      closeBtn.type = 'button';
-      closeBtn.setAttribute('aria-label', 'Close');
-      closeBtn.setAttribute('style', 'background: none; border: 0; padding: 0; margin: 0; color: #9a968f; cursor: pointer; font-size: 1.1rem; line-height: 1; flex-shrink: 0;');
-      closeBtn.textContent = '✕';
-      closeBtn.addEventListener('click', close);
-      head.appendChild(title);
-      head.appendChild(closeBtn);
-      sheet.appendChild(head);
-
-      var body = $('.margin-note-body', note);
-      if (body) {
-        var p = document.createElement('p');
-        p.setAttribute('style', "margin: 0; font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 1rem; line-height: 1.55; color: #3a3833;");
-        p.textContent = body.textContent;
-        sheet.appendChild(p);
-      }
-
-      $$('img, video', note).forEach(function (el) {
-        var media = el.cloneNode(true);
-        media.setAttribute('style', 'width: 100%; height: auto; display: block; margin-top: 1rem; border: 1px solid #e4e0d8; border-radius: 8px; background: #ffffff;');
-        if (media.tagName === 'VIDEO') { media.muted = true; media.loop = true; media.autoplay = true; }
-        sheet.appendChild(media);
-        if (media.tagName === 'VIDEO' && media.play) media.play().catch(function () {});
-      });
-
-      overlay.appendChild(sheet);
-      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-      document.body.appendChild(overlay);
-      document.body.style.overflow = 'hidden';
-    }
-
-    triggers.forEach(function (trigger) {
-      var scope = trigger.closest('.note-scope') || trigger.parentNode;
-      trigger.addEventListener('click', function () {
-        var note = $('.margin-note', scope);
-        if (note) open(note);
-      });
-    });
-
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-  }
-
-  // ── hero availability chip (home page) ───────────────────────────────────
-  // The chip toggles a contact popover; in the editor that's a React onClick,
-  // dropped by the static capture. The canvas serializes the hooks
-  // (data-behavior="avail-*") so this binds like every other behavior. Copy is
-  // handled by the shared copy-email handler in initHeader (the card's copy
-  // button carries data-behavior="copy-email"). set(false) asserts the baked
-  // closed state on load.
-  function initAvailChip() {
-    var wrap = by('avail-wrap');
-    if (!wrap) return;
-    var btn = $('[data-behavior="avail-toggle"]', wrap);
-    var card = $('[data-behavior="avail-card"]', wrap);
-    var chevron = $('[data-behavior="avail-chevron"]', wrap);
-    var closeBtn = $('[data-behavior="avail-close"]', wrap);
-    if (!btn || !card) return;
-    var open = false;
-    function set(o) {
-      open = o;
-      card.style.opacity = o ? '1' : '0';
-      // translate3d (not translateY) keeps the popover on its own GPU
-      // compositing layer so it sorts above the work section's iframe/video
-      // layers on mobile; a 2D transform only promotes it mid-transition,
-      // after which mobile browsers demote it and it drops under those layers.
-      card.style.transform = o ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, -6px, 0px)';
-      card.style.pointerEvents = o ? 'auto' : 'none';
-      if (chevron) chevron.style.transform = o ? 'rotate(180deg)' : 'rotate(0deg)';
-      btn.style.borderColor = o ? '#b8b2a6' : '#d7d2c7';
-      btn.setAttribute('aria-expanded', o ? 'true' : 'false');
-    }
-    set(false);
-    btn.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); set(!open); });
-    if (closeBtn) closeBtn.addEventListener('click', function (e) { e.preventDefault(); set(false); });
-    document.addEventListener('click', function (e) { if (open && !wrap.contains(e.target)) set(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) set(false); });
-  }
-
   // The 12-col grid publishes its own width so breakout images can size off it
-  // in pure CSS. In the DC source a ResizeObserver in the page's logic class does
-  // this; deployed, the capture leaves behind whatever pixel value the editor
-  // canvas measured, so without this every visitor at a different width sizes
-  // breakouts against a stale number.
+  // in pure CSS; kept current on resize.
   function initGridWidth() {
     var shell = $('.bio-shell');
     if (!shell) return;
@@ -906,8 +775,6 @@
     initSectionNav();
     initCarousels();
     initLightbox();
-    initMarginNotes();
-    initAvailChip();
   }
 
   if (document.readyState === 'loading') {

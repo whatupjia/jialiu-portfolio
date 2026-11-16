@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 /*
- * smoke-test.js — loads every pre-rendered page headlessly, at both a mobile
+ * smoke-test.js — loads every page headlessly, at both a mobile
  * and a desktop viewport, and fails the build if any page throws a JS error,
  * fails to load a same-origin asset, or if the interactive hooks
  * site-behaviors.js depends on (data-behavior attributes, section IDs, the
  * lightbox, nav toggle, section-nav track) are missing or don't actually work.
  *
- * This exists because a static-export bug once silently stripped a
- * data-id attribute from every case study page, which crashed
- * site-behaviors.js's unguarded init sequence and killed the image
- * lightbox everywhere — with no visible error unless you opened devtools.
+ * Broken hooks fail silently (no visible error unless you open devtools), so
+ * this checks them directly.
  * Run with: npm run smoke-test
  */
 'use strict';
@@ -112,9 +110,9 @@ async function checkNavToggle(page, failures) {
 // heading, inking as you scroll past it and scrolling to it on click.
 // Only rendered above 1100px.
 //
-// The marks ship baked into the export; the headings they point at are scanned
-// at runtime and paired by index. So when an export drops a heading level, the
-// tail marks pair with nothing and go quietly dead — no preview on hover, no
+// The marks are written in the markup; the headings they point at are scanned
+// at runtime and paired by index. So when a heading is added or removed without
+// updating the marks, the tail marks pair with nothing and go quietly dead — no preview on hover, no
 // scroll on click — which is why the counts are checked here and not just the
 // behavior. ────────────────────────────────────────────────────────────────
 async function checkSectionNav(page, failures) {
@@ -200,7 +198,7 @@ async function checkLightbox(page, failures) {
   await page.waitForTimeout(300);
   const overlay = await page.$('[data-lightbox-overlay]');
   if (!overlay) {
-    failures.push('clicking an expandable image did not open the lightbox overlay — no [data-lightbox-overlay]. Check whether the overlay is opening without its hook attribute (a re-export drops it) before assuming the lightbox itself broke');
+    failures.push('clicking an expandable image did not open the lightbox overlay — no [data-lightbox-overlay]. Check whether the overlay is opening without its hook attribute before assuming the lightbox itself broke');
     return;
   }
   await page.keyboard.press('Escape');

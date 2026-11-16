@@ -1,0 +1,76 @@
+/* LinkedIn case studies (Recruiter Inbox, Quick Reply): type scale, rhythm hooks for their markup, the muted Problem band, and the intro grid.
+   Shared foundations live in case.css. */
+
+/* Title block */
+.cs-title-block .v-case-eyebrow {
+  font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important;
+  text-transform: none !important; color: var(--ink-2) !important;
+}
+.cs-title-block h1 {
+  font-size: clamp(44px, 5vw, 68px) !important; font-weight: 400 !important;
+  letter-spacing: -0.04em !important; line-height: 1.04 !important;
+}
+
+/* Type scale: 64 · 38 · 28 · 17 · 14 (title · h2 · h3 · body · labels) */
+.cs-shell { font-size: 1.0625rem !important; }section h3 { font-size: clamp(23px, 2.2vw, 28px) !important; font-weight: 400 !important; letter-spacing: -0.03em !important; line-height: 1.2 !important; }
+
+/* Sections are separated by space, not rules; the "01 / Background" labels are hidden but keep their column */
+.v-sec { border-top: 0 !important; padding-bottom: 0 !important; }
+
+/* Neutral rules, borders, links and images */
+
+/* Vertical rhythm: 12 heading→text · 16 paragraph · 40 text↔figure · 72 repeated blocks · 96 subsection · 144 section */
+section h2, section h3 { margin-bottom: var(--r-h) !important; }
+section p { margin-bottom: var(--r-p) !important; }
+section p:last-child, section ul:last-child { margin-bottom: 0 !important; }
+.v-sec { padding-top: var(--r-sec) !important; }
+
+/* Problem: a full-bleed warm muted band, 96 outside and 80 inside */
+#problem.v-sec { position: relative; z-index: 0; margin-top: var(--band-out); padding-top: var(--band-pad) !important; padding-bottom: var(--band-pad) !important; margin-bottom: var(--band-out); }
+#problem.v-sec::before {
+  content: ""; position: absolute; inset: 0; background: var(--muted);
+  box-shadow: 0 0 0 100vmax var(--muted); clip-path: inset(0 -100vmax); z-index: -1;
+}
+
+/* Balanced wrapping split headlines into two short lines; let them fill the line */
+section h2, section h3 { text-wrap: pretty !important; }
+
+/* Vertical rhythm, same scale as Bioanalysis: 12 heading→text · 16 paragraph · 40 text↔figure · 72 repeated block · 96 subsection · 144 section; bands 96 outside, 80 inside */
+.cs-overview-wrap, #overview { padding-bottom: 0 !important; }
+.sc-host[data-sc-name="ExpandableImage"] { margin-top: var(--r-fig) !important; margin-bottom: 0 !important; }
+.sc-host[data-sc-name="ExpandableImage"] + p, .sc-host[data-sc-name="ExpandableImage"] + ul, .sc-host[data-sc-name="ExpandableImage"] + blockquote,
+.v-figwrap + p, .v-figwrap + ul, .v-figwrap + blockquote { margin-top: var(--r-fig) !important; }
+.v-sub { margin-top: var(--r-sub) !important; }
+.v-blk { margin-top: var(--r-rep) !important; }
+
+/* wrappers around figures carry their own 24px bottom margin; the block above owns the spacing */
+.v-figwrap { margin-bottom: 0 !important; }
+.v-split:last-child, .v-sub:last-child { margin-bottom: 0 !important; }
+/* after a band, the next section's heading sits at the band's outer gap */
+/* Stat row inside Outcomes: 40 above and below, like text↔figure */
+#outcomes :is([style*="display: grid"], .i3, .i4, .i5, .i14, .i16, .i18, .i19, .i26, .i39, .i42, .i60, .i64, .i66, .i76, .i82, .i98, .bio-title-grid, .intro, .stat-row, .case-section, .concept-split, .case-section-end):is([style*="repeat("], .i3, .i14, .i39, .i60, .i64, .i76, .i98, .bio-title-grid, .stat-row) { margin-top: var(--r-fig) !important; margin-bottom: var(--r-fig) !important; }
+
+.v-fig-after { margin-top: var(--r-fig) !important; }
+.sc-host[data-sc-name="Blockquote"] { margin-top: var(--r-fig) !important; margin-bottom: var(--r-fig) !important; }
+#outcomes p:is([style*="letter-spacing: -0.03em"], .i63, .i77, .i120, .case-h1, .stat):is([style*="font-weight"], .i9, .i10, .i17, .i20, .i21, .i40, .i47, .i50, .i54, .i62, .i63, .i75, .i77, .i85, .i89, .i92, .i94, .i97, .i99, .i101, .i107, .i112, .i113, .i114, .i120, .site-footer-name, .case-eyebrow, .case-h1, .outcomes-label, .stat, .case-section-label, .case-h3, .case-h3-first, .case-h3-next, .bio-shell h2):not(:first-child) { margin-top: var(--r-fig) !important; }
+#approach.v-sec { padding-top: 0 !important; }
+
+/* Intro, as on Bioanalysis: one reading column, the facts woven into the copy, metrics as a plain row, hero full width */
+@media (min-width: 901px) {
+  .cs-title-block { margin-left: calc(150px + 48px) !important; }
+  #overview { grid-template-columns: calc(150px + 48px) minmax(0, 1fr) !important; column-gap: 0 !important; }
+  #overview > div:first-child { grid-column: 2 !important; }
+  #overview > div:has(> dl) { display: none !important; }
+  #overview > .v-outcomes { grid-column: 2 !important; max-width: 600px; margin-top: calc(var(--r-rep) - 20px) !important; background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }
+  #overview > div:last-child { grid-column: 1 / -1 !important; margin-top: calc(var(--r-fig) - 20px) !important; border: 0 !important; }
+}
+#overview > .v-outcomes > p:nth-of-type(1) { font-weight: 400 !important; letter-spacing: -0.04em !important; font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem) !important; color: var(--ink) !important; margin-bottom: 0.4rem !important; }
+
+.v-last { margin-bottom: 0 !important; }
+.sc-host[data-sc-name="ExpandableImage"] + h4, .v-figwrap + h4 { margin-top: var(--r-fig) !important; }
+#outcomes div:is([style*="padding: 1rem 0px 2rem"], .i98, .i119) { padding-bottom: var(--r-fig) !important; }
+.sc-host[data-sc-name="Blockquote"]:last-child { margin-bottom: 0 !important; }
+#outcomes :is([style*="display: grid"], .i3, .i4, .i5, .i14, .i16, .i18, .i19, .i26, .i39, .i42, .i60, .i64, .i66, .i76, .i82, .i98, .bio-title-grid, .intro, .stat-row, .case-section, .concept-split, .case-section-end):is([style*="repeat("], .i3, .i14, .i39, .i60, .i64, .i76, .i98, .bio-title-grid, .stat-row) { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+/* Outcomes in the intro: plain on every width (phones used to keep the old card) */
+#overview > .v-outcomes { background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }

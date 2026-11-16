@@ -1,0 +1,31 @@
+/* Shared styling for the mapping explorations: plum ground, outlined cards, dashed links */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
+body { font-family: 'Sohne', -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #f4efe9; }
+:root {
+  --line: rgba(214, 186, 232, 0.6); --line-soft: rgba(244, 239, 233, 0.16);
+  --muted: rgba(244, 239, 233, 0.6); --new: rgb(200, 160, 245);
+  --paper: rgb(241, 237, 232); --ink: #26201f; --ink-2: rgba(38, 32, 31, 0.6);
+  --ease: cubic-bezier(0.33, 0.68, 0.35, 1);
+}
+.stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.eyebrow { font-size: 17px; color: var(--muted); letter-spacing: 0.01em; }
+.card {
+  border: 1.5px solid var(--line-soft); border-radius: 18px;
+  display: flex; align-items: center; gap: 16px; padding: 0 20px;
+  opacity: 0; transform: translateY(10px); transition: opacity 500ms ease, transform 600ms var(--ease);
+}
+.card.on, .pane.on, .chip.on { opacity: 1; transform: none; }
+.card .nm { font-size: 26px; letter-spacing: -0.02em; line-height: 1.15; }
+.card .sub { font-size: 17px; color: var(--muted); margin-top: 3px; }
+.card.hl { border-color: var(--line); }
+.tag { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); font-size: 15px; white-space: nowrap; }
+.tag i { width: 14px; height: 14px; border-radius: 4px; background: var(--new); }
+svg.links { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+svg.links path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 5 6; opacity: 0; transition: opacity 500ms ease; }
+svg.links path.on { opacity: 1; }
+.pane { opacity: 0; transform: translateY(10px); transition: opacity 500ms ease, transform 600ms var(--ease); }
+.chip { opacity: 0; transform: translateY(6px); transition: opacity 400ms ease, transform 500ms var(--ease); }
+
+/* Static image: no reveal transitions */
+.card, .pane, .chip, svg.links path { transition: none !important; }

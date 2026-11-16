@@ -1,0 +1,119 @@
+/* Former inline styles from the old export, moved out of the markup. Zero specificity (:where) so any
+   page stylesheet can override them; !important because inline styles used to beat non-important rules.
+   Fold these into named classes when polishing a page; do not add new ones here. */
+:where(.i2) { opacity: 0 !important; position: relative !important; z-index: 1 !important; max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; }
+:where(.i3) { padding-bottom: 6rem !important; margin-top: 3rem !important; display: grid !important; grid-template-columns: repeat(12, minmax(0px, 1fr)) !important; gap: 32px !important; }
+:where(.i4) { grid-column: 1 / -1 !important; margin-top: 1.5rem !important; display: grid !important; grid-template-columns: minmax(0px, 1fr) !important; gap: 104px !important; }
+:where(.i5) { display: grid !important; min-width: 0px !important; grid-template-columns: minmax(0px, 1.55fr) minmax(280px, 0.65fr) !important; gap: clamp(28px, 3.6vw, 56px) !important; align-items: start !important; color: rgb(23, 23, 19) !important; text-decoration: none !important; }
+:where(.i6) { position: relative !important; width: 100% !important; }
+:where(.i7) { width: 100% !important; aspect-ratio: 16 / 10 !important; overflow: hidden !important; }
+:where(.i8) { width: 100% !important; height: 100% !important; border: 0px !important; display: block !important; pointer-events: none !important; }
+:where(.i9) { display: block !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: rgb(110, 109, 103) !important; }
+:where(.i10) { display: block !important; margin-top: 10px !important; margin-bottom: 0px !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(27px, 2.4vw, 32px) !important; line-height: 1.15 !important; font-weight: 500 !important; letter-spacing: -0.028em !important; }
+:where(.i11) { position: relative !important; display: inline-block !important; }
+:where(.i12) { position: absolute !important; left: 0px !important; right: 0px !important; bottom: -0.14em !important; height: 2px !important; background: rgb(23, 23, 19) !important; transform: scaleX(0) !important; transform-origin: left center !important; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; }
+:where(.i13) { display: block !important; margin-top: 12px !important; font-family: var(--body-face, 'FreightText', Georgia, serif) !important; font-size: 1.125rem !important; line-height: 1.6 !important; color: rgb(110, 109, 103) !important; max-width: 34ch !important; }
+:where(.i14) { max-width: 1240px !important; margin: 4rem auto 0px !important; padding-left: 24px !important; padding-right: 24px !important; box-sizing: border-box !important; display: grid !important; grid-template-columns: repeat(12, minmax(0px, 1fr)) !important; gap: 32px !important; }
+:where(.i15) { grid-column: 1 / -1 !important; max-width: 960px !important; width: 100% !important; margin: 0px auto !important; min-width: 0px !important; }
+:where(.i16) { display: grid !important; grid-template-columns: minmax(0px, 1fr) 360px !important; gap: clamp(40px, 5vw, 72px) !important; align-items: center !important; }
+:where(.i17) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(23px, 2vw, 28px) !important; line-height: 1.15 !important; font-weight: 500 !important; letter-spacing: -0.025em !important; color: rgb(23, 23, 19) !important; margin: 0px 0px 1.75rem !important; }
+:where(.i18) { display: grid !important; row-gap: 1.85rem !important; }
+:where(.i19) { display: grid !important; grid-template-columns: auto minmax(0px, 1fr) !important; gap: 1.3rem !important; align-items: baseline !important; }
+:where(.i20) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 0.95rem !important; font-weight: 500 !important; color: rgb(179, 173, 161) !important; font-variant-numeric: tabular-nums !important; }
+:where(.i21) { margin: 0px 0px 0.3rem !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.1rem, 1.02rem + 0.3vw, 1.2rem) !important; font-weight: 500 !important; letter-spacing: -0.01em !important; line-height: 1.3 !important; color: rgb(13, 12, 9) !important; }
+:where(.i22) { margin: 0px !important; font-family: var(--body-face, 'FreightText', Georgia, serif) !important; font-size: 1.0625rem !important; line-height: 1.55 !important; color: rgb(63, 61, 56) !important; text-wrap: pretty !important; }
+:where(.i23) { aspect-ratio: 1 / 1 !important; border-radius: 12px !important; border: 1px solid rgb(228, 224, 216) !important; overflow: hidden !important; background: rgb(236, 232, 225) !important; }
+:where(.i24) { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: 50% 50% !important; display: block !important; }
+:where(.i25) { grid-column: 1 / -1 !important; max-width: 960px !important; margin: 0px auto !important; padding-bottom: 5rem !important; min-width: 0px !important; }
+:where(.i26) { display: grid !important; grid-template-columns: minmax(0px, 1fr) 360px !important; gap: clamp(40px, 4vw, 72px) !important; align-items: start !important; margin-bottom: 3rem !important; }
+:where(.i27) { padding-top: 0px !important; }
+:where(.i28) { font-family: var(--body-face, 'FreightText', Georgia, serif) !important; max-width: 600px !important; font-size: 1.125rem !important; line-height: 1.6 !important; margin: 0px 0px 1rem !important; text-wrap: pretty !important; }
+:where(.i29) { font-family: var(--body-face, 'FreightText', Georgia, serif) !important; max-width: 600px !important; font-size: 1.125rem !important; line-height: 1.6 !important; margin: 0px !important; text-wrap: pretty !important; }
+:where(.i30) { display: flex !important; align-items: center !important; gap: 1rem !important; margin-top: 1.75rem !important; }
+:where(.i31) { position: relative !important; width: 36px !important; height: 36px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 1px solid rgb(228, 224, 216) !important; opacity: 0.8 !important; text-decoration: none !important; color: rgb(13, 12, 9) !important; transition: opacity 0.2s, border-color 0.2s !important; }
+:where(.i32) { border-top: 1px solid rgb(215, 210, 199) !important; }
+:where(.i33) { display: flex !important; justify-content: space-between !important; align-items: baseline !important; padding: 0.55rem 0px !important; border-bottom: 1px dashed rgb(215, 210, 199) !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1rem !important; }
+:where(.i34) { color: rgb(107, 104, 99) !important; }
+:where(.i35) { font-family: var(--body-face, 'FreightText', Georgia, serif) !important; font-size: 1.0625rem !important; }
+:where(.i36) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; color: rgb(107, 104, 99) !important; margin: 2.25rem 0px 0.75rem !important; font-size: 0.85rem !important; }
+:where(.i37) { color: rgb(154, 150, 143) !important; }
+:where(.i38) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; color: rgb(107, 104, 99) !important; margin: 2.25rem 0px 0.75rem !important; }
+:where(.i39) { max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; box-sizing: border-box !important; padding-bottom: 4rem !important; display: grid !important; grid-template-columns: repeat(12, minmax(0px, 1fr)) !important; gap: 32px !important; }
+:where(.i40) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(23px, 2vw, 28px) !important; font-weight: 500 !important; letter-spacing: -0.025em !important; line-height: 1.15 !important; color: rgb(13, 12, 9) !important; margin: 0px 0px 1.5rem !important; }
+:where(.i41) { border-top: 1px solid rgb(228, 224, 216) !important; }
+:where(.i42) { display: grid !important; grid-template-columns: 84px minmax(0px, 1fr) !important; gap: 1.25rem !important; align-items: center !important; padding: 1rem 0px !important; border-bottom: 1px solid rgb(228, 224, 216) !important; text-decoration: none !important; color: rgb(13, 12, 9) !important; }
+:where(.i43) { width: 84px !important; aspect-ratio: 1 / 1 !important; border-radius: 8px !important; overflow: hidden !important; border: 1px solid rgb(228, 224, 216) !important; background: rgb(24, 24, 24) !important; }
+:where(.i44) { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
+:where(.i45) { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 1rem !important; min-width: 0px !important; }
+:where(.i46) { min-width: 0px !important; }
+:where(.i47) { margin: 0px 0px 0.25rem !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1.0625rem !important; font-weight: 500 !important; letter-spacing: -0.01em !important; line-height: 1.3 !important; color: rgb(13, 12, 9) !important; }
+:where(.i48) { margin: 0px !important; font-family: var(--body-face, 'FreightText', Georgia, serif) !important; font-size: 1rem !important; line-height: 1.5 !important; color: rgb(107, 104, 99) !important; text-wrap: pretty !important; }
+:where(.i49) { display: flex !important; align-items: center !important; gap: 0.85rem !important; flex: 0 0 auto !important; }
+:where(.i50) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 0.7rem !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; color: rgb(138, 134, 126) !important; white-space: nowrap !important; }
+:where(.i51) { width: 84px !important; aspect-ratio: 1 / 1 !important; border-radius: 8px !important; overflow: hidden !important; border: 1px solid rgb(228, 224, 216) !important; background: rgb(236, 232, 225) !important; }
+:where(.i52) { max-width: 1280px !important; margin: 0px auto !important; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem !important; box-sizing: border-box !important; display: flex !important; flex-wrap: wrap !important; gap: 0.75rem 1.25rem !important; align-items: center !important; justify-content: space-between !important; }
+:where(.i53) { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+:where(.i54) { font-weight: 400 !important; color: rgb(13, 12, 9) !important; }
+:where(.i55) { font-size: 0.85rem !important; color: rgb(107, 104, 99) !important; }
+:where(.i56) { position: relative !important; }
+:where(.i57) { position: relative !important; max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; }
+:where(.i60) { display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 32px !important; max-width: 960px !important; margin-left: auto !important; margin-right: auto !important; }
+:where(.i61) { grid-column: 1 / -1 !important; padding: 5.5rem 0px 0px !important; }
+:where(.i62) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.09em !important; text-transform: uppercase !important; color: rgb(6, 136, 240) !important; }
+:where(.i63) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(30px, 3.2vw, 46px) !important; font-weight: 500 !important; line-height: 1.08 !important; letter-spacing: -0.03em !important; margin: 18px 0px 0px !important; text-wrap: balance !important; }
+:where(.i64) { display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 32px !important; align-items: start !important; max-width: 960px !important; margin-left: auto !important; margin-right: auto !important; font-family: FreightText, Georgia, serif !important; font-size: 1.125rem !important; line-height: 1.6 !important; color: rgb(13, 12, 9) !important; }
+:where(.i65) { grid-area: 1 / 1 / auto / -1 !important; padding-bottom: 1.5rem !important; }
+:where(.i66) { display: grid !important; grid-template-columns: minmax(0px, 1.35fr) minmax(280px, 0.85fr) !important; gap: 20px clamp(36px, 4vw, 56px) !important; align-items: start !important; padding: 40px 0px 96px !important; }
+:where(.i67) { max-width: 600px !important; min-width: 0px !important; }
+:where(.i68) { margin: 0px 0px 1rem !important; }
+:where(.i69) { margin: 0px !important; border-top: 1px solid rgb(215, 210, 199) !important; }
+:where(.i70) { display: flex !important; justify-content: space-between !important; align-items: baseline !important; gap: 1.5rem !important; padding: 0.7rem 0px !important; border-bottom: 1px dashed rgb(215, 210, 199) !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1rem !important; line-height: 1.4 !important; }
+:where(.i71) { color: rgb(107, 104, 99) !important; margin: 0px !important; }
+:where(.i72) { font-family: FreightText, Georgia, serif !important; font-size: 1.0625rem !important; margin: 0px !important; text-align: right !important; }
+:where(.i73) { color: rgb(107, 104, 99) !important; margin: 0px !important; flex-shrink: 0 !important; }
+:where(.i74) { grid-column: 1 / -1 !important; margin-top: 1.5rem !important; padding: 1.75rem 2rem !important; background: rgb(251, 250, 249) !important; border: 1px solid rgb(228, 224, 216) !important; border-radius: 10px !important; }
+:where(.i75) { font-size: 0.85rem !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; color: rgb(107, 104, 99) !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; margin-bottom: 1rem !important; }
+:where(.i76) { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; }
+:where(.i77) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem) !important; font-weight: 500 !important; letter-spacing: -0.03em !important; line-height: 1.1 !important; margin: 0px 0px 0.35rem !important; }
+:where(.i78) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 14px !important; line-height: 1.45 !important; color: rgb(107, 104, 99) !important; margin: 0px !important; }
+:where(.i79) { font-family: FreightText, Georgia, serif !important; font-size: 1rem !important; line-height: 1.5 !important; color: rgb(107, 104, 99) !important; margin: 1.25rem 0px 0px !important; }
+:where(.i80) { grid-column: 1 / -1 !important; margin-top: 1.5rem !important; aspect-ratio: 16 / 10 !important; overflow: hidden !important; border-radius: 10px !important; border: 1px solid rgb(228, 224, 216) !important; }
+:where(.i81) { grid-area: 2 / 1 / auto / -1 !important; }
+:where(.i82) { display: grid !important; grid-template-columns: 150px minmax(0px, 1fr) !important; gap: 20px 48px !important; align-items: start !important; max-width: 960px !important; margin-left: auto !important; margin-right: auto !important; padding: 96px 0px !important; border-top: 1px solid rgb(229, 229, 229) !important; }
+:where(.i84) { grid-column: 2 !important; max-width: 600px !important; min-width: 0px !important; }
+:where(.i85) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(23px, 2.1vw, 30px) !important; font-weight: 500 !important; line-height: 1.25 !important; letter-spacing: -0.02em !important; margin: 0px 0px 0.85rem !important; text-wrap: balance !important; }
+:where(.i86) { margin: 0px !important; }
+:where(.i87) { margin: 1.5rem 0px !important; }
+:where(.i88) { margin-top: 3.5rem !important; }
+:where(.i89) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(20px, 1.7vw, 25px) !important; font-weight: 500 !important; line-height: 1.3 !important; letter-spacing: -0.015em !important; margin: 0px 0px 0.6rem !important; }
+:where(.i90) { margin: 0px 0px 2rem !important; }
+:where(.i91) { margin-bottom: 1.5rem !important; }
+:where(.i92) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1.125rem !important; font-weight: 500 !important; line-height: 1.4 !important; margin: 0px 0px 0.4rem !important; display: flex !important; align-items: center !important; gap: 0.5em !important; }
+:where(.i93) { color: rgb(107, 104, 99) !important; flex-shrink: 0 !important; font-variant-numeric: tabular-nums !important; }
+:where(.i94) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1.125rem !important; font-weight: 500 !important; line-height: 1.4 !important; margin: 0px 0px 0.5rem !important; }
+:where(.i95) { margin: 0px 0px 1.5rem !important; }
+:where(.i96) { margin-top: 0 !important; }
+:where(.i97) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem) !important; font-weight: 500 !important; line-height: 1.35 !important; margin: 0px 0px 0.5rem !important; }
+:where(.i98) { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 2rem !important; padding: 1rem 0px 2rem !important; }
+:where(.i99) { font-weight: 500 !important; font-size: 1.125rem !important; line-height: 1.5 !important; border-left: 3px solid rgb(107, 104, 99) !important; background: rgb(242, 241, 236) !important; padding: 1.25rem 1.5rem !important; margin: 0px !important; }
+:where(.i100) { display: block !important; font-style: normal !important; font-size: 0.9rem !important; color: rgb(107, 104, 99) !important; margin-top: 0.75rem !important; }
+:where(.i101) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem) !important; font-weight: 400 !important; line-height: 1.3 !important; margin: 2.5rem 0px 0.5rem !important; }
+:where(.i102) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 14px !important; line-height: 1.45 !important; color: rgb(107, 104, 99) !important; margin: 0px 0px 1rem !important; }
+:where(.i103) { margin: 0px !important; font-size: 0.9rem !important; line-height: 1.5 !important; color: rgb(107, 104, 99) !important; }
+:where(.i104) { grid-column: 1 / -1 !important; margin-top: 1.5rem !important; aspect-ratio: 16 / 10 !important; overflow: hidden !important; border-radius: 10px !important; }
+:where(.i105) { margin-top: 2.5rem !important; }
+:where(.i106) { margin: 2.5rem 0px 1rem !important; }
+:where(.i107) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem) !important; font-weight: 400 !important; line-height: 1.3 !important; margin: 0px 0px 2rem !important; }
+:where(.i108) { margin-bottom: 1.5rem !important; display: flex !important; flex-wrap: nowrap !important; gap: 1.5rem !important; align-items: flex-start !important; }
+:where(.i109) { flex: 0 1 200px !important; min-width: 150px !important; max-width: 225px !important; }
+:where(.i110) { width: 100% !important; height: auto !important; display: block !important; border-radius: 10px !important; border: 1px solid rgb(228, 224, 216) !important; background: rgb(255, 255, 255) !important; }
+:where(.i111) { flex: 1 1 320px !important; min-width: 280px !important; }
+:where(.i112) { font-size: 0.85rem !important; font-weight: 400 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; color: rgb(107, 104, 99) !important; margin-bottom: 0.5rem !important; }
+:where(.i113) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1.125rem !important; font-weight: 500 !important; line-height: 1.4 !important; margin: 0px 0px 0.4rem !important; }
+:where(.i114) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1.125rem !important; font-weight: 500 !important; line-height: 1.4 !important; margin: 2rem 0px 0.4rem !important; }
+:where(.i115) { margin: 0px 0px 2.5rem !important; }
+:where(.i116) { margin: 2.5rem 0px !important; }
+:where(.i117) { padding-top: 1rem !important; }
+:where(.i118) { margin: 1.5rem 0px 0px !important; }
+:where(.i119) { padding: 1rem 0px 2rem !important; }
+:where(.i120) { font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem) !important; font-weight: 500 !important; letter-spacing: -0.03em !important; line-height: 1.1 !important; margin: 0px 0px 0.3rem !important; }

@@ -1,0 +1,202 @@
+/* Site-wide styles: editorial look (paper and ink, single sans). Loaded on every page after
+   legacy-inline.css; see CLAUDE.md for the file structure. */
+
+/* Named base styles (from the old export). Zero specificity, so every rule below can override them. */
+:where(.site-footer) { border-top: 1px solid rgb(228, 224, 216) !important; }
+:where(.site-footer-inner) { max-width: 1280px !important; margin: 0px auto !important; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 4rem !important; box-sizing: border-box !important; display: flex !important; flex-wrap: wrap !important; gap: 0.75rem 1.25rem !important; align-items: center !important; justify-content: space-between !important; }
+:where(.site-footer-brand) { display: flex !important; align-items: center !important; gap: 0.75rem !important; }
+:where(.site-footer-name) { font-weight: 400 !important; color: rgb(13, 12, 9) !important; }
+:where(.site-footer-copy) { font-size: 0.85rem !important; color: rgb(107, 104, 99) !important; }
+:where(.page) { position: relative !important; }
+:where(.page-container) { position: relative !important; max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; }
+:where(.text-link) { color: rgb(6, 136, 240) !important; }
+
+:root {
+  --paper: #ffffff;
+  --muted: #f2f1ec; /* warm muted band, matches the legacy-tools collage background */
+  --ink: #232220;
+  --ink-2: rgba(35, 34, 32, 0.64);
+  --ink-3: rgba(35, 34, 32, 0.42);
+  --rule: rgba(35, 34, 32, 0.14);
+  --accent: #1f5a57;
+  --body-face: 'Sohne', -apple-system, system-ui, sans-serif;
+  /* Case study panels: one deep, muted tone per project */
+  /* Case study panels: one deep, muted tone per project */
+  --panel-1: #17403e; /* deep teal-green */
+  --panel-2: #222a35; /* deep slate */
+  --panel-3: #3A2840; /* deep plum; baked into the Quick Reply video (original umber copy kept in the session scratchpad) */
+}
+
+html, body { background: var(--paper) !important; }
+body { color: var(--ink) !important; }
+a { color: var(--accent); }
+a:hover { color: #164644; }
+
+/* Header */
+header[data-behavior="site-header"] {
+  background: rgba(255, 255, 255, 0.86) !important;
+  border-bottom-color: var(--rule) !important;
+}
+.site-header-mark rect { fill: var(--ink); }
+.nav-desktop a { opacity: 1 !important; color: var(--ink-2) !important; font-size: 0.98rem !important; }
+.nav-desktop a:hover { color: var(--ink) !important; }
+.contact-desktop-wrap a, .contact-desktop a {
+  border-radius: 10px !important;
+  background: var(--ink) !important;
+}
+
+/* Secondary text: one ink at reduced opacity instead of separate grays */
+:is([style*="color: rgb(110, 109, 103)"], .i9, .i13),
+:is([style*="color: rgb(107, 104, 99)"], .i34, .i36, .i38, .i48, .i55, .i71, .i73, .i75, .i78, .i79, .i93, .i100, .i102, .i103, .i112, .site-footer-copy, .outcomes-label, .stat-caption, .stat-source) { color: var(--ink-2) !important; }
+:is([style*="color: rgb(13, 12, 9)"], .i21, .i31, .i40, .i42, .i47, .i54, .i64, .site-footer-name),
+:is([style*="color: rgb(23, 23, 19)"], .i5, .i17) { color: var(--ink) !important; }
+
+/* Hero: lighter, larger, tighter */
+.hero-section { padding-top: 104px !important; padding-bottom: 184px !important; min-height: 0 !important; }
+/* Let the first case study peek above the fold */
+.work-section { margin-top: 0 !important; }
+.work-grid { margin-top: 0 !important; }
+.hero-line-sans {
+  font-weight: 400 !important;
+  font-size: clamp(44px, 4.6vw, 68px) !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1.02 !important;
+  max-width: 9.6em !important;
+}
+.hero-sub {
+  font-family: var(--body-face) !important;
+  font-size: 18px !important;
+  line-height: 1.5 !important;
+  letter-spacing: -0.006em !important;
+  max-width: 40ch !important;
+}
+.hero-grid { opacity: 0.55; }
+/* Stop the grid well above the first case study */
+.hero-paper { bottom: 120px !important; }
+.hero-scene span:is([style*="border"], .i8, .i14, .i23, .i31, .i32, .i33, .i39, .i41, .i42, .i43, .i51, .i52, .i69, .i70, .i74, .i80, .i82, .i99, .i104, .i110, .site-footer, .site-footer-inner, .outcomes-card, .case-section, .outcomes-photo, .case-section-end) { border-color: rgba(35, 34, 32, 0.18) !important; }
+
+/* Body copy: single sans throughout */
+:is([style*="FreightText"], .i13, .i22, .i28, .i29, .i35, .i48, .i64, .i72, .i79) {
+  font-family: var(--body-face) !important;
+  letter-spacing: -0.006em !important;
+}
+
+/* Sections are separated by space alone */
+#how-i-help, #about, #side-projects { margin-top: clamp(96px, 12vw, 176px) !important; }
+
+/* Section headings: big, light */
+#how-i-help h3.help-heading,
+#side-projects h3.beyond-heading,
+.v-section-title {
+  font-size: clamp(32px, 3.4vw, 46px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.1 !important;
+  margin: 0 0 2.25rem !important;
+}
+
+/* Work: stacked feature blocks, screenshot inside a full-width color panel */
+.work-section { padding-bottom: 7rem !important; }
+.work-grid { gap: clamp(88px, 10vw, 136px) !important; }
+.project {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 28px !important;
+}
+.project-meta {
+  order: -1;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: clamp(24px, 4vw, 64px);
+  align-items: end;
+}
+.project-meta > span:first-child {
+  grid-column: 1 / -1;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: pre;
+  color: var(--ink-2) !important;
+}
+.project-meta h3 {
+  font-size: clamp(32px, 3.4vw, 46px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.08 !important;
+}
+.project-meta > span:last-child {
+  margin-top: 0 !important;
+  max-width: 40ch !important;
+  justify-self: end;
+}
+.project-ui-wrap {
+  background: var(--panel, var(--panel-1));
+  padding: clamp(20px, 5vw, 72px) clamp(20px, 7vw, 112px) 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.project:nth-child(1) { --panel: var(--panel-1); }
+.project:nth-child(2) { --panel: var(--panel-2); }
+.project:nth-child(3) { --panel: var(--panel-3); }
+/* Quick Reply video has the panel color baked in behind the phone */
+.project-ui-wrap video { background: var(--panel) !important; }
+/* The screenshot sinks slightly past the panel's bottom edge
+   (Recruiter Inbox stays as-is) */
+.project { --sink: clamp(16px, 2.6vw, 36px); }
+.project:nth-child(2) { --sink: 0px; }
+.project-frame {
+  border-radius: 12px 12px 0 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+  transform: translateY(var(--sink));
+}
+/* Benchling: no border, so the animation sits flush with the frame edge.
+   Its top padding matches Recruiter Inbox (frame starts at the panel padding, no downward offset);
+   the frame runs taller by the usual sink, so the animation bleeds off the bottom instead. */
+.project:nth-child(1) .project-frame { border: 0 !important; }
+.project:nth-child(1) .project-ui-wrap { container-type: inline-size; }
+.project:nth-child(1) .project-frame { aspect-ratio: auto !important; height: calc(62.5cqw + var(--sink)) !important; margin-bottom: calc(-1 * var(--sink)) !important; transform: none !important; }
+.project:nth-child(1) .project-ui-wrap:hover .project-frame, .project:nth-child(1):focus-visible .project-frame { transform: none !important; }
+/* Quick Reply: the video fills the whole panel, so no seam shows where the
+   video's baked-in background meets the CSS panel color */
+.project:nth-child(3) .project-ui-wrap { padding: 0 !important; }
+.project:nth-child(3) .project-ui-wrap video { object-fit: cover !important; }
+/* Hover: no zoom, just a deeper shadow */
+.project-frame { transform-origin: 50% 100%; }
+.project-ui-wrap video {
+  transform-origin: 50% 100%;
+  transition: transform 420ms cubic-bezier(0.33, 0.68, 0.35, 1);
+}
+.project-frame { transition: transform 420ms cubic-bezier(0.33, 0.68, 0.35, 1), box-shadow 420ms cubic-bezier(0.33, 0.68, 0.35, 1) !important; }
+.project-ui-wrap:hover .project-frame,
+.project:focus-visible .project-frame {
+  transform: translateY(var(--sink)) !important;
+  box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.55) !important;
+}
+@media (max-width: 760px) {
+  .project-meta { grid-template-columns: 1fr; }
+  .project-meta > span:last-child { justify-self: start; margin-top: 12px !important; }
+}
+
+/* Spec table, rows, footer */
+:is([style*="border-bottom: 1px solid rgb(228, 224, 216)"], .i42),
+:is([style*="border-top: 1px solid rgb(228, 224, 216)"], .i41, .site-footer) { border-color: var(--rule) !important; }
+footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
+.beyond-row:hover .beyond-title, .beyond-row:focus-visible .beyond-title { color: var(--accent) !important; }
+.side-project-tile, .beyond-thumb { border-radius: 10px !important; }
+
+/* Warm muted band behind About, full-bleed; Beyond work returns to white */
+#about {
+  background: var(--muted);
+  box-shadow: 0 0 0 100vmax var(--muted);
+  clip-path: inset(0 -100vmax);
+  padding-top: clamp(80px, 9vw, 128px) !important;
+  padding-bottom: 0 !important; /* the section already carries its own bottom space */
+}
+
+/* Work cards: same left edge as the hero, narrower overall (columns 2-11 of the 12-column grid) */
+@media (min-width: 1001px) { .work-grid { grid-column: 2 / 12 !important; } }
+
+/* Each work card (title row + cover image) fits in one viewport: cap the card width by the viewport height */
+@media (min-width: 1001px) { .project { max-width: max(640px, calc((100vh - 230px) * 1.6)); width: 100%; margin-left: auto; margin-right: auto; } }

@@ -1,234 +1,84 @@
 # jialiu-portfolio
 
-A pre-rendered static site (plain HTML/CSS/JS, no build step). Pages are
-exported from a Claude Design canvas ("DC") and dropped into this repo as
-complete HTML files plus `site-behaviors.js` and `assets/`.
+Jia's design portfolio: plain static HTML, CSS and JS, no build step. The HTML
+in this repo is the source of truth. Pages are edited here directly with
+Claude Code (Claude Design and its canvas export are no longer part of the
+workflow), so there is no export to reconcile and no "code-only fix" list.
 
-## Deploy workflow
+## Pages
 
-The user's normal flow: Claude Design export lands in a local folder (e.g.
-`~/Downloads/deploy N`), gets dragged into a Claude Code session, reviewed,
-committed, and pushed. `git pull` first — origin is the source of truth,
-since fixes can land there directly (PRs, web edits) without ever touching
-the Design canvas.
+- `index.html` (home), `benchling-bioanalytical.html`, `linkedin-recruiter-inbox.html`,
+  `linkedin-quick-reply.html`, `404.html`.
+- The old export's inline styles now live in `legacy-inline.css` as numbered classes
+  (`.i1`, `.i2`, ...), written as `:where(.iN) { ... !important }` so any page stylesheet
+  can override them. Don't add new `iN` classes; when you polish an area, replace its
+  `iN` classes with named ones in `case.css` or the page file. The page stylesheets still
+  use `!important` because of this layer.
+- Bioanalysis has no numbered classes left. Its named vocabulary sits at the top of
+  `site.css` (`page`, `page-container`, `site-footer*`, `text-link`), `case.css`
+  (`case-section`, `case-column`, `case-p`, `case-h1`/`case-h3`, `intro`, `outcomes-card`,
+  `stat-row`, `stat`, `stat-caption`, `hero-media`, `span-full`, ...) and
+  `case-bioanalysis.css`. Use these names when converting the LinkedIn pages and the
+  homepage.
+- Inline `style` attributes remain only where scripts restyle elements at runtime: the
+  header and header spacer, the section nav, `[data-behavior]` widgets, the homepage hero,
+  expandable images, and `.bio-shell`. Leave those inline (a class with `!important`
+  would beat the script's inline writes).
 
-## IMPORTANT: known code-only fixes to re-check after every fresh export
+## Styles and scripts (load order matters: later files win)
 
-The Design canvas is a separate source of truth from this repo's HTML. Any
-fix applied by editing the exported HTML/JS directly (not in the Design
-canvas itself) is invisible to Claude Design and **will silently regress**
-the next time that page or `site-behaviors.js` is re-exported — the export
-just overwrites the fix with the canvas's stale version. This has already
-happened three times. Before treating a fresh export as done, diff the
-incoming files against these known fixes and reapply any that got clobbered:
+| File | Loaded on | Purpose |
+|---|---|---|
+| `legacy-inline.css` | every page (first) | Former inline styles; see above. |
+| `site.css` | every page | Site-wide look: paper/ink tokens, header and nav, homepage hero, work cards, About, footer. |
+| `case.css` | every case study | Shared case study foundations: spacing scale tokens, section headings, rules/links/image corners, and the intro (role stack + Outcomes label). |
+| `case-bioanalysis.css` | Bioanalysis | Its layouts: feature scroll, mapping and tests bands, plate/data diagrams, Problem band, decision cards. Bioanalysis is the reference design for all case studies. |
+| `case-linkedin.css` | Recruiter Inbox, Quick Reply | Type scale and rhythm hooks for their markup, the muted Problem band, the intro grid. |
+| `case-recruiter.css` | Recruiter Inbox | Wide figures, side-by-side text and figure, banded figure, quote weight. |
+| `site.js` | every page | Homepage copy (hero, About), work card facts. |
+| `case.js` | every case study | Title eyebrow, hidden section labels, Outcomes label, feature-scroll driver, spacing class hooks (`v-sub`, `v-figwrap`, ...). |
+| `case-recruiter.js` | Recruiter Inbox | Groups paragraphs with figures for the split layouts; size modifiers. |
+| `site-behaviors.js` | every page | Interaction: header hide/show, contact popover, section nav, lightbox, video play-on-view, hero dots. |
 
-1. **Homepage hover captions** (`index.html`): `.scp0:hover, .scp0:focus-visible
-   { --deepen: 1; }` must exist in the `<style>` block, AND no `.scp0` anchor
-   may carry an inline `--deepen: 0` in its `style` attribute (inline styles
-   beat the stylesheet rule outright, regardless of selector specificity —
-   removing the inline override, not just re-adding the rule, is what fixes
-   it). Affects the three work cards and three side-project tiles.
+Each `<link>`/`<script>` carries a `?v=N` cache-buster; bump it whenever you edit the file.
 
-2. **Margin notes / sidenotes** (`benchling-bioanalytical.html` or any page
-   using the `MarginNote` component): the export bakes in only whichever
-   viewport branch (desktop sidenote vs. mobile trigger) was active in the
-   editor canvas at capture time, never both. Check that every
-   `.sc-host[data-sc-name="MarginNote"]` contains both the `.margin-note`
-   aside and the `.margin-note-trigger` button, and that `site-behaviors.js`
-   still has `initMarginNotes()` wired up for the mobile modal.
+Diagrams and product animations are standalone pages in `assets/anim/` (shared helpers:
+`_base.css`, `_base.js`, `bioa-map.css`, `bioa-map.js`), embedded with iframes.
 
-3. **Blob-hydrated video** (`index.html`, the RB Tagger side-project tile):
-   the deploy host ignores Range headers, so a non-faststart `.mp4` (moov atom
-   after mdat) can't be parsed from a plain `<video src>` — `site-behaviors.js`
-   has a `data-blob-src` fetch-and-hydrate workaround for exactly this file
-   (see the comment above `hydrateBlob` in `initVideoAutoplay`). The export
-   bakes the video tag back to a plain `src="assets/video/rb-tagger-4-3.mp4"
-   autoplay`, dropping `data-blob-src` and disabling the workaround. Check
-   `grep -n 'rb-tagger-4-3.mp4' index.html` — the tag must read
-   `<video data-blob-src="assets/video/rb-tagger-4-3.mp4" playsinline=""
-   loop="" style="...">` with no `src` or `autoplay` attribute. If a future
-   export ships this file already faststart-encoded (moov before mdat — check
-   with `python3 -c "import struct; ..."` reading the top-level box order),
-   the plain `src` may be safe again, but until the host's Range-header
-   behavior is confirmed, keep reapplying `data-blob-src`.
+## Design system (case studies)
 
-4. **Three-tier diagram spacing** (`benchling-bioanalytical.html`): two
-   code-only pieces on `#three-tier-foundation-fullbleed`, both clobbered by
-   re-export.
+- Type scale: title 64 · h2 38 · h3 28 · card titles 22 · body 17 · labels 14 (px, max).
+- Spacing: 12 heading→text · 16 paragraph · 40 text↔figure · 72 repeated block ·
+  96 subsection · 144 section · bands 96 outside, 80 inside. Tokens `--r-*` and
+  `--band-*` live in `case.css`.
+- Headlines: no trailing periods; avoid "What <verb>" constructions.
+- White page; warm muted (`--muted`) and slate bands for emphasis. No eyebrow labels,
+  hairline rules or monospace labels.
 
-   a. *Desktop top margin.* The export ships an inline `margin-top: -1.5rem` —
-      a "tuck" that pulls the diagram up tight under the paragraph above it
-      ("I'll focus on two key areas…"). Jia found that too tight (2026-08-12);
-      the desktop value must be **`0`** so the diagram gets real breathing
-      room. Check: `grep -n 'three-tier-foundation-fullbleed'
-      benchling-bioanalytical.html` — the inline style must read
-      `margin: 0px 0px 0.5rem`, not `margin: -1.5rem 0px 0.5rem`.
+## Things that must stay true
 
-   b. *Tablet override.* At ≤1100px `#approach` stacks to one column; the old
-      negative margin used to overlap (cut off) that same paragraph, so a
-      neutralizing rule sets the stacked value explicitly. Keep it spanning the
-      whole stacked range: `@media (max-width: 1100px)
-      { #three-tier-foundation-fullbleed { margin-top: 2rem !important; } }`.
-      The export ships this override scoped to `max-width: 600px` only, leaving
-      the 601–1100px tablet range wrong — widen it back to `1100px`. (This rule
-      stays even now that the desktop tuck is gone: it keeps the stacked gap at
-      2rem rather than inheriting the desktop `0`.) Check: the `@media`
-      guarding the `margin-top: 2rem` rule must read `max-width: 1100px`, not
-      `600px`.
-
-5. **Hero availability chip removed** (`index.html`): as of 2026-08-17 the
-   "Available for consulting & full-time roles" chip and its "Get in touch"
-   popover are deleted from the hero — the whole
-   `data-behavior="avail-wrap"` block after the hero sub-paragraph, plus the
-   `availPulse` keyframes / `.avail-dot` rules in the `<style>` block. This
-   deletion is code-only; the chip still exists in the Design canvas, so a
-   re-export will bring it back. Check: `grep -n 'avail' index.html` should
-   only match the unrelated "I'm available for consulting…" body copy in the
-   about section — if it matches `avail-wrap`/`avail-chip`, delete the block
-   again. (`initAvailChip()` in `site-behaviors.js` is left in place; it
-   no-ops when the wrap is absent, and it's needed again if the chip
-   returns.)
-
-   Historical, and still the fix if the chip ever comes back: the hero
-   content grid (the `data-dc-tpl="57"` div — the one with
-   `display: grid; grid-template-columns: repeat(12, 1fr)`) must carry
-   `z-index: 2`, not `z-index: 1`. That grid is a stacking context, and it
-   traps the avail-chip popover (`data-behavior="avail-card"`, `z-index: 30`
-   internally) inside itself. The next sibling after the hero `<section>` is
-   `.work-reveal` (`position: relative; z-index: 1`), which holds the work
-   cards / case-study images. At `z-index: 1` the hero grid ties with
-   `.work-reveal` and, being earlier in the DOM, loses — so the open popover
-   paints *under* the first case-study image (most visible on mobile, where
-   the hero's bottom padding shrinks and the card reaches down into the work
-   section). Bumping the grid to `z-index: 2` lifts the whole hero subtree —
-   popover included — above `.work-reveal`, while staying below the sticky
-   header (`z-index: 5`). The export ships this grid back at `z-index: 1`.
-   Check: `grep -n 'repeat(12, 1fr)' index.html` — the hero grid's inline
-   style must read `z-index: 2`.
-
-   The z-index bump alone fixes desktop but NOT mobile: the case-study
-   previews below are `<iframe>`/`<video>` replaced elements, which mobile
-   browsers (iOS Safari, Chrome Android) composite into their own GPU layers.
-   A plain 2D `transform` promotes the popover to a compositing layer only
-   *during* its open transition; once it settles the browser demotes it and
-   it drops back under the always-composited iframe/video layers — so the
-   popover paints correctly for a frame, then slides under. The second half
-   of the fix keeps the popover permanently on its own layer: the avail-card's
-   inline style must carry `will-change: transform` and use a 3D transform
-   (`transform: translate3d(0px, -6px, 0px)`, not `translateY(-6px)`), AND
-   `initAvailChip()` in `site-behaviors.js` must toggle the open/closed state
-   with `translate3d(...)` too (not `translateY(...)`). Both halves are
-   code-only and will be clobbered by a re-export. Check: `grep -n
-   'avail-card' index.html` shows `will-change: transform` + `translate3d`,
-   and `grep -n 'translate3d' site-behaviors.js` finds the `set()` toggle.
-
-6. **Case-study section-nav ticks collect all heading levels**
-   (`site-behaviors.js`, `scanHeadings()` inside `initSectionNav()`): the
-   tick-mark stack has one mark per section heading, and the sections are
-   titled with a mix of `h1` (intro), `h2` (major parts), and `h3`
-   (sub-sections). `scanHeadings()` must gather **`$$('h1, h2, h3')`** in
-   document order (querySelectorAll returns them ordered, so the h1 leads
-   naturally). The export ships the canvas's version, which collects only
-   `h3` and prepends the `h1` — dropping every `h2`. That leaves ~⅓ fewer
-   headings than marks (roughly a third of the headings are h2), so the tail
-   marks map to nothing: they hover with no preview card and don't scroll on
-   click. Symptom: the ticks "stop working about 2/3 of the way down."
-   Check: `grep -n "scanHeadings" -A3 site-behaviors.js` — the collector line
-   must read `$$('h1, h2, h3')`, not `$$('h3')` with an `unshift` of the h1.
-   `npm run smoke-test` now covers this: it clicks the LAST tick mark on
-   every case study page and fails if the page doesn't scroll, which is
-   what a dead tail mark does. Quick manual check of the same thing:
-   `for f in benchling-bioanalytical linkedin-quick-reply linkedin-recruiter-inbox; do echo -n "$f "; echo "$(grep -oc 'data-index=' $f.html) marks / $(( $(grep -oc '<h1' $f.html) + $(grep -oc '<h2' $f.html) + $(grep -oc '<h3' $f.html) )) headings"; done`
-
-7. **Favicon mark in the global nav header** (`index.html`,
-   `benchling-bioanalytical.html`, `linkedin-quick-reply.html`,
-   `linkedin-recruiter-inbox.html`): the header logo link
-   (`a.site-header-logo`) leads with an inline `svg.site-header-mark` — the
-   rounded-square J from `assets/img/favicon.svg`, at 22px, `aria-hidden`
-   since the anchor already reads "Jia Liu". It's inlined rather than an
-   `<img src="assets/img/favicon.svg">` so it costs no extra request and the
-   `rx="112"` rounding survives without relying on `border-radius` clipping
-   the SVG box. The canvas ships the anchor as bare "Jia Liu" text (the
-   `gap: 0.55rem` on the flex anchor is the only trace of a mark), so a
-   re-export drops the svg. Check: `grep -c 'site-header-mark' index.html
-   benchling-bioanalytical.html linkedin-quick-reply.html
-   linkedin-recruiter-inbox.html` returns 1 for each. (`404.html` has no
-   site header and is intentionally left alone.)
-
-8. **Lightbox test hook** (`site-behaviors.js`, `open()` inside
-   `initLightbox()`): the overlay element must carry
-   `overlay.setAttribute('data-lightbox-overlay', '')` alongside its inline
-   `style`. Nothing on the page needs the attribute, so losing it breaks
-   nothing visible — the lightbox still opens, zooms and closes — but
-   `scripts/smoke-test.js` matches on it, so the suite reports "did not open
-   the lightbox overlay" for every case study page while the feature works
-   fine. That exact sequence already happened once: `3f76f21` added the hook
-   on 2026-08-01 and `499426e` re-exported `site-behaviors.js` over it the
-   same evening. Check: `grep -c 'data-lightbox-overlay' site-behaviors.js`
-   returns 1.
-
-9. **Homepage title includes "portfolio"** (`index.html`): the `<title>` and
-   `og:title` must read `Jia Liu - Product Design Portfolio`. The canvas ships
-   `Jia Liu - Product Designer`, and with no other visible "portfolio" on the
-   page Google showed "Missing: portfolio" for searches like "jia liu design
-   portfolio" (the meta description doesn't count for ranking). Added
-   2026-09-26. Check: `grep -c 'Product Design Portfolio' index.html` returns 2.
-
-If a new export reintroduces one of these issues, or you find another
-instance of this pattern (a code-only fix silently reverted by re-export),
-fix it the same way — diff against the last-known-good version of the file
-to see exactly what the export changed — and add it to this list.
-
-### Resolved durably in the canvas (verify, don't reapply)
-
-- **Case-study section-nav left offset.** The tick-mark nav on the case
-  study pages (`benchling-bioanalytical.html`, `linkedin-quick-reply.html`,
-  `linkedin-recruiter-inbox.html`) must sit in the left margin, clear of the
-  reading column. In the editor this is a `left-offset` React prop (case
-  studies use `-104`) consumed by `navLeft()` at render; a plain capture
-  dropped it, so `placeNav()` fell back to the shell's left edge and the
-  marks overlapped the body. Fixed at the source: the canvas now serializes
-  the offset and target onto the nav element as `data-left-offset="-104"`
-  and `data-align-to=".bio-shell, .cs-shell"` — that HTML serialization has
-  proven durable. But the *consuming* half — `placeNav()` in
-  `site-behaviors.js` reading both (`Math.max(12, shellLeft + offset)`, whose
-  clamp keeps marks on-screen just above the 1100px breakpoint) — is code-only
-  and has already been silently reverted by a later export back to a bare
-  `$('.bio-shell, .cs-shell')` / `left = shellLeft` with no offset. So this is
-  really half-durable: after every export confirm BOTH sides — `grep -o
-  'data-left-offset="[^"]*" data-align-to="[^"]*"'` on each case study page
-  returns the pair (HTML side), AND `placeNav()` still reads them with the
-  clamp (JS side, reapply from the last-known-good `site-behaviors.js` if the
-  export flattened it). Expected geometry at ≥1168px: marks ~48px clear of the
-  reading column.
-
-- **Hero availability chip.** The "Available for consulting…" chip in the
-  hero (`index.html`) opens a "Get in touch" popover; in the editor that's a
-  React `onClick`, dropped by the static capture, so early exports shipped a
-  dead chip. Fixed at the source: the canvas now serializes
-  `data-behavior="avail-wrap"` / `avail-toggle` / `avail-card` /
-  `avail-chevron` / `avail-close` onto the block and `data-behavior="copy-email"`
-  onto the popover's copy button, and `initAvailChip()` in `site-behaviors.js`
-  binds off those (copy reuses the shared `copy-email` handler). Durable so
-  far, but both halves are needed, so confirm after an export: `index.html`
-  contains `data-behavior="avail-toggle"` and `site-behaviors.js` contains
-  `initAvailChip` (registered in `initAll`).
+1. **Section nav marks = headings.** On each case study, the count of
+   `button[data-index]` in the section nav must equal the number of `h1, h2, h3`
+   headings, in the same order (`aria-label` = heading text). When adding or removing
+   a heading, add/remove its mark and renumber `data-index` from 0.
+2. **Lightbox hook.** `site-behaviors.js` sets `data-lightbox-overlay` on the overlay;
+   the smoke test matches on it.
+3. **Homepage title** reads `Jia Liu - Product Design Portfolio` in both `<title>` and
+   `og:title` (search ranking).
+4. **Videos are faststart** (index before data), so `preload="metadata"` is cheap. If a
+   new clip isn't, run `ffmpeg -i in.mp4 -c copy -movflags +faststart out.mp4`. The host
+   ignores Range headers; `site-behaviors.js` still supports `data-blob-src` as a fallback
+   for a clip that can't be re-muxed.
+5. **Images** use WebP where it is smaller, with `width`/`height`, `loading="lazy"` and
+   `decoding="async"` on every `<img>`.
+6. **`noindex`** is only on `404.html`. Don't add it to real pages.
 
 ## Verifying changes
 
-There's a static file server preconfigured in `.claude/launch.json`
-(`python3 -m http.server` on port 8123) — use the Browser pane's
-`preview_start` with `{name: "static-site"}` rather than starting a server
-manually. After copying in new export files, actually load the changed
-pages (desktop and mobile widths) and check for the two issues above plus
-the general basics: broken images/videos, horizontal overflow, console
-errors — before committing.
-
-## Scope discipline
-
-When the user says "update X" for specific pages, only touch those pages'
-HTML files plus any assets they actually reference (check with `grep -o
-'(src|href)="assets/[^"]+"' <file>` and diff against what's already in
-`assets/`). `site-behaviors.js` is shared across all pages — check its diff
-for backward compatibility with pages you're not updating before assuming
-it's safe to bring over wholesale.
+- Static server: `.claude/launch.json` (`python3 -m http.server 8123`).
+- Load changed pages at desktop and phone widths; check for horizontal overflow,
+  console errors and broken media.
+- `npm install && npm run smoke-test` (Playwright) checks every page's JS errors, assets,
+  hooks, nav and lightbox.
+- For refactors, compare element positions and computed styles before and after on each
+  page; layout should not move unless that is the intent.

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tests model</title>
+<link rel="stylesheet" href="bioa-map.css">
+<style>
+/* Same vocabulary as the model diagram: outlined cards, white chips, dashed lavender for what's new.
+   Three rows (how customers modeled it, what the workflow engine offered, with a test object). Row labels sit
+   18px above their cards, dividers are centered between rows, outer cards share one width, and each row's
+   gaps are equal. Both Test cards are centered on x=490. */
+.row-lbl { position: absolute; left: 0; font-size: 15px; line-height: 18px; color: var(--muted); }
+.card { position: absolute; height: 100px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; padding: 0 22px; }
+.card .nm { font-size: 22px; }
+.card .sub { font-size: 14px; }
+.card.dim { border-color: transparent; }
+.card.faded { opacity: 0.45 !important; }
+.chips { display: flex; gap: 8px; margin-top: 12px; }
+.chip { height: 30px; padding: 0 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 14px; display: inline-flex; align-items: center; white-space: nowrap; }
+.chip.cur { background: rgb(214, 186, 232); }
+.note { position: absolute; font-size: 15px; line-height: 18px; color: var(--muted); white-space: nowrap; }
+.note b { font-weight: 400; color: #f4efe9; }
+.edge { position: absolute; font-size: 14px; line-height: 16px; color: var(--muted); width: 140px; text-align: center; }
+svg.links path.solid { stroke-dasharray: none; stroke: rgba(244, 239, 233, 0.45); }
+.divider { position: absolute; left: 0; right: 0; height: 2px; background: repeating-linear-gradient(90deg, rgba(244, 239, 233, 0.14) 0 5px, transparent 5px 11px); }
+.eye { position: absolute; left: 473px; top: 148px; width: 34px; height: 22px; }
+</style></head><body>
+<div class="stage">
+  <!-- Row 1: a test is just a linked record -->
+  <div class="row-lbl" style="top:0">A workaround some customers built</div>
+  <div class="card c-s1" style="left:0;top:30px;width:200px"><div class="nm">Sample</div><div class="sub">Serum, Day 29</div></div>
+  <div class="card dim c-t1" style="left:340px;top:30px;width:300px"><div class="nm">Test</div><div class="sub">Custom entity, linked for the record</div></div>
+  <div class="card c-r1" style="left:780px;top:30px;width:200px"><div class="nm">Result</div><div class="sub">Entered by hand</div></div>
+  <svg class="eye" viewBox="0 0 34 22" fill="none" stroke="rgba(244,239,233,0.7)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 11C5 5 10.5 1.5 17 1.5S29 5 32.5 11C29 17 23.5 20.5 17 20.5S5 17 1.5 11z"/><circle cx="17" cy="11" r="4.5"/></svg>
+  <div class="note" style="left:290px;top:178px;width:400px;text-align:center">Scientists view custom entities and <b>infer what to do</b></div>
+
+  <div class="divider" style="top:222px"></div>
+
+  <!-- Row 2: the workflow engine is task-first -->
+  <div class="row-lbl" style="top:246px">What the workflow engine offered</div>
+  <div class="card c-s3" style="left:0;top:276px;width:200px"><div class="nm">Sample</div><div class="sub">Serum, Day 29</div></div>
+  <div class="card c-w" style="left:340px;top:276px;width:300px"><div class="nm">Workflow task</div><div class="sub">Assigned to a person</div></div>
+  <div class="card faded c-r3" style="left:780px;top:276px;width:200px"><div class="nm">Result</div><div class="sub">Not in the task view</div></div>
+  <div class="edge" style="left:200px;top:307px">covers</div>
+  <div class="note" style="left:230px;top:394px;width:520px;text-align:center">A task knows its samples, but <b>a sample doesn’t know its tasks</b></div>
+
+  <div class="divider" style="top:440px"></div>
+
+  <!-- Row 3: a test object with a status lifecycle -->
+  <div class="row-lbl" style="top:464px">A test object, as in existing software</div>
+  <div class="card c-s2" style="left:0;top:505px;width:200px"><div class="nm">Sample</div><div class="sub">Serum, Day 29</div></div>
+  <div class="card hl c-t2" style="left:295px;top:488px;width:390px;height:134px"><div class="nm">Test</div>
+    <div class="chips"><span class="chip">Assigned</span><span class="chip">Running</span><span class="chip">Complete</span><span class="chip cur">Re-test</span></div></div>
+  <div class="card c-r2" style="left:780px;top:505px;width:200px"><div class="nm">Result</div><div class="sub">Out of range: OD 2.31</div></div>
+  <div class="note" style="left:317px;top:632px">Assigned on arrival</div>
+  <div class="note" style="left:582px;top:630px">Re-test spawned automatically</div>
+</div>
+<script src="bioa-map.js"></script>
+<script>
+MapViz(1000, 680,
+  [['.c-s1', '.c-t1', 'right'], ['.c-t1', '.c-r1', 'right'],
+   ['.c-s2', '.c-t2', 'right'], ['.c-t2', '.c-r2', 'right']],
+  [['.card, .chip', 0], ['link:0', 0], ['link:1', 0], ['link:2', 0], ['link:3', 0]]);
+var NS = 'http://www.w3.org/2000/svg', svg = document.querySelector('svg.links');
+function add(d, cls, style) { var p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('class', cls || 'on'); if (style) p.setAttribute('style', style); svg.appendChild(p); return p; }
+var paths = document.querySelectorAll('svg.links path');
+paths[2].classList.add('solid'); paths[3].classList.add('solid');
+// Dashed outline for the custom-entity Test card, drawn with the same dashes as the connectors
+var box = document.createElementNS(NS, 'rect');
+box.setAttribute('x', 340.75); box.setAttribute('y', 30.75); box.setAttribute('width', 298.5); box.setAttribute('height', 98.5); box.setAttribute('rx', 17);
+box.setAttribute('fill', 'none'); box.setAttribute('class', 'on');
+box.setAttribute('style', 'stroke: rgba(214,186,232,0.6); stroke-width: 2; stroke-dasharray: 5 6;');
+svg.appendChild(box);
+// Row 2: the task points to its samples, one way only
+add('M340 326 H208', 'solid on');
+add('M216 320 L206 326 L216 332', 'on', 'stroke-dasharray:none;stroke:rgba(244,239,233,0.45)');
+// Row 3: a failed result loops back into the test
+add('M880 605 V650 H490 V630', 'on');
+add('M484 630 L490 620 L496 630', 'on', 'stroke-dasharray:none');
+</script>
+</body></html>

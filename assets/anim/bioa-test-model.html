@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test data model</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
+body { font-family: 'Sohne', -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #232220; }
+:root { --line: rgba(35, 34, 32, 0.16); --gray: rgba(35, 34, 32, 0.6); --lav: rgb(150, 110, 210); }
+.stage { position: absolute; left: 0; top: 0; width: 1000px; height: 530px; transform-origin: 0 0; }
+.lbl { position: absolute; font-size: 15px; line-height: 18px; color: var(--gray); white-space: nowrap; }
+.edge { position: absolute; font-size: 14px; line-height: 16px; color: var(--gray); white-space: nowrap; }
+.edge.lav { color: var(--lav); }
+/* Labels over the horizontal arrows span the arrow, centered on it */
+.edge.c { width: 89px; text-align: center; }
+.card { position: absolute; background: #fff; border: 1.5px solid var(--line); border-radius: 16px; padding: 0 22px; display: flex; flex-direction: column; justify-content: center; }
+.card .nm { font-size: 21px; letter-spacing: -0.015em; line-height: 1.2; }
+.card .sub { font-size: 14px; line-height: 1.35; color: var(--gray); margin-top: 3px; }
+.card.new { border-color: var(--lav); }
+.tag { position: absolute; right: 16px; top: 16px; display: inline-flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px 0 8px; border-radius: 7px; background: rgba(35, 34, 32, 0.05); font-size: 13px; }
+.tag i { width: 11px; height: 11px; border-radius: 3px; background: rgb(190, 150, 235); }
+.chips { display: flex; gap: 6px; margin-top: 12px; }
+.chip { height: 26px; padding: 0 10px; border-radius: 7px; background: rgba(35, 34, 32, 0.07); font-size: 13px; display: inline-flex; align-items: center; white-space: nowrap; }
+svg { position: absolute; left: 0; top: 0; overflow: visible; }
+</style></head><body>
+<div class="stage" id="st">
+  <div class="lbl" style="left:0;top:0">How it’s configured</div>
+  <div class="lbl" style="left:0;top:268px">How it runs</div>
+
+  <div class="card" style="left:0;top:36px;width:250px;height:118px"><div class="nm">Study design</div><div class="sub">Samples and assays to run</div></div>
+  <div class="card" style="left:340px;top:36px;width:320px;height:118px"><div class="nm">Assay procedure</div><div class="sub">Tests, dilutions, re-test rules</div></div>
+  <div class="card new" style="left:750px;top:36px;width:250px;height:118px"><div class="nm">Test</div><div class="sub">Reusable, with a result schema</div><span class="tag"><i></i>New</span></div>
+
+  <div class="card" style="left:0;top:316px;width:250px;height:118px"><div class="nm">Sample</div><div class="sub">Arrives in a container</div></div>
+  <div class="card new" style="left:340px;top:296px;width:320px;height:158px"><div class="nm">Test order</div><div class="sub">A test, at a dilution, for one sample</div>
+    <div class="chips"><span class="chip">Assigned</span><span class="chip">Running</span><span class="chip">Complete</span></div><span class="tag"><i></i>New</span></div>
+  <div class="card" style="left:750px;top:316px;width:250px;height:118px"><div class="nm">Result</div><div class="sub">Checked against its range</div></div>
+
+  <svg width="1000" height="530" viewBox="0 0 1000 530" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <defs>
+      <marker id="g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L8 5L1 9" stroke="rgba(35,34,32,0.5)" stroke-width="1.6" fill="none"/></marker>
+      <marker id="l" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L8 5L1 9" stroke="rgb(150,110,210)" stroke-width="1.6" fill="none"/></marker>
+    </defs>
+    <g stroke="rgba(35,34,32,0.4)" stroke-width="1.8">
+      <path d="M250 95 H339" marker-end="url(#g)"/>
+      <path d="M660 95 H749" marker-end="url(#g)"/>
+      <path d="M125 154 V315" marker-end="url(#g)"/>
+      <path d="M250 375 H339" marker-end="url(#g)"/>
+      <path d="M660 375 H749" marker-end="url(#g)"/>
+    </g>
+    <g stroke="rgb(150,110,210)" stroke-opacity="0.8" stroke-width="1.8" stroke-dasharray="5 6">
+      <path d="M875 154 V225 H500 V295" marker-end="url(#l)"/>
+      <path d="M875 434 V490 H500 V455" marker-end="url(#l)"/>
+    </g>
+  </svg>
+
+  <div class="edge c" style="left:250px;top:76px">runs</div>
+  <div class="edge c" style="left:660px;top:76px">uses</div>
+  <div class="edge" style="left:139px;top:226px">Expected samples</div>
+  <div class="edge c" style="left:250px;top:356px">on arrival</div>
+  <div class="edge c" style="left:660px;top:356px">produces</div>
+  <div class="edge lav" style="left:678px;top:204px">Instance of</div>
+  <div class="edge lav" style="left:520px;top:498px">Re-test at a new dilution</div>
+</div>
+<script>
+(function () {
+  var st = document.getElementById('st');
+  function fit() { var s = Math.min(innerWidth / 1000, innerHeight / 530); st.style.transform = 'scale(' + s + ')'; st.style.left = ((innerWidth - 1000 * s) / 2) + 'px'; st.style.top = ((innerHeight - 530 * s) / 2) + 'px'; }
+  fit(); addEventListener('resize', fit);
+})();
+</script>
+</body></html>

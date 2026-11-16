@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Model mapping A</title>
+<link rel="stylesheet" href="bioa-map.css">
+<style>
+.box { position: absolute; border: 1.5px solid var(--line-soft); border-radius: 26px; }
+.box > .lbl { position: absolute; left: 24px; top: 18px; font-size: 22px; letter-spacing: -0.01em; }
+.box > .lbl small { font-size: 16px; color: var(--muted); margin-left: 8px; }
+.ws { left: 0; top: 50px; width: 640px; height: 690px; }
+.pr { left: 26px; top: 64px; width: 586px; height: 600px; border-color: rgba(244, 239, 233, 0.22); background: rgba(255, 255, 255, 0.025); }
+.uo { position: absolute; left: 24px; width: 536px; height: 150px; border: 1.5px solid rgba(244, 239, 233, 0.18); border-radius: 18px; padding: 18px 22px; background: rgba(255, 255, 255, 0.03); }
+.uo .t { font-size: 22px; letter-spacing: -0.01em; }
+.uo .t small { font-size: 15px; color: var(--muted); margin-left: 8px; }
+.steps { display: flex; gap: 10px; margin-top: 22px; }
+.chip { height: 46px; padding: 0 16px; border-radius: 11px; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 18px; display: flex; align-items: center; gap: 10px; }
+.chip b { font-weight: 400; color: var(--ink-2); font-size: 14px; }
+.side { position: absolute; left: 730px; width: 270px; }
+.side .card { height: 150px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; padding: 0 22px; }
+.side .card .tag { margin: 12px 0 0; }
+.cap { position: absolute; top: 0; }
+
+/* Quieter type: labels and chips read as diagram, not headlines */
+.box > .lbl { font-size: 18px !important; }
+.box > .lbl small, .uo .t small { font-size: 14px !important; }
+.uo .t { font-size: 18px !important; }
+.chip { height: 38px !important; padding: 0 14px !important; font-size: 15px !important; border-radius: 9px !important; }
+.steps { margin-top: 18px !important; }
+.side .card .nm { font-size: 21px; }
+.side .card .sub { font-size: 15px; }
+.side .card .tag { font-size: 13px; height: 28px; }
+.eyebrow { font-size: 15px; }
+.uo { height: 120px !important; }
+.pr { height: 486px !important; }
+.ws { height: 570px !important; }
+</style></head><body>
+<div class="stage">
+  <div class="eyebrow cap" style="left:2px">Shared with Bioprocess, reused as is</div>
+  <div class="eyebrow cap" style="left:732px">Added for Bioanalytical</div>
+
+  <div class="box ws pane"><div class="lbl">Worksheet <small>a run of work</small></div>
+    <div class="box pr pane"><div class="lbl">Procedure <small>e.g. ELISA-IgG</small></div>
+      <div class="uo pane" style="top:62px"><div class="t">Unit operation <small>Coat and block</small></div>
+        <div class="steps"><span class="chip">Step 1</span><span class="chip">Step 2</span><span class="chip">Step 3</span></div></div>
+      <div class="uo pane" style="top:202px"><div class="t">Unit operation <small>Sample incubation</small></div>
+        <div class="steps"><span class="chip">Step 1</span><span class="chip">Step 2</span><span class="chip">Step 3</span></div></div>
+      <div class="uo pane" style="top:342px"><div class="t">Unit operation <small>Detection</small></div>
+        <div class="steps"><span class="chip">Step 1</span><span class="chip">Step 2</span></div></div>
+    </div>
+  </div>
+
+  <div class="side" style="top:160px"><div class="card hl c-plate"><div class="nm">Plate design</div><div class="sub">Wells, roles and dilutions</div><span class="tag"><i></i>New</span></div></div>
+  <div class="side" style="top:430px"><div class="card hl c-tests"><div class="nm">Tests</div><div class="sub">Defined with the procedure, linked to samples</div><span class="tag"><i></i>New</span></div></div>
+</div>
+<script src="bioa-map.js"></script>
+<script>
+MapViz(1000, 640,
+  [['.pr', '.c-plate', 'right', 0.5], ['.pr', '.c-tests', 'right', 0.5]],
+  [['.ws', 100], ['.pr', 350], ['.uo', 600], ['.chip', 900], ['.c-plate', 1500], ['link:0', 1700], ['.c-tests', 1900], ['link:1', 2100]]);
+</script>
+</body></html>
