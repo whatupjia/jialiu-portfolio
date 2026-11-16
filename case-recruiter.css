@@ -44,3 +44,7 @@
 
 /* Approach follows the Problem band directly: the band's 96px is the gap */
 #approach.v-sec { padding-top: 0 !important; }
+
+/* Stacked splits (below 1240px): text and figure need the usual 40px text↔figure gap */
+@media (max-width: 1239px) { .v-split > * + * { margin-top: var(--r-fig) !important; } }
+@media (max-width: 1239px) { .v-split { margin-top: var(--r-fig) !important; } }

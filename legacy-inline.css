@@ -1,7 +1,8 @@
 /* Former inline styles from the old export, moved out of the markup. Zero specificity (:where) so any
-   page stylesheet can override them; !important because inline styles used to beat non-important rules.
+   page stylesheet can override them; !important because inline styles used to beat non-important rules
+   (except opacity and transform, which animations and hover states drive).
    Fold these into named classes when polishing a page; do not add new ones here. */
-:where(.i2) { opacity: 0 !important; position: relative !important; z-index: 1 !important; max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; }
+:where(.i2) { opacity: 0; position: relative !important; z-index: 1 !important; max-width: 1240px !important; margin: 0px auto !important; padding-left: 24px !important; padding-right: 24px !important; }
 :where(.i3) { padding-bottom: 6rem !important; margin-top: 3rem !important; display: grid !important; grid-template-columns: repeat(12, minmax(0px, 1fr)) !important; gap: 32px !important; }
 :where(.i4) { grid-column: 1 / -1 !important; margin-top: 1.5rem !important; display: grid !important; grid-template-columns: minmax(0px, 1fr) !important; gap: 104px !important; }
 :where(.i5) { display: grid !important; min-width: 0px !important; grid-template-columns: minmax(0px, 1.55fr) minmax(280px, 0.65fr) !important; gap: clamp(28px, 3.6vw, 56px) !important; align-items: start !important; color: rgb(23, 23, 19) !important; text-decoration: none !important; }
@@ -11,7 +12,7 @@
 :where(.i9) { display: block !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; color: rgb(110, 109, 103) !important; }
 :where(.i10) { display: block !important; margin-top: 10px !important; margin-bottom: 0px !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: clamp(27px, 2.4vw, 32px) !important; line-height: 1.15 !important; font-weight: 500 !important; letter-spacing: -0.028em !important; }
 :where(.i11) { position: relative !important; display: inline-block !important; }
-:where(.i12) { position: absolute !important; left: 0px !important; right: 0px !important; bottom: -0.14em !important; height: 2px !important; background: rgb(23, 23, 19) !important; transform: scaleX(0) !important; transform-origin: left center !important; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; }
+:where(.i12) { position: absolute !important; left: 0px !important; right: 0px !important; bottom: -0.14em !important; height: 2px !important; background: rgb(23, 23, 19) !important; transform: scaleX(0); transform-origin: left center !important; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; }
 :where(.i13) { display: block !important; margin-top: 12px !important; font-family: var(--body-face, 'FreightText', Georgia, serif) !important; font-size: 1.125rem !important; line-height: 1.6 !important; color: rgb(110, 109, 103) !important; max-width: 34ch !important; }
 :where(.i14) { max-width: 1240px !important; margin: 4rem auto 0px !important; padding-left: 24px !important; padding-right: 24px !important; box-sizing: border-box !important; display: grid !important; grid-template-columns: repeat(12, minmax(0px, 1fr)) !important; gap: 32px !important; }
 :where(.i15) { grid-column: 1 / -1 !important; max-width: 960px !important; width: 100% !important; margin: 0px auto !important; min-width: 0px !important; }
@@ -30,7 +31,7 @@
 :where(.i28) { font-family: var(--body-face, 'FreightText', Georgia, serif) !important; max-width: 600px !important; font-size: 1.125rem !important; line-height: 1.6 !important; margin: 0px 0px 1rem !important; text-wrap: pretty !important; }
 :where(.i29) { font-family: var(--body-face, 'FreightText', Georgia, serif) !important; max-width: 600px !important; font-size: 1.125rem !important; line-height: 1.6 !important; margin: 0px !important; text-wrap: pretty !important; }
 :where(.i30) { display: flex !important; align-items: center !important; gap: 1rem !important; margin-top: 1.75rem !important; }
-:where(.i31) { position: relative !important; width: 36px !important; height: 36px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 1px solid rgb(228, 224, 216) !important; opacity: 0.8 !important; text-decoration: none !important; color: rgb(13, 12, 9) !important; transition: opacity 0.2s, border-color 0.2s !important; }
+:where(.i31) { position: relative !important; width: 36px !important; height: 36px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 1px solid rgb(228, 224, 216) !important; opacity: 0.8; text-decoration: none !important; color: rgb(13, 12, 9) !important; transition: opacity 0.2s, border-color 0.2s !important; }
 :where(.i32) { border-top: 1px solid rgb(215, 210, 199) !important; }
 :where(.i33) { display: flex !important; justify-content: space-between !important; align-items: baseline !important; padding: 0.55rem 0px !important; border-bottom: 1px dashed rgb(215, 210, 199) !important; font-family: Sohne, -apple-system, system-ui, sans-serif !important; font-size: 1rem !important; }
 :where(.i34) { color: rgb(107, 104, 99) !important; }

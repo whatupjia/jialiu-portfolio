@@ -8,7 +8,7 @@ window.MapViz = function (W, H, links, order) {
     stage.style.left = ((innerWidth - W * s) / 2) + 'px';
     stage.style.top = ((innerHeight - H * s) / 2) + 'px';
   }
-  fit(); addEventListener('resize', fit);
+  fit(); addEventListener('resize', fit); addEventListener('load', fit); if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
   // Positions in stage units, independent of the current scale
   function box(el) {
     var s = stage.getBoundingClientRect(), k = s.width / W, b = el.getBoundingClientRect();

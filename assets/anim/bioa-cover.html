@@ -163,12 +163,15 @@
   </div>
 
 </div></div>
-<script src="_base.js"></script>
+<script src="_base.js?v=2"></script>
 <script>
 (function () {
   var A = Anim, $ = function (s) { return document.querySelector(s); };
   function fit() { $('.stage').style.transform = 'scale(' + (innerWidth / 1600) + ')'; }
-  fit(); addEventListener('resize', fit);
+  // Re-fit whenever the frame's size changes: on phones the iframe can start at 0 width (lazy load, page still laying out),
+  // and no window resize event follows, so the stage would stay scaled to nothing until a refresh.
+  fit(); addEventListener('resize', fit); addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
   var scene = $('.scene'), P = [$('.p1'), $('.p2'), $('.p3')], box = $('.box'), plate = $('.plate'), ROWS = 'ABCDEFGH', W = {};
   var OV = [['PRE_SER_TG1', 120, 100], ['PRE_SER_TG2', 60, 100], ['D29_SER_TG1', 120, 70], ['D29_SER_TG2', 60, 45], ['D57_SER_TG1', 120, 25], ['D57_SER_TG2', 60, 10], ['D85_SER_TG1', 120, 8], ['D85_SER_TG2', 60, 4], ['D113_SER_TG1', 120, 2], ['D113_SER_TG2', 60, 1]];
 

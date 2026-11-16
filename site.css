@@ -200,3 +200,6 @@ footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
 
 /* Each work card (title row + cover image) fits in one viewport: cap the card width by the viewport height */
 @media (min-width: 1001px) { .project { max-width: max(640px, calc((100vh - 230px) * 1.6)); width: 100%; margin-left: auto; margin-right: auto; } }
+
+/* Phones: the work cards sit right under a short hero, so don't hold them back for the full desktop intro */
+@media (max-width: 680px) { .intro-ready .work-reveal { animation-delay: 0.8s !important; } }

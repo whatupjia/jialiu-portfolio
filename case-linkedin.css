@@ -74,3 +74,9 @@ section h2, section h3 { text-wrap: pretty !important; }
 
 /* Outcomes in the intro: plain on every width (phones used to keep the old card) */
 #overview > .v-outcomes { background: none !important; border: 0 !important; border-radius: 0 !important; padding: 0 !important; }
+/* The old facts table is replaced by the role stack on every width (phones used to show both) */
+#overview > div:has(> dl) { display: none !important; }
+/* A section's opening heading block shouldn't add its own top padding on top of the section gap */
+section > div > div:first-child:has(> h2:first-child) { padding-top: 0 !important; }
+/* Quick Reply problem list: the last row's bottom margin was adding to the band's inner padding */
+.qr-problem-row:last-child { margin-bottom: 0 !important; }

@@ -650,3 +650,11 @@ section p:last-child:not(.cap):not(.v-hero-cap):not(.v-gaps-note), section ul:la
 @media (max-width: 900px) {
   #problem.v-sec::before { position: absolute; inset: 0; grid-row: auto !important; margin: calc(-1 * var(--band-pad)) 0 !important; }
 }
+
+/* Phones: Problem band sits 64px below the intro (its wrapper adds 24px) with 56px inside, and the next
+   section starts 64px below the band, so heading-to-band gaps match the 120px band step */
+@media (max-width: 900px) {
+  #problem.v-sec { padding-top: calc(var(--band-out) - 24px + var(--band-pad)) !important; padding-bottom: var(--band-pad) !important; }
+  #problem.v-sec::before { top: calc(var(--band-out) - 24px) !important; bottom: 0 !important; margin: 0 !important; }
+  #solution-preview { padding-top: var(--band-out) !important; }
+}

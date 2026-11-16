@@ -91,3 +91,15 @@ h2 {
 
 /* Outcome figures: one step down the scale (about 38px at most) */
 #overview#overview .v-outcomes :is([style*="clamp(1.75rem"], .i77, .i120, .stat) { font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.375rem) !important; }
+
+/* Smaller screens: keep the section row gap at 20px. The spacing rules subtract 20px for it, and the page's
+   own stacked layout used 8px, which shrank every gap by 12px on phones. */
+@media (max-width: 1100px) { :is(#overview, #background, #problem, #solution-preview, #approach, #solution, #outcomes, #reflections) { row-gap: 20px !important; } }
+
+/* Smaller screens: the page's own stacked layout pads every section 56px top and bottom, which made
+   section-to-section gaps 112px instead of the 96px section step. Sections own only their top gap. */
+@media (max-width: 1100px) {
+  :is(#background, #solution, #outcomes, #reflections) { padding-top: var(--r-sec) !important; padding-bottom: 0 !important; }
+  #approach { padding-bottom: 0 !important; }
+  #background { padding-bottom: 0 !important; }
+}

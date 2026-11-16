@@ -7,6 +7,8 @@
   }
   fit();
   window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
 
   var A = window.Anim = {};
   A.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -65,7 +65,7 @@ svg { position: absolute; left: 0; top: 0; overflow: visible; }
 (function () {
   var st = document.getElementById('st');
   function fit() { var s = Math.min(innerWidth / 1000, innerHeight / 530); st.style.transform = 'scale(' + s + ')'; st.style.left = ((innerWidth - 1000 * s) / 2) + 'px'; st.style.top = ((innerHeight - 530 * s) / 2) + 'px'; }
-  fit(); addEventListener('resize', fit);
+  fit(); addEventListener('resize', fit); addEventListener('load', fit); if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
 })();
 </script>
 </body></html>
