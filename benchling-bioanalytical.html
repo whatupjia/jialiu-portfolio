@@ -141,7 +141,7 @@
 <link rel="stylesheet" href="legacy-inline.css?v=10">
 <link rel="stylesheet" href="site.css?v=20">
 <link rel="stylesheet" href="case.css?v=42">
-<link rel="stylesheet" href="case-bioanalysis.css?v=42">
+<link rel="stylesheet" href="case-bioanalysis.css?v=43">
 <script src="site.js?v=2" defer></script>
 <script src="case.js?v=20" defer></script>
 </head>
@@ -321,7 +321,7 @@
           <span style="position: absolute; left: 0px; top: 7px; height: 2px; border-radius: 1px; width: 14px; background: rgb(213, 208, 200); transition: width 0.18s, background-color 0.25s;"></span>
         </button>
       
-        <button data-index="4" aria-label="One column, many wells" style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
+        <button data-index="4" aria-label="Designing plate-based experiments" style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
           <span style="position: absolute; left: 0px; top: 7px; height: 2px; border-radius: 1px; width: 14px; background: rgb(213, 208, 200); transition: width 0.18s, background-color 0.25s;"></span>
         </button>
       
@@ -345,11 +345,11 @@
           <span style="position: absolute; left: 0px; top: 7px; height: 2px; border-radius: 1px; width: 14px; background: rgb(213, 208, 200); transition: width 0.18s, background-color 0.25s;"></span>
         </button>
       
-        <button data-index="10" aria-label="Make the abstract tangible." style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
+        <button data-index="10" aria-label="Make the invisible decisions visible" style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
           <span style="position: absolute; left: 0px; top: 7px; height: 2px; border-radius: 1px; width: 14px; background: rgb(213, 208, 200); transition: width 0.18s, background-color 0.25s;"></span>
         </button>
       
-        <button data-index="11" aria-label="Make bets you can build on." style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
+        <button data-index="11" aria-label="Make bets you can build on" style="display: block; position: relative; width: 56px; height: 16px; background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; padding: 0px; margin: 0px; cursor: pointer;">
           <span style="position: absolute; left: 0px; top: 7px; height: 2px; border-radius: 1px; width: 14px; background: rgb(213, 208, 200); transition: width 0.18s, background-color 0.25s;"></span>
         </button>
       
@@ -391,9 +391,9 @@
 
       <div class="concept-split">
       <div class="case-cell">
-        <h3 class="case-h3">One column, many wells</h3>
+        <h3 class="case-h3">Designing plate-based experiments</h3>
         <p class="case-p">Bioprocess plans experiments in a table where each column is one condition, run in one bioreactor. Bioanalytical runs on plates, where one condition can fill a block of wells, span several plates, or share a plate with others.</p>
-        <p class="p-gap-top">The table was wired into everything downstream, from experiment creation to run execution and analysis. Replacing it meant forking the codebase, which all of us wanted to avoid if possible.</p>
+        <p class="p-gap-top">This meant our experiment planning UI couldn't support the complex spatial layouts required for plate-based experiments.</p>
         
         
       </div>
@@ -405,7 +405,7 @@
       <div class="span-full v-decision">
   <div class="body">
     <h3>Invest in plate-based experiment design vs. shipping in increments</h3>
-    <p>The data model could already handle plates: samples and parameters defined in the planning table just needed to flow into them. The question was where scientists would design those plates, and how much to spend getting there.</p>
+    <p>The question became: where would scientists design plates and how much should we invest in getting there? The table was wired into everything downstream, from experiment creation to run execution and analysis. Changing it meant a heavy engineering lift.</p>
     <p>I led a design spike with engineers and PMs from the procedures and plates teams to weigh two options.</p>
   </div>
 
@@ -437,7 +437,7 @@
   </div>
 
   <div class="why">
-    <h4>Invest across the product, not in one screen</h4>
+    <h4>Reuse the planning table, invest in the plate designer</h4>
     <p>We chose option B. Plates were always going to need to live in worksheets, and that work was already in our estimates. Pulling plate design upstream into planning meant forking the procedures code for a single way of planning, and I didn’t think that was worth it compared with making the plate designer itself better, or other work our engineers could take on.</p>
     <p>Choosing B also freed us to invest in other improvements to the plate design UI itself. We didn’t put a date on the second increment, but nothing in the first one closed it off: plate design could still move into planning later.</p>
     <div class="v-improve">
@@ -520,11 +520,11 @@
       <div class="case-column">
     
     <h2><span class="sc-interp">Lessons learned</span></h2>
-    <h3 class="case-h3-first">Make the abstract tangible.</h3>
+    <h3 class="case-h3-first">Make the invisible decisions visible</h3>
       <p class="case-p">The hardest calls on this project were abstract relationships with implications nobody could see yet, like which way a link points or where a test gets defined. I think design’s power is making those implications visible, through diagrams, lo-fi mocks or working prototypes.</p>
       <p class="case-p">On complex software, that means helping the whole team see how the pieces fit, sometimes from a bird’s-eye view and sometimes at the level of a single interaction. The skill is switching between the two to find where things are most unclear.</p>
-      <h3 class="case-h3-next">Make bets you can build on.</h3>
-      <p class="case-p">Early on, I’d polish whatever UI I owned. Over time I learned that product development is closer to a series of informed bets, and some of them are one-way doors. With unlimited engineering time, a good team could design something wonderful, but that’s never the situation.</p>
+      <h3 class="case-h3-next">Make bets you can build on</h3>
+      <p class="case-p">Product development is a series of informed bets, sometimes with one-way doors. With unlimited engineering time, a good team can design the perfect experience, but that's seldom the situation.</p>
       <p class="case-p">So as design lead, I try to ground our bets in real evidence from customers and the industry, then think through what each option commits us to: if we do A, what follows, and if B, what follows? Which one lets us come back and improve it?</p>
       <p class="case-p">Working in increments, starting with the first, guards against over-investing and pushes us to think long term when everyone is under pressure just to get it done. On this project that meant plates in worksheets first and a slightly hacky test-order list, each leaving a bigger redesign possible later.</p>
 
