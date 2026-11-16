@@ -82,3 +82,13 @@ Diagrams and product animations are standalone pages in `assets/anim/` (shared h
   hooks, nav and lightbox.
 - For refactors, compare element positions and computed styles before and after on each
   page; layout should not move unless that is the intent.
+
+## Local editing tools (not deployed)
+
+`tools/` is gitignored. `python3 tools/edit/serve.py` serves the site at http://127.0.0.1:8124 and
+injects two dev-only helpers into every page:
+- **E**: edit text in place; Cmd+Enter (or Cmd+S) writes the exact changed text back to the page's
+  HTML, or to `site.js` for homepage copy set by script.
+- **N**: click any element and leave a note for Claude; notes are saved to `tools/edit/notes.md`
+  with the page, section, element and a selector. When Jia says "do my notes", work through the
+  `[open]` entries there and mark each `[done]`.
