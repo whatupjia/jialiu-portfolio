@@ -80,7 +80,7 @@
 .v-role ~ .legend .lg.role, .v-ct ~ .legend .lg.ct, .v-dil ~ .legend .lg.dil { display: flex; }
 
 /* Beat 3: dashboard */
-.dash { position: absolute; left: 0; right: 0; top: 92px; bottom: 0; background: var(--soft); padding: 22px 30px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 600px 400px; gap: 22px; overflow: hidden; }
+.dash { position: absolute; left: 0; right: 0; top: 92px; bottom: 0; background: var(--soft); padding: 22px 30px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 560px 1fr; gap: 22px; overflow: hidden; }
 .wd { background: #fff; border-radius: 8px; border: 1.5px solid var(--rule); padding: 22px 26px; position: relative; }
 .wd h4 { margin: 0 0 6px; font-size: 21px; font-weight: 600; }
 .wd .s { font-size: 15px; color: var(--muted); }
@@ -96,11 +96,9 @@
 .chrome { position: absolute; left: 0; top: 0; right: 0; height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 20px; background: rgb(241, 242, 244); z-index: 30; }
 .chrome i { width: 15px; height: 15px; border-radius: 50%; flex: none; display: block; }
 .appbar { position: absolute; left: 0; top: 50px; bottom: 0; width: 64px; background: #000DB6; z-index: 20; }
-.hbs { position: absolute; left: 26px; right: 26px; top: 116px; }
-.hb { display: grid; grid-template-columns: 150px 1fr 64px; align-items: center; gap: 14px; height: 62px; font-size: 17px; }
-.track { height: 22px; border-radius: 4px; background: rgb(236, 238, 241); overflow: hidden; }
-.track span { display: block; height: 100%; width: 0; background: var(--navy); border-radius: 4px; transition: width 900ms var(--ease); }
-.hb .n { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dash .c3 { top: 104px; }
+.vl { position: absolute; font-size: 15px; font-weight: 600; color: #26201f; transform: translate(-50%, -8px); opacity: 0; transition: opacity 300ms ease; font-variant-numeric: tabular-nums; }
+.vl.on { opacity: 1; }
 </style></head><body>
 <div class="stage">
   <div class="chrome" aria-hidden="true"><i style="background:#F4645C"></i><i style="background:#F5BD4F"></i><i style="background:#61C554"></i></div>
@@ -158,7 +156,7 @@
       <div class="wd"><h4>Samples received</h4><div class="s">Per week, by testing status · 360 to date</div>
         <div class="lgd"><span><i style="background:var(--navy)"></i>Tested</span><span><i style="background:rgb(232,176,72)"></i>Awaiting testing</span></div>
         <div class="chart c2"></div></div>
-      <div class="wd" style="grid-column: 1 / -1"><h4>Progress by timepoint</h4><div class="s">Share of samples tested</div><div class="hbs h1"></div></div>
+      <div class="wd" style="grid-column: 1 / -1"><h4>Progress by timepoint</h4><div class="s">Share of samples tested</div><div class="chart c3"></div></div>
     </div>
   </div>
 
@@ -222,10 +220,19 @@
   var TESTED = [6, 10, 14, 18, 22, 20, 24, 26, 22, 28, 30, 26];
   var RECEIVED = [20, 24, 26, 30, 28, 32, 30, 30, 30, 30, 40, 40];
   var DONE = [20, 24, 26, 30, 28, 32, 30, 24, 16, 10, 6, 0];
-  function axes(el, ymax, ticks) {
-    el.innerHTML = '';
-    ticks.forEach(function (t) { var f = t / ymax; if (f > 0) el.insertAdjacentHTML('beforeend', '<div class="gl" style="bottom:' + f * 100 + '%"></div>'); el.insertAdjacentHTML('beforeend', '<div class="yl" style="bottom:' + f * 100 + '%">' + t + '</div>'); });
-    WEEKS.forEach(function (m, i) { if (m) el.insertAdjacentHTML('beforeend', '<div class="xl" style="left:' + ((i + 0.5) / WEEKS.length * 100) + '%;transform:translateX(-50%)">' + m + '</div>'); });
+  function axes(el, ymax, ticks, labels, unit) {
+    labels = labels || WEEKS; el.innerHTML = '';
+    ticks.forEach(function (t) { var f = t / ymax; if (f > 0) el.insertAdjacentHTML('beforeend', '<div class="gl" style="bottom:' + f * 100 + '%"></div>'); el.insertAdjacentHTML('beforeend', '<div class="yl" style="bottom:' + f * 100 + '%">' + t + (unit || '') + '</div>'); });
+    labels.forEach(function (m, i) { if (m) el.insertAdjacentHTML('beforeend', '<div class="xl" style="left:' + ((i + 0.5) / labels.length * 100) + '%;transform:translateX(-50%)">' + m + '</div>'); });
+  }
+  // Share of samples tested at each timepoint: one column per timepoint, value on top
+  function timepoints(el, color) {
+    axes(el, 100, [0, 25, 50, 75, 100], TP.map(function (t) { return t[0]; }), '%');
+    TP.forEach(function (t, i) {
+      var x = (i + 0.5) / TP.length * 100;
+      el.insertAdjacentHTML('beforeend', '<div class="stk" style="left:' + x + '%;width:7%;transform:translateX(-50%)"><div class="seg" data-h="' + t[1] / 100 + '" style="background:' + color + '"></div></div>' +
+        '<div class="vl" data-v="' + t[1] + '" style="left:' + x + '%;bottom:' + t[1] + '%">0%</div>');
+    });
   }
   function bars(el, stacks, colors, ymax) {
     var n = stacks.length;
@@ -236,19 +243,20 @@
   var TP = [['Pre-immunization', 100], ['Day 29', 70], ['Day 57', 25], ['Day 85', 8], ['Day 113', 2]];
   function buildCharts() {
     var NAVY = 'rgb(10,20,170)', AMBER = 'rgb(232,176,72)';
-    $('.h1').innerHTML = TP.map(function (t) { return '<div class="hb"><span>' + t[0] + '</span><div class="track"><span data-w="' + t[1] + '"></span></div><span class="n">' + t[1] + '%</span></div>'; }).join('');
     var T = [0, 10, 20, 30, 40];
     axes($('.c1'), 40, T); bars($('.c1'), TESTED.map(function (v) { return [v]; }), [NAVY], 40);
     axes($('.c2'), 40, T); bars($('.c2'), RECEIVED.map(function (v, i) { return [DONE[i], v - DONE[i]]; }), [NAVY, AMBER], 40);
+    timepoints($('.c3'), NAVY);
   }
   function drawCharts(instant) {
-    document.querySelectorAll('.h1 .track span').forEach(function (b, i) {
-      if (instant) { b.style.transition = 'none'; b.style.width = b.dataset.w + '%'; } else setTimeout(function () { b.style.width = b.dataset.w + '%'; }, 500 + i * 120);
+    document.querySelectorAll('.c3 .vl').forEach(function (v, i) {
+      if (instant) { v.style.transition = 'none'; v.textContent = v.dataset.v + '%'; v.classList.add('on'); }
+      else setTimeout(function () { v.classList.add('on'); countUp(v, +v.dataset.v, 700); }, 500 + i * 120);
     });
     document.querySelectorAll('.stk').forEach(function (b, i) {
       var go = function () { b.querySelectorAll('.seg').forEach(function (s) { s.style.height = (+s.dataset.h * 100) + '%'; }); };
       if (instant) { b.querySelectorAll('.seg').forEach(function (s) { s.style.transition = 'none'; }); go(); }
-      else setTimeout(go, (i % 12) * 70 + (i >= 12 ? 180 : 0));
+      else setTimeout(go, i >= 24 ? 500 + (i - 24) * 120 : (i % 12) * 70 + (i >= 12 ? 180 : 0));
     });
   }
 

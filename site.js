@@ -59,7 +59,7 @@
     // About copy, updated to match the LinkedIn summary
     var ABOUT = [
       'I help teams find a direction when it isn’t clear. I look past the screen to the industry, the business, and how the people building the product work together. I do my best work in small, fast-moving teams, talking strategy with company leaders, running research with experts, and working methodically through ambiguous problems with engineers.',
-      'I started out as a teacher, then joined Coursera early on and grew into a role that mixed product and business. Grad school turned me into a product designer, and since then I’ve led four designers through a platform launch at Benchling, done research and strategy at LinkedIn, and now design software at Proscia that helps life science teams turn tissue samples into drug discoveries using AI.'
+      'I started out as a teacher, then joined Coursera early on and grew into a role that mixed product and business. Grad school turned me into a product designer, and since then I’ve led four designers through a platform launch at Benchling, done research and strategy at LinkedIn, and now design software at Proscia that helps life science teams turn tissue samples into drug discoveries.'
     ];
 
     var paras = document.querySelectorAll('#about .bio-col-text p');

@@ -39,7 +39,12 @@
 
 /* Dashboard */
 .dtitle { position: absolute; left: 44px; top: 34px; font-size: 28px; font-weight: 600; }
-.dash { position: absolute; left: 0; right: 0; top: 92px; bottom: 0; background: var(--soft); padding: 22px 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.dash { position: absolute; left: 0; right: 0; top: 92px; bottom: 0; background: var(--soft); padding: 18px 30px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 380px 1fr; gap: 16px; overflow: hidden; }
+.dash .c1, .dash .c2 { top: 116px; bottom: 50px; }
+.dash .c3 { top: 106px; bottom: 44px; }
+.c3 .xl { bottom: -28px; }
+.vl { position: absolute; font-size: 15px; font-weight: 600; color: #26201f; transform: translate(-50%, -8px); opacity: 0; transition: opacity 300ms ease; font-variant-numeric: tabular-nums; }
+.vl.on { opacity: 1; }
 .wd { background: #fff; border-radius: 8px; border: 1.5px solid var(--rule); padding: 22px 26px; position: relative; }
 .wd h4 { margin: 0 0 6px; font-size: 21px; font-weight: 600; }
 .wd .s { font-size: 15px; color: var(--muted); }
@@ -88,6 +93,7 @@
       <div class="wd"><h4>Samples received</h4><div class="s">Per week, by testing status · 360 to date</div>
         <div class="lgd"><span><i style="background:var(--navy)"></i>Tested</span><span><i style="background:rgb(232,176,72)"></i>Awaiting testing</span></div>
         <div class="chart c2"></div></div>
+      <div class="wd" style="grid-column: 1 / -1"><h4>Progress by timepoint</h4><div class="s">Share of samples tested</div><div class="chart c3"></div></div>
     </div>
   </div>
 
@@ -116,11 +122,26 @@
   var TESTED = [6, 10, 14, 18, 22, 20, 24, 26, 22, 28, 30, 26];          // 246
   var RECEIVED = [20, 24, 26, 30, 28, 32, 30, 30, 30, 30, 40, 40];       // 360
   var DONE = [20, 24, 26, 30, 28, 32, 30, 24, 16, 10, 6, 0];             // of each week's receipts, tested so far (246)
-  function axes(el, ymax, ticks) {
-    el.innerHTML = '';
-    ticks.forEach(function (t) { var f = t / ymax; if (f > 0) el.insertAdjacentHTML('beforeend', '<div class="gl" style="bottom:' + f * 100 + '%"></div>'); el.insertAdjacentHTML('beforeend', '<div class="yl" style="bottom:' + f * 100 + '%">' + t + '</div>'); });
-    var n = WEEKS.length;
-    WEEKS.forEach(function (m, i) { if (m) el.insertAdjacentHTML('beforeend', '<div class="xl" style="left:' + ((i + 0.5) / n * 100) + '%;width:auto;transform:translateX(-50%)">' + m + '</div>'); });
+  function axes(el, ymax, ticks, labels, unit) {
+    labels = labels || WEEKS; el.innerHTML = '';
+    ticks.forEach(function (t) { var f = t / ymax; if (f > 0) el.insertAdjacentHTML('beforeend', '<div class="gl" style="bottom:' + f * 100 + '%"></div>'); el.insertAdjacentHTML('beforeend', '<div class="yl" style="bottom:' + f * 100 + '%">' + t + (unit || '') + '</div>'); });
+    var n = labels.length;
+    labels.forEach(function (m, i) { if (m) el.insertAdjacentHTML('beforeend', '<div class="xl" style="left:' + ((i + 0.5) / n * 100) + '%;width:auto;transform:translateX(-50%)">' + m + '</div>'); });
+  }
+  // Share of samples tested at each timepoint: one column per timepoint, value on top (same chart as the homepage cover)
+  var TP = [['Pre-immunization', 100], ['Day 29', 70], ['Day 57', 25], ['Day 85', 8], ['Day 113', 2]];
+  function timepoints(el, color) {
+    axes(el, 100, [0, 50, 100], TP.map(function (t) { return t[0]; }), '%');
+    TP.forEach(function (t, i) {
+      var x = (i + 0.5) / TP.length * 100;
+      el.insertAdjacentHTML('beforeend', '<div class="stk" style="left:' + x + '%;width:7%;transform:translateX(-50%)"><div class="seg" data-h="' + t[1] / 100 + '" style="background:' + color + '"></div></div>' +
+        '<div class="vl" data-v="' + t[1] + '" style="left:' + x + '%;bottom:' + t[1] + '%">0%</div>');
+    });
+  }
+  function countUp(el, to, ms) {
+    var t0 = null;
+    function tick(t) { if (t0 == null) t0 = t; var k = Math.min((t - t0) / ms, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + '%'; if (k < 1) requestAnimationFrame(tick); }
+    requestAnimationFrame(tick);
   }
   function bars(el, stacks, ymax, colors) {
     var n = stacks.length;
@@ -135,12 +156,17 @@
     bars(e1, TESTED.map(function (v) { return [v]; }), 40, [NAVY]);
     var e2 = $('.c2'); axes(e2, 40, [0, 10, 20, 30, 40]);
     bars(e2, RECEIVED.map(function (v, i) { return [DONE[i], v - DONE[i]]; }), 40, [NAVY, AMBER]);
+    timepoints($('.c3'), NAVY);
   }
   function drawCharts(instant) {
     document.querySelectorAll('.stk').forEach(function (b, i) {
       var go = function () { b.querySelectorAll('.seg').forEach(function (s) { s.style.height = (+s.dataset.h * 100) + '%'; }); };
       if (instant) { b.querySelectorAll('.seg').forEach(function (s) { s.style.transition = 'none'; }); go(); }
-      else setTimeout(go, (i % 12) * 80 + (i >= 12 ? 200 : 0));
+      else setTimeout(go, i >= 24 ? 500 + (i - 24) * 120 : (i % 12) * 80 + (i >= 12 ? 200 : 0));
+    });
+    document.querySelectorAll('.c3 .vl').forEach(function (v, i) {
+      if (instant) { v.style.transition = 'none'; v.textContent = v.dataset.v + '%'; v.classList.add('on'); }
+      else setTimeout(function () { v.classList.add('on'); countUp(v, +v.dataset.v, 700); }, 500 + i * 120);
     });
   }
   function reset() {

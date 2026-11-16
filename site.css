@@ -203,3 +203,52 @@ footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
 
 /* Phones: the work cards sit right under a short hero, so don't hold them back for the full desktop intro */
 @media (max-width: 680px) { .intro-ready .work-reveal { animation-delay: 0.8s !important; } }
+
+/* Bioanalysis panel texture (mock): a faint well-plate dot grid that fades out toward
+   the edges, plus a soft glow from the top left behind the browser window */
+.project:nth-child(1) .project-ui-wrap {
+  background:
+    radial-gradient(120% 90% at 18% 0%, rgba(120, 190, 175, 0.22), transparent 60%),
+    var(--panel-1);
+}
+.project:nth-child(1) .project-ui-wrap::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(170, 220, 205, 0.16) 0 3px, transparent 3.5px);
+  background-size: 26px 26px;
+  background-position: 13px 13px;
+  -webkit-mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
+          mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
+}
+.project:nth-child(1) .project-frame { position: relative; z-index: 1; }
+
+/* Recruiter Inbox panel texture: fine horizontal rules, like list dividers, fading toward
+   the edges, plus the same soft top-left glow as the other panels */
+.project:nth-child(2) .project-ui-wrap {
+  background:
+    radial-gradient(120% 90% at 18% 0%, rgba(150, 170, 200, 0.16), transparent 60%),
+    var(--panel-2);
+}
+.project:nth-child(2) .project-ui-wrap::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(200, 212, 230, 0.12) 1px, transparent 1px);
+  background-size: 100% 18px;
+  -webkit-mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
+          mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
+}
+.project:nth-child(2) .project-frame { position: relative; z-index: 1; }
+
+/* Quick Reply panel texture: scattered chat-bubble outlines on the plum, laid over the
+   video (which has the plum baked in) and masked out around the phone in the middle */
+.project:nth-child(3) .project-ui-wrap::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image:
+    radial-gradient(90% 80% at 15% 0%, rgba(210, 170, 220, 0.14), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='96'%3E%3Cg fill='none' stroke='%23e6cfee' stroke-opacity='0.10' stroke-width='1.6'%3E%3Cpath d='M14 14h40a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8H26l-8 7v-7h-4a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8z'/%3E%3Cpath d='M74 58h32a7 7 0 0 1 7 7v9a7 7 0 0 1-7 7h-3v6l-7-6H74a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: auto, 120px 96px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0 22%, transparent 36%, transparent 64%, #000 78%);
+          mask-image: linear-gradient(90deg, #000 0 22%, transparent 36%, transparent 64%, #000 78%);
+}
+
+/* About: icon circles get a clearer outline (was a near-invisible warm hairline at 80% opacity) */
+#about .icon-link { border-color: rgba(35, 34, 32, 0.28) !important; opacity: 1; }
+#about .icon-link:hover, #about .icon-link:focus-visible { border-color: rgba(35, 34, 32, 0.6) !important; }
