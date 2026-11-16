@@ -252,3 +252,7 @@ footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
 /* About: icon circles get a clearer outline (was a near-invisible warm hairline at 80% opacity) */
 #about .icon-link { border-color: rgba(35, 34, 32, 0.28) !important; opacity: 1; }
 #about .icon-link:hover, #about .icon-link:focus-visible { border-color: rgba(35, 34, 32, 0.6) !important; }
+
+/* Recruiter Inbox: the animation scales to the iframe's whole-pixel height, which can leave up to
+   a pixel of the slate panel showing under it; a white frame backs that sliver */
+.project:nth-child(2) .project-frame, .project:nth-child(2) .project-frame iframe { background: #fff; }
