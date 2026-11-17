@@ -24,10 +24,9 @@
   var ROWS = []; for (var r = 0; r < 14; r++) ROWS.push([0, (0.5 * Math.pow(2, r % 7)).toFixed(1), (0.12 + rnd() * 0.85)]);
   function table(R, t) {
     var B = panel(R, 7); if (B[2] < 40 || B[3] < 16) return;
-    var rh = 15, n = Math.floor(B[3] / rh), wide = B[2] > 150, hi = Math.floor(t * 0.8) % Math.max(1, n - 1);
+    var rh = 15, n = Math.floor(B[3] / rh), wide = B[2] > 150;
     for (var i = 0; i < n; i++) {
       var y = B[1] + i * rh + rh / 2, row = ROWS[(i - 1 + ROWS.length) % ROWS.length];
-      if (i > 0 && i - 1 === hi) { ctx.fillStyle = 'rgba(13,153,255,0.08)'; ctx.fillRect(B[0] - 4, y - rh / 2, B[2] + 8, rh); }
       bar(B[0], y, i ? 22 : 14, i ? 0.55 : 0.18);
       if (wide) { var cw = i ? 8 + row[1].length * 3 : 12; bar(B[0] + B[2] * 0.42 - cw, y, cw, i ? 0.3 : 0.18); }
       var bx = B[0] + B[2] * (wide ? 0.5 : 0.38), bw = B[2] * (wide ? 0.5 : 0.62);
@@ -54,8 +53,6 @@
       }
     }
     ctx.fill();
-    var rx = B[0] + B[2] * (0.5 + 0.3 * Math.sin(t * 0.35)), ry = B[1] + IH * (0.5 + 0.25 * Math.cos(t * 0.27)), rb = Math.min(B[2], IH) * 0.16;
-    ctx.strokeStyle = BLUE; ctx.lineWidth = 1.25; ctx.setLineDash([3, 2]); ctx.strokeRect(rx - rb, ry - rb, rb * 2, rb * 2); ctx.setLineDash([]); ctx.lineWidth = 1;
     ctx.restore();
   }
 
@@ -78,7 +75,6 @@
     for (p = 0; p < 6; p += 2) { xb = x0 - dw * 0.7; ctx.moveTo(x0 - dw * 0.35, L1[p]); ctx.lineTo(xb, L1[p]); ctx.lineTo(xb, L1[p + 1]); ctx.lineTo(x0 - dw * 0.35, L1[p + 1]); L2.push((L1[p] + L1[p + 1]) / 2); }
     xb = x0 - dw; ctx.moveTo(x0 - dw * 0.7, L2[0]); ctx.lineTo(xb, L2[0]); ctx.lineTo(xb, L2[2]); ctx.lineTo(x0 - dw * 0.7, L2[2]); ctx.moveTo(x0 - dw * 0.7, L2[1]); ctx.lineTo(xb, L2[1]);
     ctx.stroke(); ctx.restore();
-    var sc = Math.floor(t * 2) % 16; ctx.strokeStyle = BLUE; ctx.lineWidth = 1.25; ctx.strokeRect(x0 + sc * cw - 0.5, B[1] - 0.5, cw, B[3]); ctx.lineWidth = 1;
   }
   // 4. ball-and-stick molecule turning in 3D
   var MOL = (function () {
