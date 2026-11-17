@@ -91,10 +91,6 @@
     a:hover { color: #0576d1; }
     strong, b { font-weight: 500; }
     @keyframes wordIn { from { transform: translateY(110%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes gridRuleIn { 0% { background-size: 0% 100%, 100% 0%; } 48% { background-size: 100% 100%, 100% 0%; } 100% { background-size: 100% 100%, 100% 100%; } }
-    .intro-ready .hero-grid { animation: gridRuleIn 1.5s cubic-bezier(0.33, 0.9, 0.4, 1) 2.5s both; }
-    html.skip-intro .hero-grid, html:not(.intro-ready):not(.skip-intro) .hero-grid { animation: none !important; }
-    @media (prefers-reduced-motion: reduce) { .hero-grid { animation: none !important; } }
     @keyframes inkSettle { 0% { color: #6b6863; } 100% { color: #0d0c09; } }
     @keyframes highlightWashIn { from { background-size: 0% 0.3em; } to { background-size: 100% 0.3em; } }
     html.skip-intro .hero-emph { animation: none !important; }
@@ -103,78 +99,18 @@
     @keyframes workFadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
     .intro-ready .work-reveal { animation: workFadeUp 1.3s cubic-bezier(0.16, 1, 0.3, 1) 3s both; }
     @media (prefers-reduced-motion: reduce) { .word-in { animation: none; opacity: 1 !important; } .work-reveal { animation: none; opacity: 1 !important; } }
-    @keyframes lineShimmer {
-      0%, 2%    { background-position: 200% 0; }
-      13%       { background-position: -120% 0; }
-      14%, 100% { background-position: -120% 0; }
+    /* Hero animation (hero-select.js): fades in with the intro; hidden where the headline takes the full width */
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+    @keyframes heroCanvasIn { from { opacity: 0; } to { opacity: 1; } }
+    .intro-ready .hero-canvas { animation: heroCanvasIn 0.9s ease 2.2s both; }
+    @media (prefers-reduced-motion: reduce) { .hero-canvas { animation: none !important; } }
+    /* Below 900px the window stacks under the text: 16:10 on tablets, two-panel 4:5 on phones.
+       The canvas runs 24px past the window (into the right gutter and below) for the cursor tag. */
+    @media (max-width: 899px) {
+      html .hero-section { flex-direction: column !important; align-items: stretch !important; padding-bottom: 72px !important; }
+      .hero-shape { position: relative !important; inset: auto !important; order: 2; margin: 48px 0 0 24px; width: calc(100% - 24px); height: calc((100vw - 48px) * 0.625 + 24px); }
     }
-    .scene-shimmer {
-      background-image: linear-gradient(100deg, #d9d3c8 34%, #f4f1ea 50%, #d9d3c8 66%);
-      background-size: 220% 100%;
-      background-repeat: no-repeat;
-      animation: lineShimmer 12s ease-in-out 3.1s infinite;
-    }
-    @media (prefers-reduced-motion: reduce) { .scene-shimmer { animation: none !important; } }
-    @keyframes cursorTrip {
-      0%, 12%   { transform: translate(0, 0); }
-      26%, 56%  { transform: translate(0.3182em, -2.3409em); }
-      70%, 100% { transform: translate(0, 0); }
-    }
-    @keyframes btnPress {
-      0%, 28%   { transform: scale(1); background: #0688f0; }
-      31%       { transform: scale(0.94); background: #0576d1; }
-      36%, 100% { transform: scale(1); background: #0688f0; }
-    }
-    /* The loop is seamless because the end state is a visual duplicate of the
-       start state: after the stack shifts one slot, card B sits where A was and
-       card C sits where B was, all three carrying the same grey chip. Card B
-       must therefore never change colour, or the reset reads as a hard cut. */
-    @keyframes chipGrey {
-      0%, 8%      { opacity: 1; }
-      12%, 100%   { opacity: 0; }
-    }
-    @keyframes chipBlue {
-      0%, 8%      { opacity: 0; }
-      12%, 30%    { opacity: 1; }
-      36%, 100%   { opacity: 0; }
-    }
-    @keyframes chipDone {
-      0%, 30%     { opacity: 0; }
-      36%, 100%   { opacity: 1; }
-    }
-    @keyframes stackShift {
-      0%, 46%     { transform: translateY(0); }
-      56%, 100%   { transform: translateY(-0.75em); }
-    }
-    @keyframes cardRetire {
-      0%, 46%     { opacity: 1; }
-      56%, 100%   { opacity: 0; }
-    }
-    @keyframes cardArrive {
-      0%, 48%     { opacity: 0; }
-      58%, 100%   { opacity: 1; }
-    }
-    .scene-cursor  { animation: cursorTrip 12s cubic-bezier(0.5, 0, 0.2, 1) 3.1s infinite; }
-    .scene-btn     { animation: btnPress 12s ease 3.1s infinite; }
-    .scene-stack   { animation: stackShift 12s cubic-bezier(0.5, 0, 0.2, 1) 3.1s infinite; }
-    .scene-card-a  { animation: cardRetire 12s ease 3.1s infinite; }
-    .scene-card-c  { animation: cardArrive 12s ease 3.1s infinite; }
-    .scene-chip-a1 { animation: chipGrey 12s ease 3.1s infinite; }
-    .scene-chip-a1b { animation: chipBlue 12s ease 3.1s infinite; }
-    .scene-chip-a2 { animation: chipDone 12s ease 3.1s infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .scene-cursor, .scene-btn, .scene-stack, .scene-card-a, .scene-card-c,
-      .scene-chip-a1, .scene-chip-a1b, .scene-chip-a2 { animation: none !important; }
-      .scene-card-c, .scene-chip-a1b, .scene-chip-a2 { opacity: 0 !important; }
-    }
-    @keyframes sceneIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-    .scene-el { opacity: 0; animation: sceneIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both; }
-    html.skip-intro .scene-el { animation: none !important; opacity: 1 !important; transform: none !important; }
-    html:not(.intro-ready):not(.skip-intro) .scene-el { animation: none !important; opacity: 1 !important; transform: none !important; }
-    @media (prefers-reduced-motion: reduce) { .scene-el { animation: none !important; opacity: 1 !important; transform: none !important; } }
-    /* The scene lives in the gap right of the headline; below this width the
-       headline claims the full column and there is nowhere for it to sit. */
-    @media (max-width: 680px) { .hero-scene { display: none !important; } }
+    @media (max-width: 599px) { .hero-shape { margin-top: 40px; height: calc((100vw - 48px) * 1.15 + 24px); } }
     html.skip-intro .word-in { animation: none !important; opacity: 1 !important; transform: none !important; }
     html.skip-intro .work-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
     html:not(.intro-ready):not(.skip-intro) .word-in, html:not(.intro-ready):not(.skip-intro) .work-reveal { opacity: 1 !important; animation: none !important; transform: none !important; }
@@ -209,20 +145,6 @@
     .bio-col-photo { order: 2; }
     .bio-col-text { order: 1; }
     @media (max-width: 900px) { .work-pair { grid-template-columns: 1fr !important; } .work-hero-card { aspect-ratio: 1 / 1 !important; } }
-    @media (max-width: 1024px) { #side-projects { display: block !important; } #side-projects > div { margin: 0 !important; } }
-    @media (max-width: 900px) { .side-project-grid { grid-template-columns: 1fr 1fr !important; } }
-    @media (max-width: 600px) { .side-project-grid { grid-template-columns: 1fr !important; } }
-    .beyond-title { transition: color 0.2s ease; }
-    .beyond-arrow { opacity: 0; transform: translate(-3px, 3px); transition: opacity 0.2s ease, transform 0.2s ease; }
-    .beyond-row:hover .beyond-title, .beyond-row:focus-visible .beyond-title { color: #0688f0; }
-    .beyond-row:hover .beyond-arrow, .beyond-row:focus-visible .beyond-arrow { opacity: 1; transform: translate(0, 0); }
-    @media (hover: none) { .beyond-arrow { display: none; } }
-    @media (max-width: 600px) {
-      .beyond-row { grid-template-columns: 64px minmax(0, 1fr) !important; gap: 1.25rem !important; }
-      .beyond-thumb { width: 64px !important; }
-      .beyond-content { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; }
-      .beyond-meta { display: none !important; }
-    }
   </style><noscript>
     .word-in, .work-reveal { opacity: 1 !important; animation: none !important; }
   </noscript><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap" rel="stylesheet"><style>
@@ -236,8 +158,11 @@
 <script src="site-behaviors.js?v=3" defer></script>
 <!-- site styles -->
 <link rel="stylesheet" href="legacy-inline.css?v=10">
-<link rel="stylesheet" href="site.css?v=26">
-<script src="site.js?v=4" defer></script>
+<link rel="stylesheet" href="site.css?v=35">
+<link rel="stylesheet" href="theme.css?v=1">
+<script src="theme.js?v=1"></script>
+<script src="site.js?v=6" defer></script>
+<script src="hero-select.js?v=6" defer></script>
 
 </head>
 <body>
@@ -336,65 +261,7 @@
     </nav>
    </div>
   </div></header><div class="header-spacer-default" style="height: 66px; flex-shrink: 0"></div></div><section class="hero-section" style="position: relative; display: flex; align-items: center; padding-top: 116px; padding-bottom: 135px; overflow: visible; width: 100%; box-sizing: border-box;">
-    <div class="hero-paper" aria-hidden="true" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; z-index: 0;">
-      <div class="hero-grid" style="position: absolute; inset: 0px; background-image: repeating-linear-gradient(0deg, rgba(13, 12, 9, 0.07) 0px, rgba(13, 12, 9, 0.07) 1px, transparent 1px, transparent 11px), repeating-linear-gradient(90deg, rgba(13, 12, 9, 0.07) 0px, rgba(13, 12, 9, 0.07) 1px, transparent 1px, transparent 11px); background-position: 0px 0px; background-repeat: no-repeat; background-size: 100% 100%, 100% 100%; clip-path: polygon(104% 104%, 34% 104%, 34% 100.15%, 36.69% 100.15%, 36.69% 96.31%, 39.38% 96.31%, 39.38% 92.46%, 42.08% 92.46%, 42.08% 88.62%, 44.77% 88.62%, 44.77% 84.77%, 47.46% 84.77%, 47.46% 80.92%, 50.15% 80.92%, 50.15% 77.08%, 52.85% 77.08%, 52.85% 73.23%, 55.54% 73.23%, 55.54% 69.38%, 58.23% 69.38%, 58.23% 65.54%, 60.92% 65.54%, 60.92% 61.69%, 63.62% 61.69%, 63.62% 57.85%, 66.31% 57.85%, 66.31% 54%, 69% 54%, 69% 50.15%, 71.69% 50.15%, 71.69% 46.31%, 74.38% 46.31%, 74.38% 42.46%, 77.08% 42.46%, 77.08% 38.62%, 79.77% 38.62%, 79.77% 34.77%, 82.46% 34.77%, 82.46% 30.92%, 85.15% 30.92%, 85.15% 27.08%, 87.85% 27.08%, 87.85% 23.23%, 90.54% 23.23%, 90.54% 19.38%, 93.23% 19.38%, 93.23% 15.54%, 95.92% 15.54%, 95.92% 11.69%, 98.62% 11.69%, 98.62% 7.85%, 101.31% 7.85%, 101.31% 4%, 104% 4%);"></div>
-    </div>
-
-
-    <div class="hero-shape" style="position: absolute; inset: 0px; pointer-events: none; z-index: 0;">
-      <div class="hero-scene" aria-hidden="true" style="position: absolute; right: max(2.5rem, -420px + 50vw); top: 50%; transform: translateY(-50%); font-size: clamp(46px, 6.3vw, 88px); width: 3.5227em; height: 4.8864em; pointer-events: none;">
-
-        <div class="scene-el" style="position: absolute; left: 2.2273em; top: 0px; width: 1.2727em; animation-delay: 3.05s;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.0682em;">
-            <span style="height: 0.3636em; border: 1px solid rgb(213, 207, 196); border-radius: 0.0568em;"></span>
-            <span style="height: 0.3636em; border: 1px solid rgb(213, 207, 196); border-radius: 0.0568em; background: rgb(235, 231, 223);"></span>
-            <span style="height: 0.3636em; border: 1px solid rgb(213, 207, 196); border-radius: 0.0568em; background: rgb(235, 231, 223);"></span>
-            <span style="height: 0.3636em; border: 1px solid rgb(213, 207, 196); border-radius: 0.0568em;"></span>
-          </div>
-        </div>
-
-        <div class="scene-el" style="position: absolute; left: 0px; top: 1.0455em; width: 3.0455em; padding: 0.1818em; box-sizing: border-box; border: 1px solid rgb(207, 201, 189); border-radius: 0.1136em; background: rgb(255, 255, 255); animation-delay: 2.45s;">
-          <span class="scene-shimmer" style="display: block; width: 100%; height: 0.0909em; border-radius: 0.0455em; background-color: rgb(217, 211, 200); margin-bottom: 0.1136em;"></span>
-          <span class="scene-shimmer" style="display: block; width: 72%; height: 0.0909em; border-radius: 0.0455em; background-color: rgb(217, 211, 200); margin-bottom: 0.1818em; animation-delay: 3.25s;"></span>
-          <span class="scene-btn" style="display: flex; align-items: center; justify-content: center; width: 0.7045em; height: 0.25em; border-radius: 0.0682em; background: rgb(6, 136, 240);"><span style="display: block; width: 0.3409em; height: 0.0568em; border-radius: 0.0341em; background: rgba(255, 255, 255, 0.85);"></span></span>
-        </div>
-
-        <div class="scene-el" style="position: absolute; left: 1.7045em; top: 1.7773em; width: 1.2523em; height: 0.7125em; transform: rotate(6deg); transform-origin: 50% 50%; overflow: visible; animation-delay: 2.75s;">
-          <svg viewBox="0 0 116 66" fill="none" style="width: 100%; height: 100%; overflow: visible;">
-            <path d="M4 5 C56 7 96 22 104 50" stroke="#bdb6a8" stroke-width="1.75" stroke-linecap="round"></path>
-            <path d="M107.6 36.6 L104 50 L94.7 39.5" stroke="#bdb6a8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-          </svg>
-        </div>
-
-        <div class="scene-el" style="position: absolute; left: 1.0909em; top: 2.8636em; width: 2.2614em; height: 1.4432em; padding-right: 0.0341em; box-sizing: border-box; overflow: hidden; animation-delay: 2.95s;">
-          <div class="scene-stack">
-            <div class="scene-card-a" style="height: 0.6591em; padding: 0.1136em 0.1364em; margin-bottom: 0.0909em; border: 1px solid rgb(207, 201, 189); border-radius: 0.1023em; background: rgb(255, 255, 255); box-shadow: rgba(13, 12, 9, 0.08) 0.0341em 0.0341em 0px; box-sizing: border-box;">
-              <span style="display: block; width: 68%; height: 0.0795em; border-radius: 0.0455em; background: rgb(217, 211, 200); margin-bottom: 0.1023em;"></span>
-              <span style="position: relative; display: block;"><span class="scene-chip-a1" style="display: block; width: 0.6136em; height: 0.1818em; border-radius: 999px; background: rgb(221, 215, 204);"></span><span class="scene-chip-a1b" style="position: absolute; left: 0px; top: 0px; display: block; width: 0.6136em; height: 0.1818em; border-radius: 999px; background: rgb(6, 136, 240);"></span><span class="scene-chip-a2" style="position: absolute; left: 0px; top: 0px; display: block; width: 0.6136em; height: 0.1818em; border-radius: 999px; background: rgb(46, 158, 99);"></span></span>
-            </div>
-            <div class="" style="height: 0.6591em; padding: 0.1136em 0.1364em; margin-bottom: 0.0909em; border: 1px solid rgb(207, 201, 189); border-radius: 0.1023em; background: rgb(255, 255, 255); box-shadow: rgba(13, 12, 9, 0.08) 0.0341em 0.0341em 0px; box-sizing: border-box;">
-              <span style="display: block; width: 68%; height: 0.0795em; border-radius: 0.0455em; background: rgb(217, 211, 200); margin-bottom: 0.1023em;"></span>
-              <span style="display: block; width: 0.6136em; height: 0.1818em; border-radius: 999px; background: rgb(221, 215, 204);"></span>
-            </div>
-            <div class="scene-card-c" style="height: 0.6591em; padding: 0.1136em 0.1364em; margin-bottom: 0.0909em; border: 1px solid rgb(207, 201, 189); border-radius: 0.1023em; background: rgb(255, 255, 255); box-shadow: rgba(13, 12, 9, 0.08) 0.0341em 0.0341em 0px; box-sizing: border-box;">
-              <span style="display: block; width: 68%; height: 0.0795em; border-radius: 0.0455em; background: rgb(217, 211, 200); margin-bottom: 0.1023em;"></span>
-              <span class="" style="display: block; width: 0.6136em; height: 0.1818em; border-radius: 999px; background: rgb(221, 215, 204);"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="scene-el" style="position: absolute; left: 0.0909em; top: 4.2273em; animation-delay: 3.2s;"><div class="scene-cursor" style="display: flex; align-items: flex-start; gap: 0.0568em;">
-          <svg viewBox="0 0 16 18" fill="none" style="width: 0.2386em; height: 0.2652em; flex: 0 0 auto;"><path d="M1.5 1.2 L13.4 9.6 L7.6 10.2 L10.1 15.9 L7.4 17 L4.9 11.3 L1.5 14.6 Z" fill="#7a5af8" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round" paint-order="stroke"></path></svg>
-          <span style="display: block; width: 0.4886em; height: 0.2273em; border-radius: 999px; background: rgb(122, 90, 248); box-shadow: rgb(255, 255, 255) 0px 0px 0px 0.0284em;"></span>
-        </div></div>
-
-      </div></div>
-
-      
-
-      
-      
-    
+    <div class="hero-shape" aria-hidden="true" style="position: absolute; inset: 0px; pointer-events: none; z-index: 0;"><canvas class="hero-canvas"></canvas></div>
     <div style="position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0px auto; padding-left: 24px; padding-right: 24px; box-sizing: border-box; display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;">
       <div class="hero-title" style="grid-area: 1 / 2 / auto / -1; position: relative; align-self: center;">
         
@@ -454,7 +321,7 @@
           <div class="i6 project-ui-wrap">
             
             
-              <video src="assets/video/quick-reply-flow-panel.mp4?v=8" poster="assets/img/linkedin-quick-reply-panel.webp?v=2" loop="" preload="metadata" aria-label="LinkedIn smart reply for job candidates" muted="" autoplay="" playsinline="" style="width: 100%; aspect-ratio: 16 / 10; object-fit: contain; object-position: center top; display: block; pointer-events: none; background: rgb(255, 255, 255);"></video>
+              <video src="assets/video/quick-reply-flow-panel.mp4?v=10" poster="assets/img/linkedin-quick-reply-panel.webp?v=4" loop="" preload="metadata" aria-label="LinkedIn smart reply for job candidates" muted="" autoplay="" playsinline="" style="width: 100%; aspect-ratio: 16 / 10; object-fit: contain; object-position: center top; display: block; pointer-events: none; background: rgb(255, 255, 255);"></video>
             
             
           </div>
@@ -568,52 +435,7 @@
     </div>
   </section>
 
-    <section id="side-projects" class="i39">
-    <div class="i15">
-      <h3 class="i40 beyond-heading">Beyond work</h3>
-      
-      <div class="i41">
-        
-          <a class="i42 beyond-row" href="https://github.com/whatupjia/rbtagger-releases" target="_blank" rel="noopener">
-            <div class="i43 beyond-thumb">
-              
-              <img src="assets/img/rb-tagger-logo-168.png" alt="RB Tagger" loading="lazy" decoding="async" width="168" height="168" class="i44">
-              
-            </div>
-            <div class="i45 beyond-content">
-              <div class="i46">
-                <h4 class="i47 beyond-title"><span class="sc-interp">RB Tagger</span></h4>
-                <p class="i48"><span class="sc-interp">Created a faster, better way for DJs to organize their music.</span></p>
-              </div>
-              <div class="i49 beyond-meta">
-                <span class="i50"><span class="sc-interp">App</span></span>
-                <svg class="beyond-arrow" viewBox="0 0 24 24" fill="none" stroke="#0688f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;"><path d="M7 17L17 7M9 7h8v8"></path></svg>
-              </div>
-            </div>
-          </a>
-        
-          <a class="i42 beyond-row" href="https://www.nyc.gov/assets/cto/downloads/annual-reports/2021_impact_report.pdf" target="_blank" rel="noopener">
-            <div class="i51 beyond-thumb">
-              
-              <img src="assets/img/nyc-impact-report-cover-168.png" alt="USDR x NYC Fellowship" loading="lazy" decoding="async" width="168" height="151" class="i44">
-              
-            </div>
-            <div class="i45 beyond-content">
-              <div class="i46">
-                <h4 class="i47 beyond-title"><span class="sc-interp">USDR x NYC Fellowship</span></h4>
-                <p class="i48"><span class="sc-interp">Shipped an improved website for senior services during COVID-19.</span></p>
-              </div>
-              <div class="i49 beyond-meta">
-                <span class="i50"><span class="sc-interp">Civic Tech</span></span>
-                <svg class="beyond-arrow" viewBox="0 0 24 24" fill="none" stroke="#0688f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;"><path d="M7 17L17 7M9 7h8v8"></path></svg>
-              </div>
-            </div>
-          </a>
-        
-        
-      </div>
-    </div>
-  </section><div class="sc-host" data-sc-name="Footer"><footer class="i41">
+<div class="sc-host" data-sc-name="Footer"><footer class="i41">
   <div class="i52">
     <div class="i53">
       <span class="i54">Jia Liu</span>

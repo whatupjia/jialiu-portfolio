@@ -1,0 +1,30 @@
+/* Dark tokens for the diagram figures. Applies inside diagram iframes (body.dg) and to
+   inline diagram SVGs on the page, when html[data-theme="dark"]. SVG presentation attributes are
+   remapped by value, so the diagrams keep their light colors as the default. */
+html[data-theme="dark"]:has(> body.dg), html[data-theme="dark"] body.dg { background: transparent !important; }
+html[data-theme="dark"] body.dg { color: #ecebe6 !important; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) {
+  --line: rgba(236, 235, 230, 0.16); --gray: rgba(236, 235, 230, 0.6);
+}
+/* surfaces */
+html[data-theme="dark"] :is(body.dg, .v-decision .media) :is([fill="#fff"], [fill="#ffffff"], [fill="white"]) { fill: #2a2826; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="#f2f1ec"] { fill: #1c1a19; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="rgb(244,242,239)"] { fill: #24221f; }
+/* ink */
+html[data-theme="dark"] :is(body.dg, .v-decision .media) :is([fill="#26201f"], [fill="#232220"]) { fill: #ecebe6; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="rgba(38,32,31,0.4)"] { fill: rgba(236, 235, 230, 0.4); }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) :is([fill="rgba(38,32,31,0.55)"], [fill="rgba(38,32,31,0.6)"]) { fill: rgba(236, 235, 230, 0.6); }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="rgba(38,32,31,0.05)"] { fill: rgba(236, 235, 230, 0.06); }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) :is([stroke="rgba(38,32,31,0.14)"], [stroke="rgba(38,32,31,0.16)"]) { stroke: rgba(236, 235, 230, 0.16); }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [stroke="rgba(38,32,31,0.6)"] { stroke: rgba(236, 235, 230, 0.6); }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) :is([stroke="rgba(35,34,32,0.4)"], [stroke="rgba(35,34,32,0.5)"]) { stroke: rgba(236, 235, 230, 0.45); }
+/* accents, lifted so they hold up on dark */
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="#1f5a57"] { fill: #5fa39a; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [stroke="#1f5a57"] { stroke: #5fa39a; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="#4d5a73"] { fill: #8d9ab5; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [stroke="#4d5a73"] { stroke: #8d9ab5; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [fill="#a0522d"] { fill: #cf8059; }
+html[data-theme="dark"] :is(body.dg, .v-decision .media) [stroke="#a0522d"] { stroke: #cf8059; }
+/* test model (HTML cards) */
+html[data-theme="dark"] body.dg .card { background: #2a2826; }
+html[data-theme="dark"] body.dg :is(.chip, .tag) { background: rgba(236, 235, 230, 0.08); }

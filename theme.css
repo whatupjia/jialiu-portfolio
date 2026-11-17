@@ -1,0 +1,58 @@
+/* Dark mode. Applies when the visitor's system is dark, unless they chose light with the
+   header toggle, or when they chose dark. theme.js sets html[data-theme]. */
+:root { color-scheme: light; }
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141312;
+  --muted: #1c1a19;              /* dark sand; baked into quick-reply-flow-panel-dark.mp4 */
+  --ink: #ecebe6;
+  --ink-2: rgba(236, 235, 230, 0.64);
+  --ink-3: rgba(236, 235, 230, 0.42);
+  --rule: rgba(236, 235, 230, 0.14);
+  --accent: #7cc2b8;
+}
+html[data-theme="dark"] :is([style*="color: rgb(110, 109, 103)"], .hero-sub) { color: var(--ink-2) !important; }
+html[data-theme="dark"] a:hover { color: #a4d6ce; }
+
+/* Header: translucent dark glass, light logo and links */
+html[data-theme="dark"] [data-behavior="site-header"] { background: rgba(20, 19, 18, 0.72) !important; border-bottom-color: var(--rule) !important; }
+html[data-theme="dark"] :is(.site-header-logo, .nav-desktop a, .nav-mobile-toggle) { color: var(--ink) !important; }
+html[data-theme="dark"] .site-header-mark rect { fill: var(--ink); }
+html[data-theme="dark"] .site-header-mark path { fill: var(--paper); }
+html[data-theme="dark"] [data-behavior="contact-shape"] { background: #2a2926 !important; box-shadow: inset 0 0 0 1px rgba(236, 235, 230, 0.16) !important; }
+
+/* Hero animation: drawn for light; invert lightness and rotate hue back so it reads as a dark app */
+html[data-theme="dark"] .hero-canvas { filter: invert(0.92) hue-rotate(180deg); }
+
+/* Work cards: dark sand panels; the product frames keep their own (light) UI */
+/* Embedded animations are light UI; without this they'd inherit the dark color scheme and fade */
+html[data-theme="dark"] iframe { color-scheme: light; }
+html[data-theme="dark"] .project-frame { border-color: rgba(236, 235, 230, 0.12) !important; box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.7) !important; }
+
+/* About */
+html[data-theme="dark"] #about :is(h1, h2, h3) { color: var(--ink) !important; }
+html[data-theme="dark"] #about .icon-link { border-color: rgba(236, 235, 230, 0.28) !important; color: var(--ink) !important; }
+html[data-theme="dark"] #about .icon-link:hover { border-color: rgba(236, 235, 230, 0.6) !important; }
+
+/* The toggle */
+.theme-toggle { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 999px; background: none; color: rgb(13, 12, 9); cursor: pointer; flex-shrink: 0; opacity: 0.75; transition: opacity 0.2s, background 0.2s; }
+.theme-toggle:hover, .theme-toggle:focus-visible { opacity: 1; background: rgba(13, 12, 9, 0.06); }
+html[data-theme="dark"] .theme-toggle { color: var(--ink); }
+html[data-theme="dark"] .theme-toggle:hover { background: rgba(236, 235, 230, 0.08); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .moon { display: block; } .theme-toggle .sun { display: none; }
+html[data-theme="dark"] .theme-toggle .moon { display: none; } html[data-theme="dark"] .theme-toggle .sun { display: block; }
+
+/* ---------- Case studies ---------- */
+/* Headings: the pages set h1-h4 to ink in an inline style */
+html[data-theme="dark"] :is(h1, h2, h3, h4), html[data-theme="dark"] .v-flow .entry h4 { color: var(--ink) !important; }
+/* Bioanalysis decision cards: dark sand instead of white; their diagrams stay light */
+html[data-theme="dark"] .opt { background: var(--muted) !important; border-color: var(--rule) !important; }
+html[data-theme="dark"] .opt :is(p, li, span, div):not([class*="chip"]):not([class*="tag"]) { border-color: var(--rule); }
+/* Sand figure tiles become dark sand; their diagrams are themed by assets/anim/_dark.css,
+   screenshots inside them stay light */
+html[data-theme="dark"] :is(.v-decision .media, .v-improve .tile, .v-wfpair .tile, .v-flow .tile, .v-model-tile) { background: var(--muted) !important; }
+/* Quotes on a sand box (Quick Reply) */
+html[data-theme="dark"] blockquote { background: var(--muted) !important; border-color: var(--rule) !important; }
+/* Screenshots stay light, a touch dimmer so they don't glare on dark */
+html[data-theme="dark"] :is(.expandable-image-wrap, .project-frame, .v-hero-frame, .tile) :is(img, video) { filter: brightness(0.92); }

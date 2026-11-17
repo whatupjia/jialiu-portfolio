@@ -603,6 +603,8 @@ section p:last-child:not(.cap):not(.v-hero-cap):not(.v-gaps-note), section ul:la
 /* mapping band */
 #approach.v-sec { margin-top: var(--band-out) !important; }
 #approach .v-dark { padding-top: var(--band-pad) !important; padding-bottom: var(--band-pad) !important; margin-bottom: calc(var(--band-out) - 28px) !important; }
+/* Below 1100px the page's inline section reset zeroes the first child's padding; keep the band's inside padding */
+#approach.v-sec > div.v-dark { padding-top: var(--band-pad) !important; padding-bottom: var(--band-pad) !important; }
 /* plates */
 .concept-split:has(.v-plates-frame) { row-gap: var(--r-fig) !important; }
 .v-decision { margin-top: calc(var(--r-sub) - 20px) !important; }

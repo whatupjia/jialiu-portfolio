@@ -24,7 +24,8 @@
   /* Case study panels: one deep, muted tone per project */
   --panel-1: #17403e; /* deep teal-green */
   --panel-2: #222a35; /* deep slate */
-  --panel-3: #3A2840; /* deep plum; baked into the Quick Reply video (original umber copy kept in the session scratchpad) */
+  --panel-3: #3A2840; /* deep plum */
+  --card-panel: var(--muted); /* homepage work cards share the warm sand; baked into the Quick Reply video */
 }
 
 html, body { background: var(--paper) !important; }
@@ -70,10 +71,6 @@ header[data-behavior="site-header"] {
   letter-spacing: -0.006em !important;
   max-width: 40ch !important;
 }
-.hero-grid { opacity: 0.55; }
-/* Stop the grid well above the first case study */
-.hero-paper { bottom: 120px !important; }
-.hero-scene span:is([style*="border"], .i8, .i14, .i23, .i31, .i32, .i33, .i39, .i41, .i42, .i43, .i51, .i52, .i69, .i70, .i74, .i80, .i82, .i99, .i104, .i110, .site-footer, .site-footer-inner, .outcomes-card, .case-section, .outcomes-photo, .case-section-end) { border-color: rgba(35, 34, 32, 0.18) !important; }
 
 /* Body copy: single sans throughout */
 :is([style*="FreightText"], .i13, .i22, .i28, .i29, .i35, .i48, .i64, .i72, .i79) {
@@ -82,11 +79,11 @@ header[data-behavior="site-header"] {
 }
 
 /* Sections are separated by space alone */
-#how-i-help, #about, #side-projects { margin-top: clamp(96px, 12vw, 176px) !important; }
+#how-i-help { margin-top: clamp(96px, 12vw, 176px) !important; }
+#about { margin-top: clamp(64px, 8vw, 112px) !important; }
 
 /* Section headings: big, light */
 #how-i-help h3.help-heading,
-#side-projects h3.beyond-heading,
 .v-section-title {
   font-size: clamp(32px, 3.4vw, 46px) !important;
   font-weight: 400 !important;
@@ -135,9 +132,7 @@ header[data-behavior="site-header"] {
   box-sizing: border-box;
   overflow: hidden;
 }
-.project:nth-child(1) { --panel: var(--panel-1); }
-.project:nth-child(2) { --panel: var(--panel-2); }
-.project:nth-child(3) { --panel: var(--panel-3); }
+.project { --panel: var(--card-panel); }
 /* Quick Reply video has the panel color baked in behind the phone */
 .project-ui-wrap video { background: var(--panel) !important; }
 /* The screenshot sinks slightly past the panel's bottom edge
@@ -146,15 +141,16 @@ header[data-behavior="site-header"] {
 .project:nth-child(2) { --sink: 0px; }
 .project-frame {
   border-radius: 12px 12px 0 0 !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(13, 12, 9, 0.1) !important;
   border-bottom: 0 !important;
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.28);
   transform: translateY(var(--sink));
 }
-/* Benchling: no border, so the animation sits flush with the frame edge.
+/* Benchling: the animation sits inside the frame's hairline.
    Its top padding matches Recruiter Inbox (frame starts at the panel padding, no downward offset);
    the frame runs taller by the usual sink, so the animation bleeds off the bottom instead. */
-.project:nth-child(1) .project-frame { border: 0 !important; }
+/* Bioanalysis: white backing under the animation, like Recruiter Inbox, so the frame's hairline and shadow read */
+.project:nth-child(1) .project-frame { background: #fff; }
 .project:nth-child(1) .project-ui-wrap { container-type: inline-size; }
 .project:nth-child(1) .project-frame { aspect-ratio: auto !important; height: calc(62.5cqw + var(--sink)) !important; margin-bottom: calc(-1 * var(--sink)) !important; transform: none !important; }
 .project:nth-child(1) .project-ui-wrap:hover .project-frame, .project:nth-child(1):focus-visible .project-frame { transform: none !important; }
@@ -172,7 +168,7 @@ header[data-behavior="site-header"] {
 .project-ui-wrap:hover .project-frame,
 .project:focus-visible .project-frame {
   transform: translateY(var(--sink)) !important;
-  box-shadow: 0 40px 70px -30px rgba(0, 0, 0, 0.55) !important;
+  box-shadow: 0 32px 60px -28px rgba(0, 0, 0, 0.34) !important;
 }
 @media (max-width: 760px) {
   .project-meta { grid-template-columns: 1fr; }
@@ -183,13 +179,12 @@ header[data-behavior="site-header"] {
 :is([style*="border-bottom: 1px solid rgb(228, 224, 216)"], .i42),
 :is([style*="border-top: 1px solid rgb(228, 224, 216)"], .i41, .site-footer) { border-color: var(--rule) !important; }
 footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
-.beyond-row:hover .beyond-title, .beyond-row:focus-visible .beyond-title { color: var(--accent) !important; }
-.side-project-tile, .beyond-thumb { border-radius: 10px !important; }
 
-/* Warm muted band behind About, full-bleed; Beyond work returns to white */
+/* About: a full-bleed warm sand band, the same tone as the work card panels */
 #about {
-  background: var(--muted);
-  box-shadow: 0 0 0 100vmax var(--muted);
+  --band: var(--muted);
+  background: var(--band);
+  box-shadow: 0 0 0 100vmax var(--band);
   clip-path: inset(0 -100vmax);
   padding-top: clamp(80px, 9vw, 128px) !important;
   padding-bottom: 0 !important; /* the section already carries its own bottom space */
@@ -204,52 +199,11 @@ footer { border-top: 1px solid var(--rule) !important; margin-top: 4rem; }
 /* Phones: the work cards sit right under a short hero, so don't hold them back for the full desktop intro */
 @media (max-width: 680px) { .intro-ready .work-reveal { animation-delay: 0.8s !important; } }
 
-/* Bioanalysis panel texture (mock): a faint well-plate dot grid that fades out toward
-   the edges, plus a soft glow from the top left behind the browser window */
-.project:nth-child(1) .project-ui-wrap {
-  background:
-    radial-gradient(120% 90% at 18% 0%, rgba(120, 190, 175, 0.22), transparent 60%),
-    var(--panel-1);
-}
-.project:nth-child(1) .project-ui-wrap::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(170, 220, 205, 0.16) 0 3px, transparent 3.5px);
-  background-size: 26px 26px;
-  background-position: 13px 13px;
-  -webkit-mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
-          mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
-}
-.project:nth-child(1) .project-frame { position: relative; z-index: 1; }
+/* Homepage: the white footer sits right under the About band, with no extra gap */
+#about ~ .sc-host footer { margin-top: 0 !important; border-top: 0 !important; }
 
-/* Recruiter Inbox panel texture: fine horizontal rules, like list dividers, fading toward
-   the edges, plus the same soft top-left glow as the other panels */
-.project:nth-child(2) .project-ui-wrap {
-  background:
-    radial-gradient(120% 90% at 18% 0%, rgba(150, 170, 200, 0.16), transparent 60%),
-    var(--panel-2);
-}
-.project:nth-child(2) .project-ui-wrap::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: linear-gradient(rgba(200, 212, 230, 0.12) 1px, transparent 1px);
-  background-size: 100% 18px;
-  -webkit-mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
-          mask-image: radial-gradient(90% 80% at 50% 35%, #000 25%, transparent 85%);
-}
-.project:nth-child(2) .project-frame { position: relative; z-index: 1; }
-
-/* Quick Reply panel texture: scattered chat-bubble outlines on the plum, laid over the
-   video (which has the plum baked in) and masked out around the phone in the middle */
-.project:nth-child(3) .project-ui-wrap::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background-image:
-    radial-gradient(90% 80% at 15% 0%, rgba(210, 170, 220, 0.14), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='96'%3E%3Cg fill='none' stroke='%23e6cfee' stroke-opacity='0.10' stroke-width='1.6'%3E%3Cpath d='M14 14h40a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8H26l-8 7v-7h-4a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8z'/%3E%3Cpath d='M74 58h32a7 7 0 0 1 7 7v9a7 7 0 0 1-7 7h-3v6l-7-6H74a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: auto, 120px 96px;
-  -webkit-mask-image: linear-gradient(90deg, #000 0 22%, transparent 36%, transparent 64%, #000 78%);
-          mask-image: linear-gradient(90deg, #000 0 22%, transparent 36%, transparent 64%, #000 78%);
-}
-
-/* About: icon circles get a clearer outline (was a near-invisible warm hairline at 80% opacity) */
+/* About: full-ink heading; icon circles get a clearer outline */
+#about :is(h1, h2, h3) { color: var(--ink) !important; }
 #about .icon-link { border-color: rgba(35, 34, 32, 0.28) !important; opacity: 1; }
 #about .icon-link:hover, #about .icon-link:focus-visible { border-color: rgba(35, 34, 32, 0.6) !important; }
 

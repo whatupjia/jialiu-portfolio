@@ -1,6 +1,10 @@
 # jialiu-portfolio
 
-Jia's design portfolio: plain static HTML, CSS and JS, no build step. The HTML
+Jia's design portfolio (jialiudesign.com): plain static HTML, CSS and JS, no build step.
+This folder is the one working copy; all portfolio work happens here. Work on `main`;
+pushing `main` deploys the live site.
+Past versions are git tags, not folders (`v2-claude-design`, `v3-redesign`; tag the next
+major redesign `v4-...`). `archive/*` tags hold old unpushed work. The HTML
 in this repo is the source of truth. Pages are edited here directly with
 Claude Code (Claude Design and its canvas export are no longer part of the
 workflow), so there is no export to reconcile and no "code-only fix" list.
@@ -38,6 +42,8 @@ workflow), so there is no export to reconcile and no "code-only fix" list.
 | `site.js` | every page | Homepage copy (hero, About), work card facts. |
 | `case.js` | every case study | Title eyebrow, hidden section labels, Outcomes label, feature-scroll driver, spacing class hooks (`v-sub`, `v-figwrap`, ...). |
 | `case-recruiter.js` | Recruiter Inbox | Groups paragraphs with figures for the split layouts; size modifiers. |
+| `hero-select.js` | Home | Hero animation on `.hero-canvas`: a design-tool cursor selects, resizes and drags lab-app panels (heatmap, molecule, table, point cloud, sample board, dither image). Hidden below 900px. Scratch previews (`hero-explore.html`, `hero-views.html`) are not deployed. |
+| `theme.css` / `theme.js` | Home, case studies (last, in `<head>`; the script is not deferred so there's no light flash) | Dark mode: follows the system until the visitor uses the header toggle (choice saved in localStorage). Sets `html[data-theme]`; swaps the Quick Reply cover for its `-dark` copy; themes the diagram iframes with `assets/anim/_dark.css`. Screenshots stay light (dimmed). New hard-coded colors need a dark rule here. |
 | `site-behaviors.js` | every page | Interaction: header hide/show, contact popover, section nav, lightbox, video play-on-view, hero dots. |
 
 Each `<link>`/`<script>` carries a `?v=N` cache-buster; bump it whenever you edit the file.
@@ -82,6 +88,24 @@ Diagrams and product animations are standalone pages in `assets/anim/` (shared h
   hooks, nav and lightbox.
 - For refactors, compare element positions and computed styles before and after on each
   page; layout should not move unless that is the intent.
+
+## Adding a case study
+
+1. Copy `benchling-bioanalytical.html` to `<slug>.html` (Bioanalysis is the reference
+   design). Keep its stylesheet and script tags; create `case-<slug>.css` only for layouts
+   unique to the new page. Use the named classes, not `iN` ones.
+2. Intro: title, intro paragraphs, role stack on the right (Role, Team, Timeline), metrics
+   under an "Outcomes" label. Then the usual sections (Background, Problem, Approach,
+   Solution, Outcomes, Lessons learned), following the type, spacing and headline rules above.
+3. Section nav: one `button[data-index]` per `h1, h2, h3`, `aria-label` = heading text,
+   numbered from 0 (rule 1 below).
+4. Media: WebP with `width`/`height`, `loading="lazy"`, `decoding="async"`; faststart video.
+   Product animations go in `assets/anim/` as standalone pages on the shared `_base.*`.
+5. Homepage: add a card in `#work` in `index.html` (eyebrow facts in `site.js`). Card panels are
+   all light gray (`--card-panel` in `site.css`) with a faint pattern borrowed from the hero's
+   panel views (dot grid, row rules, card outlines); give it a cover (animation iframe, video or
+   image). A video cover needs the panel gray baked into its background.
+6. Bump `?v=N` on every file you changed, check desktop and phone widths, then push.
 
 ## Local editing tools (not deployed)
 

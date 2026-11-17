@@ -15,7 +15,7 @@
   }
 
   function run() {
-    // About: give it a heading to match Beyond work
+    // About: give it a heading
     var about = document.querySelector('#about .about-content');
     if (about) about.insertBefore(heading('Hi, I’m Jia.'), about.firstChild);
 
@@ -29,7 +29,7 @@
     // Hero copy
     var HERO_TITLE = 'I design products that help experts do their best work.';
     var HERO_SUB = [
-      'I find solutions to hard problems and design tools that are clear to use and practical to build, from the first customer conversation to shipped product.',
+      'Clear to use and practical to build, from the first customer conversation to shipped product.',
       'Currently at Proscia, previously Benchling and LinkedIn.'
     ];
     var line = document.querySelector('.hero-line-sans');
