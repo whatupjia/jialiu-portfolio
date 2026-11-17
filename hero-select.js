@@ -1,10 +1,10 @@
-/* Homepage hero: a design-tool selection over a lab app. A cursor ("Jia") selects, resizes and
-   drags three panels between layouts; each dropped panel turns into another scientific view.
+/* Homepage hero: a design-tool selection over a lab app. A cursor selects, resizes and drags three
+   panels between layouts; each dropped panel turns into another scientific view. Variants and the
+   exploration it came from live in tools/scratch/hero-abstract.*.
    Mounts on .hero-canvas inside .hero-section. Canvas only; pauses offscreen and for reduced motion. */
 (function () {
   var canvas = document.querySelector('.hero-canvas'), section = canvas && canvas.closest('.hero-section');
   if (!canvas || !section) return;
-  var MONO = '11px ui-monospace, SFMono-Regular, Menlo, monospace';
 
   // ---------- panel views (drawn without labels) ----------
   var TEAL = '#17403e', BLUE = '#0d99ff', INK = '#171713', RULE = 'rgba(13,12,9,0.12)', SOFT = 'rgba(13,12,9,0.45)', ctx;
@@ -56,19 +56,17 @@
     ctx.restore();
   }
 
-  // 2. heatmap with a dendrogram; rows re-sort between two orders
+  // 2. clustered heatmap: rows grouped by the dendrogram, which is always shown; cell values drift gently
   var HM = (function () { var r = seeded(7), m = []; for (var i = 0; i < 12; i++) { var row = [], g = i % 3; for (var j = 0; j < 16; j++) row.push(Math.max(0, Math.min(1, 0.5 + (g === 0 ? 0.4 : g === 1 ? -0.3 : 0.1) * Math.sin(j * 0.5 + g) + gauss(r) * 0.18))); m.push(row); } return m; })();
-  var ORD_A = [0, 3, 6, 9, 1, 4, 7, 10, 2, 5, 8, 11], ORD_B = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  var ORD = [0, 3, 6, 9, 1, 4, 7, 10, 2, 5, 8, 11]; // row order after clustering
   function heatmap(R, t) {
     var B = panel(R, 9); if (B[2] < 50 || B[3] < 40) return;
     var dw = Math.min(40, B[2] * 0.2), cw = (B[2] - dw - 4) / 16, ch = B[3] / 12, x0 = B[0] + dw + 4;
-    var ph = (t % 8) / 8, k = ph < 0.4 ? 0 : ph < 0.5 ? (ph - 0.4) / 0.1 : ph < 0.9 ? 1 : 1 - (ph - 0.9) / 0.1; k = k * k * (3 - 2 * k);
     for (var i = 0; i < 12; i++) {
-      var pa = ORD_A.indexOf(i), pb = ORD_B.indexOf(i), y = B[1] + (pb + (pa - pb) * k) * ch;
-      for (var j = 0; j < 16; j++) { var v = HM[i][j], g = Math.round(244 - v * 190); ctx.fillStyle = v > 0.85 ? TEAL : 'rgb(' + g + ',' + g + ',' + (g - 2) + ')'; ctx.fillRect(x0 + j * cw, y, cw - 1, ch - 1); }
+      var y = B[1] + ORD.indexOf(i) * ch;
+      for (var j = 0; j < 16; j++) { var v = Math.max(0, Math.min(1, HM[i][j] + 0.07 * Math.sin(t * 0.8 + i * 0.7 + j * 0.35))), g = Math.round(244 - v * 190); ctx.fillStyle = v > 0.85 ? TEAL : 'rgb(' + g + ',' + g + ',' + (g - 2) + ')'; ctx.fillRect(x0 + j * cw, y, cw - 1, ch - 1); }
     }
-    // dendrogram fades in once rows are clustered
-    ctx.save(); ctx.globalAlpha *= k; ctx.strokeStyle = SOFT; ctx.beginPath();
+    ctx.save(); ctx.strokeStyle = SOFT; ctx.beginPath();
     function yc(p) { return B[1] + (p + 0.5) * ch; }
     var L1 = [], L2 = [];
     for (var p = 0; p < 12; p += 2) { var xa = x0 - 4, xb = x0 - dw * 0.35; ctx.moveTo(xa, yc(p)); ctx.lineTo(xb, yc(p)); ctx.lineTo(xb, yc(p + 1)); ctx.lineTo(xa, yc(p + 1)); L1.push((yc(p) + yc(p + 1)) / 2); }
@@ -99,27 +97,40 @@
     });
     ctx.restore();
   }
-  // 10. sample board: cards hop from column to column
-  var KB = (function () { var r = seeded(3), c = []; for (var i = 0; i < 11; i++) c.push({ col: i % 4, w: 0.4 + r() * 0.5, tag: r() < 0.3, x: null, y: null }); return c; })(), kbStep = -1;
+  // 10. sample board: cards stay in their columns; now and then one is added at the bottom
+  //     or the top one is cleared and the rest slide up
+  var KC = null, kbStep = -1;
   function kanban(R, t) {
     var B = panel(R, 12); if (B[2] < 60 || B[3] < 40) return;
-    var step = Math.floor(t / 1.3);
-    if (kbStep < 0) kbStep = step;
-    while (kbStep < step) { kbStep++; var c = KB[(kbStep * 7) % KB.length]; c.col = (c.col + 1) % 4; KB.splice(KB.indexOf(c), 1); KB.push(c); }
-    var cw = B[2] / 4, ch = Math.min(22, B[3] / 4.4);
+    var cw = B[2] / 4, ch = Math.min(22, B[3] / 4.4), gap = 5, maxRows = Math.max(1, Math.floor((B[3] - 18) / (ch + gap)));
+    if (!KC) { var r0 = seeded(3); KC = [3, 2, 4, 1].map(function (n) { var l = []; for (var i = 0; i < n; i++) l.push({ w: 0.4 + r0() * 0.5, tag: r0() < 0.3, born: -9, y: null }); return l; }); }
+    var step = Math.floor(t / 1.4);
+    if (kbStep < 0 || step < kbStep) kbStep = step;
+    var rn = seeded(41 + step);
+    while (kbStep < step) {
+      kbStep++;
+      var col = KC[(kbStep * 3) % 4], alive = col.filter(function (c) { return !c.dieAt; });
+      if (alive.length >= maxRows || (kbStep % 2 && alive.length > 1)) alive[0].dieAt = t;
+      else col.push({ w: 0.4 + rn() * 0.5, tag: rn() < 0.3, born: t, y: null });
+    }
     for (var k = 0; k < 4; k++) { ctx.fillStyle = 'rgba(13,12,9,0.035)'; rr(B[0] + k * cw + 2, B[1], cw - 4, B[3], 4); ctx.fill(); bar(B[0] + k * cw + 8, B[1] + 8, cw * 0.3); }
-    var count = [0, 0, 0, 0];
-    KB.forEach(function (c) {
-      var tx = B[0] + c.col * cw + 6, ty = B[1] + 16 + count[c.col]++ * (ch + 5);
-      if (c.x == null) { c.x = tx; c.y = ty; }
-      c.x += (tx - c.x) * 0.12; c.y += (ty - c.y) * 0.12;
-      if (c.y + ch > B[1] + B[3]) return;
-      var moving = Math.abs(tx - c.x) > 2;
-      ctx.save(); if (moving) { ctx.shadowColor = 'rgba(13,12,9,0.18)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2; }
-      rr(c.x, c.y, cw - 12, ch, 3); ctx.fillStyle = '#fff'; ctx.fill(); ctx.restore();
-      ctx.strokeStyle = moving ? BLUE : RULE; ctx.stroke();
-      bar(c.x + 6, c.y + ch / 2, (cw - 30) * c.w, 0.3);
-      if (c.tag) { ctx.fillStyle = TEAL; ctx.beginPath(); ctx.arc(c.x + cw - 20, c.y + ch / 2, 2.5, 0, 7); ctx.fill(); }
+    KC.forEach(function (col, k) {
+      var idx = 0;
+      for (var n = col.length - 1; n >= 0; n--) if (col[n].dieAt && t - col[n].dieAt > 0.35) col.splice(n, 1);
+      col.forEach(function (c) {
+        var ty = B[1] + 18 + (c.dieAt ? Math.max(0, idx - 1) : idx) * (ch + gap);
+        if (!c.dieAt) idx++;
+        if (c.y == null) c.y = ty;
+        c.y += (ty - c.y) * 0.18;
+        var a = c.dieAt ? 1 - (t - c.dieAt) / 0.35 : Math.min(1, (t - c.born) / 0.4);
+        if (a <= 0 || c.y + ch > B[1] + B[3]) return;
+        var x = B[0] + k * cw + 6, s = c.dieAt ? 1 : 0.94 + 0.06 * a;
+        ctx.save(); ctx.globalAlpha *= a; ctx.translate(x + (cw - 12) / 2, c.y + ch / 2); ctx.scale(s, s); ctx.translate(-(x + (cw - 12) / 2), -(c.y + ch / 2));
+        rr(x, c.y, cw - 12, ch, 3); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = RULE; ctx.stroke();
+        bar(x + 6, c.y + ch / 2, (cw - 30) * c.w, 0.3);
+        if (c.tag) { ctx.fillStyle = TEAL; ctx.beginPath(); ctx.arc(x + cw - 20, c.y + ch / 2, 2.5, 0, 7); ctx.fill(); }
+        ctx.restore();
+      });
     });
   }
 
@@ -196,9 +207,10 @@
     var STEPS2 = [['P2', 0, 'br'], ['P3', 1, 'c'], ['P4', 1, 'br'], ['P', 0, 'c']];
     var LAY = LAY3, STEPS = STEPS3;
     // each step: the gesture takes ACT seconds, then the layout rests until STEP
-    var STEP = 3.8, ACT = 2.6;
+    var STEP = 3.2, ACT = 1.9;
     function ease(k) { return 0.5 - 0.5 * Math.cos(Math.PI * k); }
     function easeOut(k) { return 1 - Math.pow(1 - k, 3); }
+    function easeIO3(k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
     function lerp(a, b, k) { return a + (b - a) * k; }
     function abs(r) { return [F.x + r[0] * F.w, F.y + r[1] * F.h, r[2] * F.w, r[3] * F.h]; }
     function rr(x, y, w, h, rad) { ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, y, w, h, rad) : ctx.rect(x, y, w, h); }
@@ -218,7 +230,7 @@
         ctx = c.getContext('2d'); W = w; H = h; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         var two = mode === 'phone';
         if (two !== (LAY === LAY2)) { LAY = two ? LAY2 : LAY3; STEPS = two ? STEPS2 : STEPS3; lastStep = -1; }
-        // stacked: the window fills the canvas, leaving 24px right and below for the cursor tag and size pill
+        // stacked: the window fills the canvas, leaving 24px right and below for the cursor
         if (mode === 'side') { var R = chartRect(W, H, title); F = { x: R.x0, y: R.y0 + 10, w: R.x1 - R.x0, h: R.y1 - R.y0 - 10 }; }
         else F = { x: 0.5, y: 0.5, w: W - 25, h: H - 25 };
       },
@@ -229,8 +241,10 @@
         // after a move, the dropped panel turns into another view
         if (stepN !== lastStep) { lastStep = stepN; if (stepN > 0 && !resize) { var freeK = ORDERV.filter(function (v) { return kind.indexOf(v) < 0; }), nextK = freeK[swaps++ % freeK.length]; prevKind[j] = kind[j]; prevAt[j] = kindAt[j]; kind[j] = nextK; kindAt[j] = t + ACT * (0.76 - u); } }
         function ph(a, b, f) { return (f || ease)(Math.max(0, Math.min(1, (u - a) / (b - a)))); }
-        // one continuous gesture: the drag eases in and out, the drop settles out of it without a pause
-        var drag = ph(0.32, 0.76), reflow = resize ? drag : ph(0.4, 0.78), drop = ph(0.68, 0.86, easeOut);
+        // one continuous gesture: the drag eases in and out, the drop settles out of it without a pause.
+        // On a move the other panels hold still until the dragged one is over its new slot, then make
+        // room (like drag-and-drop lists); on a resize they follow the drag live.
+        var drag = ph(0.32, 0.76, easeIO3), reflow = resize ? drag : ph(0.5, 0.72), drop = ph(0.68, 0.86, easeOut);
         var lift = Math.min(ph(0.29, 0.36), 1 - ph(0.7, 0.86, easeOut));
         var E = FROM.map(function (r, q) { return abs(r.map(function (v, z) { return lerp(v, TO[q][z], reflow); })); });
         var a0 = abs(FROM[j]), a1 = abs(TO[j]), S;
@@ -256,7 +270,7 @@
         function draw(q) { view(q, E[q], t); }
         E.forEach(function (_, q) { if (q !== j || u <= 0.28 || resize) draw(q); });
         if (!resize) {
-          var pa = Math.min(ph(0.36, 0.44), 1 - ph(0.72, 0.84));
+          var pa = Math.min(ph(0.5, 0.57), 1 - ph(0.72, 0.84));
           if (pa > 0) { ctx.save(); ctx.globalAlpha = pa; rr(a1[0], a1[1], a1[2], a1[3], 5); ctx.fillStyle = 'rgba(13,153,255,0.07)'; ctx.fill(); ctx.setLineDash([5, 4]); ctx.strokeStyle = BLUE; ctx.lineWidth = 1.25; ctx.stroke(); ctx.restore(); }
           if (u > 0.28) {
             if (lift > 0) { ctx.save(); ctx.shadowColor = 'rgba(13,12,9,' + 0.22 * lift + ')'; ctx.shadowBlur = 24 * lift; ctx.shadowOffsetY = 10 * lift; rr(S[0], S[1], S[2], S[3], 4); ctx.fillStyle = '#fff'; ctx.fill(); ctx.restore(); }
@@ -267,13 +281,9 @@
         var selR = u < 0.28 ? abs(FROM[pv[1]]) : S;
         if (u > 0.18 && u < 0.28) { ctx.strokeStyle = 'rgba(13,153,255,0.55)'; ctx.lineWidth = 1; ctx.strokeRect(a0[0] - 0.5, a0[1] - 0.5, a0[2] + 1, a0[3] + 1); }
         var Sb = selR; if (!resize && u > 0.28) { var e2 = 1 + 0.02 * lift; Sb = [S[0] - S[2] * (e2 - 1) / 2, S[1] - S[3] * (e2 - 1) / 2, S[2] * e2, S[3] * e2]; }
-        ctx.strokeStyle = BLUE; ctx.lineWidth = 1.25; ctx.strokeRect(Sb[0] - 0.5, Sb[1] - 0.5, Sb[2] + 1, Sb[3] + 1);
-        [[Sb[0], Sb[1]], [Sb[0] + Sb[2], Sb[1]], [Sb[0], Sb[1] + Sb[3]], [Sb[0] + Sb[2], Sb[1] + Sb[3]]].forEach(function (p) { ctx.fillStyle = '#fff'; ctx.fillRect(p[0] - 3.5, p[1] - 3.5, 7, 7); ctx.strokeRect(p[0] - 3.5, p[1] - 3.5, 7, 7); });
-        var sz = Math.round(Sb[2] / F.w * 1200) + ' × ' + Math.round(Sb[3] / F.w * 1200);
-        ctx.font = MONO; var tw = ctx.measureText(sz).width; ctx.fillStyle = BLUE;
-        rr(Sb[0] + Sb[2] / 2 - tw / 2 - 6, Sb[1] + Sb[3] + 8, tw + 12, 18, 3); ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(sz, Sb[0] + Sb[2] / 2, Sb[1] + Sb[3] + 17.5);
-        // cursor: a diagonal resize arrow while on a corner handle, otherwise the pointer; name tag either way
+        ctx.strokeStyle = BLUE; ctx.lineWidth = 1; ctx.strokeRect(Sb[0] - 0.5, Sb[1] - 0.5, Sb[2] + 1, Sb[3] + 1);
+        [[Sb[0], Sb[1]], [Sb[0] + Sb[2], Sb[1]], [Sb[0], Sb[1] + Sb[3]], [Sb[0] + Sb[2], Sb[1] + Sb[3]]].forEach(function (p) { ctx.fillStyle = '#fff'; ctx.fillRect(p[0] - 2.5, p[1] - 2.5, 5, 5); ctx.strokeRect(p[0] - 2.5, p[1] - 2.5, 5, 5); });
+        // cursor: a diagonal resize arrow while on a corner handle, otherwise the pointer
         var press = u > 0.28 && u < 0.78;
         ctx.save(); ctx.translate(X, Y);
         if (resize && u > 0.24 && u < 0.8) {
@@ -286,8 +296,7 @@
           ctx.fillStyle = INK; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
           if (press) ctx.scale(1 / 0.92, 1 / 0.92);
         }
-        ctx.font = MONO; ctx.fillStyle = TEAL; rr(14, 18, 30, 18, 9); ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('Jia', 29, 27.5); ctx.restore();
+        ctx.restore();
       },
       still: function () { this.frame(0); }
     };
