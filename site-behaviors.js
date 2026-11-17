@@ -325,10 +325,13 @@
     }
 
     var card = document.createElement('div');
+    card.className = 'section-nav-card'; // theme.css restyles it for dark mode
     card.style.cssText = 'position: absolute; left: 46px; box-sizing: border-box; width: 320px; background: #ffffff; border: 1px solid #e4e0d8; border-radius: 10px; box-shadow: 0 1px 2px rgba(13,12,9,0.04), 0 12px 32px rgba(13,12,9,0.10); padding: 1rem 1.125rem; pointer-events: none; display: none;';
     var cardTitle = document.createElement('p');
+    cardTitle.className = 'section-nav-card-title';
     cardTitle.style.cssText = "font-family: 'Mori', -apple-system, system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; line-height: 1.35; color: #0d0c09; margin: 0 0 0.375rem;";
     var cardBody = document.createElement('p');
+    cardBody.className = 'section-nav-card-body';
     cardBody.style.cssText = "font-family: 'Neue Montreal', -apple-system, system-ui, sans-serif; font-size: 0.875rem; line-height: 1.5; color: #6b6863; margin: 0;";
     card.appendChild(cardTitle);
     card.appendChild(cardBody);

@@ -42,7 +42,7 @@ workflow), so there is no export to reconcile and no "code-only fix" list.
 | `site.js` | every page | Homepage copy (hero, About), work card facts. |
 | `case.js` | every case study | Title eyebrow, hidden section labels, Outcomes label, feature-scroll driver, spacing class hooks (`v-sub`, `v-figwrap`, ...). |
 | `case-recruiter.js` | Recruiter Inbox | Groups paragraphs with figures for the split layouts; size modifiers. |
-| `hero-select.js` | Home | Hero animation on `.hero-canvas`: a design-tool cursor selects, resizes and drags lab-app panels (heatmap, molecule, table, point cloud, sample board, dither image). Hidden below 900px. Scratch previews (`hero-explore.html`, `hero-views.html`) are not deployed. |
+| `hero-select.js` | Home | Hero animation on `.hero-canvas`: a design-tool cursor selects, resizes and drags lab-app panels (heatmap, molecule, table, point cloud, sample board, dither image). Hidden below 900px. Its exploration pages live in `tools/scratch/`. |
 | `theme.css` / `theme.js` | Home, case studies (last, in `<head>`; the script is not deferred so there's no light flash) | Dark mode: follows the system until the visitor uses the header toggle (choice saved in localStorage). Sets `html[data-theme]`; swaps the Quick Reply cover for its `-dark` copy; themes the diagram iframes with `assets/anim/_dark.css`. Screenshots stay light (dimmed). New hard-coded colors need a dark rule here. |
 | `site-behaviors.js` | every page | Interaction: header hide/show, contact popover, section nav, lightbox, video play-on-view, hero dots. |
 
@@ -116,3 +116,8 @@ injects two dev-only helpers into every page:
 - **N**: click any element and leave a note for Claude; notes are saved to `tools/edit/notes.md`
   with the page, section, element and a selector. When Jia says "do my notes", work through the
   `[open]` entries there and mark each `[done]`.
+
+`tools/scratch/` holds design explorations kept for reference (hero concepts, panel views, sphere tiles,
+card background comparison, the dither homepage variant). Open them through the edit server, e.g.
+http://127.0.0.1:8124/tools/scratch/hero-explore.html. They're gitignored with the rest of `tools/`, so
+they never deploy; put new scratch pages there too.

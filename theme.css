@@ -27,7 +27,7 @@ html[data-theme="dark"] .hero-canvas { filter: invert(0.92) hue-rotate(180deg); 
 /* Work cards: dark sand panels; the product frames keep their own (light) UI */
 /* Embedded animations are light UI; without this they'd inherit the dark color scheme and fade */
 html[data-theme="dark"] iframe { color-scheme: light; }
-html[data-theme="dark"] .project-frame { border-color: rgba(236, 235, 230, 0.12) !important; box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.7) !important; }
+html[data-theme="dark"] :is(.project-frame, .v-hero-frame) { border-color: rgba(236, 235, 230, 0.12) !important; box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.7) !important; }
 
 /* About */
 html[data-theme="dark"] #about :is(h1, h2, h3) { color: var(--ink) !important; }
@@ -56,3 +56,10 @@ html[data-theme="dark"] :is(.v-decision .media, .v-improve .tile, .v-wfpair .til
 html[data-theme="dark"] blockquote { background: var(--muted) !important; border-color: var(--rule) !important; }
 /* Screenshots stay light, a touch dimmer so they don't glare on dark */
 html[data-theme="dark"] :is(.expandable-image-wrap, .project-frame, .v-hero-frame, .tile) :is(img, video) { filter: brightness(0.92); }
+
+/* Section nav (case studies): marks and the hover preview card are styled inline by site-behaviors.js */
+html[data-theme="dark"] button[data-index] span[style*="rgb(13, 12, 9)"] { background: var(--ink) !important; }
+html[data-theme="dark"] button[data-index] span[style*="rgb(213, 208, 200)"] { background: rgba(236, 235, 230, 0.28) !important; }
+html[data-theme="dark"] .section-nav-card { background: #24221f !important; border-color: var(--rule) !important; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important; }
+html[data-theme="dark"] .section-nav-card-title { color: var(--ink) !important; }
+html[data-theme="dark"] .section-nav-card-body { color: var(--ink-2) !important; }
