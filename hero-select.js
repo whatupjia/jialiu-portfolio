@@ -258,8 +258,19 @@
         // cursor: travel from where the last drag ended to this grab point, then stay on the handle or the panel
         function grab(R, mode) { return mode === 'br' ? [R[0] + R[2], R[1] + R[3]] : mode === 'tl' ? [R[0], R[1]] : [R[0] + R[2] * 0.55, R[1] + R[3] * 0.5]; }
         var pe = grab(abs(FROM[pv[1]]), pv[2]), g0 = grab(a0, st[2]), X, Y;
-        if (u < 0.28) { var k = ph(0.02, 0.26), bend = Math.sin(k * Math.PI) * 0.12; X = lerp(pe[0], g0[0], k) - (g0[1] - pe[1]) * bend; Y = lerp(pe[1], g0[1], k) + (g0[0] - pe[0]) * bend; }
-        else { var gp = grab(S, st[2]); X = gp[0]; Y = gp[1]; }
+        // Long trips take longer: the cursor sets off up to 0.45s early, during the previous step's rest,
+        // so it arrives at the same moment but travels more slowly.
+        var tl = t % STEP, tArrive = 0.26 * ACT;
+        function lead(a, b) { return Math.min(0.45, Math.hypot(b[0] - a[0], b[1] - a[1]) / 1400); }
+        function travel(a, b, k) { k = ease(Math.max(0, Math.min(1, k))); var bend = Math.sin(k * Math.PI) * 0.12; return [lerp(a[0], b[0], k) - (b[1] - a[1]) * bend, lerp(a[1], b[1], k) + (b[0] - a[0]) * bend]; }
+        var XY;
+        if (u < 0.28) { var ld = lead(pe, g0); XY = travel(pe, g0, (tl + ld) / (ld + tArrive)); }
+        else {
+          XY = grab(S, st[2]);
+          var nx = STEPS[(i + 1) % STEPS.length], gn = grab(abs(TO[nx[1]]), nx[2]), ln = lead(XY, gn);
+          if (tl > STEP - ln) XY = travel(XY, gn, (tl - (STEP - ln)) / (ln + tArrive));
+        }
+        X = XY[0]; Y = XY[1];
         ctx.clearRect(0, 0, W, H);
         // app window: background and title bar
         ctx.fillStyle = '#f7f6f2'; ctx.fillRect(F.x, F.y, F.w, F.h); ctx.strokeStyle = 'rgba(13,12,9,0.14)'; ctx.lineWidth = 1; ctx.strokeRect(F.x + 0.5, F.y + 0.5, F.w, F.h);
