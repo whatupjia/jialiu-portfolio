@@ -80,3 +80,11 @@ section h2, section h3 { text-wrap: pretty !important; }
 section > div > div:first-child:has(> h2:first-child) { padding-top: 0 !important; }
 /* Quick Reply problem list: the last row's bottom margin was adding to the band's inner padding */
 .qr-problem-row:last-child { margin-bottom: 0 !important; }
+
+/* Corners: figure containers are square; screenshots and sketches inside them keep 8px.
+   Avoid large rounded corners. */
+:is(.expandable-image-wrap, .hero-media) { border-radius: 0 !important; }
+.qr-problem-img img { border-radius: 8px !important; }
+/* Recruiter Inbox: the opening product screens are UI mocks, so they keep their rounded corners */
+.hero-media:has(iframe[src*="recruiter-inbox"]) { border-radius: 10px !important; }
+.expandable-image-wrap:has(img[src*="linkedin-recruiter-2010s"], img[src*="linkedin-talent-solutions-search"], img[src*="linkedin-inbox-annotated"]) { border-radius: 12px !important; }

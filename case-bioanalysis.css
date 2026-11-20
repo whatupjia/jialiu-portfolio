@@ -661,3 +661,11 @@ section p:last-child:not(.cap):not(.v-hero-cap):not(.v-gaps-note), section ul:la
   #problem.v-sec::before { top: calc(var(--band-out) - 24px) !important; bottom: 0 !important; margin: 0 !important; }
   #solution-preview { padding-top: var(--band-out) !important; }
 }
+
+/* Corners: container cards and figure tiles are square; what sits inside them (screenshots,
+   illustrations) keeps an 8px radius (small chips less). Avoid large rounded corners. */
+:is(.v-decision .opt, .v-improve .tile, .v-wfpair .tile, .v-flow .tile, .v-model-tile) { border-radius: 0 !important; }
+.v-improve .tile img, .v-improve .tile img[src*="layers.png"], .v-improve .tile img[src*="scanning.png"], .v-wfpair .tile img, .v-flow .tile img { border-radius: 8px !important; }
+.v-wfpair .tile img { border-radius: 8px 8px 0 0 !important; }
+/* Layers and scanning screenshots: same 28px inset above and below */
+.v-improve .tile img[src*="layers.png"], .v-improve .tile img[src*="scanning.png"] { height: calc(100% - 56px) !important; object-fit: cover; object-position: top; }

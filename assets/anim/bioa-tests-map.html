@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tests model</title>
-<link rel="stylesheet" href="bioa-map.css">
+<link rel="stylesheet" href="bioa-map.css?v=2">
 <style>
 /* Same vocabulary as the model diagram: outlined cards, white chips, dashed lavender for what's new.
    Three rows (how customers modeled it, what the workflow engine offered, with a test object). Row labels sit
@@ -14,7 +14,7 @@
 .card.dim { border-color: transparent; }
 .card.faded { opacity: 0.45 !important; }
 .chips { display: flex; gap: 8px; margin-top: 12px; }
-.chip { height: 30px; padding: 0 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 14px; display: inline-flex; align-items: center; white-space: nowrap; }
+.chip { height: 30px; padding: 0 11px; border-radius: 0; background: rgba(255, 255, 255, 0.9); color: var(--ink); font-size: 14px; display: inline-flex; align-items: center; white-space: nowrap; }
 .chip.cur { background: rgb(214, 186, 232); }
 .note { position: absolute; font-size: 15px; line-height: 18px; color: var(--muted); white-space: nowrap; }
 .note b { font-weight: 400; color: #f4efe9; }
@@ -65,7 +65,7 @@ var paths = document.querySelectorAll('svg.links path');
 paths[2].classList.add('solid'); paths[3].classList.add('solid');
 // Dashed outline for the custom-entity Test card, drawn with the same dashes as the connectors
 var box = document.createElementNS(NS, 'rect');
-box.setAttribute('x', 340.75); box.setAttribute('y', 30.75); box.setAttribute('width', 298.5); box.setAttribute('height', 98.5); box.setAttribute('rx', 17);
+box.setAttribute('x', 340.75); box.setAttribute('y', 30.75); box.setAttribute('width', 298.5); box.setAttribute('height', 98.5); box.setAttribute('rx', 0);
 box.setAttribute('fill', 'none'); box.setAttribute('class', 'on');
 box.setAttribute('style', 'stroke: rgba(214,186,232,0.6); stroke-width: 2; stroke-dasharray: 5 6;');
 svg.appendChild(box);

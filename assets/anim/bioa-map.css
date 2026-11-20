@@ -11,7 +11,7 @@ body { font-family: 'Sohne', -apple-system, system-ui, sans-serif; -webkit-font-
 .stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
 .eyebrow { font-size: 17px; color: var(--muted); letter-spacing: 0.01em; }
 .card {
-  border: 1.5px solid var(--line-soft); border-radius: 18px;
+  border: 1.5px solid var(--line-soft); border-radius: 0;
   display: flex; align-items: center; gap: 16px; padding: 0 20px;
   opacity: 0; transform: translateY(10px); transition: opacity 500ms ease, transform 600ms var(--ease);
 }
@@ -19,8 +19,8 @@ body { font-family: 'Sohne', -apple-system, system-ui, sans-serif; -webkit-font-
 .card .nm { font-size: 26px; letter-spacing: -0.02em; line-height: 1.15; }
 .card .sub { font-size: 17px; color: var(--muted); margin-top: 3px; }
 .card.hl { border-color: var(--line); }
-.tag { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 11px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); font-size: 15px; white-space: nowrap; }
-.tag i { width: 14px; height: 14px; border-radius: 4px; background: var(--new); }
+.tag { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 11px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); font-size: 15px; white-space: nowrap; }
+.tag i { width: 14px; height: 14px; border-radius: 2px; background: var(--new); }
 svg.links { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
 svg.links path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 5 6; opacity: 0; transition: opacity 500ms ease; }
 svg.links path.on { opacity: 1; }
